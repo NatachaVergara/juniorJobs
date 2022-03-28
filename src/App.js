@@ -1,22 +1,27 @@
-import logo from './logo.svg';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
+
+import ProfilePage from './pages/ProfilePage';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <Routes>
+        <Route path="/*" element={<ProfilePage />} />
+        {/* {authCtx.isLoggedIn && (
+          <>
+            <Route path="*" element={<Navigate replace to="/home" />} />
+            <Route path="/home" element={<HomePage />} />
+          </>
+        )}
+        {!authCtx.isLoggedIn && (
+          <>
+            <Route path="*" element={<Navigate replace to="/auth" />} />
+            <Route path="/auth" element={<AuthPage />} />
+          </>
+        )} */}
+      </Routes>
       </header>
     </div>
   );
