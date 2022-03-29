@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import ProfilePage from "./pages/ProfilePage";
+import { Navigate, Route, Routes } from "react-router-dom";
+import { Col, Container, Row } from "reactstrap";
+import Layout from "./components/Layout/Layout";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout>
+      <Routes>
+        <Route path="*" element={<Navigate replace to="/profile" />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        {/* {authCtx.isLoggedIn && (
+        <>
+        <Route path="*" element={<Navigate replace to="/home" />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/add-recipe" element={<SearchPage />} />
+        </>
+        )}
+        {!authCtx.isLoggedIn && (
+          <>
+          <Route path="*" element={<Navigate replace to="/auth" />} />
+          <Route path="/auth" element={<AuthPage />} />
+          </>
+        )} */}
+      </Routes>
+    </Layout>
   );
 }
 
