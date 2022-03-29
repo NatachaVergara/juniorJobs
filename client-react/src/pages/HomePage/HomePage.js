@@ -1,6 +1,5 @@
-import { Col, Container, Row } from "reactstrap";
-import FeaturedCard from "./FeaturedCard";
-import JobAreas from "./JobAreas";
+import FeaturedCards from "./FeaturedCards";
+import Hero from "./Hero";
 
 // ============ JUST CLONING THE HOMEPAGE, NEEDS RE MAKE FOR OUR PLATFORM ===================
 export const HomePage = () => {
@@ -12,49 +11,9 @@ export const HomePage = () => {
         awesome startups and tech companies. We filter jobs so you don't have
         to.
       </p>
-      <Row>
-        <Col>
-          <Row>
-            <Col>
-              <strong>300,000+</strong>
-              <p>Professionals</p>
-            </Col>
-            <Col>
-              <strong>9,000+</strong>
-              <p>Companies</p>
-            </Col>
-            <Col>
-              <strong>1,000,000+</strong>
-              <p>applications sent</p>
-            </Col>
-          </Row>
-        </Col>
+      <Hero />
 
-        <Col>
-          <JobAreas />
-        </Col>
-      </Row>
-      <h3>Featured</h3>
-      <Row>
-        <FeaturedCard color="info"/>
-
-        <FeaturedCard />
-      </Row>
-      <Row>
-        <FeaturedCard />
-
-        <FeaturedCard color="info"/>
-      </Row>{" "}
-      <Row>
-        <FeaturedCard color="info"/>
-
-        <FeaturedCard />
-      </Row>{" "}
-      <Row>
-        <FeaturedCard />
-
-        <FeaturedCard color="info"/>
-      </Row>
+      <FeaturedCards />
     </>
   );
 };

@@ -13,7 +13,7 @@ export const FeaturedCard = ({ color }) => {
                     src="https://cdn1.iconfinder.com/data/icons/social-black-buttons/512/anonymous-512.png"
                     width="96px"
                     height="96px"
-                    style={{borderRadius : "20px"}}
+                    style={{borderRadius : "20px"}} alt="Logo"
                   />
                 </Col>
                 <Col>
