@@ -2,6 +2,7 @@ import ProfilePage from "./pages/ProfilePage";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Col, Container, Row } from "reactstrap";
 import Layout from "./components/Layout/Layout";
+import { HomePage } from "./pages/HomePage/HomePage";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Routes>
         <Route path="*" element={<Navigate replace to="/profile" />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/home" element={<HomePage />} />
         {/* {authCtx.isLoggedIn && (
         <>
         <Route path="*" element={<Navigate replace to="/home" />} />
