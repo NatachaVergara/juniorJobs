@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Navbar, NavbarBrand, NavItem, Button } from "reactstrap";
 // import AuthContext from "../../store/auth-context";
-import classes from './MainNavigation.module.css'
+import classes from './MainNavigation.module.scss'
 const MainNavigation = () => {
   // const authCtx = useContext(AuthContext);
 

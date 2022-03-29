@@ -11,7 +11,7 @@ const MyTextInput = ({ label, ...props }) => {
   return (
     <>
       <Label htmlFor={props.id || props.name}>{label}</Label>
-      <Input {...field} {...props} />
+      <Input {...field} {...props} invalid={meta.error&&meta.touched} valid={!meta.error&&meta.touched}/>
       {meta.touched && meta.error ? (
         <div className="error">{meta.error}</div>
       ) : null}
