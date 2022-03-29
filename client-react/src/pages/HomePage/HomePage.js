@@ -36,9 +36,24 @@ export const HomePage = () => {
       </Row>
       <h3>Featured</h3>
       <Row>
-        <FeaturedCard />
+        <FeaturedCard color="info"/>
 
         <FeaturedCard />
+      </Row>
+      <Row>
+        <FeaturedCard />
+
+        <FeaturedCard color="info"/>
+      </Row>{" "}
+      <Row>
+        <FeaturedCard color="info"/>
+
+        <FeaturedCard />
+      </Row>{" "}
+      <Row>
+        <FeaturedCard />
+
+        <FeaturedCard color="info"/>
       </Row>
     </>
   );
