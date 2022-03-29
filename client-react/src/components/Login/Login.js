@@ -1,9 +1,9 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+//import { useNavigate } from 'react-router-dom'
 import { Field, Form, Formik } from 'formik'
 import './Login.scss'
 function Login() {
-  let navigate = useNavigate()
+ // let navigate = useNavigate()
 
 
 
@@ -108,8 +108,7 @@ function Login() {
               </div>
             </div>
             <button
-              type='submit'
-               className='boton btn btn-primary'>Ingresar
+              type='submit' className='boton btn btn-primary'>Ingresar
             </button>
           </Form>
           
