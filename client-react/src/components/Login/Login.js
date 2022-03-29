@@ -1,6 +1,7 @@
 import React from 'react'
 //import { useNavigate } from 'react-router-dom'
 import { Field, Form, Formik } from 'formik'
+import { BsShieldLockFill } from "react-icons/bs";
 import './Login.scss'
 function Login() {
  // let navigate = useNavigate()
@@ -118,7 +119,9 @@ function Login() {
 
       </Formik>
        {/* Link para resetear la contraseña    */}
-      <span className="d-flex justify-content-center align-items-center mt-5 pt-5">¿Olvidaste tu contraseña?</span>
+      <span className="d-flex justify-content-center align-items-center mt-5 pt-5">
+        <BsShieldLockFill/> ¿Olvidaste tu contraseña?
+      </span>
 
 
     </>

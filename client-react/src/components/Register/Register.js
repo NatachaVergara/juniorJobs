@@ -1,6 +1,6 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import { FcNeutralDecision, FcBusiness } from "react-icons/fc";
+import { Link, useNavigate } from 'react-router-dom'
+import { FcNeutralDecision, FcBusiness, FcApproval } from "react-icons/fc";
 import './Register.scss'
 
 const Register = () => {
@@ -15,6 +15,7 @@ const Register = () => {
     }
 
     return (
+        <>
         <div className='container m-auto d-flex flex-column mt-5 pt-5 registerContainer'>
             <h1 className='d-flex justify-content-center'>¿Cómo te vas a registrar?</h1>
             <div className='mt-5 registerBody'>
@@ -29,10 +30,12 @@ const Register = () => {
                     <button className='btn btn-primary' type="submit" onClick={() => formRecruter()}>
                         Ir a formulario Recruter</button>
                 </div>
+            </div>       
 
             </div>
-
-        </div>
+            <Link to='/login' className="d-flex justify-content-center align-items-center mt-5 pt-5 text-decoration-none text-black"> <FcApproval/> Ya tengo cuenta </Link>
+</>
+        
     )
 }
 
