@@ -1,14 +1,11 @@
 import { AccessTimeRounded, CakeOutlined, CheckroomOutlined, DinnerDiningOutlined, Face, LaptopMacOutlined, LocalHospitalOutlined, Person, TagFacesOutlined, Watch, WatchLater } from '@mui/icons-material';
 import PersonIcon from '@mui/icons-material/Person';
 import { Col, Row } from 'reactstrap';
-import Layout from '../components/Layout/Layout'
 import './JobDescription.scss'
 
 export const JobDescriptionPage = () => {
     return (
         <>
-            <Layout>
-                <div className='navbar'>NAVBAR</div>
                 <div className='wrapper '>
                     <h1 className='title'>Job Description Page</h1>
                     <ul>
@@ -119,7 +116,7 @@ export const JobDescriptionPage = () => {
                         </Row>
                     </div>
                 </div>
-            </Layout>
+         
         </>
     )
 }
