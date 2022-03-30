@@ -1,8 +1,9 @@
 // import { useContext } from "react";
 // import { Link } from "react-router-dom";
 // import AuthContext from "../../store/auth-context";
+import { Fragment } from "react";
 import { NavLink } from "react-router-dom";
-import { Navbar, NavbarBrand, NavItem, Button } from "reactstrap";
+import { Navbar, NavbarBrand, NavItem, Button, Input, Label } from "reactstrap";
 import classes from "./MainNavigation.module.scss";
 const MainNavigation = () => {
   // const authCtx = useContext(AuthContext);
@@ -12,51 +13,44 @@ const MainNavigation = () => {
     isLoggedIn = false;
   };
   return (
-    <Navbar
-      className={classes.navbar}
-      expand="md"
-      sticky="top"
-      color="secondary"
-      dark
-    >
-      <NavbarBrand href="/">Junior Jobs App</NavbarBrand>
+    <Navbar className={classes.navbar} sticky="top" color="secondary" dark>
+      
+      <NavItem>
+        <NavbarBrand href="/">Junior Jobs App</NavbarBrand>
+      </NavItem>
+
+      <NavItem>
+        <Input
+          placeholder="Search an open position"
+          className={classes.searchInput}
+          type="search"
+        ></Input>
+      </NavItem>
+
       <NavItem>
         <NavLink to="/home">
-          <Button color="info" >
-            Home
-          </Button>
+          <Button color="primary">Home</Button>
         </NavLink>
         <NavLink to="/profile">
-          <Button color="primary" >
-            Profile
-          </Button>
+          <Button color="primary">Profile</Button>
         </NavLink>
-      {/* </NavItem>
-      <NavItem> */}
         <NavLink to="/about-us">
-          <Button color="primary" >
-            About us
-          </Button>
+          <Button color="primary">About us</Button>
         </NavLink>
         <NavLink to="/faq">
-          <Button color="primary" >
-            Faqs
-          </Button>
+          <Button color="primary">Faqs</Button>
         </NavLink>
-      </NavItem>
-      {!isLoggedIn && (
-        <NavItem>
-          <Button color="warning">SignUp</Button>
-          <Button color="warning">LogIn</Button>
-        </NavItem>
-      )}
-      {isLoggedIn && (
-        <NavItem>
+        {!isLoggedIn ? (
+          <Fragment>
+            <Button color="warning">SignUp</Button>
+            <Button color="warning">LogIn</Button>
+          </Fragment>
+        ) : (
           <Button onClick={logoutHandler} color="warning">
             Logout
           </Button>
-        </NavItem>
-      )}
+        )}
+      </NavItem>
     </Navbar>
   );
 };
