@@ -11,8 +11,9 @@ const Layout = (props) => {
       <MainNavigation />
       <Container fluid>
         <Row>
-          <Sidebar/>
+          <Sidebar />
           <Col
+            tag="main"
             md={{
               offset: 0,
               size: 11,
