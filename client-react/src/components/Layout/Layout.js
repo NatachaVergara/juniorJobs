@@ -1,18 +1,21 @@
 import { Fragment } from "react";
-import { Container,Row,Col } from "reactstrap";
+import { Link } from "react-router-dom";
+import { Container, Row, Col } from "reactstrap";
 
 import MainNavigation from "./MainNavigation";
+import Sidebar from "./Sidebar";
 
 const Layout = (props) => {
   return (
     <Fragment>
       <MainNavigation />
-      <Container>
+      <Container fluid>
         <Row>
+          <Sidebar/>
           <Col
             md={{
-              offset: 1,
-              size: 10,
+              offset: 0,
+              size: 11,
             }}
             sm="12"
           >
