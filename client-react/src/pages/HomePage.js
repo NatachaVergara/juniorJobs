@@ -1,6 +1,6 @@
-import FeaturedCards from "./FeaturedCards";
-import Hero from "./Hero";
-import MainContainer from "./MainContainer";
+import FeaturedCards from "../components/Home/FeaturedCards";
+import Hero from "../components/Home/Hero";
+import MainContainer from "../components/Home/MainContainer";
 
 // ============ JUST CLONING THE HOMEPAGE, NEEDS RE MAKE FOR OUR PLATFORM ===================
 export const HomePage = () => {
