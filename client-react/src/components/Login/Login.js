@@ -1,10 +1,10 @@
 import React from 'react'
-//import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Field, Form, Formik } from 'formik'
 import { BsShieldLockFill } from "react-icons/bs";
 import './Login.scss'
 function Login() {
- // let navigate = useNavigate()
+let navigate = useNavigate()
 
 
 
@@ -61,8 +61,12 @@ function Login() {
             alert('Tanto el email como la contraseña ingresados están incorrectos, por favor revise la información y vuelva a intentar')
           }else if (isUser.email === valores.email && isUser.password === valores.password) {
             resetForm()  
-            alert('Bienvenido nuevamente')
             console.log('usuario logeado/Formik funcionando')
+            console.log('....redireccionando a home en 3 segundo')
+            setTimeout(() => {
+              navigate('/')
+            }, 2000)
+            
           }
 
       }}
