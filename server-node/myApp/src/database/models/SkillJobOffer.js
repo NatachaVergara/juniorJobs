@@ -12,7 +12,7 @@ module.exports = (sequelize,DataTypes) => {
         id_Skill: {
             type: DataTypes.INTEGER,
             foreingKey: true,
-            null: true,
+            null: true, 
         },
         id_JobOffer: {
             type: DataTypes.INTEGER,

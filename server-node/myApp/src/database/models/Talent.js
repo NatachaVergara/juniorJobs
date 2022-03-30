@@ -65,22 +65,22 @@ module.exports = (sequelize,DataTypes) => {
         id_Seniority: {
             type: DataTypes.INTEGER,
             foreingKey: true,
-            null: true,
+            null: false,
         },
         id_Experience: {
             type: DataTypes.INTEGER,
             foreingKey: true,
-            null: true,
+            null: false,
         },
         id_Speciality: {
             type: DataTypes.INTEGER,
             foreingKey: true,
-            null: true,
+            null: false,
         },
         id_Education: {
             type: DataTypes.INTEGER,
             foreingKey: true,
-            null: true,
+            null: false,
         }
 }
 
