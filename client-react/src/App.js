@@ -8,9 +8,9 @@ function App() {
   return (
     <Layout>
       <Routes>
-        <Route path="*" element={<Navigate replace to="/profile" />} />
+        <Route path="*" element={<Navigate replace to="/" />} />
         <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/home" element={<HomePage />} />
+        <Route path="/" element={<HomePage />} />
         {/* {authCtx.isLoggedIn && (
         <>
         <Route path="*" element={<Navigate replace to="/home" />} />
