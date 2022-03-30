@@ -6,7 +6,7 @@ import MainNavigation from "./MainNavigation";
 const Layout = (props) => {
   return (
     <Fragment>
-      {/* <MainNavigation /> */}
+      <MainNavigation />
       <Container>
         <Row>
           <Col
