@@ -65,7 +65,7 @@ let navigate = useNavigate()
             console.log('....redireccionando a home en 3 segundo')
             setTimeout(() => {
               navigate('/')
-            }, 3000)
+            }, 2000)
             
           }
 
