@@ -1,5 +1,6 @@
 import FeaturedCards from "./FeaturedCards";
 import Hero from "./Hero";
+import MainContainer from "./MainContainer";
 
 // ============ JUST CLONING THE HOMEPAGE, NEEDS RE MAKE FOR OUR PLATFORM ===================
 export const HomePage = () => {
@@ -14,6 +15,7 @@ export const HomePage = () => {
       <Hero />
 
       <FeaturedCards />
+      <MainContainer/>
     </>
   );
 };
