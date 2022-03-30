@@ -53,24 +53,16 @@ function Login() {
 
           if (isUser.email !== valores.email && isUser.password !== valores.password) {
             alert('El correo electronico ingresado no se encuentra registrado, asegurese de haberlo ingresado correctamente')
-          }
-
-          if (isUser.email === valores.email && isUser.password !== valores.password) {
+          }else if (isUser.email === valores.email && isUser.password !== valores.password) {
             alert(`La contraseña ingresada no corresponde con el mail ingresado, asegurese de habelo ingresado correctamente`)
 
-          }
-          if (isUser.email !== valores.email && isUser.password !== valores.password) {
+          }else if (isUser.email !== valores.email && isUser.password !== valores.password) {
 
             alert('Tanto el email como la contraseña ingresados están incorrectos, por favor revise la información y vuelva a intentar')
-          }
-
-          if (isUser.email === valores.email && isUser.password === valores.password) {
-            resetForm()           
+          }else if (isUser.email === valores.email && isUser.password === valores.password) {
+            resetForm()  
+            alert('Bienvenido nuevamente')
             console.log('usuario logeado/Formik funcionando')
-            
-            
-
-
           }
 
       }}
