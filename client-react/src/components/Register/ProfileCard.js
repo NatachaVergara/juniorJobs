@@ -7,7 +7,7 @@ import {
   CardText,
   CardTitle,
 } from "reactstrap";
-import classes from "./Profile.module.scss";
+import classes from "./ProfileCard.module.scss";
 
 export default function ProfileCard(props) {
   return (
@@ -41,8 +41,8 @@ export default function ProfileCard(props) {
           bulk of the card's content.
         </CardText>
           <div>
-            <Button color="warning">DELETE</Button>
-            <Button color="danger">EDIT</Button>
+            <Button onClick={props.onDelete} color="warning">DELETE</Button>
+            <Button onClick={props.onEdit} color="danger">EDIT</Button>
           </div>
       </Card>
     </Fragment>

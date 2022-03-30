@@ -15,13 +15,13 @@ import classes from "./Profile.module.scss";
 import ProfileCard from "./ProfileCard";
 import ProjectsCard from "./ProjectsCard";
 
-export default function Profile() {
+export default function Profile(props) {
   return (
     <Fragment>
       <Container>
         <Row>
           <Col>
-            <ProfileCard />
+            <ProfileCard onEdit={props.onEdit} onDelete={props.onDelete} />
           </Col>
           <Col lg="8">
             <ProjectsCard />

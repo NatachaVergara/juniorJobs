@@ -1,16 +1,25 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Col, Container, Row } from "reactstrap";
 import Profile from "../components/Register/Profile";
 import RegisterRecruiter from "../components/Register/RegisterRecruiter";
 import RegisterTalent from "../components/Register/RegisterTalent";
 
 export default function ProfilePage() {
+  const [isEditing,setIsEditing]=useState(false)
+  const [isRecruiter,setIsRecruiter]=useState(true)
+  const [isTalent,setIsTalent]=useState(true)
+  function onEditHandler(){
+    setIsEditing(true)
+  }
+  function onDeleteHandler(){
+    
+  }
   return (
     <Fragment>
-      <Profile></Profile>
+      {!isEditing&&<Profile onEdit={onEditHandler} onDelete={onDeleteHandler}></Profile>}
       {/* editing and first login */}
-      {!true && <RegisterTalent></RegisterTalent>}
-      {!true && <RegisterRecruiter></RegisterRecruiter>}
+      {isEditing&&isTalent && <RegisterTalent></RegisterTalent>}
+      {isEditing&&isRecruiter && <RegisterRecruiter></RegisterRecruiter>}
     </Fragment>
   );
 }

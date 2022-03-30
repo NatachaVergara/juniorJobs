@@ -3,7 +3,7 @@ import classes from "./ProjectsCard.module.scss";
 
 export default function (props) {
   return (
-    <Card body color="light" className={classes.card}>
+    <Card body color="light" className={classes.profile}>
       <CardBody>
         <CardTitle tag="h5">Projects</CardTitle>
         <CardText>Mostrar proyectos realizados</CardText>
