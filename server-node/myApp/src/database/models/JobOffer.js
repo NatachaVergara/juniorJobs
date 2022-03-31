@@ -78,20 +78,30 @@ module.exports = (sequelize,DataTypes) => {
 
     const JobOffer = sequelize.define (alias,cols,config);
 
-    // Talent.associate = function(models){
-    //     Talent.belongsTo(models.Genero,{
-    //         as: "generos",
-    //         foreignKey: "Genero_id",
-    //         timestamps: false
-    //     });
-    //     Talent.belongsToMany(models.Personaje,{
-    //         as: "talent",
-    //         through: "personajePelicula",
-    //         foreignKey: "Pelicula_id",
-    //         otherKey: "Personaje_id",
-    //         timestamps: false
-    //     });
-    // }
+    JobOffer.associate = function(models){
+        JobOffer.belongsTo(models.Schedule,{
+            as: "schedule",
+            foreignKey: "Schedule_id",
+            timestamps: false
+        });
+        JobOffer.belongsTo(models.Remote,{
+            as: "remote",
+            foreignKey: "Remote_id",
+            timestamps: false
+        });
+        JobOffer.belongsTo(models.Recruiter,{
+            as: "recruiter",
+            foreignKey: "Recruiter_id",
+            timestamps: false
+        });
+        // Talent.belongsToMany(models.Personaje,{
+        //     as: "talent",
+        //     through: "personajePelicula",
+        //     foreignKey: "Pelicula_id",
+        //     otherKey: "Personaje_id",
+        //     timestamps: false
+        // });
+    }
 
     return JobOffer;
 }

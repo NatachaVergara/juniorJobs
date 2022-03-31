@@ -22,20 +22,13 @@ module.exports = (sequelize,DataTypes) => {
 
     const Remote = sequelize.define (alias,cols,config);
 
-    // Talent.associate = function(models){
-    //     Talent.belongsTo(models.Genero,{
-    //         as: "generos",
-    //         foreignKey: "Genero_id",
-    //         timestamps: false
-    //     });
-    //     Talent.belongsToMany(models.Personaje,{
-    //         as: "talent",
-    //         through: "personajePelicula",
-    //         foreignKey: "Pelicula_id",
-    //         otherKey: "Personaje_id",
-    //         timestamps: false
-    //     });
-    // }
+    Remote.associate = function(models){
+        Remote.hasMany(models.JobOffer,{
+            as: "joboffer",
+            foreignKey: "Remote_id",
+            timestamps: false
+        });
+    }
 
     return Remote;
 }
