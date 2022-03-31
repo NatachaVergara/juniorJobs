@@ -16,10 +16,13 @@ const programmingJobs = [
     return (
       <>
 
-<Row>
+
+{categoriesArray.map((c, i) => (
+  <Row>
   
-<Col>
-            {designJobs.map(() => 
+  <Col>
+  <h1 key={i}>{c.category}</h1>
+  {designJobs.map(() => 
             <Col>
             <Row>
               <a href="#">
@@ -45,10 +48,10 @@ const programmingJobs = [
             </Row>
           </Col>
         )}
-            </Col>
-</Row>
-            
-       
+  </Col>
+  </Row>
+)
+)} 
     </>
     );
   }
