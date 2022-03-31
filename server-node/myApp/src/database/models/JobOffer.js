@@ -109,13 +109,13 @@ module.exports = (sequelize,DataTypes) => {
             foreignKey: "Speciality_id",
             timestamps: false
         });
-        // Talent.belongsToMany(models.Personaje,{
-        //     as: "talent",
-        //     through: "personajePelicula",
-        //     foreignKey: "Pelicula_id",
-        //     otherKey: "Personaje_id",
-        //     timestamps: false
-        // });
+        JobOffer.belongsToMany(models.Skill,{
+            as: "skill",
+            through: "SkillJobOffer",
+            foreignKey: "id_JobOffer",
+            otherKey: "id_Skill",
+            timestamps: false
+        });
     }
 
     return JobOffer;
