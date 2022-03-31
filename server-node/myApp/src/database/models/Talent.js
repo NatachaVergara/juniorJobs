@@ -91,20 +91,35 @@ module.exports = (sequelize,DataTypes) => {
 
     const Talent = sequelize.define (alias,cols,config);
 
-    // Talent.associate = function(models){
-    //     Talent.belongsTo(models.Genero,{
-    //         as: "generos",
-    //         foreignKey: "Genero_id",
-    //         timestamps: false
-    //     });
-    //     Talent.belongsToMany(models.Personaje,{
-    //         as: "talent",
-    //         through: "personajePelicula",
-    //         foreignKey: "Pelicula_id",
-    //         otherKey: "Personaje_id",
-    //         timestamps: false
-    //     });
-    // }
+    Talent.associate = function(models){
+        Talent.belongsTo(models.Seniority,{
+            as: "seniority",
+            foreignKey: "Seniority_id",
+            timestamps: false
+        });
+        Talent.belongsTo(models.Experience,{
+            as: "experience",
+            foreignKey: "Experience_id",
+            timestamps: false
+        });
+        Talent.belongsTo(models.Speciality,{
+            as: "speciality",
+            foreignKey: "Speciality_id",
+            timestamps: false
+        });
+        Talent.belongsTo(models.Education,{
+            as: "education",
+            foreignKey: "Education_id",
+            timestamps: false
+        });
+        // Talent.belongsToMany(models.Personaje,{
+        //     as: "talent",
+        //     through: "personajePelicula",
+        //     foreignKey: "Pelicula_id",
+        //     otherKey: "Personaje_id",
+        //     timestamps: false
+        // });
+    }
 
     return Talent;
 }
