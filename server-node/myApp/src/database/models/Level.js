@@ -22,20 +22,18 @@ module.exports = (sequelize,DataTypes) => {
 
     const Level = sequelize.define (alias,cols,config);
 
-    // Talent.associate = function(models){
-    //     Talent.belongsTo(models.Genero,{
-    //         as: "generos",
-    //         foreignKey: "Genero_id",
-    //         timestamps: false
-    //     });
-    //     Talent.belongsToMany(models.Personaje,{
-    //         as: "talent",
-    //         through: "personajePelicula",
-    //         foreignKey: "Pelicula_id",
-    //         otherKey: "Personaje_id",
-    //         timestamps: false
-    //     });
-    // }
+    Level.associate = function(models){
+        Level.hasMany(models.LanguageTalent,{
+            as: "languagetalent",
+            foreignKey: "id_Level",
+            timestamps: false
+        });
+        Level.hasMany(models.LanguageJobOffer,{
+            as: "languagejoboffer",
+            foreignKey: "id_Level",
+            timestamps: false
+        });
+    }
 
     return Level;
 }
