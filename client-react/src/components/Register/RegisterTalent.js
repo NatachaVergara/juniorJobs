@@ -2,7 +2,7 @@ import React from "react";
 import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
 // import classes from "./RegisterTalent.module.css";
-import { Col, Input, Label, Row } from "reactstrap";
+import { Button, Card, Col, Container, Input, Label, Row } from "reactstrap";
 
 const MyTextInput = ({ label, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
@@ -11,7 +11,12 @@ const MyTextInput = ({ label, ...props }) => {
   return (
     <>
       <Label htmlFor={props.id || props.name}>{label}</Label>
-      <Input {...field} {...props} invalid={meta.error&&meta.touched} valid={!meta.error&&meta.touched}/>
+      <Input
+        {...field}
+        {...props}
+        invalid={meta.error && meta.touched}
+        valid={!meta.error && meta.touched}
+      />
       {meta.touched && meta.error ? (
         <div className="error">{meta.error}</div>
       ) : null}
@@ -23,7 +28,13 @@ const MySelect = ({ label, ...props }) => {
   return (
     <>
       <Label htmlFor={props.id || props.name}>{label}</Label>
-      <Input type="select" {...field} {...props} />
+      <Input
+        type="select"
+        {...field}
+        {...props}
+        invalid={meta.error && meta.touched}
+        valid={!meta.error && meta.touched}
+      />
       {meta.touched && meta.error ? <p>{meta.error}</p> : null}
     </>
   );
@@ -33,7 +44,13 @@ const MyCheckbox = ({ children, ...props }) => {
   return (
     <>
       <Label>
-        <Input {...field} {...props} type="checkbox" />
+        <Input
+          {...field}
+          {...props}
+          type="checkbox"
+          invalid={meta.error && meta.touched}
+          valid={!meta.error && meta.touched}
+        />
         {children}
       </Label>
       {meta.touched && meta.error ? (
@@ -42,30 +59,37 @@ const MyCheckbox = ({ children, ...props }) => {
     </>
   );
 };
-const MyRange = ({ label, ...props }) => {
-  const [field, meta] = useField({ ...props, type: "range" });
-  return (
-    <>
-      <Label htmlFor={props.id || props.name}>
-        {label}, is <b>{field.value}</b>
-      </Label>
-      <Input type="range" {...field} {...props} />
+// const MyRange = ({ label, ...props }) => {
+//   const [field, meta] = useField({ ...props, type: "range" });
+//   return (
+//     <>
+//       <Label htmlFor={props.id || props.name}>
+//         {label}, is <b>{field.value}</b>
+//       </Label>
+//       <Input type="range" {...field} {...props} />
 
-      {meta.touched && meta.error ? (
-        <div className="error">{meta.error}</div>
-      ) : null}
-    </>
-  );
-};
+//       {meta.touched && meta.error ? (
+//         <div className="error">{meta.error}</div>
+//       ) : null}
+//     </>
+//   );
+// };
 const MyRadio = ({ label, ...props }) => {
   const [field, meta] = useField({ ...props, type: "radio" });
   return (
     <div>
       <Label>
-        <Input {...field} {...props} type="radio" />
+        <Container>
+          <Input
+            {...field}
+            {...props}
+            type="radio"
+            invalid={meta.error && meta.touched}
+            valid={!meta.error && meta.touched}
+          />
+        </Container>
         {label}
       </Label>
-
       {meta.touched && meta.error ? (
         <div className="error">{meta.error}</div>
       ) : null}
@@ -80,7 +104,7 @@ const phoneRegex =
 export default function RegisterTalent(props) {
   return (
     <>
-      <h1 className="h1">Complete your profile!</h1>
+      <h1 className="h1">Complete your talent profile!</h1>
       <Formik
         initialValues={{
           userName: "",
@@ -108,9 +132,8 @@ export default function RegisterTalent(props) {
             .email("Field should contain a valid e-mail")
             .max(255)
             .required("E-mail is required"),
-          phone: Yup.string()
-            .matches(phoneRegex, "Phone number is not valid")
-            .required("Required"),
+          phone: Yup.string().matches(phoneRegex, "Phone number is not valid"),
+          // .required("Required"),
           linkedinUrl: Yup.string()
             // .matches(urlRegex, "Url is not valid")
             .required("Required"),
@@ -183,28 +206,40 @@ export default function RegisterTalent(props) {
                 />
               </Col>
             </Row>
-            <MyTextInput
-              label="E-mail"
-              name="email"
-              type="text"
-              placeholder="example@juniorjobs.com"
-            />
-            <MyTextInput
-              label="Phone number"
-              name="phone"
-              type="text"
-              placeholder="+54 342 6 156 014"
-            />
-            <MyTextInput
-              label="LinkedIn Link"
-              name="linkedinUrl"
-              type="text"
-            />
-            <MyTextInput
-              label="Remote repositories link"
-              name="repositoryUrl"
-              type="text"
-            />
+            <Row>
+              <Col>
+                <MyTextInput
+                  label="E-mail"
+                  name="email"
+                  type="text"
+                  placeholder="example@juniorjobs.com"
+                />
+              </Col>
+              <Col>
+                <MyTextInput
+                  label="Phone number"
+                  name="phone"
+                  type="text"
+                  placeholder="+54 342 6 156 014"
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <MyTextInput
+                  label="LinkedIn Link"
+                  name="linkedinUrl"
+                  type="url"
+                />
+              </Col>
+              <Col>
+                <MyTextInput
+                  label="Remote repositories link"
+                  name="repositoryUrl"
+                  type="url"
+                />
+              </Col>
+            </Row>
             <MyTextInput label="Age" name="userAge" type="number" />
             <Row>
               <Col>
@@ -215,27 +250,20 @@ export default function RegisterTalent(props) {
                 </MySelect>
               </Col>
               <Col>
-                {/* <MySelect label="Experience" name="experience">
-                  <option value="0-2 months">0-2 months</option>
-                  <option value="2-6 months">2-6 months</option>
-                  <option value="6-12 months">6-12 months</option>
-                  <option value="1-2 years">1-2 years</option>
-                  <option value="2-4 years">2-4 years</option>
-                </MySelect> */}
+                <MySelect label="Speciality if apply" name="speciality">
+                  <option value="AI">Aritificial intelligence</option>
+                  <option value="Games">Games</option>
+                  <option value="Fintech">Fintech</option>
+                  <option value="Data science">Data science</option>
+                  <option value="Networks">Networks</option>
+                  <option value="Computer-Human Interface">
+                    Computer-Human Interface
+                  </option>
+                  <option value="Computer Graphics">Computer Graphics</option>
+                  <option value="Cyber security">Cyber security</option>
+                </MySelect>
               </Col>
             </Row>
-            <MySelect label="Speciality if apply" name="speciality">
-              <option value="AI">Aritificial intelligence</option>
-              <option value="Games">Games</option>
-              <option value="Fintech">Fintech</option>
-              <option value="Data science">Data science</option>
-              <option value="Networks">Networks</option>
-              <option value="Computer-Human Interface">
-                Computer-Human Interface
-              </option>
-              <option value="Computer Graphics">Computer Graphics</option>
-              <option value="Cyber security">Cyber security</option>
-            </MySelect>
             <MyTextInput
               label="Education"
               name="education"
@@ -248,50 +276,61 @@ export default function RegisterTalent(props) {
               type="textarea"
               placeholder="Describe yourself"
             />
-
-            <div className="radios">
-              <MyRadio
-                label="0-2 months"
-                name="experience"
-                type="radio"
-                value="0-2 months"
-              />
-              <MyRadio
-                label="2-6 months"
-                name="experience"
-                type="radio"
-                value="2-6 months"
-              />
-              <MyRadio
-                label="6-12 months"
-                name="experience"
-                type="radio"
-                value="6-12 months"
-              />
-              <MyRadio
-                label="1-2 yeas"
-                name="experience"
-                type="radio"
-                value="1-2 years"
-              />
-              <MyRadio
-                label="2-4 years"
-                name="experience"
-                type="radio"
-                value="2-4 years"
-              />
-            </div>
-            <MyCheckbox name="acceptedTerms">
+            <Card body color="" className="">
+              <Row>
+                <Col>
+                  <MyRadio
+                    label="0-2 months"
+                    name="experience"
+                    type="radio"
+                    value="0-2 months"
+                  />
+                </Col>
+                <Col>
+                  <MyRadio
+                    label="2-6 months"
+                    name="experience"
+                    type="radio"
+                    value="2-6 months"
+                  />
+                </Col>
+                <Col>
+                  <MyRadio
+                    label="6-12 months"
+                    name="experience"
+                    type="radio"
+                    value="6-12 months"
+                  />
+                </Col>
+                <Col>
+                  <MyRadio
+                    label="1-2 yeas"
+                    name="experience"
+                    type="radio"
+                    value="1-2 years"
+                  />
+                </Col>
+                <Col>
+                  <MyRadio
+                    label="2-4 years"
+                    name="experience"
+                    type="radio"
+                    value="2-4 years"
+                  />
+                </Col>
+              </Row>
+            </Card>
+            <MyCheckbox name="acceptedTerms">{""}
               I accept the terms and conditions
             </MyCheckbox>
-
-            <button
-              className={`btn btn-primary `}
-              type="submit"
-              disabled={isSubmitting || !isValid}
-            >
-              Submit
-            </button>
+            <div>
+              <Button color="primary" disabled={isSubmitting || !isValid}>
+                Submit
+              </Button>
+              <Button color="danger" disabled={isSubmitting || !isValid}>
+                Remove this profile
+              </Button>
+            </div>
           </Form>
         )}
       </Formik>
