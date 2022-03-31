@@ -1,5 +1,4 @@
 import { Fragment, useState } from "react";
-import { Col, Container, Row } from "reactstrap";
 import Profile from "../components/Register/Profile";
 import RegisterRecruiter from "../components/Register/RegisterRecruiter";
 import RegisterTalent from "../components/Register/RegisterTalent";

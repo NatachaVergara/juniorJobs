@@ -12,7 +12,7 @@ import classes from "./ProfileCard.module.scss";
 export default function ProfileCard(props) {
   return (
     <Fragment>
-      <Card body color="dark" inverse className={classes.card}>
+      <Card body color="secondary" inverse className={classes.card}>
         <CardImg
           src="https://media.istockphoto.com/photos/young-character-actor-headshot-picture-id1211061995?k=20&m=1211061995&s=170667a&w=0&h=KtUBCp33OpGS9VfQ35IIJB8jF7aC1r7tMhI_Rqlxh5I="
           width="100%"
