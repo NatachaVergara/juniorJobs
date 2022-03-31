@@ -1,10 +1,5 @@
 import { Col, Row, CardTitle, CardText, Card } from "reactstrap";
-
-const categoriesArray = [
-  { category: "Design", id: "123" },
-  { category: "Programming", id: "124" },
-  { category: "Data Science / Analytics", id: "125" },
-];
+import {categoriesArray} from './dbHome'
 
 const jobs = [1, 2];
 export default function MainContainer() {
