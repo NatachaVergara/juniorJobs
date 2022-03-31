@@ -5,14 +5,16 @@ import './AboutUs.scss'
 
 const AboutUs = () => {
   let nosotros = [
-    { name: 'Juan Pérez', age: '35', linkedinUrl: '#', img: 'https://img.freepik.com/iconos-gratis/grupo-reunion_318-10037.jpg?t=st=1648674807~exp=1648675407~hmac=026aa4bef60da8439d348b618d4a7f5439e0820721b826d4cbb94820a9fddb82&w=360', github: '#' },
-    {
-      name: 'Mark Zuckerberg', age: '35', linkedinUrl: '#', img: 'https://img.freepik.com/iconos-gratis/grupo-reunion_318-10037.jpg?t=st=1648674807~exp=1648675407~hmac=026aa4bef60da8439d348b618d4a7f5439e0820721b826d4cbb94820a9fddb82&w=360', github: '#'
-    },
-    { name: 'Steve Jobs', age: '35', linkedinUrl: '#', img: 'https://img.freepik.com/iconos-gratis/grupo-reunion_318-10037.jpg?t=st=1648674807~exp=1648675407~hmac=026aa4bef60da8439d348b618d4a7f5439e0820721b826d4cbb94820a9fddb82&w=360', github: '#' },
-    { name: 'Steven spielberg', age: '35', linkedinUrl: '#', img: 'https://img.freepik.com/iconos-gratis/grupo-reunion_318-10037.jpg?t=st=1648674807~exp=1648675407~hmac=026aa4bef60da8439d348b618d4a7f5439e0820721b826d4cbb94820a9fddb82&w=360', github: '#' },
-    { name: 'Ada Lovelace', age: '35', linkedinUrl: '#', img: 'https://img.freepik.com/iconos-gratis/grupo-reunion_318-10037.jpg?t=st=1648674807~exp=1648675407~hmac=026aa4bef60da8439d348b618d4a7f5439e0820721b826d4cbb94820a9fddb82&w=360', github: '#' },
-    { name: 'Grace Hopper', age: '35', linkedinUrl: '#', img: 'https://img.freepik.com/iconos-gratis/grupo-reunion_318-10037.jpg?t=st=1648674807~exp=1648675407~hmac=026aa4bef60da8439d348b618d4a7f5439e0820721b826d4cbb94820a9fddb82&w=360', github: '#' }
+    { name: 'Alexander Huerta', city: '', rol:'', linkedin:'', github:'', skills:[]},
+    { name: 'Brayan Tabarez', city: '', rol:'', linkedin:'', github:'', skills:[]},
+    { name: 'Gabriel Llanez', city: '', rol:'', linkedin:'', github:'', skills:[]},
+    { name: 'Gaspar Castelo', city: '', rol:'', linkedin:'', github:'', skills:[]},
+    { name: 'Hernan García', city: '', rol:'', linkedin:'', github:'', skills:[]},
+    { name: 'Ingrid Inga', city: '', rol:'', linkedin:'', github:'', skills:[]},
+    { name: 'Leonardo Alvez', city: '', rol:'', linkedin:'', github:'', skills:[]},
+    { name: 'Matias Mazparrotte', city: '', rol:'', linkedin:'', github:'', skills:[]},
+    { name: 'Matias Semelman', city: '', rol:'', linkedin:'', github:'', skills:[] },
+    { name:' Natacha Vergara', city: '', rol:'', linkedin:'', github:'', skills:[]}
 
 
   ]
@@ -53,13 +55,14 @@ const AboutUs = () => {
         />
       </section>
 
-      <section className="aboutUS mt-5 mb-5">
+      <section className="aboutUS mt-5 mb-5 pb-5">
+        <h1 className='text-light m-5'>El equipo</h1>
         <div className="row d-flex justify-content-center align-items-center">
-
+         
           {nosotros.map((n, i) => (
             <div className="card-container col col-md-4" key={i} >
-              <img className="round" src="https://randomuser.me/api/portraits/women/79.jpg" alt="user" />
-              <h3>Ricky Park</h3>
+              <img className="round" src="https://randomuser.me/api/portraits/lego/0.jpg" alt="user" />
+              <h3>{ n.name}</h3>
               <h6>New York</h6>
               <p>User interface designer and <br /> front-end developer</p>
               <div className="buttons">
