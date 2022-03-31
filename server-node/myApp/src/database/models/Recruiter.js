@@ -60,10 +60,12 @@ module.exports = (sequelize,DataTypes) => {
     const Recruiter = sequelize.define (alias,cols,config);
 
     Recruiter.associate = function(models){
-        Recruiter.hasMany(models.JobOffer,{
-            as: "joboffer",
+        Recruiter.belongsToMany(models.Talent,{
+            as: "talent",
+            through: "JobOffer",
             foreignKey: "id_Recruiter",
-            timestamps: false
+            otherKey: "id_Talent",
+            timestamps: true
         });
     }
 

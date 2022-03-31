@@ -89,11 +89,6 @@ module.exports = (sequelize,DataTypes) => {
             foreignKey: "id_Remote",
             timestamps: false
         });
-        JobOffer.belongsTo(models.Recruiter,{
-            as: "recruiter",
-            foreignKey: "id_Recruiter",
-            timestamps: false
-        });
         JobOffer.belongsTo(models.Seniority,{
             as: "seniority",
             foreignKey: "id_Seniority",
