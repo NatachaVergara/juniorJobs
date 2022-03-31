@@ -78,20 +78,47 @@ module.exports = (sequelize,DataTypes) => {
 
     const JobOffer = sequelize.define (alias,cols,config);
 
-    // Talent.associate = function(models){
-    //     Talent.belongsTo(models.Genero,{
-    //         as: "generos",
-    //         foreignKey: "Genero_id",
-    //         timestamps: false
-    //     });
-    //     Talent.belongsToMany(models.Personaje,{
-    //         as: "talent",
-    //         through: "personajePelicula",
-    //         foreignKey: "Pelicula_id",
-    //         otherKey: "Personaje_id",
-    //         timestamps: false
-    //     });
-    // }
+    JobOffer.associate = function(models){
+        JobOffer.belongsTo(models.Schedule,{
+            as: "schedule",
+            foreignKey: "id_Schedule",
+            timestamps: false
+        });
+        JobOffer.belongsTo(models.Remote,{
+            as: "remote",
+            foreignKey: "id_Remote",
+            timestamps: false
+        });
+        JobOffer.belongsTo(models.Seniority,{
+            as: "seniority",
+            foreignKey: "id_Seniority",
+            timestamps: false
+        });
+        JobOffer.belongsTo(models.Experience,{
+            as: "experience",
+            foreignKey: "id_Experience",
+            timestamps: false
+        });
+        JobOffer.belongsTo(models.Speciality,{
+            as: "speciality",
+            foreignKey: "id_Speciality",
+            timestamps: false
+        });
+        JobOffer.belongsToMany(models.Skill,{
+            as: "skill",
+            through: "SkillJobOffer",
+            foreignKey: "id_JobOffer",
+            otherKey: "id_Skill",
+            timestamps: false
+        });
+        JobOffer.belongsToMany(models.Language,{
+            as: "language",
+            through: "LanguageJobOffer",
+            foreignKey: "id_JobOffer",
+            otherKey: "id_Language",
+            timestamps: false
+        });
+    }
 
     return JobOffer;
 }

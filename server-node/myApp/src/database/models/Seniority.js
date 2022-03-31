@@ -22,20 +22,18 @@ module.exports = (sequelize,DataTypes) => {
 
     const Seniority = sequelize.define (alias,cols,config);
 
-    // Talent.associate = function(models){
-    //     Talent.belongsTo(models.Genero,{
-    //         as: "generos",
-    //         foreignKey: "Genero_id",
-    //         timestamps: false
-    //     });
-    //     Talent.belongsToMany(models.Personaje,{
-    //         as: "talent",
-    //         through: "personajePelicula",
-    //         foreignKey: "Pelicula_id",
-    //         otherKey: "Personaje_id",
-    //         timestamps: false
-    //     });
-    // }
+    Seniority.associate = function(models){
+        Seniority.hasMany(models.Talent,{
+            as: "talent",
+            foreignKey: "id_Seniority",
+            timestamps: false
+        });
+        Seniority.hasMany(models.JobOffer,{
+            as: "joboffer",
+            foreignKey: "id_Seniority",
+            timestamps: false
+        });
+    }
 
     return Seniority;
 }
