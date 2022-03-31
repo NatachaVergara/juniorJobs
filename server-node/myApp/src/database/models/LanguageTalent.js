@@ -39,13 +39,6 @@ module.exports = (sequelize,DataTypes) => {
             foreignKey: "id_Level",
             timestamps: false
         });
-        // Talent.belongsToMany(models.Personaje,{
-        //     as: "talent",
-        //     through: "personajePelicula",
-        //     foreignKey: "Pelicula_id",
-        //     otherKey: "Personaje_id",
-        //     timestamps: false
-        // });
     }
 
     return LanguageTalent;

@@ -94,22 +94,22 @@ module.exports = (sequelize,DataTypes) => {
     Talent.associate = function(models){
         Talent.belongsTo(models.Seniority,{
             as: "seniority",
-            foreignKey: "Seniority_id",
+            foreignKey: "id_Seniority",
             timestamps: false
         });
         Talent.belongsTo(models.Experience,{
             as: "experience",
-            foreignKey: "Experience_id",
+            foreignKey: "id_Experience",
             timestamps: false
         });
         Talent.belongsTo(models.Speciality,{
             as: "speciality",
-            foreignKey: "Speciality_id",
+            foreignKey: "id_Speciality",
             timestamps: false
         });
         Talent.belongsTo(models.Education,{
             as: "education",
-            foreignKey: "Education_id",
+            foreignKey: "id_Education",
             timestamps: false
         });
         Talent.belongsToMany(models.Skill,{

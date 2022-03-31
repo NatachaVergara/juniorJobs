@@ -25,12 +25,12 @@ module.exports = (sequelize,DataTypes) => {
     Seniority.associate = function(models){
         Seniority.hasMany(models.Talent,{
             as: "talent",
-            foreignKey: "Seniority_id",
+            foreignKey: "id_Seniority",
             timestamps: false
         });
         Seniority.hasMany(models.JobOffer,{
             as: "joboffer",
-            foreignKey: "Seniority_id",
+            foreignKey: "id_Seniority",
             timestamps: false
         });
     }

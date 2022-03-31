@@ -25,7 +25,7 @@ module.exports = (sequelize,DataTypes) => {
     Education.associate = function(models){
         Education.hasMany(models.Talent,{
             as: "talent",
-            foreignKey: "Education_id",
+            foreignKey: "id_Education",
             timestamps: false
         });
     }

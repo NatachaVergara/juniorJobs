@@ -25,7 +25,7 @@ module.exports = (sequelize,DataTypes) => {
     Remote.associate = function(models){
         Remote.hasMany(models.JobOffer,{
             as: "joboffer",
-            foreignKey: "Remote_id",
+            foreignKey: "id_Remote",
             timestamps: false
         });
     }

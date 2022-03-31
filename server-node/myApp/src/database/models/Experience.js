@@ -25,12 +25,12 @@ module.exports = (sequelize,DataTypes) => {
     Experience.associate = function(models){
         Experience.hasMany(models.Talent,{
             as: "talent",
-            foreignKey: "Experience_id",
+            foreignKey: "id_Experience",
             timestamps: false
         });
         Experience.hasMany(models.JobOffer,{
             as: "joboffer",
-            foreignKey: "Experience_id",
+            foreignKey: "id_Experience",
             timestamps: false
         });
     }

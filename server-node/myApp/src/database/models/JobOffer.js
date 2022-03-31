@@ -81,32 +81,32 @@ module.exports = (sequelize,DataTypes) => {
     JobOffer.associate = function(models){
         JobOffer.belongsTo(models.Schedule,{
             as: "schedule",
-            foreignKey: "Schedule_id",
+            foreignKey: "id_Schedule",
             timestamps: false
         });
         JobOffer.belongsTo(models.Remote,{
             as: "remote",
-            foreignKey: "Remote_id",
+            foreignKey: "id_Remote",
             timestamps: false
         });
         JobOffer.belongsTo(models.Recruiter,{
             as: "recruiter",
-            foreignKey: "Recruiter_id",
+            foreignKey: "id_Recruiter",
             timestamps: false
         });
         JobOffer.belongsTo(models.Seniority,{
             as: "seniority",
-            foreignKey: "Seniority_id",
+            foreignKey: "id_Seniority",
             timestamps: false
         });
         JobOffer.belongsTo(models.Experience,{
             as: "experience",
-            foreignKey: "Experience_id",
+            foreignKey: "id_Experience",
             timestamps: false
         });
         JobOffer.belongsTo(models.Speciality,{
             as: "speciality",
-            foreignKey: "Speciality_id",
+            foreignKey: "id_Speciality",
             timestamps: false
         });
         JobOffer.belongsToMany(models.Skill,{

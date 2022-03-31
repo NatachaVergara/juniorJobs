@@ -25,7 +25,7 @@ module.exports = (sequelize,DataTypes) => {
     Schedule.associate = function(models){
         Schedule.hasMany(models.JobOffer,{
             as: "joboffer",
-            foreignKey: "Schedule_id",
+            foreignKey: "id_Schedule",
             timestamps: false
         });
     }

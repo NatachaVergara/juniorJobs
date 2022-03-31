@@ -23,11 +23,6 @@ module.exports = (sequelize,DataTypes) => {
     const Language = sequelize.define (alias,cols,config);
 
     Language.associate = function(models){
-        // Language.belongsTo(models.Genero,{
-        //     as: "generos",
-        //     foreignKey: "Genero_id",
-        //     timestamps: false
-        // });
         Language.belongsToMany(models.Talent,{
             as: "talent",
             through: "LanguageTalent",

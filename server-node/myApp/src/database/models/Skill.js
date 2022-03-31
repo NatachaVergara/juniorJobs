@@ -23,11 +23,6 @@ module.exports = (sequelize,DataTypes) => {
     const Skill = sequelize.define (alias,cols,config);
 
     Skill.associate = function(models){
-        // Talent.belongsTo(models.Genero,{
-        //     as: "generos",
-        //     foreignKey: "Genero_id",
-        //     timestamps: false
-        // });
         Skill.belongsToMany(models.Talent,{
             as: "talent",
             through: "SkillTalent",
