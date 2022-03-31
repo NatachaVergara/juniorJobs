@@ -28,6 +28,11 @@ module.exports = (sequelize,DataTypes) => {
             foreignKey: "id_Level",
             timestamps: false
         });
+        Level.hasMany(models.LanguageJobOffer,{
+            as: "languagejoboffer",
+            foreignKey: "id_Level",
+            timestamps: false
+        });
         // Talent.belongsToMany(models.Personaje,{
         //     as: "talent",
         //     through: "personajePelicula",

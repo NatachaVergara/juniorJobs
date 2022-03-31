@@ -35,6 +35,13 @@ module.exports = (sequelize,DataTypes) => {
             otherKey: "id_Talent",
             timestamps: false
         });
+        Language.belongsToMany(models.JobOffer,{
+            as: "joboffer",
+            through: "LanguageJobOffer",
+            foreignKey: "id_Language",
+            otherKey: "id_JobOffer",
+            timestamps: false
+        });
     }
 
     return Language;
