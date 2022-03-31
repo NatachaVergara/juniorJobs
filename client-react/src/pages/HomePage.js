@@ -1,6 +1,7 @@
 import FeaturedCards from "../components/Home/FeaturedCards";
 import Hero from "../components/Home/Hero";
 import MainContainer from "../components/Home/MainContainer";
+import SubFooter from "../components/Home/SubFooter";
 
 // ============ JUST CLONING THE HOMEPAGE, NEEDS RE MAKE FOR OUR PLATFORM ===================
 export const HomePage = () => {
@@ -16,6 +17,7 @@ export const HomePage = () => {
 
       <FeaturedCards />
       <MainContainer/>
+      <SubFooter/>
     </>
   );
 };
