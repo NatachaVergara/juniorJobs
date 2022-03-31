@@ -59,20 +59,15 @@ module.exports = (sequelize,DataTypes) => {
 
     const Recruiter = sequelize.define (alias,cols,config);
 
-    // Talent.associate = function(models){
-    //     Talent.belongsTo(models.Genero,{
-    //         as: "generos",
-    //         foreignKey: "Genero_id",
-    //         timestamps: false
-    //     });
-    //     Talent.belongsToMany(models.Personaje,{
-    //         as: "talent",
-    //         through: "personajePelicula",
-    //         foreignKey: "Pelicula_id",
-    //         otherKey: "Personaje_id",
-    //         timestamps: false
-    //     });
-    // }
+    Recruiter.associate = function(models){
+        Recruiter.belongsToMany(models.Talent,{
+            as: "talent",
+            through: "JobOffer",
+            foreignKey: "id_Recruiter",
+            otherKey: "id_Talent",
+            timestamps: true
+        });
+    }
 
     return Recruiter;
 }
