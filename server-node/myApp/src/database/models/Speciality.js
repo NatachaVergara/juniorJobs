@@ -28,6 +28,11 @@ module.exports = (sequelize,DataTypes) => {
             foreignKey: "Speciality_id",
             timestamps: false
         });
+        Speciality.hasMany(models.JobOffer,{
+            as: "joboffer",
+            foreignKey: "Speciality_id",
+            timestamps: false
+        });
     }
 
     return Speciality;
