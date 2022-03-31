@@ -1,3 +1,10 @@
+.formPage{
+    width:50%;
+    margin:auto;
+    margin-left: 30%;  
+
+   
+}
 Form{
         max-height: 9000px;
         border: 3px solid black;
@@ -52,5 +59,15 @@ Form{
         button{
             margin-left:35%;
         }
+    }
+}
+
+
+
+@media screen and (max-width: 768px) {
+    .formPage {
+        width: 90% !important;
+        margin: auto;
+        margin-left: 5%;
     }
 }
