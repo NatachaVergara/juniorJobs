@@ -1,25 +1,63 @@
-import { Link } from "react-router-dom";
-import { Col, Row } from "reactstrap";
-import classes from './Sidebar.module.scss'
+import { Col, Container, Nav, NavItem, NavLink, Row } from "reactstrap";
+import classes from "./Sidebar.module.scss";
+import { MdOutlineCases,MdList,MdPersonOutline,MdBuild} from "react-icons/md";
 
 export default function (props) {
   return (
-    <Col tag="nav" xs="1" className={classes.sidebar}>
+    <Col tag="nav" xs="2" className="bg-secondary">
       <Row>
-        <ul>
-          <li>
-            <Link to="/jos-applied">Jobs applied</Link>
-          </li>
-          <li>
-            <Link to="/jobs-for-you">Jobs for you</Link>
-          </li>
-          <li>
-            <Link to="/edit-profile">Edit your profile</Link>
-          </li>
-          <li>
-            <Link to="/resources">Resources</Link>
-          </li>
-        </ul>
+        <Nav vertical>
+          <NavItem>
+            <NavLink className={classes.anchor} href="/home">
+              <Container fluid>
+                <Row>
+                  <Col sm="2">
+                    <MdOutlineCases />
+                  </Col>
+                  <Col>Jobs for you</Col>
+                </Row>
+              </Container>
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink className={classes.anchor} href="/home">
+              <Container fluid>
+                <Row>
+                  <Col sm="2">
+                    <MdList />
+                  </Col>
+                  <Col>Jobs applied</Col>
+                </Row>
+              </Container>
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink className={classes.anchor} href="/home">
+              <Container fluid>
+                <Row>
+                  <Col sm="2">
+                    <MdPersonOutline />
+                  </Col>
+                  <Col>Profile</Col>
+                </Row>
+              </Container>
+            </NavLink>
+          </NavItem>
+          
+          <NavItem>
+            <NavLink className={classes.anchor} href="/home">
+              <Container fluid>
+                <Row>
+                  <Col sm="2">
+                    <MdBuild />
+                  </Col>
+                  <Col>Resources</Col>
+                </Row>
+              </Container>
+            </NavLink>
+          </NavItem>
+          
+        </Nav>
       </Row>
     </Col>
   );

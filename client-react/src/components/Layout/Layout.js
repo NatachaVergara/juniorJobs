@@ -16,7 +16,7 @@ const Layout = (props) => {
             tag="main"
             md={{
               offset: 0,
-              size: 11,
+              size: 10,
             }}
             sm="12"
           >
