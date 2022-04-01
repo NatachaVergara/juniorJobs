@@ -34,7 +34,7 @@ const MainNavigation = () => {
         <NavLink to="/profile">
           <Button color="primary">Profile</Button>
         </NavLink>
-        <NavLink to="/about-us">
+        <NavLink to="/about">
           <Button color="primary">About us</Button>
         </NavLink>
         <NavLink to="/faq">

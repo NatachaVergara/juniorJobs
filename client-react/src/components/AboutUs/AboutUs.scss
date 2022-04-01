@@ -1,0 +1,123 @@
+*{margin: 0; padding:0; box-sizing: border-box;}
+
+.aboutBody{
+    width: 80%;
+    margin:auto;
+    & p{
+        font-family:'Helvica', sans-serif;
+        font-size:18px;
+        font-variant: proportional-nums;
+        line-height:24.84px;
+        text-decoration: none solid rgb(0,0,0);
+        color:black;
+        text-align: left;
+
+    }
+    & h4{
+        
+        font-family:'Helvica', sans-serif;
+        font-weight:500;
+        line-height:68px;
+        margin: 25px;
+        padding: 15px;
+        text-align: left;
+    }
+
+
+}
+    .aboutImg{
+        & img{
+            width:90%;
+            height:350px;
+            margin:auto;
+        }
+    }
+
+
+
+.aboutUS{  
+    @import url('https://fonts.googleapis.com/css?family=Montserrat');
+        width:90%;
+        margin:auto;
+        background-color: #0d0d0e;
+        font-family: Montserrat, sans-serif;        
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        min-height: 100vh;
+        margin: 0;
+}
+
+.card-container {
+	background-color: #eccc17;
+	border-radius: 15px;
+	box-shadow: 0px 10px 20px -10px rgba(0,0,0,0.75);
+	color: #0d0d0e;
+	padding-top: 30px;
+	position: relative;
+	width: 250px;
+	max-width: 100%;
+	text-align: center;
+    margin: 15px;
+
+    & .round {
+        border: 1px solid #0d0d0e;
+        border-radius: 50%;
+        padding: 7px;
+        width: 128px;
+        height: 128px;
+
+    }
+}
+
+.buttons{
+    & a{
+        margin: 5px
+    }
+    & .primary {
+	background-color: #0a0a0a;
+	border: 1px solid #0c0c0c;
+	border-radius: 3px;
+	color: #f3f2f7;
+	font-family: Montserrat, sans-serif;
+	font-weight: 500;
+	padding: 10px 10px;
+    text-decoration:none;
+    }
+    & .ghost {
+	background-color: transparent;
+	color: #f3f2f7;
+    }
+
+}
+
+
+.skills {
+	background-color: #eccc17;
+	text-align: left;
+	padding: 15px;
+	margin-top: 30px;
+
+    & ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+     }
+
+    & li {
+	border: 1px solid #2D2747;
+	border-radius: 2px;
+	display: inline-block;
+	font-size: 12px;
+	margin: 0 7px 7px 0;
+	padding: 7px;
+}
+}
+.custom-tag {
+    max-width: 100%;
+    height: 500px;
+    background: black;
+}
+
+
