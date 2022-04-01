@@ -1,10 +1,13 @@
+import { Link } from "react-router-dom";
 import { Col, Row, CardTitle, CardText, Card } from "reactstrap";
 
 export const FeaturedCard = ({ color }) => {
   return (
     <Col>
       <Row>
-        <a href="#">
+      <Link to={"/job"}>
+
+        {/* <a href="#"> */}
           <Col sm="12">
             <Card body color={color}>
               <Row>
@@ -23,7 +26,8 @@ export const FeaturedCard = ({ color }) => {
               </Row>
             </Card>
           </Col>
-        </a>
+        {/* </a> */}
+      </Link>
       </Row>
     </Col>
   );

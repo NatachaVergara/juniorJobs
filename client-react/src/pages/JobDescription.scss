@@ -1,10 +1,6 @@
-.navbar {
-  width: 100vw;
-  height: auto;
-}
-
 .wrapper {
-  width: 80vw;
+  width: 70vw;
+  margin: 20px;
   .title {
     padding-left: 30px;
   }
@@ -34,10 +30,11 @@
 }
 
 .wrapperDesc {
-  width: 80vw;
+  margin: 20px;
+  width: 70vw;
   margin-top: 2rem;
   .conditions {
-    width: 80vw;
+    width: 70vw;
     .col-right {
       display: flex;
       justify-content: center;
@@ -57,6 +54,13 @@
           margin-left: 10px;
         }
       }
+    }
+  }
+  .bottom{
+    display: flex;
+    justify-content: center;
+    .bottom-button{
+      width: 500px;
     }
   }
 }
