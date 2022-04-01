@@ -21,7 +21,7 @@ const MainNavigation = () => {
   return (
     <Navbar className={classes.navbar} sticky="top" color="secondary" dark>
       <NavItem>
-        <NavbarBrand href="/">Junior Jobs App</NavbarBrand>
+        <h2 className="text-light">Junior jobs</h2>
       </NavItem>
 
       <NavItem>
@@ -34,7 +34,7 @@ const MainNavigation = () => {
 
       <NavItem>
         <NavLink to="/home">
-          <Button color="primary">Home</Button>
+          <Button className="m-2" color="primary">Home</Button>
         </NavLink>
         {ls === true && (
           <NavLink to="/profile">
@@ -42,21 +42,21 @@ const MainNavigation = () => {
           </NavLink>
         )}
         <NavLink to="/about">
-          <Button color="primary">About us</Button>
+          <Button className="m-1"  color="primary">About us</Button>
         </NavLink>
         <NavLink to="/faq">
-          <Button color="primary">Faqs</Button>
+          <Button className="m-1"  color="primary">Faqs</Button>
         </NavLink>
         {ls === true ? (
-          <Button onClick={logoutHandler} color="warning">
+          <Button className="m-1"  onClick={logoutHandler} color="warning">
             Logout
           </Button>
         ) : (
           <Fragment>
-            <Button color="warning" onClick={() => navigate("/register")}>
+            <Button  className="m-1" color="warning" onClick={() => navigate("/register")}>
               SignUp
             </Button>
-            <Button color="warning" onClick={() => navigate("/login")}>
+            <Button className="m-1"  color="warning" onClick={() => navigate("/login")}>
               LogIn
             </Button>
           </Fragment>

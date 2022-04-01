@@ -1,13 +1,6 @@
-.navbar{
-  // background-color: #475b92;
-  // margin-bottom: 1rem; 
-  // border: 1px solid;
-  padding: 1.4rem 1rem;
+.searchInput {
+  width: 40rem;
 }
-
-.searchInput {width: 40rem;}
-
-
 @media screen and (max-width: 768px) {
   .searchInput {
     width: 20rem;
