@@ -1,17 +1,17 @@
 import { Fragment } from "react";
-//import { Link } from "react-router-dom";
 import { Container, Row, Col } from "reactstrap";
+import Footer from "./Footer";
 import MainNavigation from "./MainNavigation";
 import Sidebar from "./Sidebar";
 
 const Layout = (props) => {
-  
+  let ls = JSON.parse(localStorage.getItem("isLogin"));
   return (
     <Fragment>
       <MainNavigation />
       <Container fluid>
         <Row>
-         <Sidebar />          
+          <Sidebar />
           <Col
             tag="main"
             md={{
@@ -24,6 +24,7 @@ const Layout = (props) => {
           </Col>
         </Row>
       </Container>
+      <Footer/>
     </Fragment>
   );
 };

@@ -6,25 +6,20 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { Navbar, NavbarBrand, NavItem, Button, Input } from "reactstrap";
 import classes from "./MainNavigation.module.scss";
 
-
 const MainNavigation = () => {
-   // const authCtx = useContext(AuthContext);
+  // const authCtx = useContext(AuthContext);
   // const isLoggedIn = authCtx.isLoggedIn;
 
-  let ls = JSON.parse(localStorage.getItem('isLogin'))
-  const navigate = useNavigate()
+  let ls = JSON.parse(localStorage.getItem("isLogin"));
+  const navigate = useNavigate();
   const logoutHandler = () => {
-     alert('adios')
-     localStorage.setItem('isLogin', false)    
-     navigate('/login')   
-  }
-
-
+    alert("adios");
+    localStorage.setItem("isLogin", false);
+    navigate("/login");
+  };
 
   return (
-
     <Navbar className={classes.navbar} sticky="top" color="secondary" dark>
-
       <NavItem>
         <NavbarBrand href="/">Junior Jobs App</NavbarBrand>
       </NavItem>
@@ -41,10 +36,11 @@ const MainNavigation = () => {
         <NavLink to="/home">
           <Button color="primary">Home</Button>
         </NavLink>
-        {ls === true &&
-        <NavLink to="/profile">
-          <Button color="primary">Profile</Button>
-        </NavLink>}
+        {ls === true && (
+          <NavLink to="/profile">
+            <Button color="primary">Profile</Button>
+          </NavLink>
+        )}
         <NavLink to="/about">
           <Button color="primary">About us</Button>
         </NavLink>
@@ -55,14 +51,16 @@ const MainNavigation = () => {
           <Button onClick={logoutHandler} color="warning">
             Logout
           </Button>
-        ) :
-          (
-            <Fragment>
-              <Button color="warning" onClick={() => navigate('/register')}>SignUp</Button>
-              <Button color="warning" onClick={() => navigate('/login')}>LogIn</Button>
-            </Fragment>
-          )
-        }
+        ) : (
+          <Fragment>
+            <Button color="warning" onClick={() => navigate("/register")}>
+              SignUp
+            </Button>
+            <Button color="warning" onClick={() => navigate("/login")}>
+              LogIn
+            </Button>
+          </Fragment>
+        )}
       </NavItem>
     </Navbar>
   );
