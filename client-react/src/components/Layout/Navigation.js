@@ -1,4 +1,4 @@
-import { useContext } from "react";
+//import { useContext } from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -10,9 +10,11 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   NavbarText,
+  DropdownMenu,
+  DropdownItem,
 } from "reactstrap";
 
-import AuthContext from "../../store/auth-context";
+//import AuthContext from "../../store/auth-context";
 
 export default function Navigation() {
   return (

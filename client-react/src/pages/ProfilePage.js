@@ -17,8 +17,11 @@ export default function ProfilePage() {
     <Fragment>
       {!isEditing&&<Profile onEdit={onEditHandler} onDelete={onDeleteHandler}></Profile>}
       {/* editing and first login */}
-      {isEditing&&isTalent && <RegisterTalent></RegisterTalent>}
-      {isEditing&&isRecruiter && <RegisterRecruiter></RegisterRecruiter>}
+      
+      <RegisterTalent></RegisterTalent>
+      <RegisterRecruiter></RegisterRecruiter>
+      {/* {!isEditing&&isTalent && <RegisterTalent></RegisterTalent>}
+      {isEditing&&isRecruiter && <RegisterRecruiter></RegisterRecruiter>} */}
     </Fragment>
   );
 }

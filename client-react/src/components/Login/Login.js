@@ -2,27 +2,17 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Field, Form, Formik } from 'formik'
 import { BsShieldLockFill } from "react-icons/bs";
+import { talentUsers } from '../../db/dbUsers'
 import './Login.scss'
 function Login() {
-let navigate = useNavigate()
+  
 
+  let navigate = useNavigate()
 
-
-  //Creo un usuario en el localStorage para imitar que si existe en la base de datos
-  const user = {
-    email: 'user@email.com',
-    password: '123456'
-    
-  }
-
-  localStorage.setItem('token', JSON.stringify(user));
-
-
-
-
+  console.log(talentUsers[0])
   return (
-    <>
-    
+    <div className='formPage'>
+
       <Formik
         initialValues={{
           email: '',
@@ -48,32 +38,28 @@ let navigate = useNavigate()
         }}
 
         onSubmit={(valores, { resetForm }) => {
-          let isUser = JSON.parse(localStorage.getItem('token'))
+          console.log(talentUsers)
           console.log(valores.email, valores.password)
 
-          if (isUser.email !== valores.email && isUser.password !== valores.password) {
+          if (talentUsers[0].email !== valores.email && talentUsers[0].password !== valores.password) {
             alert('El correo electronico ingresado no se encuentra registrado, asegurese de haberlo ingresado correctamente')
-          }else if (isUser.email === valores.email && isUser.password !== valores.password) {
+          } else if (talentUsers[0].email === valores.email && talentUsers[0].password !== valores.password) {
             alert(`La contraseña ingresada no corresponde con el mail ingresado, asegurese de habelo ingresado correctamente`)
 
-          }else if (isUser.email !== valores.email && isUser.password !== valores.password) {
+          } else if (talentUsers[0].email !== valores.email && talentUsers[0].password !== valores.password) {
 
             alert('Tanto el email como la contraseña ingresados están incorrectos, por favor revise la información y vuelva a intentar')
-          }else if (isUser.email === valores.email && isUser.password === valores.password) {
-            resetForm()  
-            console.log('usuario logeado/Formik funcionando')
-            console.log('....redireccionando a home en 3 segundo')
-            setTimeout(() => {
-              navigate('/')
-            }, 2000)
-            
+          } else if (talentUsers[0].email === valores.email && talentUsers[0].password === valores.password) {
+            resetForm()
+           localStorage.setItem('isLogin', true)
+           navigate('/')
           }
 
-      }}
+        }}
       >
-        
+
         {({ errors, touched }) => (
-          
+
           <Form className='form container mt-5 pt-5'>
             <h1 className='d-flex justify-content-center align-items-center mb-5'>LOGIN</h1>
             <div className="fields d-flex flex-column flex-md-row justify-content-around align-items-stretch">
@@ -86,7 +72,7 @@ let navigate = useNavigate()
                   id="email"
                   name="email"
                   aria-labelledby="emailHelp"
-                  placeholder="email@email.com"
+                  placeholder="user@email.com"
                 />
 
                 {touched.email && errors.email ? <div className="form-text text-danger fs-6">{errors.email}</div> : <div id="emailHelp" className="form-text ">Nunca compartiremos su email con nadie.</div>}
@@ -108,19 +94,19 @@ let navigate = useNavigate()
               type='submit' className='boton btn btn-primary'>Ingresar
             </button>
           </Form>
-          
+
 
         )}
 
 
       </Formik>
-       {/* Link para resetear la contraseña    */}
+      {/* Link para resetear la contraseña    */}
       <span className="d-flex justify-content-center align-items-center mt-5 pt-5">
-        <BsShieldLockFill/> ¿Olvidaste tu contraseña?
+        <BsShieldLockFill /> ¿Olvidaste tu contraseña?
       </span>
 
 
-    </>
+    </div>
   )
 }
 
