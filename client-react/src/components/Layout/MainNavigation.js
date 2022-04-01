@@ -14,7 +14,6 @@ const MainNavigation = () => {
   let ls = JSON.parse(localStorage.getItem('isLogin'))
   const navigate = useNavigate()
   const logoutHandler = () => {
-     alert('adios')
      localStorage.setItem('isLogin', false)    
      navigate('/login')   
   }
