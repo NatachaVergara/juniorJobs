@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Col, Row, CardTitle, CardText, Card } from "reactstrap";
 import {categoriesArray} from './dbHome'
 
