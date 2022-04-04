@@ -7,6 +7,7 @@ import { HomePage } from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import AboutUsPage from "./pages/AboutUsPage";
+import ResourcesPage from "./pages/ResourcesPage";
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage/>} />
         <Route path="/about" element={<AboutUsPage/>} />
+        <Route path="/resources" element={<ResourcesPage/>} />
+
         {/* {authCtx.isLoggedIn && (
         <>
         <Route path="*" element={<Navigate replace to="/home" />} />
