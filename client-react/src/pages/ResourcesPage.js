@@ -15,6 +15,7 @@ const ResourcesPage = () => {
     <Col>
 
 <IndividualResource key={i} title={r.title} imgLink={r.imgLink} description={r.description} link={r.link} />
+
 </Col>
 
 
@@ -22,6 +23,7 @@ const ResourcesPage = () => {
 
 
 ))}
+<h1>Backend</h1>
 </Row>
     </Fragment>
  
