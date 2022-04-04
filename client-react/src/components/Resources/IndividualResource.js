@@ -4,7 +4,7 @@ const IndividualResource = ({ imgLink, title, description, link }) => {
       <a href={link} target="_blank"
           rel="noreferrer">
         {" "}
-        <img src={imgLink} className="card-img-top" alt="..." />
+        <img src={imgLink} className="card-img-top" alt={`${title} image`} />
       </a>
 
       <div className="card-body">
