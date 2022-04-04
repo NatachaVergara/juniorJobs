@@ -1,20 +1,20 @@
 export let frontendResources = [  {
-    title: "Introduction to CSS3",
+    title: "Frontend Developer Roadmap",
     imgLink: "https://diak46rl5chc7.cloudfront.net/orgs/75329/contents/fjm9ztcwpy8n5x71/w460_fjm9ztcwpy8n5x71.jpeg",
-    description: "The web today is almost unrecognizable from the early days of white pages with lists of blue links.The emphasis will be on learning how to write CSS rules, how to test code, and how to establish good programming habits.",
-    link: "https://www.coursera.org/learn/introcss",
+    description: "Step by step guide to becoming a modern frontend developer in 2022.",
+    link: "https://roadmap.sh/frontend",
   },
   {
-    title: "The Basics of Web-Design Layout",
-    imgLink: "https://diak46rl5chc7.cloudfront.net/orgs/75329/contents/63mnz5zkay1saadb/w460_63mnz5zkay1saadb.jpg",
-    description: "Learn How To Describe Your Design With HTML & CSS. This class will show you how to describe layouts to the browser, what the defaults are, how to override them, and when to override them.",
-    link: "https://www.skillshare.com/classes/The-Basics-of-Web-Design-Layout-Learn-How-To-Describe-Your-Design-With-HTML-CSS/1282829766?via=search-layout-grid",
+    title: "Frontend Masters Bootcamp",
+    imgLink: "https://static.frontendmasters.com/assets/courses/2019-09-07-calculator-javascript/thumb@2x.webp",
+    description: "Get a complete, ground up introduction to HTML, CSS and JavaScript. You'll also get hands-on experience building projects to show off your new skills along the way!",
+    link: "https://frontendmasters.com/bootcamp/",
   },
   {
-    title: "Intro to HTML Email Development",
-    imgLink: "https://diak46rl5chc7.cloudfront.net/orgs/75329/contents/pl0aivg4ajriqnvc/w460_pl0aivg4ajriqnvc.jpeg",
-    description: "This class is geared toward anyone that wants to learn more about how emails are developed with HTML. Having previous knowledge of HTML is preferred, but anyone without prior knowledge is welcome to take the course and follow along.",
-    link: "https://www.skillshare.com/classes/Intro-to-HTML-Email-Development/1851764446?via=search-layout-grid",
+    title: "Responsive Web Design",
+    imgLink: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/FreeCodeCamp_logo.png/800px-FreeCodeCamp_logo.png",
+    description: "In this Responsive Web Design Certification, you'll learn the languages that developers use to build webpages: HTML (Hypertext Markup Language) for content, and CSS (Cascading Style Sheets) for design.",
+    link: "https://www.freecodecamp.org/learn/responsive-web-design/",
   },
   {
     title: "Web Development Fundamentals",
@@ -23,16 +23,21 @@ export let frontendResources = [  {
     link: "https://www.skillshare.com/classes/Web-Development-Fundamentals-Javascript/342157332?via=search-layout-grid",
   },
   {
-    title: "Python for Everybody",
-    imgLink: "https://diak46rl5chc7.cloudfront.net/orgs/75329/contents/581rii9482avqjc8/w460_581rii9482avqjc8.jpeg",
-    description: "Learn Python for Everybody from University of Michigan. This Specialization builds on the success of the Python for Everybody course and will introduce fundamental programming concepts including data structures, networked application program ...",
-    link: "https://www.coursera.org/specializations/python",
+    title: "React for Beginners",
+    imgLink: "https://sigdeletras.com/images/blog/202004_react_leaflet/react.png",
+    description: "Upgrade your JavaScript skills. Learn React JS in just a couple of afternoons, taught by Wes Bos.",
+    link: "https://reactforbeginners.com/friend/FRONTENDMENTOR",
   },
   {
-    title: "Khan Academy SQL",
-    imgLink: "https://diak46rl5chc7.cloudfront.net/orgs/75329/contents/xf8w5zgbgk099lm0/w460_xf8w5zgbgk099lm0.jpeg",
-    description: "Learn how to use SQL to store, query, and manipulate data. SQL is a special-purpose programming language designed for managing data in a relational database, and is used by a huge number of apps and organizations.",
-    link: "https://www.khanacademy.org/computing/computer-programming/sql",
+    title: "Conquering Responsive Layouts",
+    imgLink: "https://d31ezp3r8jwmks.cloudfront.net/8aAusuHrnap1HUiCxm4Sq72s",
+    description: "Kevin Powell takes you through everything you need to know to create responsive layouts in his brilliant 21-day course.",
+    link: "https://courses.kevinpowell.co/conquering-responsive-layouts",
   }
 ]
-  
+
+let backendResources = [
+  {
+    
+  }
+]
