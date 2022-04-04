@@ -27,7 +27,7 @@ export default function MainContainer() {
                             />
                           </Col>
                           <Col>
-                            <CardTitle tag="h5">Job Title</CardTitle>
+                            <CardTitle tag="h5">{c.jobs[0].jobTitle}</CardTitle>
                             <CardText>
                               Remote/Location - Fulltime - 1500USD
                             </CardText>
