@@ -1,8 +1,10 @@
+import { useEffect } from "react";
 import { Col, Row, CardTitle, CardText, Card } from "reactstrap";
 import {categoriesArray} from './dbHome'
 
 const jobs = [1, 2];
 export default function MainContainer() {
+
   return (
     <>
       {categoriesArray.map((c, i) => (

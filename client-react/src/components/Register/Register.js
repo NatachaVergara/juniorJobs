@@ -17,7 +17,7 @@ const Register = () => {
     return (
         <>
         <div className='container m-auto d-flex flex-column mt-5 pt-5 registerContainer'>
-            <h1 className='d-flex justify-content-center'>¿Cómo te vas a registrar?</h1>
+            <h1 className='d-flex justify-content-center'>¿CÓMO TE VAS A REGISTRAR?</h1>
             <div className='mt-5 registerBody'>
 
                 <div className='registerCard'>

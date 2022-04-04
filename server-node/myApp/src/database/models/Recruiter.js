@@ -1,3 +1,5 @@
+const Sequelize = require('sequelize');
+
 module.exports = (sequelize,DataTypes) => {
 
     let alias = "Recruiter";
@@ -54,7 +56,11 @@ module.exports = (sequelize,DataTypes) => {
 
     let config = {
         tableName: "Recruiter",
-        timestamps: true
+        timestamps: true,
+        paranoid: true,
+        createdAt: "createDate",
+        deletedAt: "removeDate",
+        updatedAt: "editDate"
     }
 
     const Recruiter = sequelize.define (alias,cols,config);
