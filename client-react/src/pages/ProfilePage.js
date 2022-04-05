@@ -24,6 +24,10 @@ export default function ProfilePage() {
         params.method = "put";
         params.url = "/recruiters/:id";
         params.headers = { accept: "*/*" };
+        params.auth = {
+          username: "",
+          password: "",
+        };
         params.data = { values };
       }
     } else {
@@ -36,11 +40,11 @@ export default function ProfilePage() {
         params.method = "put";
         params.url = "/talent/:id";
         params.headers = { accept: "*/*" };
-        (params.auth = {
+        params.auth = {
           username: "",
           password: "",
-        }),
-          (params.data = { values });
+        };
+        params.data = { values };
       }
     }
     fetchData({ params });
