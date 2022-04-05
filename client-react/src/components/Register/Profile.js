@@ -1,17 +1,5 @@
 import { Fragment } from "react";
-import {
-  Card,
-  Col,
-  Container,
-  Row,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-  CardText,
-  Button,
-  CardImg,
-} from "reactstrap";
-import classes from "./Profile.module.scss";
+import { Col, Container, Row } from "reactstrap";
 import ProfileCard from "./ProfileCard";
 import ProjectsCard from "./ProjectsCard";
 
