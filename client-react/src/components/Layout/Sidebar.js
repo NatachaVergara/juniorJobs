@@ -43,7 +43,7 @@ export default function (props) {
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink className={classes.anchor} href="/home">
+              <NavLink className={classes.anchor} href="/profile">
                 <Container fluid>
                   <Row>
                     <Col sm="2">
@@ -56,7 +56,7 @@ export default function (props) {
             </NavItem>
 
             <NavItem>
-              <NavLink className={classes.anchor} href="/home">
+              <NavLink className={classes.anchor} href="/resources">
                 <Container fluid>
                   <Row>
                     <Col sm="2">

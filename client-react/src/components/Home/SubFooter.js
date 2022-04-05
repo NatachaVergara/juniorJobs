@@ -19,12 +19,12 @@ const SubFooter = () => (
     <Col>
       <h1>Jobs by Category</h1>
       {jobsByCategory.map((e, i) => (
-        <Col>
+        <Col key={i}>
           <Row>
             {" "}
             <ul>
               <li>
-                <a href="/" key={i}>
+                <a href="/" >
                   {e}
                 </a>
               </li>
@@ -36,12 +36,12 @@ const SubFooter = () => (
     <Col>
       <h1>Jobs by Country</h1>
       {jobsByCountry.map((e, i) => (
-        <Col>
+        <Col key={i}>
           <Row>
             {" "}
             <ul>
               <li>
-                <a href="/" key={i}>
+                <a href="/" >
                   {e}
                 </a>
               </li>
@@ -51,12 +51,12 @@ const SubFooter = () => (
       ))}
       <h1>Jobs by City</h1>
       {jobsByCity.map((e, i) => (
-        <Col>
+        <Col key={i}>
           <Row>
             {" "}
             <ul>
               <li>
-                <a href="/" key={i}>
+                <a href="/" >
                   {e}
                 </a>
               </li>
@@ -68,12 +68,12 @@ const SubFooter = () => (
     <Col>
       <h1>Jobs by tags</h1>
       {jobsByTag.map((e, i) => (
-        <Col>
+        <Col key={i}>
           <Row>
             {" "}
             <ul>
               <li>
-                <a href="/" key={i}>
+                <a href="/" >
                   {e}
                 </a>
               </li>
