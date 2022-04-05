@@ -135,7 +135,7 @@ export default function RegisterTalent(props) {
           phone: Yup.string().matches(phoneRegex, "Phone number is not valid"),
           // .required("Required"),
           linkedinUrl: Yup.string()
-            // .matches(urlRegex, "Url is not valid")
+            .matches(urlRegex, "Url is not valid")
             .required("Required"),
           repositoryUrl: Yup.string()
             // .matches(urlRegex, "Url is not valid")
@@ -320,8 +320,8 @@ export default function RegisterTalent(props) {
                 </Col>
               </Row>
             </Card>
-            <MyCheckbox name="acceptedTerms">{""}
-              I accept the terms and conditions
+            <MyCheckbox name="acceptedTerms">
+              {""}I accept the terms and conditions
             </MyCheckbox>
             <div>
               <Button color="primary" disabled={isSubmitting || !isValid}>

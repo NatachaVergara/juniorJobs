@@ -2,7 +2,7 @@ import React from "react";
 import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
 // import classes from "./RegisterTalent.module.css";
-import { Button, Col, Container, Input, Label, Row } from "reactstrap";
+import { Button, Col, Input, Label, Row } from "reactstrap";
 
 const MyTextInput = ({ label, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
@@ -23,22 +23,22 @@ const MyTextInput = ({ label, ...props }) => {
     </>
   );
 };
-const MySelect = ({ label, ...props }) => {
-  const [field, meta] = useField(props);
-  return (
-    <>
-      <Label htmlFor={props.id || props.name}>{label}</Label>
-      <Input
-        type="select"
-        {...field}
-        {...props}
-        invalid={meta.error && meta.touched}
-        valid={!meta.error && meta.touched}
-      />
-      {meta.touched && meta.error ? <p>{meta.error}</p> : null}
-    </>
-  );
-};
+// const MySelect = ({ label, ...props }) => {
+//   const [field, meta] = useField(props);
+//   return (
+//     <>
+//       <Label htmlFor={props.id || props.name}>{label}</Label>
+//       <Input
+//         type="select"
+//         {...field}
+//         {...props}
+//         invalid={meta.error && meta.touched}
+//         valid={!meta.error && meta.touched}
+//       />
+//       {meta.touched && meta.error ? <p>{meta.error}</p> : null}
+//     </>
+//   );
+// };
 const MyCheckbox = ({ children, ...props }) => {
   const [field, meta] = useField({ ...props, type: "checkbox" });
   return (
@@ -74,31 +74,31 @@ const MyCheckbox = ({ children, ...props }) => {
 //     </>
 //   );
 // };
-const MyRadio = ({ label, ...props }) => {
-  const [field, meta] = useField({ ...props, type: "radio" });
-  return (
-    <div>
-      <Label>
-        <Container>
-          <Input
-            {...field}
-            {...props}
-            type="radio"
-            invalid={meta.error && meta.touched}
-            valid={!meta.error && meta.touched}
-          />
-        </Container>
-        {label}
-      </Label>
+// const MyRadio = ({ label, ...props }) => {
+//   const [field, meta] = useField({ ...props, type: "radio" });
+//   return (
+//     <div>
+//       <Label>
+//         <Container>
+//           <Input
+//             {...field}
+//             {...props}
+//             type="radio"
+//             invalid={meta.error && meta.touched}
+//             valid={!meta.error && meta.touched}
+//           />
+//         </Container>
+//         {label}
+//       </Label>
 
-      {meta.touched && meta.error ? (
-        <div className="error">{meta.error}</div>
-      ) : null}
-    </div>
-  );
-};
-const urlRegex =
-  /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/gm;
+//       {meta.touched && meta.error ? (
+//         <div className="error">{meta.error}</div>
+//       ) : null}
+//     </div>
+//   );
+// };
+// const urlRegex =
+//   /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/gm;
 const phoneRegex =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
