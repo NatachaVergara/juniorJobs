@@ -1,5 +1,7 @@
 const db = require('../database/models');
+const Sequelize = require('sequelize')
 const bcryptjs = require('bcryptjs');
+const User = require('../database/models/index')
 const userController = {
     login: (req, res) => {
 
@@ -39,9 +41,25 @@ const userController = {
         })    
     },
 
-    register: (req, res) => {
-
-    }
+    // register: (req, res) => {
+    //     console.log(req.body);
+    //     const password = req.body.password;
+    //     const hashPassword = bcryptjs.hashSync(password, 10);
+    //     User.create({
+    //         name: req.body.name,
+    //         lastName: req.body.lastName,
+    //         email: req.body.email,
+    //         password: hashPassword,
+    //         birthdate: req.body.birthdate,
+    //         image: req.body.image,
+    //         repository: req.body.repository,
+    //         url: req.body.url,
+    //         profile: req.body.profile,
+    //         phone: req.body.phone
+    //     }).then(user => {
+    //         res.json(user)
+    //     })
+    // }
 }
 
 module.exports = userController;
