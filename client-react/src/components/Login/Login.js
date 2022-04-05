@@ -1,15 +1,12 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
 import { Field, Form, Formik } from 'formik'
 import { BsShieldLockFill } from "react-icons/bs";
-import { talentUsers } from '../../db/dbUsers'
 import './Login.scss'
+import { useUserContext } from '../../Store/UserContext';
 function Login() {
-  
-
-  let navigate = useNavigate()
-
-  console.log(talentUsers[0])
+  const {  userLogin } = useUserContext()
+ 
+ 
   return (
     <div className='formPage'>
 
@@ -38,22 +35,7 @@ function Login() {
         }}
 
         onSubmit={(valores, { resetForm }) => {
-          console.log(talentUsers)
-          console.log(valores.email, valores.password)
-
-          if (talentUsers[0].email !== valores.email && talentUsers[0].password !== valores.password) {
-            alert('El correo electronico ingresado no se encuentra registrado, asegurese de haberlo ingresado correctamente')
-          } else if (talentUsers[0].email === valores.email && talentUsers[0].password !== valores.password) {
-            alert(`La contraseña ingresada no corresponde con el mail ingresado, asegurese de habelo ingresado correctamente`)
-
-          } else if (talentUsers[0].email !== valores.email && talentUsers[0].password !== valores.password) {
-
-            alert('Tanto el email como la contraseña ingresados están incorrectos, por favor revise la información y vuelva a intentar')
-          } else if (talentUsers[0].email === valores.email && talentUsers[0].password === valores.password) {
-            resetForm()
-           localStorage.setItem('isLogin', true)
-           navigate('/')
-          }
+          userLogin(valores.email, valores.password, resetForm)
 
         }}
       >

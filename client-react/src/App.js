@@ -11,10 +11,13 @@ import AboutUsPage from "./pages/AboutUsPage";
 import ResourcesPage from "./pages/ResourcesPage";
 
 import FaqPage from "./pages/FaqPage";
+import UserContextProvider from "./Store/UserContext";
  
 
 function App() {
   return (
+
+    <UserContextProvider>
     <Layout>
       <Routes>
         <Route path="*" element={<Navigate replace to="/" />} />
@@ -46,7 +49,8 @@ function App() {
           </>
         )} */}
       </Routes>
-    </Layout>
+      </Layout>
+    </UserContextProvider>
   );
 }
 

@@ -1,25 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Col, Container, Nav, NavItem, NavLink, Row } from "reactstrap";
 import classes from "./Sidebar.module.scss";
 import { MdOutlineCases,MdList,MdPersonOutline,MdBuild} from "react-icons/md";
+import { useUserContext } from '../../Store/UserContext';
+import { Link } from 'react-router-dom';
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default function (props) {
- let [isLG, setIsLG] = useState(false)
-  console.log(isLG)
-
-  useEffect(() => {
-    setIsLG(JSON.parse(localStorage.getItem('isLogin')))
-   }, [isLG])
-
+  const { isUser } = useUserContext()
 
   return (
    <>   
-      {isLG && <Col tag="nav" xs="2" className="bg-secondary">
+      {isUser && <Col tag="nav" xs="2" className="bg-secondary">
         <Row>
           <Nav vertical>
             <NavItem>
-              <NavLink className={classes.anchor} href="/home">
+              <Link className={classes.anchor} to="/">
                 <Container fluid>
                   <Row>
                     <Col sm="2">
@@ -28,10 +24,10 @@ export default function (props) {
                     <Col>Jobs for you</Col>
                   </Row>
                 </Container>
-              </NavLink>
+              </Link>
             </NavItem>
             <NavItem>
-              <NavLink className={classes.anchor} href="/home">
+              <Link className={classes.anchor} to="/">
                 <Container fluid>
                   <Row>
                     <Col sm="2">
@@ -40,10 +36,10 @@ export default function (props) {
                     <Col>Jobs applied</Col>
                   </Row>
                 </Container>
-              </NavLink>
+              </Link>
             </NavItem>
-            <NavItem>
-              <NavLink className={classes.anchor} href="/profile">
+            {/* <NavItem>
+              <Link className={classes.anchor} to="/profile">
                 <Container fluid>
                   <Row>
                     <Col sm="2">
@@ -52,11 +48,11 @@ export default function (props) {
                     <Col>Profile</Col>
                   </Row>
                 </Container>
-              </NavLink>
-            </NavItem>
+              </Link>
+            </NavItem> */}
 
             <NavItem>
-              <NavLink className={classes.anchor} href="/resources">
+              <Link className={classes.anchor} to="/resources">
                 <Container fluid>
                   <Row>
                     <Col sm="2">
@@ -65,7 +61,7 @@ export default function (props) {
                     <Col>Resources</Col>
                   </Row>
                 </Container>
-              </NavLink>
+              </Link>
             </NavItem>
 
           </Nav>
