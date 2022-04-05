@@ -1,7 +1,7 @@
 import { Card, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap";
 import classes from "./ProjectsCard.module.scss";
 
-export default function (props) {
+export default function ProjectsCard(props) {
   return (
     <Card body color="light" className={classes.profile}>
       <CardBody>
@@ -22,7 +22,7 @@ export default function (props) {
           </Card>
         </div>
         <div>
-        <Card body color="light" className={classes.projects}>
+          <Card body color="light" className={classes.projects}>
             <CardBody>
               <CardTitle tag="h5">Card title</CardTitle>
               <CardSubtitle className="mb-2 text-muted" tag="h6">
