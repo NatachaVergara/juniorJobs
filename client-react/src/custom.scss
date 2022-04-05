@@ -1,10 +1,112 @@
-$primary: #380a09;
-$secondary: #1e3b34;
-$success: #79b9af;
-$info: #704c46;
-$warning: rgb(105, 58, 58);
-$danger: rgb(170, 188, 95);
+
+/*Original de Gaspar*/
+// $primary: #380a09;
+// $secondary: #1e3b34;
+// $success: #79b9af;
+// $info: #704c46;
+// $warning: rgb(105, 58, 58);
+// $danger: rgb(170, 188, 95);
 // $light: $gray-100 !default;
 // $dark: $gray-900 !default;
+
+
+
+
+
+/*Paleta 1*/
+// $primary: #2166b7;
+// $secondary: #63a0fa;
+// $success: #15bf6e;
+// $info: #8fcff6;
+// $warning: #ebd211;
+// $danger: #fe180a;
+
+
+
+
+
+
+/*Paleta 2*/
+$white: #ffffff;
+
+$theme-colors: ("light": #f1dfcc,
+    "dark": #010000,
+    "primary": #252a38,
+    "secondary": #bc3c51,
+    "info": #097a3f,
+    "success": #069756,
+    "warning": #dfc707,
+    "danger": #ec1402,
+);
+
+
+
+/*Paleta 3*/
+
+// $white: #ffffff;
+
+// $theme-colors: ("light": #dadaea,
+//     "dark": #040028,
+//     "primary": #162563,
+//     "secondary": #c80003,
+//     "info": #765fbd,
+//     "success": #009757,
+//     "warning": #dec800,
+//     "danger": #eb1a00,
+// );
+
+
+
+
+/*Paleta 4*/
+
+// $white: #ffffff;
+
+// $theme-colors: ("light": #f6e0e0,
+//     "dark": #000104,
+//     "primary": #1f2f8e,
+//     "secondary": #961ee3,
+//     "info": #fd2e24,
+//     "success": #079859,
+//     "warning": #dec808,
+//     "danger": #eb1c03,
+// );
+
+
+/*Paleta 5*/
+
+// $white: #ffffff;
+
+// $theme-colors: ("light": #d0d3d8,
+//     "dark": #333855,
+//     "primary": #0e55a3,
+//     "secondary": #9b7863,
+//     "info": #35a050,
+//     "success": #0ba75f,
+//     "warning": #e4cc0b,
+//     "danger": #f41504,
+// );
+
+
+
+/*Paleta 6*/
+// $white: #ffffff;
+
+// $theme-colors: ("light": #e2e8e9,
+//     "dark": #cd20af,
+//     "primary": #e40388,
+//     "secondary": #280a4c,
+//     "info": #2696ba,
+//     "accent1": #2be280,
+//     "accent2": #209a49,
+//     "accent3": #aac4cb,
+//     "success": #02bb82,
+//     "warning": #dad602,
+//     "danger": #eb4301,
+// );
+
+
+
+
 
 @import "bootstrap/scss/bootstrap.scss";
