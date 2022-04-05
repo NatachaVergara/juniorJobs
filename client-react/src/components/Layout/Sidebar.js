@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { Col, Container, Nav, NavItem, NavLink, Row } from "reactstrap";
 import classes from "./Sidebar.module.scss";

@@ -6,6 +6,9 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+
+
+    
 }
 
 
@@ -26,6 +29,7 @@
 .acordeon {
     width: 100%;
     margin: auto;
+    margin-top:15px;
 
 
 
@@ -56,5 +60,14 @@
 
     & .answer {
         padding: 15px;
+    }
+}
+
+
+
+
+@media screen and (max-width: 768px) {
+    .FAQ {
+        width: 100%;
     }
 }
