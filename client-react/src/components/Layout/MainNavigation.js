@@ -22,10 +22,7 @@ const MainNavigation = () => {
   return (
     <Navbar className={classes.navbar} sticky="top" color="secondary" dark>
       <NavItem>
-        <NavbarBrand>
-          {/* Le saque el link, despues hay que volver a ponerlo y agregarle los estilos */}
-          Junior Jobs App
-        </NavbarBrand>
+        <NavbarBrand>Junior Jobs app</NavbarBrand>
       </NavItem>
 
       <NavItem>
