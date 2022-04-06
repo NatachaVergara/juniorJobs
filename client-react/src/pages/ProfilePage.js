@@ -57,14 +57,8 @@ export default function ProfilePage() {
       {isSignup && !isRecruiter && (
         <RegisterTalent onSubmit={onSubmitHandler}></RegisterTalent>
       )}
-      {!isSignup && !isRecruiter && (
-        <RegisterTalent onSubmit={onSubmitHandler}></RegisterTalent>
-      )}
 
       {isSignup && isRecruiter && (
-        <RegisterRecruiter onSubmit={onSubmitHandler}></RegisterRecruiter>
-      )}
-      {!isSignup && isRecruiter && (
         <RegisterRecruiter onSubmit={onSubmitHandler}></RegisterRecruiter>
       )}
     </Fragment>
