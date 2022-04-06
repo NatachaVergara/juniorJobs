@@ -113,11 +113,13 @@ export default function RegisterTalent(props) {
           phone: "",
           linkedinUrl: "",
           repositoryUrl: "",
-          userAge: 18,
+          userDateofbirth: new Date(),
           seniority: "",
           experience: "",
           speciality: "",
           education: "",
+          languages: "",
+          skills: "",
           profileDescription: "",
           acceptedTerms: false,
         }}
@@ -140,7 +142,10 @@ export default function RegisterTalent(props) {
           repositoryUrl: Yup.string()
             // .matches(urlRegex, "Url is not valid")
             .required("Required"),
-          userAge: Yup.number().moreThan(17, "Enter a number greater than 18"),
+          userDateofbirth: Yup.date().max(
+            new Date(new Date() - 599616000000),
+            "Must to be +18 years old"
+          ),
           seniority: Yup.string()
             .oneOf(["Trainee", "Junior"], "Invalid Job Type")
             .required("Required"),
@@ -240,7 +245,11 @@ export default function RegisterTalent(props) {
                 />
               </Col>
             </Row>
-            <MyTextInput label="Age" name="userAge" type="number" />
+            <MyTextInput
+              label="Date of birth"
+              name="userDateofbirth"
+              type="number"
+            />
             <Row>
               <Col>
                 <MySelect label="Seniority" name="seniority">

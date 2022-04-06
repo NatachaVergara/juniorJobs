@@ -105,14 +105,14 @@ const phoneRegex =
 export default function RegisterRecruiter(props) {
   return (
     <>
-      <h1 className="h1">Complete your recruiter profile!</h1>
+      <h2 className="h1">Complete your recruiter profile!</h2>
       <Formik
         initialValues={{
           userName: "",
           userLastName: "",
           email: "",
           phone: "",
-          userAge: 18,
+          userDateofbirth: new Date(),
           company: "",
           companyDescription: "",
           acceptedTerms: false,
@@ -129,7 +129,10 @@ export default function RegisterRecruiter(props) {
             .max(255)
             .required("E-mail is required"),
           phone: Yup.string().matches(phoneRegex, "Phone number is not valid"),
-          userAge: Yup.number().moreThan(17, "Enter a number greater than 18"),
+          userDateofbirth: Yup.date().max(
+            new Date(new Date() - 599616000000),
+            "Must to be +18 years old"
+          ),
           company: Yup.string()
             .max(350, "Must be 350 characters or less")
             .required("Required"),
@@ -182,7 +185,11 @@ export default function RegisterRecruiter(props) {
                 />
               </Col>
               <Col>
-                <MyTextInput label="Age" name="userAge" type="number" />
+                <MyTextInput
+                  label="Date of birth"
+                  name="userDateofbirth"
+                  type="date"
+                />
               </Col>
             </Row>
             <Row>
