@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
 // import classes from "./RegisterTalent.module.css";
 import { Button, Card, Col, Container, Input, Label, Row } from "reactstrap";
+import SkillsArray from "./SkillsArrayField";
 
 const MyTextInput = ({ label, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
@@ -39,6 +40,7 @@ const MySelect = ({ label, ...props }) => {
     </>
   );
 };
+
 const MyCheckbox = ({ children, ...props }) => {
   const [field, meta] = useField({ ...props, type: "checkbox" });
   return (
@@ -101,6 +103,23 @@ const urlRegex =
 const phoneRegex =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
+const options = {
+  skills: [
+    <option value="">Select one</option>,
+    <option value="React">React</option>,
+    <option value="Angular">Angular</option>,
+    <option value="NET">NET</option>,
+    <option value="C++">C++</option>,
+    <option value="CSS">CSS</option>,
+    <option value="HTML5">HTML5</option>,
+  ],
+  level: [
+    <option value="Beginner">Beginner</option>,
+    <option value="Medium">Medium</option>,
+    <option value="Advanced">Advanced</option>,
+  ],
+};
+
 export default function RegisterTalent(props) {
   return (
     <>
@@ -119,7 +138,12 @@ export default function RegisterTalent(props) {
           speciality: "",
           education: "",
           languages: "",
-          skills: "",
+          skills: [
+            {
+              name: "",
+              level: "",
+            },
+          ],
           profileDescription: "",
           acceptedTerms: false,
         }}
@@ -197,7 +221,7 @@ export default function RegisterTalent(props) {
           }, 400);
         }}
       >
-        {({ isSubmitting, isValid }) => (
+        {({ isSubmitting, isValid, values, initialValues }) => (
           <Form>
             <Row>
               <Col>
@@ -285,6 +309,16 @@ export default function RegisterTalent(props) {
               type="textarea"
               placeholder="Describe yourself"
             />
+            <Row>
+              <SkillsArray
+                skills={values.skills}
+                skillOptions={options.skills}
+                levelOptions={options.level}
+              ></SkillsArray>
+            </Row>
+            <Row>
+              {values.skills},{values.skillLevel}
+            </Row>
             <Card body color="" className="">
               <Row>
                 <Col>
