@@ -3,10 +3,11 @@ import { Field, Form, Formik } from 'formik'
 import { BsShieldLockFill } from "react-icons/bs";
 import './Login.scss'
 import { useUserContext } from '../../Store/UserContext';
+import axios from 'axios'
 function Login() {
-  const {  userLogin } = useUserContext()
- 
- 
+  const { userLogin } = useUserContext()
+
+
   return (
     <div className='formPage'>
 
@@ -37,6 +38,25 @@ function Login() {
         onSubmit={(valores, { resetForm }) => {
           userLogin(valores.email, valores.password, resetForm)
 
+          //hardcodie el tipo de user
+          let userType = 'Talent'
+
+
+          const response = axios.post('http://localhost:3002',
+            JSON.stringify({
+              email: valores.email,
+              password: valores.password,
+              userType
+            }),
+          {
+            header: {
+              'Content-type': 'application/json',
+              'Access-Control-Allow-Origin': 'http://localhost:3002',
+              'Access-Control-Allow-Credentials': 'true'
+            }
+            
+          })
+          console.log(JSON.stringify(response?.data))
         }}
       >
 
@@ -88,7 +108,7 @@ function Login() {
       </span>
 
 
-    </div>
+    </div >
   )
 }
 

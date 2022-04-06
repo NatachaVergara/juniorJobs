@@ -34,8 +34,8 @@ const UserContextProvider = ({ children }) => {
 
 
   const userLogin = (email, password, resetForm) => {
-    console.log(talentUsers)
-    console.log(email, password)
+    // console.log(talentUsers)
+    // console.log(email, password)
 
     if (talentUsers[0].email !== email && talentUsers[0].password !== password) {
       alert('El correo electronico ingresado no se encuentra registrado, asegurese de haberlo ingresado correctamente')
