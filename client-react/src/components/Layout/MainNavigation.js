@@ -4,24 +4,28 @@
 import { Fragment } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Navbar, NavbarBrand, NavItem, Button, Input } from "reactstrap";
+import { useUserContext } from "../../Store/UserContext";
 import classes from "./MainNavigation.module.scss";
 
 const MainNavigation = () => {
+  const { isUser, setIsUser } = useUserContext();
+
   // const authCtx = useContext(AuthContext);
   // const isLoggedIn = authCtx.isLoggedIn;
 
-  let ls = JSON.parse(localStorage.getItem("isLogin"));
   const navigate = useNavigate();
   const logoutHandler = () => {
-    alert("adios");
-    localStorage.setItem("isLogin", false);
+    setIsUser(false);
     navigate("/login");
   };
 
   return (
     <Navbar className={classes.navbar} sticky="top" color="secondary" dark>
       <NavItem>
-        <h2 className="text-light">Junior jobs</h2>
+        <NavbarBrand>
+          {/* Le saque el link, despues hay que volver a ponerlo y agregarle los estilos */}
+          Junior Jobs App
+        </NavbarBrand>
       </NavItem>
 
       <NavItem>
@@ -33,30 +37,34 @@ const MainNavigation = () => {
       </NavItem>
 
       <NavItem>
-        <NavLink to="/home">
-          <Button className="m-2" color="primary">Home</Button>
+        <NavLink to="/">
+          <Button color="primary">Home</Button>
         </NavLink>
-        {ls === true && (
+        {isUser === true && (
           <NavLink to="/profile">
             <Button color="primary">Profile</Button>
           </NavLink>
         )}
         <NavLink to="/about">
-          <Button className="m-1"  color="primary">About us</Button>
+          <Button className="m-1" color="primary">
+            About us
+          </Button>
         </NavLink>
         <NavLink to="/faq">
-          <Button className="m-1"  color="primary">Faqs</Button>
+          <Button className="m-1" color="primary">
+            Faqs
+          </Button>
         </NavLink>
-        {ls === true ? (
-          <Button className="m-1"  onClick={logoutHandler} color="warning">
+        {isUser === true ? (
+          <Button onClick={logoutHandler} color="warning">
             Logout
           </Button>
         ) : (
           <Fragment>
-            <Button  className="m-1" color="warning" onClick={() => navigate("/register")}>
+            <Button color="warning" onClick={() => navigate("/register")}>
               SignUp
             </Button>
-            <Button className="m-1"  color="warning" onClick={() => navigate("/login")}>
+            <Button color="warning" onClick={() => navigate("/login")}>
               LogIn
             </Button>
           </Fragment>

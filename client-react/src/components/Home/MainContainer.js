@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Col, Row, CardTitle, CardText, Card } from "reactstrap";
 import {categoriesArray} from './dbHome'
 
@@ -8,13 +7,13 @@ export default function MainContainer() {
   return (
     <>
       {categoriesArray.map((c, i) => (
-        <Row>
-          <Col>
+        <Row key={i}>
+          <Col >
             <h1 key={i}>{c.category}</h1>
-            {jobs.map(() => (
-              <Col>
+            {jobs.map((j,i) => (
+              <Col key={i}>
                 <Row>
-                  <a href="#">
+                  <a href="/">
                     <Col sm="12">
                       <Card body>
                         <Row>
@@ -28,7 +27,7 @@ export default function MainContainer() {
                             />
                           </Col>
                           <Col>
-                            <CardTitle tag="h5">Job Title</CardTitle>
+                            <CardTitle tag="h5">{c.jobs[0].jobTitle}</CardTitle>
                             <CardText>
                               Remote/Location - Fulltime - 1500USD
                             </CardText>

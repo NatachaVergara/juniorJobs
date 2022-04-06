@@ -9,7 +9,7 @@ export const categoriesArray = [
     ] },
     { category: "Programming", id: "2", jobs : [
         {
-            jobTitle: "UI/UX Designer",
+            jobTitle: "Full-Stack developer",
             workingHours: 3,
             location: "Remote",
             postedDate: "Mar. 31"
@@ -17,7 +17,7 @@ export const categoriesArray = [
     ]},
     { category: "Data Science / Analytics", id: "3", jobs : [
         {
-            jobTitle: "UI/UX Designer",
+            jobTitle: "Data Engineer",
             workingHours: 3,
             location: "Remote",
             postedDate: "Mar. 31"

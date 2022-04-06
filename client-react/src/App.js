@@ -8,8 +8,16 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import AboutUsPage from "./pages/AboutUsPage";
 
+import ResourcesPage from "./pages/ResourcesPage";
+
+import FaqPage from "./pages/FaqPage";
+import UserContextProvider from "./Store/UserContext";
+ 
+
 function App() {
   return (
+
+    <UserContextProvider>
     <Layout>
       <Routes>
         <Route path="*" element={<Navigate replace to="/" />} />
@@ -18,7 +26,15 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage/>} />
+
         <Route path="/about" element={<AboutUsPage/>} />
+        <Route path="/resources" element={<ResourcesPage/>} />
+
+
+        <Route path="/about" element={<AboutUsPage />} />
+        <Route path="/faq" element={<FaqPage/>} />
+        
+ 
         {/* {authCtx.isLoggedIn && (
         <>
         <Route path="*" element={<Navigate replace to="/home" />} />
@@ -33,7 +49,8 @@ function App() {
           </>
         )} */}
       </Routes>
-    </Layout>
+      </Layout>
+    </UserContextProvider>
   );
 }
 
