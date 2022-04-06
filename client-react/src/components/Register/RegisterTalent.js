@@ -102,23 +102,6 @@ const urlRegex =
 const phoneRegex =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
-const options = {
-  skills: [
-    <option value="">Select one</option>,
-    <option value="React">React</option>,
-    <option value="Angular">Angular</option>,
-    <option value="NET">NET</option>,
-    <option value="C++">C++</option>,
-    <option value="CSS">CSS</option>,
-    <option value="HTML5">HTML5</option>,
-  ],
-  level: [
-    <option value="Beginner">Beginner</option>,
-    <option value="Medium">Medium</option>,
-    <option value="Advanced">Advanced</option>,
-  ],
-};
-
 export default function RegisterTalent(props) {
   return (
     <>
@@ -266,7 +249,7 @@ export default function RegisterTalent(props) {
             <MyTextInput
               label="Date of birth"
               name="userDateofbirth"
-              type="number"
+              type="date"
             />
             <Row>
               <Col>
@@ -304,11 +287,7 @@ export default function RegisterTalent(props) {
               placeholder="Describe yourself"
             />
             <Row>
-              <SkillsArray
-                skills={values.skills}
-                skillOptions={options.skills}
-                levelOptions={options.level}
-              ></SkillsArray>
+              <SkillsArray skills={values.skills}></SkillsArray>
             </Row>
 
             <Card body color="" className="">
