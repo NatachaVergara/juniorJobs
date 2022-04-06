@@ -4,11 +4,11 @@ import { Button, Col, Input, Label, Row } from "reactstrap";
 export default function SkillsArray(props) {
   return (
     <FieldArray name="skills">
-      {({ insert, remove, push }) => (
+      {({ remove, push }) => (
         <div>
           {props.skills.length > 0 &&
             props.skills.map((skill, index) => (
-              <Row key={index}>
+              <Row key={index.toString()}>
                 <Col>
                   <Label htmlFor={`skills.${index}.name`}>Tech</Label>
                   <Input name={`skills.${index}.name`} type="select" />

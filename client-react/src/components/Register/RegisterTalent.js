@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
-// import classes from "./RegisterTalent.module.css";
 import { Button, Card, Col, Container, Input, Label, Row } from "reactstrap";
 import SkillsArray from "./SkillsArrayField";
 
@@ -138,12 +137,7 @@ export default function RegisterTalent(props) {
           speciality: "",
           education: "",
           languages: "",
-          skills: [
-            {
-              name: "",
-              level: "",
-            },
-          ],
+          skills: [],
           profileDescription: "",
           acceptedTerms: false,
         }}
@@ -221,7 +215,7 @@ export default function RegisterTalent(props) {
           }, 400);
         }}
       >
-        {({ isSubmitting, isValid, values, initialValues }) => (
+        {({ isSubmitting, isValid, values }) => (
           <Form>
             <Row>
               <Col>
@@ -316,9 +310,7 @@ export default function RegisterTalent(props) {
                 levelOptions={options.level}
               ></SkillsArray>
             </Row>
-            <Row>
-              {values.skills},{values.skillLevel}
-            </Row>
+
             <Card body color="" className="">
               <Row>
                 <Col>
