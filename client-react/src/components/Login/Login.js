@@ -2,10 +2,10 @@ import React from 'react'
 import { Field, Form, Formik } from 'formik'
 import { BsShieldLockFill } from "react-icons/bs";
 import './Login.scss'
-import { useUserContext } from '../../Store/UserContext';
+//import { useUserContext } from '../../Store/UserContext';
 import axios from 'axios'
 function Login() {
-  const { userLogin } = useUserContext()
+//  const { userLogin } = useUserContext()
 
 
   return (
@@ -36,27 +36,32 @@ function Login() {
         }}
 
         onSubmit={(valores, { resetForm }) => {
-          userLogin(valores.email, valores.password, resetForm)
+          // userLogin(valores.email, valores.password, resetForm)
 
           //hardcodie el tipo de user
           let userType = 'Talent'
 
+          const postLogin = async () => {
 
-          const response = axios.post('http://localhost:3002',
-            JSON.stringify({
-              email: valores.email,
-              password: valores.password,
-              userType
-            }),
-          {
-            header: {
-              'Content-type': 'application/json',
-              'Access-Control-Allow-Origin': 'http://localhost:3002',
-              'Access-Control-Allow-Credentials': 'true'
-            }
-            
-          })
-          console.log(JSON.stringify(response?.data))
+            const response = await axios.post('http://localhost:3002/users/login',
+                {
+                email: valores.email,
+                password: valores.password,
+                userType
+              },
+              {
+                header: {
+                  'Content-type': 'application/x-www-form-urlencoded'                  
+                }
+
+              })
+               console.log(response?.data)
+          }
+
+          postLogin()
+
+
+
         }}
       >
 
