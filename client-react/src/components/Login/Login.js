@@ -2,11 +2,13 @@ import React from 'react'
 import { Field, Form, Formik } from 'formik'
 import { BsShieldLockFill } from "react-icons/bs";
 import './Login.scss'
-//import { useUserContext } from '../../Store/UserContext';
-import axios from 'axios'
+import { useUserContext } from '../../Store/UserContext';
+//import axios from 'axios'
+// import { useNavigate } from 'react-router-dom';
+// import { postLogin } from '../../hooks/postLogin-axios';
 function Login() {
-//  const { userLogin } = useUserContext()
-
+  const { userLogin } = useUserContext()
+ 
 
   return (
     <div className='formPage'>
@@ -14,52 +16,35 @@ function Login() {
       <Formik
         initialValues={{
           email: '',
-          password: ''
+          password: '',
+          userType: ''
         }}
 
 
         //Validando los inputs
-        validate={(valores) => {
+        validate={(values) => {
           let isError = {}
           //Validando el email
-          if (!valores.email) {
-            isError.email = 'Porfavor ingrese su email'
-          } else if (!/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(valores.email)) {
+          if (!values.email) {
+            isError.email = 'Please, enter your email'
+          } else if (!/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(values.email)) {
             isError.email = 'El correo solo puede contener letras, números, puntos, guiones, guion bajo y @'
           }
           //Validando la contraseña
-          if (!valores.password) {
-            isError.password = 'Por favor ingrese su contraseña'
+          if (!values.password) {
+            isError.password = 'Please, enter your password'
+          }
+
+          //Validando los radios
+          if (!values.userType) {
+            isError.userType = 'Please, select how are you going to login, talent or recruter'
           }
 
           return isError
         }}
 
-        onSubmit={(valores, { resetForm }) => {
-          // userLogin(valores.email, valores.password, resetForm)
-
-          //hardcodie el tipo de user
-          let userType = 'Talent'
-          const postLogin = async () => {
-
-            const response = await axios.post('http://localhost:3002/users/login',
-                {
-                email: valores.email,
-                password: valores.password,
-                userType
-              },
-              {
-                header: {
-                  'Content-type': 'application/x-www-form-urlencoded'                  
-                }
-
-              })
-               console.log(response?.data)
-          }
-
-          postLogin()
-
-
+        onSubmit={(values, { resetForm }) => {
+          userLogin(values, resetForm)
 
         }}
       >
@@ -67,8 +52,22 @@ function Login() {
         {({ errors, touched }) => (
 
           <Form className='form container mt-5 pt-5'>
-            <h1 className='d-flex justify-content-center align-items-center mb-5'>LOGIN</h1>
+            <div className='d-flex flex-column mb-5'>
+              <h1 className='d-flex justify-content-center align-items-center'>LOGIN</h1>
+              <div className='container d-flex justify-content-center align-items-center'>
+                <div className='pe-2'>
+                  <Field type="radio" name="userType" value="Recruiter" className='me-2'/>
+                  Soy recruiter</div>
+                <div>
+                  <Field type="radio" name="userType" value="Talent" className='me-2' />
+                  Soy talent</div>
+              </div>
+              {errors.userType ? <div className="form-text text-danger fs-6 ms-3">{errors.userType}</div> : null}
+
+            </div>
             <div className="fields d-flex flex-column flex-md-row justify-content-around align-items-stretch">
+
+
               <div className="emailDiv mb-3 d-flex flex-column justify-content-center align-item-center">
                 <label htmlFor="email" className='mb-2'>Email</label>
 

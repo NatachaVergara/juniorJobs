@@ -1,6 +1,7 @@
+import axios from 'axios'
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { talentUsers } from '../db/dbUsers'
+import swal from "sweetalert";
 
 
 const UserContext = createContext(null)
@@ -23,35 +24,43 @@ const getLocalUser = () => {
 }
 
 
-
-
-
-
-
 const UserContextProvider = ({ children }) => {
   const [isUser, setIsUser] = useState(getLocalUser())
   let navigate = useNavigate()
 
 
-  const userLogin = (email, password, resetForm) => {
-    // console.log(talentUsers)
-    // console.log(email, password)
+  const userLogin = async (values, resetForm) => {
 
-    if (talentUsers[0].email !== email && talentUsers[0].password !== password) {
-      alert('El correo electronico ingresado no se encuentra registrado, asegurese de haberlo ingresado correctamente')
-    } else if (talentUsers[0].email === email && talentUsers[0].password !== password) {
-      alert(`La contraseña ingresada no corresponde con el mail ingresado, asegurese de habelo ingresado correctamente`)
 
-    } else if (talentUsers[0].email !== email && talentUsers[0].password !== password) {
+    try {
+      const response = await axios.post('http://localhost:3002/users/login',
+        {
+          email: values.email,
+          password: values.password,
+          userType: values.userType
+        },
+        { header: { 'Content-type': 'application/x-www-form-urlencoded' } }
+      )
 
-      alert('Tanto el email como la contraseña ingresados están incorrectos, por favor revise la información y vuelva a intentar')
-    } else if (talentUsers[0].email === email && talentUsers[0].password === password) {
+      console.log(response)  
+      swal(response.data)
       resetForm()
+      //Aca podriamos usar el userType en vez de es user true-false
+      //setIsUser(value.userType)
       setIsUser(true)
       navigate('/')
+
+
+
+    } catch (error) {
+      return swal(JSON.stringify(error.response.data.message));
+      //alert(JSON.stringify(error.response.data.message))
     }
+
+
+
   }
-//Creo un estado user dentro de mi localStorage
+  //Creo un estado user dentro de mi localStorage
   useEffect(() => {
     localStorage.setItem('user', JSON.stringify(isUser))
   }, [isUser])
