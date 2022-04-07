@@ -40,7 +40,6 @@ function Login() {
 
           //hardcodie el tipo de user
           let userType = 'Talent'
-
           const postLogin = async () => {
 
             const response = await axios.post('http://localhost:3002/users/login',
