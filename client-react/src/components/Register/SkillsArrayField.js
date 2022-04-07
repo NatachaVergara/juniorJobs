@@ -1,4 +1,3 @@
-import { Field, ErrorMessage, FieldArray } from "formik";
 import { Button, Col, Input, Label, Row } from "reactstrap";
 const options = {
   skills: [
@@ -16,45 +15,33 @@ const options = {
     <option value="Advanced">Advanced</option>,
   ],
 };
+
 export default function SkillsArray(props) {
   return (
-    <FieldArray name="skills">
-      {({ remove, push }) => (
-        <div>
-          {props.skills.length > 0 &&
-            props.skills.map((skill, index) => (
-              <Row key={index.toString()}>
-                <Col>
-                  <Label htmlFor={`skills.${index}.name`}>Tech</Label>
-                  <Input name={`skills.${index}.name`} type="select">
-                    {options.skills}
-                  </Input>
-                </Col>
-                <Col>
-                  <Label htmlFor={`skills.${index}.level`}>Level</Label>
-                  <Input name={`skills.${index}.level`} type="select">
-                    {options.level}{" "}
-                  </Input>
-                </Col>
-                <Col>
-                  <Button
-                    type="button"
-                    className="primary"
-                    onClick={() => remove(index)}
-                  >
-                    REMOVE
-                  </Button>
-                </Col>
-              </Row>
-            ))}
+    <div>
+      <Row key={props.index.toString()}>
+        <Col>
+          <Label htmlFor={`skills.${props.index}.name`}>Tech</Label>
+          <Input name={`skills.${props.index}.name`} type="select">
+            {options.skills}
+          </Input>
+        </Col>
+        <Col>
+          <Label htmlFor={`skills.${props.index}.level`}>Level</Label>
+          <Input name={`skills.${props.index}.level`} type="select">
+            {options.level}{" "}
+          </Input>
+        </Col>
+        <Col>
           <Button
-            className="secondary"
-            onClick={() => push({ name: "", level: "" })}
+            type="button"
+            className="primary"
+            onClick={() => props.remove(props.index)}
           >
-            Add Skill
+            REMOVE
           </Button>
-        </div>
-      )}
-    </FieldArray>
+        </Col>
+      </Row>
+    </div>
   );
 }

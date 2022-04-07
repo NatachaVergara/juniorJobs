@@ -1,5 +1,12 @@
 import React from "react";
-import { Formik, Form, useField, FieldArray } from "formik";
+import {
+  Formik,
+  Form,
+  useField,
+  FieldArray,
+  Field,
+  ErrorMessage,
+} from "formik";
 import * as Yup from "yup";
 import { Button, Card, Col, Container, Input, Label, Row } from "reactstrap";
 import SkillsArray from "./SkillsArrayField";
@@ -119,13 +126,8 @@ export default function RegisterTalent(props) {
           experience: "",
           speciality: "",
           education: "",
-          languages: [
-            {
-              language: "",
-              languageLevel: "",
-            },
-          ],
-          skills: [],
+          languages: [{ language: "", languageLevel: "" }],
+          skills: [{ name: "", level: "" }],
           profileDescription: "",
           acceptedTerms: false,
         }}
@@ -280,44 +282,43 @@ export default function RegisterTalent(props) {
               </Col>
             </Row>
             <Row>
-              <FieldArray name="languages">
+              {/* <FieldArray name="languages">
                 {({ insert, remove, push }) => (
                   <Row>
                     {values.languages.length > 0 &&
                       values.languages.map((language, index) => (
                         <Row key={index}>
                           <Col>
-                            <MyLanguageSelector/>
+                            <MyLanguageSelector />
                           </Col>
                           <Col>
-                            <MyLanguageLevelSelector/>
+                            <MyLanguageLevelSelector />
                           </Col>
-                       <Row>
-                         <Col>
-                            <Button
-                              color="secondary"
-                              onClick={() => push({ language: '', languageLevel: '' })}
-                            >
-                              Add
-                            </Button>
-                            </Col>
+                          <Row>
                             <Col>
-                            <Button
-                              color="primary"
-                              onClick={() => remove(index)}
-                            >
-                              X
-                            </Button>
+                              <Button
+                                color="primary"
+                                onClick={() => remove(index)}
+                              >
+                                X
+                              </Button>
                             </Col>
-                       </Row>
-                        
-                 
-                          
+                          </Row>
                         </Row>
                       ))}
+                    <Col>
+                      <Button
+                        color="secondary"
+                        onClick={() =>
+                          push({ language: "", languageLevel: "" })
+                        }
+                      >
+                        Add
+                      </Button>
+                    </Col>
                   </Row>
                 )}
-              </FieldArray>
+              </FieldArray> */}
             </Row>
             <MyTextInput
               label="Education"
@@ -332,7 +333,61 @@ export default function RegisterTalent(props) {
               placeholder="Describe yourself"
             />
             <Row>
-              <SkillsArray skills={values.skills}></SkillsArray>
+              <FieldArray name="skills">
+                {({ insert, remove, push }) => (
+                  <div>
+                    {values.skills.length > 0 &&
+                      values.skills.map((skill, index) => (
+                        <div className="row" key={index}>
+                          <div className="col">
+                            <label htmlFor={`skills.${index}.name`}>Name</label>
+                            <Field
+                              name={`skills.${index}.name`}
+                              placeholder="Jane Doe"
+                              type="text"
+                            />
+                            <ErrorMessage
+                              name={`skills.${index}.name`}
+                              component="div"
+                              className="field-error"
+                            />
+                          </div>
+                          <div className="col">
+                            <label htmlFor={`skills.${index}.email`}>
+                              Email
+                            </label>
+                            <Field
+                              name={`skills.${index}.email`}
+                              placeholder="jane@acme.com"
+                              type="email"
+                            />
+                            <ErrorMessage
+                              name={`skills.${index}.name`}
+                              component="div"
+                              className="field-error"
+                            />
+                          </div>
+                          <div className="col">
+                            <button
+                              type="button"
+                              className="secondary"
+                              onClick={() => remove(index)}
+                            >
+                              X
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    <button
+                      type="button"
+                      className="secondary"
+                      onClick={() => push({ name: "", email: "" })}
+                    >
+                      Add skill
+                    </button>
+                  </div>
+                )}
+              </FieldArray>
             </Row>
 
             <Card body color="" className="">
@@ -398,13 +453,10 @@ export default function RegisterTalent(props) {
 }
 
 const MyLanguageSelector = () => (
-  <MySelect
-  label="Languages"
-  name="languages.language"
->
-  <option value="Select">Add a language</option>
+  <MySelect label="Languages" name="languages.language">
+    <option value="Select">Add a language</option>
 
-  <option>Select Language</option>
+    <option>Select Language</option>
     <option value="da">Danish - dansk</option>
     <option value="nl">Dutch - Nederlands</option>
     <option value="en">English</option>
@@ -415,40 +467,33 @@ const MyLanguageSelector = () => (
     <option value="en-ZA">English (South Africa)</option>
     <option value="en-GB">English (United Kingdom)</option>
     <option value="en-US">English (United States)</option>
- 
+
     <option value="fr">French - français</option>
-   
+
     <option value="de">German - Deutsch</option>
-   
+
     <option value="it">Italian - italiano</option>
     <option value="it-IT">Italian (Italy) - italiano (Italia)</option>
     <option value="it-CH">Italian (Switzerland) - italiano (Svizzera)</option>
     <option value="ja">Japanese - 日本語</option>
-  
+
     <option value="pl">Polish - polski</option>
     <option value="pt">Portuguese - português</option>
-  
+
     <option value="ru">Russian - русский</option>
-   
+
     <option value="es">Spanish - español</option>
     <option value="es-AR">Spanish (Argentina) - español (Argentina)</option>
-  
-   
-</MySelect>
-)
+  </MySelect>
+);
 
 const MyLanguageLevelSelector = () => (
-  <MySelect
-  label="Level"
-  name="languages.languageLevel"
->
-  <option value="Level">Select level</option>
+  <MySelect label="Level" name="languages.languageLevel">
+    <option value="Level">Select level</option>
 
-  <option value="Basic">Basic</option>
-  <option value="Intermediate">Intermediate</option>
-  <option value="Intermediate">Advanced</option>
-  <option value="Intermediate">Native - Fluent</option>
-
-</MySelect>
-)
-
+    <option value="Basic">Basic</option>
+    <option value="Intermediate">Intermediate</option>
+    <option value="Intermediate">Advanced</option>
+    <option value="Intermediate">Native - Fluent</option>
+  </MySelect>
+);

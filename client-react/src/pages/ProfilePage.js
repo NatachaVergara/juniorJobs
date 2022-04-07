@@ -48,7 +48,7 @@ export default function ProfilePage() {
         params.data = { values };
       }
     }
-    fetchData({ params });
+    fetchData(params);
   }
 
   return (
