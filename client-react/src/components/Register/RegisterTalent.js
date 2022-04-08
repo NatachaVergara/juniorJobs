@@ -127,10 +127,10 @@ export default function RegisterTalent(props) {
           url: "",
           repository: "",
           birthdate: new Date(),
-          seniority: "",
-          experience: "",
-          speciality: "",
-          education: "",
+          id_seniority: "",
+          id_experience: "",
+          id_speciality: "",
+          id_education: "",
           languages: [{ language: "", languageLevel: "" }],
           skills: [{ name: "", level: "" }],
           profile: "",
@@ -162,10 +162,10 @@ export default function RegisterTalent(props) {
             new Date(new Date() - 599616000000),
             "Must to be +18 years old"
           ),
-          seniority: Yup.string()
+          id_seniority: Yup.string()
             .oneOf(["Trainee", "Junior"], "Invalid Job Type")
             .required("Required"),
-          experience: Yup.string()
+          id_experience: Yup.string()
             // .oneOf(
             //   [
             //     "0-2 months",
@@ -177,7 +177,7 @@ export default function RegisterTalent(props) {
             //   "Invalid range"
             // )
             .required("Required"),
-          speciality: Yup.string().oneOf(
+          id_speciality: Yup.string().oneOf(
             [
               "AI",
               "Games",
@@ -190,7 +190,7 @@ export default function RegisterTalent(props) {
             ],
             "Invalid Job Type"
           ),
-          education: Yup.string()
+          id_education: Yup.string()
             .max(1000, "Must be 1000 characters or less")
             .required("Required"),
           profile: Yup.string()
@@ -265,14 +265,14 @@ export default function RegisterTalent(props) {
             <MyTextInput label="Date of birth" name="birthdate" type="date" />
             <Row>
               <Col>
-                <MySelect label="Seniority" name="seniority">
+                <MySelect label="Seniority" name="id_seniority">
                   <option value="">Select one of the list</option>
                   <option value="Trainee">Trainee</option>
                   <option value="Junior">Junior</option>
                 </MySelect>
               </Col>
               <Col>
-                <MySelect label="Speciality if apply" name="speciality">
+                <MySelect label="Speciality if apply" name="id_speciality">
                   <option value="AI">Aritificial intelligence</option>
                   <option value="Games">Games</option>
                   <option value="Fintech">Fintech</option>
@@ -384,7 +384,7 @@ export default function RegisterTalent(props) {
 
             <MyTextInput
               label="Education"
-              name="education"
+              name="id_education"
               type="textarea"
               placeholder="Describe your academic background"
             />
@@ -400,7 +400,7 @@ export default function RegisterTalent(props) {
                 <Col>
                   <MyRadio
                     label="0-2 months"
-                    name="experience"
+                    name="id_experience"
                     type="radio"
                     value="0-2 months"
                   />
@@ -408,7 +408,7 @@ export default function RegisterTalent(props) {
                 <Col>
                   <MyRadio
                     label="2-6 months"
-                    name="experience"
+                    name="id_experience"
                     type="radio"
                     value="2-6 months"
                   />
@@ -416,7 +416,7 @@ export default function RegisterTalent(props) {
                 <Col>
                   <MyRadio
                     label="6-12 months"
-                    name="experience"
+                    name="id_experience"
                     type="radio"
                     value="6-12 months"
                   />
@@ -424,7 +424,7 @@ export default function RegisterTalent(props) {
                 <Col>
                   <MyRadio
                     label="1-2 yeas"
-                    name="experience"
+                    name="id_experience"
                     type="radio"
                     value="1-2 years"
                   />
@@ -432,7 +432,7 @@ export default function RegisterTalent(props) {
                 <Col>
                   <MyRadio
                     label="2-4 years"
-                    name="experience"
+                    name="id_experience"
                     type="radio"
                     value="2-4 years"
                   />
