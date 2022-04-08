@@ -444,32 +444,32 @@ const MyLanguageSelector = () => (
     <option value={0}>Add a language</option>
     <option>Select Language</option>
     <option value={1}>Danish - dansk</option>
-    <option value="en">English</option>
-    <option value="nl">Dutch - Nederlands</option>
-    <option value="en-AU">English (Australia)</option>
-    <option value="en-CA">English (Canada)</option>
-    <option value="en-IN">English (India)</option>
-    <option value="en-NZ">English (New Zealand)</option>
-    <option value="en-ZA">English (South Africa)</option>
-    <option value="en-GB">English (United Kingdom)</option>
-    <option value="en-US">English (United States)</option>
+    <option value={2}>English</option>
+    <option value={3}>Dutch - Nederlands</option>
+    <option value={4}>English (Australia)</option>
+    <option value={5}>English (Canada)</option>
+    <option value={6}>English (India)</option>
+    <option value={7}>English (New Zealand)</option>
+    <option value={8}>English (South Africa)</option>
+    <option value={9}>English (United Kingdom)</option>
+    <option value={10}>English (United States)</option>
 
-    <option value="fr">French - français</option>
+    <option value={11}>French - français</option>
 
-    <option value="de">German - Deutsch</option>
+    <option value={12}>German - Deutsch</option>
 
-    <option value="it">Italian - italiano</option>
-    <option value="it-IT">Italian (Italy) - italiano (Italia)</option>
-    <option value="it-CH">Italian (Switzerland) - italiano (Svizzera)</option>
-    <option value="ja">Japanese - 日本語</option>
+    <option value={13}>Italian - italiano</option>
+    <option value={14}>Italian (Italy) - italiano (Italia)</option>
+    <option value={15}>Italian (Switzerland) - italiano (Svizzera)</option>
+    <option value={16}>Japanese - 日本語</option>
 
-    <option value="pl">Polish - polski</option>
-    <option value="pt">Portuguese - português</option>
+    <option value={17}>Polish - polski</option>
+    <option value={18}>Portuguese - português</option>
 
-    <option value="ru">Russian - русский</option>
+    <option value={19}>Russian - русский</option>
 
-    <option value="es">Spanish - español</option>
-    <option value="es-AR">Spanish (Argentina) - español (Argentina)</option>
+    <option value={20}>Spanish - español</option>
+    <option value={21}>Spanish (Argentina) - español (Argentina)</option>
   </MySelect>
 );
 
