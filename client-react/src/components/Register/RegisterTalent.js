@@ -389,7 +389,7 @@ export default function RegisterTalent(props) {
               placeholder="Describe your academic background"
             />
             <MyTextInput
-              label="url"
+              label="Profile description"
               name="profile"
               type="textarea"
               placeholder="Describe yourself"
