@@ -36,9 +36,9 @@ export default function ProfilePage() {
         params.url = "/talents";
         params.headers = { accept: "*/*" };
         params.data = {
-          name: "User3",
-          lastName: "Prueba",
-          email: "prueba3@gmail.com",
+          name: "User4",
+          lastName: "Prueba4",
+          email: "prueba4@gmail.com",
           password: "pr123",
           birthdate: "1986-04-26",
           image: "https://www.tzuzulcode.com/_next/image?url=%2Flogo.png&w=64&q=75",

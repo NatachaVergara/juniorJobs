@@ -2,13 +2,14 @@ import React from 'react'
 import { Field, Form, Formik } from 'formik'
 import { BsShieldLockFill } from "react-icons/bs";
 import './Login.scss'
-import { useUserContext } from '../../Store/UserContext';
+
+import {usePostLogin} from '../../hooks/usePostLogin';
 //import axios from 'axios'
 // import { useNavigate } from 'react-router-dom';
 // import { postLogin } from '../../hooks/postLogin-axios';
 function Login() {
-  const { userLogin } = useUserContext()
- 
+  //const { userLogin } = useUserContext()
+  const { fetchData } = usePostLogin()
 
   return (
     <div className='formPage'>
@@ -44,7 +45,7 @@ function Login() {
         }}
 
         onSubmit={(values, { resetForm }) => {
-          userLogin(values, resetForm)
+          fetchData(values, resetForm)
 
         }}
       >

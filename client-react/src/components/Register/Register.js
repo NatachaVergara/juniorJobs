@@ -10,7 +10,7 @@ const Register = () => {
         navigate('/profile')
     }
      //Iria al formulario de recruter
-    const formRecruter = () => {
+    const formRecruiter = () => {
         navigate('/profile')
     }
 
@@ -26,9 +26,9 @@ const Register = () => {
                         Ir a formulario Talento</button>
                 </div>
                 <div className='registerCard'>
-                    <h3>Soy Recruter <FcBusiness/></h3>
-                    <button className='btn btn-primary' type="submit" onClick={() => formRecruter()}>
-                        Ir a formulario Recruter</button>
+                    <h3>Soy Recruiter <FcBusiness/></h3>
+                    <button className='btn btn-primary' type="submit" onClick={() => formRecruiter()}>
+                        Ir a formulario Recruiter</button>
                 </div>
             </div>       
 
