@@ -116,30 +116,30 @@ const phoneRegex =
 export default function RegisterTalent(props) {
   return (
     <>
-      <h1 className="h1">Complete your talent profile!</h1>
+      <h1 className="h1">Complete your talent url!</h1>
       <Formik
         initialValues={{
-          userName: "",
-          userLastName: "",
+          name: "",
+          lastName: "",
           email: "",
           phone: "",
-          linkedinUrl: "",
-          repositoryUrl: "",
-          userDateofbirth: new Date(),
+          url: "",
+          repository: "",
+          birthdate: new Date(),
           seniority: "",
           experience: "",
           speciality: "",
           education: "",
           languages: [{ language: "", languageLevel: "" }],
           skills: [{ name: "", level: "" }],
-          profileDescription: "",
+          profile: "",
           acceptedTerms: false,
         }}
         validationSchema={Yup.object({
-          userName: Yup.string()
+          name: Yup.string()
             .min(4, "Must be 4 characters or more")
             .required("Required"),
-          userLastName: Yup.string()
+          lastName: Yup.string()
             .min(4, "Must be 4 characters or more")
             .required("Required"),
           email: Yup.string()
@@ -148,13 +148,13 @@ export default function RegisterTalent(props) {
             .required("E-mail is required"),
           phone: Yup.string().matches(phoneRegex, "Phone number is not valid"),
           // .required("Required"),
-          linkedinUrl: Yup.string()
+          url: Yup.string()
             .matches(urlRegex, "Url is not valid")
             .required("Required"),
-          repositoryUrl: Yup.string()
+          repository: Yup.string()
             // .matches(urlRegex, "Url is not valid")
             .required("Required"),
-          userDateofbirth: Yup.date().max(
+          birthdate: Yup.date().max(
             new Date(new Date() - 599616000000),
             "Must to be +18 years old"
           ),
@@ -189,7 +189,7 @@ export default function RegisterTalent(props) {
           education: Yup.string()
             .max(1000, "Must be 1000 characters or less")
             .required("Required"),
-          profileDescription: Yup.string()
+          profile: Yup.string()
             .max(350, "Must be 350 characters or less")
             .required("Required"),
           acceptedTerms: Yup.boolean()
@@ -214,14 +214,10 @@ export default function RegisterTalent(props) {
           <Form>
             <Row>
               <Col>
-                <MyTextInput label="Name" name="userName" type="text" />
+                <MyTextInput label="Name" name="name" type="text" />
               </Col>
               <Col>
-                <MyTextInput
-                  label="Last name"
-                  name="userLastName"
-                  type="text"
-                />
+                <MyTextInput label="Last name" name="lastName" type="text" />
               </Col>
             </Row>
             <Row>
@@ -244,25 +240,17 @@ export default function RegisterTalent(props) {
             </Row>
             <Row>
               <Col>
-                <MyTextInput
-                  label="LinkedIn Link"
-                  name="linkedinUrl"
-                  type="url"
-                />
+                <MyTextInput label="LinkedIn Link" name="url" type="url" />
               </Col>
               <Col>
                 <MyTextInput
                   label="Remote repositories link"
-                  name="repositoryUrl"
+                  name="repository"
                   type="url"
                 />
               </Col>
             </Row>
-            <MyTextInput
-              label="Date of birth"
-              name="userDateofbirth"
-              type="date"
-            />
+            <MyTextInput label="Date of birth" name="birthdate" type="date" />
             <Row>
               <Col>
                 <MySelect label="Seniority" name="seniority">
@@ -389,8 +377,8 @@ export default function RegisterTalent(props) {
               placeholder="Describe your academic background"
             />
             <MyTextInput
-              label="Profile"
-              name="profileDescription"
+              label="url"
+              name="profile"
               type="textarea"
               placeholder="Describe yourself"
             />
@@ -447,7 +435,7 @@ export default function RegisterTalent(props) {
                 Submit
               </Button>
               <Button color="danger" disabled={isSubmitting || !isValid}>
-                Remove this profile
+                Remove this url
               </Button>
             </div>
           </Form>
