@@ -132,7 +132,6 @@ export default function RegisterTalent(props) {
           id_experience: 1,
           id_speciality: 1,
           id_education: 1,
-          languages: [{ language: 0, languageLevel: 0 }],
           skills: [{ name: 0, level: 0 }],
           profile: "",
           acceptedTerms: false,
@@ -164,7 +163,7 @@ export default function RegisterTalent(props) {
             "Must to be +18 years old"
           ),
           id_seniority: Yup.number()
-            .oneOf([0, 1], "Invalid seniority Type")
+            .oneOf([0, 1, 2, 3, 4], "Invalid seniority Type")
             .required("Required"),
           id_experience: Yup.number()
             .oneOf([0, 1, 2, 3, 4], "Invalid experience range")
@@ -250,64 +249,23 @@ export default function RegisterTalent(props) {
             <Row>
               <Col>
                 <MySelect label="Seniority" name="id_seniority">
-                  <option value="">Select one of the list</option>
-                  <option value="Trainee">Trainee</option>
-                  <option value="Junior">Junior</option>
+                  <option value={0}>Select one of the list</option>
+                  <option value={1}>Trainee</option>
+                  <option value={2}>Junior</option>
                 </MySelect>
               </Col>
               <Col>
                 <MySelect label="Speciality if apply" name="id_speciality">
-                  <option value="AI">Aritificial intelligence</option>
-                  <option value="Games">Games</option>
-                  <option value="Fintech">Fintech</option>
-                  <option value="Data science">Data science</option>
-                  <option value="Networks">Networks</option>
-                  <option value="Computer-Human Interface">
-                    Computer-Human Interface
-                  </option>
-                  <option value="Computer Graphics">Computer Graphics</option>
-                  <option value="Cyber security">Cyber security</option>
+                  <option value={0}>Aritificial intelligence</option>
+                  <option value={1}>Games</option>
+                  <option value={2}>Fintech</option>
+                  <option value={3}>Data science</option>
+                  <option value={4}>Networks</option>
+                  <option value={5}>Computer-Human Interface</option>
                 </MySelect>
               </Col>
             </Row>
             <h2 className="mt-4 ">Languages and skills</h2>
-            <Row>
-              <FieldArray name="languages">
-                {({ insert, remove, push }) => (
-                  <Row>
-                    {values.languages.length > 0 &&
-                      values.languages.map((language, index) => (
-                        <Row key={index}>
-                          <Col>
-                            <MyLanguageSelector />
-                          </Col>
-                          <Col>
-                            <MyLanguageLevelSelector />
-                          </Col>
-                          <Col>
-                            <Button
-                              color="primary mt-4"
-                              onClick={() => remove(index)}
-                            >
-                              X
-                            </Button>
-                          </Col>
-                        </Row>
-                      ))}
-                    <Col>
-                      <Button
-                        color="secondary mt-2"
-                        onClick={() =>
-                          push({ language: "", languageLevel: "" })
-                        }
-                      >
-                        Add
-                      </Button>
-                    </Col>
-                  </Row>
-                )}
-              </FieldArray>
-            </Row>
             <Row>
               <FieldArray name="skills">
                 {({ insert, remove, push }) => (
@@ -317,8 +275,10 @@ export default function RegisterTalent(props) {
                         <div className="row" key={index}>
                           <div className="col">
                             <label htmlFor={`skills.${index}.name`}>Name</label>
-                            <Field name={`skills.${index}.name`} type="select">
-                              <option value={0}>Select one</option>,
+                            <Field name={`skills.${index}.name`} as={MySelect}>
+                              <option value={0}>English</option>
+                              <option value={1}>German</option>
+                              <option value={2}>French</option>
                             </Field>
                             <ErrorMessage
                               name={`skills.${index}.name`}
@@ -327,38 +287,38 @@ export default function RegisterTalent(props) {
                             />
                           </div>
                           <div className="col">
-                            <label htmlFor={`skills.${index}.email`}>
-                              Email
+                            <label htmlFor={`skills.${index}.level`}>
+                              Level
                             </label>
-                            <Field
-                              name={`skills.${index}.email`}
-                              placeholder="jane@acme.com"
-                              type="email"
-                            />
+                            <Field name={`skills.${index}.level`} as={MySelect}>
+                              <option value={0}>Basic</option>
+                              <option value={1}>Intermidate</option>
+                              <option value={2}>Advanced</option>
+                            </Field>
                             <ErrorMessage
-                              name={`skills.${index}.name`}
+                              name={`skills.${index}.level`}
                               component="div"
                               className="field-error"
                             />
                           </div>
                           <div className="col">
-                            <button
-                              type="button"
-                              className="secondary"
+                            <Button
+                              color="danger"
+                              className="mt-4"
                               onClick={() => remove(index)}
                             >
                               X
-                            </button>
+                            </Button>
                           </div>
                         </div>
                       ))}
-                    <button
-                      type="button"
-                      className="secondary"
-                      onClick={() => push({ name: "", email: "" })}
+                    <Button
+                      color="success"
+                      className="my-3"
+                      onClick={() => push({ name: "", level: "" })}
                     >
                       Add skill
-                    </button>
+                    </Button>
                   </div>
                 )}
               </FieldArray>
@@ -429,7 +389,7 @@ export default function RegisterTalent(props) {
                 Submit
               </Button>
               <Button color="danger" disabled={isSubmitting || !isValid}>
-                Remove this url
+                Remove this profile
               </Button>
             </div>
           </Form>
@@ -438,48 +398,47 @@ export default function RegisterTalent(props) {
     </>
   );
 }
-
-const MyLanguageSelector = () => (
-  <MySelect label="Languages" name="languages.language">
-    <option value={0}>Add a language</option>
-    <option>Select Language</option>
-    <option value={1}>Danish - dansk</option>
-    <option value={2}>English</option>
-    <option value={3}>Dutch - Nederlands</option>
-    <option value={4}>English (Australia)</option>
-    <option value={5}>English (Canada)</option>
-    <option value={6}>English (India)</option>
-    <option value={7}>English (New Zealand)</option>
-    <option value={8}>English (South Africa)</option>
-    <option value={9}>English (United Kingdom)</option>
-    <option value={10}>English (United States)</option>
-
-    <option value={11}>French - français</option>
-
-    <option value={12}>German - Deutsch</option>
-
-    <option value={13}>Italian - italiano</option>
-    <option value={14}>Italian (Italy) - italiano (Italia)</option>
-    <option value={15}>Italian (Switzerland) - italiano (Svizzera)</option>
-    <option value={16}>Japanese - 日本語</option>
-
-    <option value={17}>Polish - polski</option>
-    <option value={18}>Portuguese - português</option>
-
-    <option value={19}>Russian - русский</option>
-
-    <option value={20}>Spanish - español</option>
-    <option value={21}>Spanish (Argentina) - español (Argentina)</option>
+const Myselectgaspi = () => (
+  <MySelect label="Seniority" name="id_seniority">
+    <option value={0}>Select one of the list</option>
+    <option value={1}>Trainee</option>
+    <option value={2}>Junior</option>
   </MySelect>
 );
+// const MyLanguageSelector = () => (
+//   <MySelect label="Languages" name="languages.language">
+//     <option value={0}>Add a language</option>
+//     <option>Select Language</option>
+//     <option value={1}>Danish - dansk</option>
+//     <option value={2}>English</option>
+//     <option value={3}>Dutch - Nederlands</option>
+//     <option value={4}>English (Australia)</option>
+//     <option value={5}>English (Canada)</option>
+//     <option value={6}>English (India)</option>
+//     <option value={7}>English (New Zealand)</option>
+//     <option value={8}>English (South Africa)</option>
+//     <option value={9}>English (United Kingdom)</option>
+//     <option value={10}>English (United States)</option>
+//     <option value={11}>French - français</option>
+//     <option value={12}>German - Deutsch</option>
+//     <option value={13}>Italian - italiano</option>
+//     <option value={14}>Italian (Italy) - italiano (Italia)</option>
+//     <option value={15}>Italian (Switzerland) - italiano (Svizzera)</option>
+//     <option value={16}>Japanese - 日本語</option>
+//     <option value={17}>Polish - polski</option>
+//     <option value={18}>Portuguese - português</option>
+//     <option value={19}>Russian - русский</option>
+//     <option value={20}>Spanish - español</option>
+//     <option value={21}>Spanish (Argentina) - español (Argentina)</option>
+//   </MySelect>
+// );
 
-const MyLanguageLevelSelector = () => (
-  <MySelect label="Level" name="languages.languageLevel">
-    <option value="Level">Select level</option>
-
-    <option value="Basic">Basic</option>
-    <option value="Intermediate">Intermediate</option>
-    <option value="Intermediate">Advanced</option>
-    <option value="Intermediate">Native - Fluent</option>
-  </MySelect>
-);
+// const MyLanguageLevelSelector = () => (
+//   <MySelect label="Level" name="languages.languageLevel">
+//     <option value="Level">Select level</option>
+//     <option value="Basic">Basic</option>
+//     <option value="Intermediate">Intermediate</option>
+//     <option value="Intermediate">Advanced</option>
+//     <option value="Intermediate">Native - Fluent</option>
+//   </MySelect>
+// );
