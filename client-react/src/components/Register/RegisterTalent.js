@@ -126,13 +126,14 @@ export default function RegisterTalent(props) {
           phone: "",
           url: "",
           repository: "",
+          image: "",
           birthdate: new Date(),
-          id_seniority: "",
-          id_experience: "",
-          id_speciality: "",
-          id_education: "",
-          languages: [{ language: "", languageLevel: "" }],
-          skills: [{ name: "", level: "" }],
+          id_seniority: 1,
+          id_experience: 1,
+          id_speciality: 1,
+          id_education: 1,
+          languages: [{ language: 0, languageLevel: 0 }],
+          skills: [{ name: 0, level: 0 }],
           profile: "",
           acceptedTerms: false,
         }}
@@ -162,37 +163,20 @@ export default function RegisterTalent(props) {
             new Date(new Date() - 599616000000),
             "Must to be +18 years old"
           ),
-          id_seniority: Yup.string()
-            .oneOf(["Trainee", "Junior"], "Invalid Job Type")
+          id_seniority: Yup.number()
+            .oneOf([0, 1], "Invalid seniority Type")
             .required("Required"),
-          id_experience: Yup.string()
-            // .oneOf(
-            //   [
-            //     "0-2 months",
-            //     "2-6 months",
-            //     "6-12 months",
-            //     "1-2 years",
-            //     "2-4 years",
-            //   ],
-            //   "Invalid range"
-            // )
+          id_experience: Yup.number()
+            .oneOf([0, 1, 2, 3, 4], "Invalid experience range")
             .required("Required"),
-          id_speciality: Yup.string().oneOf(
-            [
-              "AI",
-              "Games",
-              "Fintech",
-              "Data science",
-              "Networks",
-              "Computer-Human Interface",
-              "Computer Graphics",
-              "Cyber security",
-            ],
-            "Invalid Job Type"
+          id_speciality: Yup.number().oneOf(
+            [0, 1, 2, 3, 4, 5, 6, 7],
+            "Invalid speciality Type"
           ),
-          id_education: Yup.string()
-            .max(1000, "Must be 1000 characters or less")
-            .required("Required"),
+          id_education: Yup.number().oneOf(
+            [0, 1, 2, 3, 4, 5, 6, 7],
+            "Invalid Education Type"
+          ),
           profile: Yup.string()
             .max(350, "Must be 350 characters or less")
             .required("Required"),
@@ -402,7 +386,7 @@ export default function RegisterTalent(props) {
                     label="0-2 months"
                     name="id_experience"
                     type="radio"
-                    value="0-2 months"
+                    value={0}
                   />
                 </Col>
                 <Col>
@@ -410,7 +394,7 @@ export default function RegisterTalent(props) {
                     label="2-6 months"
                     name="id_experience"
                     type="radio"
-                    value="2-6 months"
+                    value={1}
                   />
                 </Col>
                 <Col>
@@ -418,7 +402,7 @@ export default function RegisterTalent(props) {
                     label="6-12 months"
                     name="id_experience"
                     type="radio"
-                    value="6-12 months"
+                    value={2}
                   />
                 </Col>
                 <Col>
@@ -426,7 +410,7 @@ export default function RegisterTalent(props) {
                     label="1-2 yeas"
                     name="id_experience"
                     type="radio"
-                    value="1-2 years"
+                    value={3}
                   />
                 </Col>
                 <Col>
@@ -434,7 +418,7 @@ export default function RegisterTalent(props) {
                     label="2-4 years"
                     name="id_experience"
                     type="radio"
-                    value="2-4 years"
+                    value={4}
                   />
                 </Col>
               </Row>
@@ -459,12 +443,11 @@ export default function RegisterTalent(props) {
 
 const MyLanguageSelector = () => (
   <MySelect label="Languages" name="languages.language">
-    <option value="Select">Add a language</option>
-
+    <option value={0}>Add a language</option>
     <option>Select Language</option>
-    <option value="da">Danish - dansk</option>
-    <option value="nl">Dutch - Nederlands</option>
+    <option value={1}>Danish - dansk</option>
     <option value="en">English</option>
+    <option value="nl">Dutch - Nederlands</option>
     <option value="en-AU">English (Australia)</option>
     <option value="en-CA">English (Canada)</option>
     <option value="en-IN">English (India)</option>
