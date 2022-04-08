@@ -122,6 +122,7 @@ export default function RegisterTalent(props) {
           name: "",
           lastName: "",
           email: "",
+          password: "",
           phone: "",
           url: "",
           repository: "",
@@ -140,6 +141,9 @@ export default function RegisterTalent(props) {
             .min(4, "Must be 4 characters or more")
             .required("Required"),
           lastName: Yup.string()
+            .min(4, "Must be 4 characters or more")
+            .required("Required"),
+          password: Yup.string()
             .min(4, "Must be 4 characters or more")
             .required("Required"),
           email: Yup.string()
@@ -227,6 +231,14 @@ export default function RegisterTalent(props) {
                   name="email"
                   type="text"
                   placeholder="example@juniorjobs.com"
+                />
+              </Col>
+              <Col>
+                <MyTextInput
+                  label="Password"
+                  name="password"
+                  type="password"
+                  placeholder=""
                 />
               </Col>
               <Col>
