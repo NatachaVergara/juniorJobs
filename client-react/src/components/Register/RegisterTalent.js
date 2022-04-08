@@ -308,7 +308,7 @@ export default function RegisterTalent(props) {
                 )}
               </FieldArray>
             </Row>
-            {/* <Row>
+            <Row>
               <FieldArray name="skills">
                 {({ insert, remove, push }) => (
                   <div>
@@ -317,11 +317,9 @@ export default function RegisterTalent(props) {
                         <div className="row" key={index}>
                           <div className="col">
                             <label htmlFor={`skills.${index}.name`}>Name</label>
-                            <Field
-                              name={`skills.${index}.name`}
-                              placeholder="Jane Doe"
-                              type="text"
-                            />
+                            <Field name={`skills.${index}.name`} type="select">
+                              <option value={0}>Select one</option>,
+                            </Field>
                             <ErrorMessage
                               name={`skills.${index}.name`}
                               component="div"
@@ -364,7 +362,7 @@ export default function RegisterTalent(props) {
                   </div>
                 )}
               </FieldArray>
-            </Row> */}
+            </Row>
 
             <MyTextInput
               label="Education"

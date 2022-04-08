@@ -1,18 +1,18 @@
 import { Button, Col, Input, Label, Row } from "reactstrap";
 const options = {
   skills: [
-    <option value="">Select one</option>,
-    <option value="React">React</option>,
-    <option value="Angular">Angular</option>,
-    <option value="NET">NET</option>,
-    <option value="C++">C++</option>,
-    <option value="CSS">CSS</option>,
-    <option value="HTML5">HTML5</option>,
+    <option value={0}>Select one</option>,
+    <option value={1}>React</option>,
+    <option value={2}>Angular</option>,
+    <option value={3}>NET</option>,
+    <option value={4}>C++</option>,
+    <option value={5}>CSS</option>,
+    <option value={6}>HTML5</option>,
   ],
   level: [
-    <option value="Beginner">Beginner</option>,
-    <option value="Medium">Medium</option>,
-    <option value="Advanced">Advanced</option>,
+    <option value={0}>Beginner</option>,
+    <option value={1}>Medium</option>,
+    <option value={2}>Advanced</option>,
   ],
 };
 
