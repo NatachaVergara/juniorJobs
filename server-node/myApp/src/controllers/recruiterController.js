@@ -31,7 +31,7 @@ const recruiterController = {
                     res.status(201).json({message: 'Reclutador creado'});
                 })
                 .catch(function(error){
-                    console.log("No se pudo crear el registro en la base de datos", error);
+                    console.log("No se pudo crear el registro en nuestra base de datos", error);
                 })
             }
         })
@@ -59,7 +59,7 @@ const recruiterController = {
                     return res.status(201).json({message: 'Se actualizó el reclutador'});
                 })
                 .catch(function(error){
-                    console.log("No se pudo crear el registro en la base de datos", error);
+                    console.log("No se pudo crear el registro en nuestra base de datos", error);
                 })
             }
             else {
@@ -73,11 +73,34 @@ const recruiterController = {
     },
 
     destroy: (req, res) => {
-        res.json("Metodo borrado de Recruiter");
+        //res.json("Metodo borrado de Recruiter");
+        console.log(req.body);
+        db.Recruiter.findByPk(req.params.id)
+        .then((recruiter) => {
+            if(recruiter) {
+                db.Recruiter.destroy({
+                    where: {id:req.params.id}
+                })
+                .then(()=>{
+                    console.log('El reclutador ha sido borrado de nuestra base de datos');
+                    return res.status(204).json({message: 'El reclutador ha sido borrado nuestra base de datos'});
+                })
+                .catch(function(error){
+                    console.log("No se pudo borar el reclutador de nuestra base de datos", error);
+                })
+            }
+            else {
+                console.log('No se encontró el reclutador en nuestra base de datos');
+                return res.status(404).json({message: 'No se encontró el reclutador en nuestra base de datos'});
+            }
+        })
+        .catch(function(error){
+            console.log(`Se ha producido el siguiente error: `, error);
+        })
     },
 
     show: (req, res) => {
-        res.json("Metodo visualización de Recruiter x id");
+        //res.json("Metodo visualización de Recruiter x id");
     },
 
     index: (req, res) => {
