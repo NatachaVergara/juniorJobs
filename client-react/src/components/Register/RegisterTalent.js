@@ -116,7 +116,7 @@ const phoneRegex =
 export default function RegisterTalent(props) {
   return (
     <>
-      <h1 className="h1">Complete your talent url!</h1>
+      <h1 className="h1">Complete your talent profile!</h1>
       <Formik
         initialValues={{
           name: "",
