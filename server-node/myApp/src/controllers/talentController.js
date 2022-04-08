@@ -47,19 +47,45 @@ const talentController = {
     },
 
     update: (req, res) => {
-        res.json("Metodo edición de Talento");
+        const id = req.params.id
+        const nuevoTalento = req.body
+        db.Talent.findOne({where:{id: id}})
+        .then(talento => {
+            talento.update(nuevoTalento)
+            .then(newTalent => {
+                res.json(newTalent)
+            })
+        })
+        //res.json("Metodo edición de Talento");
     },
 
     destroy: (req, res) => {
-        res.json("Metodo borrado de Talento");
+        const id = req.params.id
+        db.Talent.findOne({where:{id: id}})
+        .then(talento => {
+            talento.destroy()
+            .then(Talent => {
+                res.json(Talent)
+            })
+        })
+        //res.json("Metodo borrado de Talento");
     },
 
     show: (req, res) => {
-        res.json("Metodo visualización de Talento x id");
+        const id = req.params.id;
+        db.Talent.findOne({where:{id: id}})
+        .then((talent) => {
+            res.json(talent)
+        })
+        //res.json("Metodo visualización de Talento x id");
     },
 
     index: (req, res) => {
-        res.json("Metodo visualización de todos los Talentos");
+        db.Talent.findAll()
+        .then((talent) => {
+            res.json(talent)
+        })
+        //res.json("Metodo visualización de todos los Talentos");
     }
     
 }
