@@ -17,7 +17,9 @@ const MyTextInput = ({ label, ...props }) => {
   const [field, meta] = useField(props);
   return (
     <>
-      <Label htmlFor={props.id || props.name}>{label}</Label>
+      <Label htmlFor={props.id || props.name} className="mt-3">
+        {label}
+      </Label>
       <Input
         {...field}
         {...props}
@@ -34,7 +36,9 @@ const MySelect = ({ label, ...props }) => {
   const [field, meta] = useField(props);
   return (
     <>
-      <Label htmlFor={props.id || props.name}>{label}</Label>
+      <Label htmlFor={props.id || props.name} className="mt-3">
+        {label}{" "}
+      </Label>
       <Input
         type="select"
         {...field}
@@ -194,6 +198,7 @@ export default function RegisterTalent(props) {
         })}
         onSubmit={(values, { setSubmitting }) => {
           setSubmitting(true);
+          console.log(values);
           props.onSubmit(values);
           setSubmitting(false);
         }}
@@ -281,8 +286,9 @@ export default function RegisterTalent(props) {
                 </MySelect>
               </Col>
             </Row>
+            <h2 className="mt-4 ">Languages and skills</h2>
             <Row>
-              {/* <FieldArray name="languages">
+              <FieldArray name="languages">
                 {({ insert, remove, push }) => (
                   <Row>
                     {values.languages.length > 0 &&
@@ -294,21 +300,19 @@ export default function RegisterTalent(props) {
                           <Col>
                             <MyLanguageLevelSelector />
                           </Col>
-                          <Row>
-                            <Col>
-                              <Button
-                                color="primary"
-                                onClick={() => remove(index)}
-                              >
-                                X
-                              </Button>
-                            </Col>
-                          </Row>
+                          <Col>
+                            <Button
+                              color="primary mt-4"
+                              onClick={() => remove(index)}
+                            >
+                              X
+                            </Button>
+                          </Col>
                         </Row>
                       ))}
                     <Col>
                       <Button
-                        color="secondary"
+                        color="secondary mt-2"
                         onClick={() =>
                           push({ language: "", languageLevel: "" })
                         }
@@ -318,21 +322,9 @@ export default function RegisterTalent(props) {
                     </Col>
                   </Row>
                 )}
-              </FieldArray> */}
+              </FieldArray>
             </Row>
-            <MyTextInput
-              label="Education"
-              name="education"
-              type="textarea"
-              placeholder="Describe your academic background"
-            />
-            <MyTextInput
-              label="Profile"
-              name="profileDescription"
-              type="textarea"
-              placeholder="Describe yourself"
-            />
-            <Row>
+            {/* <Row>
               <FieldArray name="skills">
                 {({ insert, remove, push }) => (
                   <div>
@@ -388,7 +380,20 @@ export default function RegisterTalent(props) {
                   </div>
                 )}
               </FieldArray>
-            </Row>
+            </Row> */}
+
+            <MyTextInput
+              label="Education"
+              name="education"
+              type="textarea"
+              placeholder="Describe your academic background"
+            />
+            <MyTextInput
+              label="Profile"
+              name="profileDescription"
+              type="textarea"
+              placeholder="Describe yourself"
+            />
 
             <Card body color="" className="">
               <Row>
