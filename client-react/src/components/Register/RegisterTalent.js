@@ -192,18 +192,18 @@ export default function RegisterTalent(props) {
             .required("Required")
             .oneOf([true], "You must accept the terms and conditions."),
         })}
-        // onSubmit={(values, { setSubmitting }) => {
-        //   setSubmitting(true);
-        //   props.onSubmit(values);
-        //   setSubmitting(false);
-        // }}
         onSubmit={(values, { setSubmitting }) => {
-          console.log(values);
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
+          setSubmitting(true);
+          props.onSubmit(values);
+          setSubmitting(false);
         }}
+        // onSubmit={(values, { setSubmitting }) => {
+        //   console.log(values);
+        //   setTimeout(() => {
+        //     alert(JSON.stringify(values, null, 2));
+        //     setSubmitting(false);
+        //   }, 400);
+        // }}
       >
         {({ isSubmitting, isValid, values }) => (
           <Form>
