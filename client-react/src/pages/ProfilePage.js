@@ -6,12 +6,12 @@ import { useAxios } from "../hooks/use-axios";
 
 export default function ProfilePage() {
   // pide context, porque necesito manejar autorizaciones y estados de signup/editing, talent/recruiter
-  const { fetchData, response } = useAxios();
   const [isSignup, setIsSignup] = useState(true);
   const [isRecruiter, setIsRecruiter] = useState(false);
   function onEditHandler(props) {
     // setIsSignup(true);
   }
+  const { fetchData, response } = useAxios();
   function onSubmitHandler(values) {
     let params = {};
     if (isRecruiter) {
@@ -35,21 +35,7 @@ export default function ProfilePage() {
         params.method = "post";
         params.url = "/talents";
         params.headers = { accept: "*/*" };
-        params.data = {
-          name: "User4",
-          lastName: "Prueba4",
-          email: "prueba4@gmail.com",
-          password: "pr123",
-          birthdate: "1986-04-26",
-          image: "https://www.tzuzulcode.com/_next/image?url=%2Flogo.png&w=64&q=75",
-          repository: "www.git.com",
-          url: "https://www.google.com.ar",
-          profile: "www.linkedin.com",
-          phone: "3115623245",
-          id_Seniority: 1,
-          id_Experience: 1,
-          id_Speciality: 1,
-          id_Education: 1 };
+        params.data = { values };
       } else {
         params.method = "put";
         params.url = "/talents/:id";
@@ -61,7 +47,7 @@ export default function ProfilePage() {
         params.data = { values };
       }
     }
-    fetchData({ ...params });
+    fetchData(params);
   }
 
   return (
@@ -69,11 +55,11 @@ export default function ProfilePage() {
       <Profile onEdit={onEditHandler} onDelete={onSubmitHandler}></Profile>
 
       {/* {isSignup && !isRecruiter && ( */}
-        <RegisterTalent onSubmit={onSubmitHandler}></RegisterTalent>
+      <RegisterTalent onSubmit={onSubmitHandler}></RegisterTalent>
       {/* )} */}
 
       {/* {isSignup && isRecruiter && ( */}
-        <RegisterRecruiter onSubmit={onSubmitHandler}></RegisterRecruiter>
+      <RegisterRecruiter onSubmit={onSubmitHandler}></RegisterRecruiter>
       {/* )} */}
     </Fragment>
   );

@@ -1,8 +1,15 @@
 import React from "react";
-import { Formik, Form, useField } from "formik";
+import {
+  Formik,
+  Form,
+  useField,
+  FieldArray,
+  Field,
+  ErrorMessage,
+} from "formik";
 import * as Yup from "yup";
-// import classes from "./RegisterTalent.module.css";
 import { Button, Card, Col, Container, Input, Label, Row } from "reactstrap";
+import SkillsArray from "./SkillsArrayField";
 
 const MyTextInput = ({ label, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
@@ -10,7 +17,9 @@ const MyTextInput = ({ label, ...props }) => {
   const [field, meta] = useField(props);
   return (
     <>
-      <Label htmlFor={props.id || props.name}>{label}</Label>
+      <Label htmlFor={props.id || props.name} className="mt-3">
+        {label}
+      </Label>
       <Input
         {...field}
         {...props}
@@ -27,7 +36,9 @@ const MySelect = ({ label, ...props }) => {
   const [field, meta] = useField(props);
   return (
     <>
-      <Label htmlFor={props.id || props.name}>{label}</Label>
+      <Label htmlFor={props.id || props.name} className="mt-3">
+        {label}{" "}
+      </Label>
       <Input
         type="select"
         {...field}
@@ -39,6 +50,7 @@ const MySelect = ({ label, ...props }) => {
     </>
   );
 };
+
 const MyCheckbox = ({ children, ...props }) => {
   const [field, meta] = useField({ ...props, type: "checkbox" });
   return (
@@ -107,27 +119,31 @@ export default function RegisterTalent(props) {
       <h1 className="h1">Complete your talent profile!</h1>
       <Formik
         initialValues={{
-          userName: "",
-          userLastName: "",
+          name: "",
+          lastName: "",
           email: "",
+          password: "",
           phone: "",
-          linkedinUrl: "",
-          repositoryUrl: "",
-          userDateofbirth: new Date(),
-          seniority: "",
-          experience: "",
-          speciality: "",
-          education: "",
-          languages: "",
-          skills: "",
-          profileDescription: "",
+          url: "",
+          repository: "",
+          image: "",
+          birthdate: new Date(),
+          id_seniority: 1,
+          id_experience: 1,
+          id_speciality: 1,
+          id_education: 1,
+          skills: [{ name: 0, level: 0 }],
+          profile: "",
           acceptedTerms: false,
         }}
         validationSchema={Yup.object({
-          userName: Yup.string()
+          name: Yup.string()
             .min(4, "Must be 4 characters or more")
             .required("Required"),
-          userLastName: Yup.string()
+          lastName: Yup.string()
+            .min(4, "Must be 4 characters or more")
+            .required("Required"),
+          password: Yup.string()
             .min(4, "Must be 4 characters or more")
             .required("Required"),
           email: Yup.string()
@@ -136,48 +152,31 @@ export default function RegisterTalent(props) {
             .required("E-mail is required"),
           phone: Yup.string().matches(phoneRegex, "Phone number is not valid"),
           // .required("Required"),
-          linkedinUrl: Yup.string()
+          url: Yup.string()
             .matches(urlRegex, "Url is not valid")
             .required("Required"),
-          repositoryUrl: Yup.string()
+          repository: Yup.string()
             // .matches(urlRegex, "Url is not valid")
             .required("Required"),
-          userDateofbirth: Yup.date().max(
+          birthdate: Yup.date().max(
             new Date(new Date() - 599616000000),
             "Must to be +18 years old"
           ),
-          seniority: Yup.string()
-            .oneOf(["Trainee", "Junior"], "Invalid Job Type")
+          id_seniority: Yup.number()
+            .oneOf([0, 1, 2, 3, 4], "Invalid seniority Type")
             .required("Required"),
-          experience: Yup.string()
-            // .oneOf(
-            //   [
-            //     "0-2 months",
-            //     "2-6 months",
-            //     "6-12 months",
-            //     "1-2 years",
-            //     "2-4 years",
-            //   ],
-            //   "Invalid range"
-            // )
+          id_experience: Yup.number()
+            .oneOf([0, 1, 2, 3, 4], "Invalid experience range")
             .required("Required"),
-          speciality: Yup.string().oneOf(
-            [
-              "AI",
-              "Games",
-              "Fintech",
-              "Data science",
-              "Networks",
-              "Computer-Human Interface",
-              "Computer Graphics",
-              "Cyber security",
-            ],
-            "Invalid Job Type"
+          id_speciality: Yup.number().oneOf(
+            [0, 1, 2, 3, 4, 5, 6, 7],
+            "Invalid speciality Type"
           ),
-          education: Yup.string()
-            .max(1000, "Must be 1000 characters or less")
-            .required("Required"),
-          profileDescription: Yup.string()
+          id_education: Yup.number().oneOf(
+            [0, 1, 2, 3, 4, 5, 6, 7],
+            "Invalid Education Type"
+          ),
+          profile: Yup.string()
             .max(350, "Must be 350 characters or less")
             .required("Required"),
           acceptedTerms: Yup.boolean()
@@ -186,6 +185,7 @@ export default function RegisterTalent(props) {
         })}
         onSubmit={(values, { setSubmitting }) => {
           setSubmitting(true);
+          console.log(values);
           props.onSubmit(values);
           setSubmitting(false);
         }}
@@ -197,18 +197,14 @@ export default function RegisterTalent(props) {
         //   }, 400);
         // }}
       >
-        {({ isSubmitting, isValid }) => (
+        {({ isSubmitting, isValid, values }) => (
           <Form>
             <Row>
               <Col>
-                <MyTextInput label="Name" name="userName" type="text" />
+                <MyTextInput label="Name" name="name" type="text" />
               </Col>
               <Col>
-                <MyTextInput
-                  label="Last name"
-                  name="userLastName"
-                  type="text"
-                />
+                <MyTextInput label="Last name" name="lastName" type="text" />
               </Col>
             </Row>
             <Row>
@@ -222,6 +218,14 @@ export default function RegisterTalent(props) {
               </Col>
               <Col>
                 <MyTextInput
+                  label="Password"
+                  name="password"
+                  type="password"
+                  placeholder=""
+                />
+              </Col>
+              <Col>
+                <MyTextInput
                   label="Phone number"
                   name="phone"
                   type="text"
@@ -231,100 +235,148 @@ export default function RegisterTalent(props) {
             </Row>
             <Row>
               <Col>
-                <MyTextInput
-                  label="LinkedIn Link"
-                  name="linkedinUrl"
-                  type="url"
-                />
+                <MyTextInput label="LinkedIn Link" name="url" type="url" />
               </Col>
               <Col>
                 <MyTextInput
                   label="Remote repositories link"
-                  name="repositoryUrl"
+                  name="repository"
                   type="url"
                 />
               </Col>
             </Row>
-            <MyTextInput
-              label="Date of birth"
-              name="userDateofbirth"
-              type="number"
-            />
+            <MyTextInput label="Date of birth" name="birthdate" type="date" />
             <Row>
               <Col>
-                <MySelect label="Seniority" name="seniority">
-                  <option value="">Select one of the list</option>
-                  <option value="Trainee">Trainee</option>
-                  <option value="Junior">Junior</option>
+                <MySelect label="Seniority" name="id_seniority">
+                  <option value={0}>Select one of the list</option>
+                  <option value={1}>Trainee</option>
+                  <option value={2}>Junior</option>
                 </MySelect>
               </Col>
               <Col>
-                <MySelect label="Speciality if apply" name="speciality">
-                  <option value="AI">Aritificial intelligence</option>
-                  <option value="Games">Games</option>
-                  <option value="Fintech">Fintech</option>
-                  <option value="Data science">Data science</option>
-                  <option value="Networks">Networks</option>
-                  <option value="Computer-Human Interface">
-                    Computer-Human Interface
-                  </option>
-                  <option value="Computer Graphics">Computer Graphics</option>
-                  <option value="Cyber security">Cyber security</option>
+                <MySelect label="Speciality if apply" name="id_speciality">
+                  <option value={0}>Aritificial intelligence</option>
+                  <option value={1}>Games</option>
+                  <option value={2}>Fintech</option>
+                  <option value={3}>Data science</option>
+                  <option value={4}>Networks</option>
+                  <option value={5}>Computer-Human Interface</option>
                 </MySelect>
               </Col>
             </Row>
+            <h2 className="mt-4 ">Languages and skills</h2>
+            <Row>
+              <FieldArray name="skills">
+                {({ insert, remove, push }) => (
+                  <div>
+                    {values.skills.length > 0 &&
+                      values.skills.map((skill, index) => (
+                        <div className="row" key={index}>
+                          <div className="col">
+                            <label htmlFor={`skills.${index}.name`}>Name</label>
+                            <Field name={`skills.${index}.name`} as={MySelect}>
+                              <option value={0}>English</option>
+                              <option value={1}>German</option>
+                              <option value={2}>French</option>
+                            </Field>
+                            <ErrorMessage
+                              name={`skills.${index}.name`}
+                              component="div"
+                              className="field-error"
+                            />
+                          </div>
+                          <div className="col">
+                            <label htmlFor={`skills.${index}.level`}>
+                              Level
+                            </label>
+                            <Field name={`skills.${index}.level`} as={MySelect}>
+                              <option value={0}>Basic</option>
+                              <option value={1}>Intermidate</option>
+                              <option value={2}>Advanced</option>
+                            </Field>
+                            <ErrorMessage
+                              name={`skills.${index}.level`}
+                              component="div"
+                              className="field-error"
+                            />
+                          </div>
+                          <div className="col">
+                            <Button
+                              color="danger"
+                              className="mt-4"
+                              onClick={() => remove(index)}
+                            >
+                              X
+                            </Button>
+                          </div>
+                        </div>
+                      ))}
+                    <Button
+                      color="success"
+                      className="my-3"
+                      onClick={() => push({ name: "", level: "" })}
+                    >
+                      Add skill
+                    </Button>
+                  </div>
+                )}
+              </FieldArray>
+            </Row>
+
             <MyTextInput
               label="Education"
-              name="education"
+              name="id_education"
               type="textarea"
               placeholder="Describe your academic background"
             />
             <MyTextInput
-              label="Profile"
-              name="profileDescription"
+              label="Profile description"
+              name="profile"
               type="textarea"
               placeholder="Describe yourself"
             />
+
             <Card body color="" className="">
               <Row>
                 <Col>
                   <MyRadio
                     label="0-2 months"
-                    name="experience"
+                    name="id_experience"
                     type="radio"
-                    value="0-2 months"
+                    value={0}
                   />
                 </Col>
                 <Col>
                   <MyRadio
                     label="2-6 months"
-                    name="experience"
+                    name="id_experience"
                     type="radio"
-                    value="2-6 months"
+                    value={1}
                   />
                 </Col>
                 <Col>
                   <MyRadio
                     label="6-12 months"
-                    name="experience"
+                    name="id_experience"
                     type="radio"
-                    value="6-12 months"
+                    value={2}
                   />
                 </Col>
                 <Col>
                   <MyRadio
                     label="1-2 yeas"
-                    name="experience"
+                    name="id_experience"
                     type="radio"
-                    value="1-2 years"
+                    value={3}
                   />
                 </Col>
                 <Col>
                   <MyRadio
                     label="2-4 years"
-                    name="experience"
+                    name="id_experience"
                     type="radio"
-                    value="2-4 years"
+                    value={4}
                   />
                 </Col>
               </Row>
@@ -346,3 +398,47 @@ export default function RegisterTalent(props) {
     </>
   );
 }
+const Myselectgaspi = () => (
+  <MySelect label="Seniority" name="id_seniority">
+    <option value={0}>Select one of the list</option>
+    <option value={1}>Trainee</option>
+    <option value={2}>Junior</option>
+  </MySelect>
+);
+// const MyLanguageSelector = () => (
+//   <MySelect label="Languages" name="languages.language">
+//     <option value={0}>Add a language</option>
+//     <option>Select Language</option>
+//     <option value={1}>Danish - dansk</option>
+//     <option value={2}>English</option>
+//     <option value={3}>Dutch - Nederlands</option>
+//     <option value={4}>English (Australia)</option>
+//     <option value={5}>English (Canada)</option>
+//     <option value={6}>English (India)</option>
+//     <option value={7}>English (New Zealand)</option>
+//     <option value={8}>English (South Africa)</option>
+//     <option value={9}>English (United Kingdom)</option>
+//     <option value={10}>English (United States)</option>
+//     <option value={11}>French - français</option>
+//     <option value={12}>German - Deutsch</option>
+//     <option value={13}>Italian - italiano</option>
+//     <option value={14}>Italian (Italy) - italiano (Italia)</option>
+//     <option value={15}>Italian (Switzerland) - italiano (Svizzera)</option>
+//     <option value={16}>Japanese - 日本語</option>
+//     <option value={17}>Polish - polski</option>
+//     <option value={18}>Portuguese - português</option>
+//     <option value={19}>Russian - русский</option>
+//     <option value={20}>Spanish - español</option>
+//     <option value={21}>Spanish (Argentina) - español (Argentina)</option>
+//   </MySelect>
+// );
+
+// const MyLanguageLevelSelector = () => (
+//   <MySelect label="Level" name="languages.languageLevel">
+//     <option value="Level">Select level</option>
+//     <option value="Basic">Basic</option>
+//     <option value="Intermediate">Intermediate</option>
+//     <option value="Intermediate">Advanced</option>
+//     <option value="Intermediate">Native - Fluent</option>
+//   </MySelect>
+// );
