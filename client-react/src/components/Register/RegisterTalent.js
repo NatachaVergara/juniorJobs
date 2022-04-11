@@ -95,7 +95,7 @@ const MyRadio = ({ label, ...props }) => {
           <Input
             {...field}
             {...props}
-            type="radio"
+            // type="radio"
             invalid={meta.error && meta.touched}
             valid={!meta.error && meta.touched}
           />
@@ -129,7 +129,7 @@ export default function RegisterTalent(props) {
           image: "",
           birthdate: new Date(),
           id_seniority: 1,
-          id_experience: 1,
+          // id_experience: "0a2",
           id_speciality: 1,
           id_education: 1,
           skills: [{ name: 0, level: 0 }],
@@ -165,9 +165,9 @@ export default function RegisterTalent(props) {
           id_seniority: Yup.number()
             .oneOf([0, 1, 2, 3, 4], "Invalid seniority Type")
             .required("Required"),
-          id_experience: Yup.number()
-            .oneOf([0, 1, 2, 3, 4], "Invalid experience range")
-            .required("Required"),
+          // id_experience: Yup.number()
+          //   .oneOf([0, 1, 2, 3, 4], "Invalid experience range")
+          //   .required("Required"),
           id_speciality: Yup.number().oneOf(
             [0, 1, 2, 3, 4, 5, 6, 7],
             "Invalid speciality Type"
@@ -185,6 +185,14 @@ export default function RegisterTalent(props) {
         })}
         onSubmit={(values, { setSubmitting }) => {
           setSubmitting(true);
+          values.id_seniority = +values.id_seniority;
+          values.id_education = +values.id_education;
+          values.id_speciality = +values.id_speciality;
+          values.id_experience = +values.id_experience;
+          values.skills = values.skills.map((skill) => ({
+            name: +skill.name,
+            level: +skill.level,
+          }));
           console.log(values);
           props.onSubmit(values);
           setSubmitting(false);
@@ -337,14 +345,14 @@ export default function RegisterTalent(props) {
               placeholder="Describe yourself"
             />
 
-            <Card body color="" className="">
+            <Card body color="" className="my-3">
               <Row>
                 <Col>
                   <MyRadio
                     label="0-2 months"
                     name="id_experience"
                     type="radio"
-                    value={0}
+                    value="0"
                   />
                 </Col>
                 <Col>
@@ -352,7 +360,7 @@ export default function RegisterTalent(props) {
                     label="2-6 months"
                     name="id_experience"
                     type="radio"
-                    value={1}
+                    value="1"
                   />
                 </Col>
                 <Col>
@@ -360,7 +368,7 @@ export default function RegisterTalent(props) {
                     label="6-12 months"
                     name="id_experience"
                     type="radio"
-                    value={2}
+                    value="2"
                   />
                 </Col>
                 <Col>
@@ -368,7 +376,7 @@ export default function RegisterTalent(props) {
                     label="1-2 yeas"
                     name="id_experience"
                     type="radio"
-                    value={3}
+                    value="3"
                   />
                 </Col>
                 <Col>
@@ -376,7 +384,7 @@ export default function RegisterTalent(props) {
                     label="2-4 years"
                     name="id_experience"
                     type="radio"
-                    value={4}
+                    value="4"
                   />
                 </Col>
               </Row>
@@ -398,13 +406,7 @@ export default function RegisterTalent(props) {
     </>
   );
 }
-const Myselectgaspi = () => (
-  <MySelect label="Seniority" name="id_seniority">
-    <option value={0}>Select one of the list</option>
-    <option value={1}>Trainee</option>
-    <option value={2}>Junior</option>
-  </MySelect>
-);
+
 // const MyLanguageSelector = () => (
 //   <MySelect label="Languages" name="languages.language">
 //     <option value={0}>Add a language</option>
