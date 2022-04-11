@@ -58,10 +58,10 @@ function Login() {
               <div className='container d-flex justify-content-center align-items-center'>
                 <div className='pe-2'>
                   <Field type="radio" name="userType" value="Recruiter" className='me-2'/>
-                  Im recruiter</div>
+                  as Recruiter</div>
                 <div>
                   <Field type="radio" name="userType" value="Talent" className='me-2' />
-                  Im talent</div>
+                  as Talent</div>
               </div>
               {errors.userType ? <div className="form-text text-danger fs-6 ms-3">{errors.userType}</div> : null}
 
@@ -81,7 +81,7 @@ function Login() {
                   placeholder="user@email.com"
                 />
 
-                {touched.email && errors.email ? <div className="form-text text-danger fs-6">{errors.email}</div> : <div id="emailHelp" className="form-text ">We will never share your email with others.</div>}
+                {touched.email && errors.email ? <div className="form-text text-danger fs-6">{errors.email}</div> : <div id="emailHelp" className="form-text ">We will never share your email with others</div>}
               </div>
 
               <div className='mb-3 passwordDiv'>

@@ -9,7 +9,7 @@ import {
 } from "formik";
 import * as Yup from "yup";
 import { Button, Card, Col, Container, Input, Label, Row } from "reactstrap";
-import SkillsArray from "./SkillsArrayField";
+//import SkillsArray from "./SkillsArrayField";
 
 const MyTextInput = ({ label, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
