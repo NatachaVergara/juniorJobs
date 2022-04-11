@@ -124,7 +124,21 @@ const jobOfferController = {
     },
 
     index: (req, res) => {
-        res.json("Metodo para mostarr todas las ofertas laborales");
+        //res.json("Metodo para mostarr todas las ofertas laborales");
+        db.JobOffer.findAll()
+        .then((allJobOffer) => {
+            if(allJobOffer) {
+                console.log(allJobOffer);
+                return res.status(200).json(allJobOffer);
+            }
+            else {
+                console.log('No se encontró ninguna oferta laboral en nuestra base de datos');
+                return res.status(404).json({message: 'No se encontró ninguna oferta laboral en nuestra base de datos'});
+            }
+        })
+        .catch(function(error){
+            console.log(`Se ha producido el siguiente error: `, error);
+        })
     }
     
 }
