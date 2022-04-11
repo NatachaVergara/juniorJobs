@@ -4,7 +4,6 @@ const bcryptjs = require('bcryptjs')
 
 const talentController = {
     create: (req, res) => {
-        //res.json("Metodo creación de Talento");
         db.Talent.findOne({where: {
             email: req.body.email
         }})
@@ -48,44 +47,60 @@ const talentController = {
 
     update: (req, res) => {
         const id = req.params.id
-        const nuevoTalento = req.body
         db.Talent.findOne({where:{id: id}})
         .then(talento => {
-            talento.update(nuevoTalento)
+            talento.update({
+                name: req.body.name,
+                lastName: req.body.lastName,
+                email: req.body.email,
+                company: req.body.company,
+                image: req.body.image,
+                url: req.body.url
+            },{where: {id:req.params.id}})
             .then(newTalent => {
                 res.json(newTalent)
             })
         })
-        //res.json("Metodo edición de Talento");
+        .catch({message: "no se pudo actualizar el usuario"})
     },
 
     destroy: (req, res) => {
-        const id = req.params.id
-        db.Talent.findOne({where:{id: id}})
+        db.Talent.findOne({where: {id:req.params.id}})
         .then(talento => {
-            talento.destroy()
+            talento.destroy({
+                where: {id:req.params.id}
+            })
             .then(Talent => {
                 res.json(Talent)
             })
         })
-        //res.json("Metodo borrado de Talento");
+        .catch({message: "no se pudo eliminar el usuario"})
     },
 
     show: (req, res) => {
         const id = req.params.id;
         db.Talent.findOne({where:{id: id}})
         .then((talent) => {
-            res.json(talent)
+            if(talent){
+                console.log(talent);
+                //res.json(talent)
+                res.json({id: talent.id, name: talent.name, lastName: talent.lastName, email: talent.email, birthdate: talent.birthdate, image: talent.image, repository: talent.repository, url: talent.url, profile: talent.profile, phone: talent.phone})
+            }else {
+                res.json({message: "no existe el talento buscado"})
+            }
         })
-        //res.json("Metodo visualización de Talento x id");
     },
 
     index: (req, res) => {
         db.Talent.findAll()
         .then((talent) => {
-            res.json(talent)
+            console.log(talent);
+            if (talent) {
+                res.json({id: talent.id, name: talent.name, lastName: talent.lastName, email: talent.email, birthdate: talent.birthdate, image: talent.image, repository: talent.repository, url: talent.url, profile: talent.profile, phone: talent.phone}) 
+            }else {
+                res.json({message: "no existen talentos"})
+            }
         })
-        //res.json("Metodo visualización de todos los Talentos");
     }
     
 }
