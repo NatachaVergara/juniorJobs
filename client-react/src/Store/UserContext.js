@@ -20,13 +20,22 @@ const getLocalUser = () => {
     return false
   }
 }
+const getLocalUserType = () => {
+  let userTypeLS = localStorage.getItem('userTypeLS')
+
+  if (userTypeLS) {
+    return JSON.parse(localStorage.getItem('userTypeLS'))
+  } else {
+    return null
+  }
+}
 
 
 const UserContextProvider = ({ children }) => {
   const [isUser, setIsUser] = useState(getLocalUser())
-  const [userType, setUsertype]= useState('')
+  //Cree un estado para setear el userType que por ahora se va a utilizar en el Register
+  const [userType, setUserType] = useState(getLocalUserType())
   console.log(userType)
-
 
   
   //Creo un estado user dentro de mi localStorage
@@ -34,12 +43,17 @@ const UserContextProvider = ({ children }) => {
     localStorage.setItem('user', JSON.stringify(isUser))
   }, [isUser])
 
+  //Creo un estado userType dentro de mi localStorage
+  useEffect(() => {
+    localStorage.setItem('userTypeLS', JSON.stringify(userType))
+  }, [userType])
+
 
 
 
   return (
     <UserContext.Provider
-      value={{ isUser, setIsUser, setUsertype, userType }}
+      value={{ isUser, setIsUser, setUserType, userType }}
     >
       {children}
     </UserContext.Provider>
