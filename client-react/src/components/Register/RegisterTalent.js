@@ -133,6 +133,7 @@ export default function RegisterTalent(props) {
           id_speciality: 1,
           id_education: 1,
           skills: [{ name: 0, level: 0 }],
+          languages: [{ name: 0, level:0}] ,
           profile: "",
           acceptedTerms: false,
         }}
@@ -193,6 +194,10 @@ export default function RegisterTalent(props) {
             name: +skill.name,
             level: +skill.level,
           }));
+          values.languages = values.languages.map((language) => ({
+            name: +language.level,
+            level: +language.level,
+          }))
           console.log(values);
           props.onSubmit(values);
           setSubmitting(false);
@@ -284,9 +289,14 @@ export default function RegisterTalent(props) {
                           <div className="col">
                             <label htmlFor={`skills.${index}.name`}>Name</label>
                             <Field name={`skills.${index}.name`} as={MySelect}>
-                              <option value={0}>English</option>
-                              <option value={1}>German</option>
-                              <option value={2}>French</option>
+                              <option value={0}>Javascript</option>
+                              <option value={1}>Python</option>
+                              <option value={2}>Go</option>
+                              <option value={3}>NodeJs</option>
+                              <option value={4}>ReactJs</option>
+                              <option value={5}>Remix</option>
+                              
+
                             </Field>
                             <ErrorMessage
                               name={`skills.${index}.name`}
@@ -331,7 +341,68 @@ export default function RegisterTalent(props) {
                 )}
               </FieldArray>
             </Row>
+            <Row>
+              <FieldArray name="languages">
+                {({ insert, remove, push }) => (
+                  <div>
+                    {values.languages.length > 0 &&
+                      values.languages.map((language, index) => (
+                        <div className="row" key={index}>
+                          <div className="col">
+                            <label htmlFor={`languages.${index}.name`}>Name</label>
+                            <Field name={`languages.${index}.name`} as={MySelect}>
+                              <option value={0}>English</option>
+                              <option value={1}>Spanish</option>
+                              <option value={2}>French</option>
+                              <option value={3}>German</option>
+                              <option value={4}>Italian</option>
+                              <option value={5}>Portugues</option>
+                              
 
+                            </Field>
+                            <ErrorMessage
+                              name={`languages.${index}.name`}
+                              component="div"
+                              className="field-error"
+                            />
+                          </div>
+                          <div className="col">
+                            <label htmlFor={`languages.${index}.level`}>
+                              Level
+                            </label>
+                            <Field name={`languages.${index}.level`} as={MySelect}>
+                              <option value={0}>Basic</option>
+                              <option value={1}>Intermidate</option>
+                              <option value={2}>Advanced</option>
+                            </Field>
+                            <ErrorMessage
+                              name={`languages.${index}.level`}
+                              component="div"
+                              className="field-error"
+                            />
+                          </div>
+                          <div className="col">
+                            <Button
+                              color="danger"
+                              className="mt-4"
+                              onClick={() => remove(index)}
+                            >
+                              X
+                            </Button>
+                          </div>
+                        </div>
+                      ))}
+                    <Button
+                      color="success"
+                      className="my-3"
+                      onClick={() => push({ name: "", level: "" })}
+                    >
+                      Add Language
+                    </Button>
+                  </div>
+                )}
+              </FieldArray>
+            </Row>
             <MyTextInput
               label="Education"
               name="id_education"
@@ -407,40 +478,3 @@ export default function RegisterTalent(props) {
   );
 }
 
-// const MyLanguageSelector = () => (
-//   <MySelect label="Languages" name="languages.language">
-//     <option value={0}>Add a language</option>
-//     <option>Select Language</option>
-//     <option value={1}>Danish - dansk</option>
-//     <option value={2}>English</option>
-//     <option value={3}>Dutch - Nederlands</option>
-//     <option value={4}>English (Australia)</option>
-//     <option value={5}>English (Canada)</option>
-//     <option value={6}>English (India)</option>
-//     <option value={7}>English (New Zealand)</option>
-//     <option value={8}>English (South Africa)</option>
-//     <option value={9}>English (United Kingdom)</option>
-//     <option value={10}>English (United States)</option>
-//     <option value={11}>French - français</option>
-//     <option value={12}>German - Deutsch</option>
-//     <option value={13}>Italian - italiano</option>
-//     <option value={14}>Italian (Italy) - italiano (Italia)</option>
-//     <option value={15}>Italian (Switzerland) - italiano (Svizzera)</option>
-//     <option value={16}>Japanese - 日本語</option>
-//     <option value={17}>Polish - polski</option>
-//     <option value={18}>Portuguese - português</option>
-//     <option value={19}>Russian - русский</option>
-//     <option value={20}>Spanish - español</option>
-//     <option value={21}>Spanish (Argentina) - español (Argentina)</option>
-//   </MySelect>
-// );
-
-// const MyLanguageLevelSelector = () => (
-//   <MySelect label="Level" name="languages.languageLevel">
-//     <option value="Level">Select level</option>
-//     <option value="Basic">Basic</option>
-//     <option value="Intermediate">Intermediate</option>
-//     <option value="Intermediate">Advanced</option>
-//     <option value="Intermediate">Native - Fluent</option>
-//   </MySelect>
-// );
