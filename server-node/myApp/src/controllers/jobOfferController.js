@@ -106,7 +106,21 @@ const jobOfferController = {
     },
 
     show: (req, res) => {
-        res.json("Metodo para mostrar una Oferta Laboral por el ID");
+        //res.json("Metodo para mostrar una Oferta Laboral por el ID");
+        db.JobOffer.findByPk(req.params.id)
+        .then((jobOffer) => {
+            if(jobOffer) {
+                console.log(jobOffer);
+                return res.status(200).json(jobOffer.dataValues);
+            }
+            else {
+                console.log('No se encontró la oferta de trabajo en nuestra base de datos');
+                return res.status(404).json({message: 'No se encontró la oferta de trabajo en nuestra base de datos'});
+            }
+        })
+        .catch(function(error){
+            console.log(`Se ha producido el siguiente error: `, error);
+        })
     },
 
     index: (req, res) => {
