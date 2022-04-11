@@ -36,6 +36,26 @@ const Faq = () => {
             question: '4. Question 4',
             answer: ' Accusantium? Placeat a illum, laborum delectus totam ex libero, perspiciatis molestias veniam asperiores dolor mollitia.Nam numquam accusamus voluptatibus.Nostrum inventore voluptatum in, odio quaerat architecto voluptas ad neque repellat sequi?',
             id: '4'
+        },
+        {
+            question: '5. Question 5',
+            answer: ' Accusantium? Placeat a illum, laborum delectus totam ex libero, perspiciatis molestias veniam asperiores dolor mollitia.Nam numquam accusamus voluptatibus.Nostrum inventore voluptatum in, odio quaerat architecto voluptas ad neque repellat sequi?',
+            id: '5'
+        },
+        {
+            question: '6. Question 6',
+            answer: ' Accusantium? Placeat a illum, laborum delectus totam ex libero, perspiciatis molestias veniam asperiores dolor mollitia.Nam numquam accusamus voluptatibus.Nostrum inventore voluptatum in, odio quaerat architecto voluptas ad neque repellat sequi?',
+            id: '6'
+        },
+        {
+            question: '7. Question 7',
+            answer: ' Accusantium? Placeat a illum, laborum delectus totam ex libero, perspiciatis molestias veniam asperiores dolor mollitia.Nam numquam accusamus voluptatibus.Nostrum inventore voluptatum in, odio quaerat architecto voluptas ad neque repellat sequi?',
+            id: '7'
+        },
+        {
+            question: '8. Question 8',
+            answer: ' Accusantium? Placeat a illum, laborum delectus totam ex libero, perspiciatis molestias veniam asperiores dolor mollitia.Nam numquam accusamus voluptatibus.Nostrum inventore voluptatum in, odio quaerat architecto voluptas ad neque repellat sequi?',
+            id: '8'
         }
 
     ]

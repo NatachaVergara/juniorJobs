@@ -58,10 +58,10 @@ function Login() {
               <div className='container d-flex justify-content-center align-items-center'>
                 <div className='pe-2'>
                   <Field type="radio" name="userType" value="Recruiter" className='me-2'/>
-                  Soy recruiter</div>
+                  Im recruiter</div>
                 <div>
                   <Field type="radio" name="userType" value="Talent" className='me-2' />
-                  Soy talent</div>
+                  Im talent</div>
               </div>
               {errors.userType ? <div className="form-text text-danger fs-6 ms-3">{errors.userType}</div> : null}
 
@@ -81,11 +81,11 @@ function Login() {
                   placeholder="user@email.com"
                 />
 
-                {touched.email && errors.email ? <div className="form-text text-danger fs-6">{errors.email}</div> : <div id="emailHelp" className="form-text ">Nunca compartiremos su email con nadie.</div>}
+                {touched.email && errors.email ? <div className="form-text text-danger fs-6">{errors.email}</div> : <div id="emailHelp" className="form-text ">We will never share your email with others.</div>}
               </div>
 
               <div className='mb-3 passwordDiv'>
-                <label htmlFor="email m-1" className='mb-2'>Contraseña</label>
+                <label htmlFor="email m-1" className='mb-2'>Password</label>
                 <Field
                   type="password"
                   className="form-control passwordField"
@@ -97,7 +97,7 @@ function Login() {
               </div>
             </div>
             <button
-              type='submit' className='boton btn btn-primary'>Ingresar
+              type='submit' className='boton btn btn-primary'>Log in
             </button>
           </Form>
 
@@ -107,7 +107,7 @@ function Login() {
 
       </Formik>
       {/* Link para resetear la contraseña    */}
-      <span className="d-flex justify-content-center align-items-center mt-5 pt-5">
+      <span className="d-flex justify-content-center align-items-center mt-5 mb-5 pt-5">
         <BsShieldLockFill /> ¿Olvidaste tu contraseña?
       </span>
 

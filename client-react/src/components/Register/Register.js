@@ -108,7 +108,7 @@ const Register = () => {
       </Container>
       <Link
         to="/login"
-        className="d-flex justify-content-center align-items-center mt-5 pt-5 text-decoration-none text-black"
+        className="d-flex justify-content-center align-items-center mb-5 mt-5 pt-5 text-decoration-none text-black"
       >
         {" "}
         <FcApproval /> Ya tengo cuenta{" "}

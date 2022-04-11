@@ -5,7 +5,7 @@ import MainNavigation from "./MainNavigation";
 import Sidebar from "./Sidebar";
 
 const Layout = (props) => {
-  let ls = JSON.parse(localStorage.getItem("isLogin"));
+ 
   return (
     <Fragment>
       <MainNavigation />
@@ -19,6 +19,7 @@ const Layout = (props) => {
               size: 10,
             }}
             sm="12"
+            height="100"
           >
             {props.children}
           </Col>
