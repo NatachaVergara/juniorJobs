@@ -93,6 +93,19 @@ const talentController = {
 
     index: (req, res) => {
         db.Talent.findAll()
+        // .then((talent) => {
+        //     let tal = []
+        //     if (talent) {
+        //         for (var i = 0; i < talent.length; i++){
+        //             tal.push(talent[i].dataValues)
+        //             //console.log(tal)
+        //             tal.slice(4,1)
+        //             console.log(tal)
+        //         }
+        //     }
+        // })
+
+        db.Talent.findAll()
         .then((talent) => {
             console.log(talent);
             if (talent) {
@@ -102,7 +115,6 @@ const talentController = {
             }
         })
     }
-    
 }
 
 module.exports = talentController;
