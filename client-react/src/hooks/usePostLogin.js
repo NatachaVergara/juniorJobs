@@ -24,6 +24,8 @@ export const usePostLogin = () => {
             )
 
             console.log(response)
+            console.log(response.data)
+            
             swal(response.data)
             resetForm()
             //Aca podriamos usar el userType en vez de es user true-false
