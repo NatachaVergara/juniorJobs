@@ -129,7 +129,7 @@ export default function RegisterTalent(props) {
           image: "",
           birthdate: new Date(),
           id_seniority: 1,
-          // id_experience: "0a2",
+          id_experience: 0,
           id_speciality: 1,
           id_education: 1,
           skills: [{ name: 0, level: 0 }],
@@ -390,7 +390,7 @@ export default function RegisterTalent(props) {
               </Row>
             </Card>
             <MyCheckbox name="acceptedTerms">
-              {""}I accept the terms and conditions
+              {" I accept the terms and conditions"}
             </MyCheckbox>
             <div>
               <Button color="primary" disabled={isSubmitting || !isValid}>

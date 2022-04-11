@@ -99,8 +99,6 @@ const MyCheckbox = ({ children, ...props }) => {
 // };
 // const urlRegex =
 //   /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/gm;
-const phoneRegex =
-  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
 export default function RegisterRecruiter(props) {
   return (
@@ -108,31 +106,29 @@ export default function RegisterRecruiter(props) {
       <h2 className="h1">Complete your recruiter profile!</h2>
       <Formik
         initialValues={{
-          userName: "",
-          userLastName: "",
+          name: "",
+          lastName: "",
           email: "",
-          phone: "",
-          userDateofbirth: new Date(),
+          password: "",
           company: "",
-          companyDescription: "",
+          image: "",
+          url: "",
           acceptedTerms: false,
         }}
         validationSchema={Yup.object({
-          userName: Yup.string()
+          name: Yup.string()
             .min(4, "Must be 4 characters or more")
             .required("Required"),
-          userLastName: Yup.string()
+          lastName: Yup.string()
+            .min(4, "Must be 4 characters or more")
+            .required("Required"),
+          password: Yup.string()
             .min(4, "Must be 4 characters or more")
             .required("Required"),
           email: Yup.string()
             .email("Field should contain a valid e-mail")
             .max(255)
             .required("E-mail is required"),
-          phone: Yup.string().matches(phoneRegex, "Phone number is not valid"),
-          userDateofbirth: Yup.date().max(
-            new Date(new Date() - 599616000000),
-            "Must to be +18 years old"
-          ),
           company: Yup.string()
             .max(350, "Must be 350 characters or less")
             .required("Required"),
@@ -140,31 +136,21 @@ export default function RegisterRecruiter(props) {
             .required("Required")
             .oneOf([true], "You must accept the terms and conditions."),
         })}
-        // onSubmit={(values, { setSubmitting }) => {
-        //   setSubmitting(true);
-        //   props.onSubmit(values);
-        //   setSubmitting(false);
-        // }}
         onSubmit={(values, { setSubmitting }) => {
+          setSubmitting(true);
           console.log(values);
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
+          props.onSubmit(values);
+          setSubmitting(false);
         }}
       >
         {({ isSubmitting, isValid }) => (
           <Form>
-            <Row>
+            <Row cl>
               <Col>
-                <MyTextInput label="Name" name="userName" type="text" />
+                <MyTextInput label="Name" name="name" type="text" />
               </Col>
               <Col>
-                <MyTextInput
-                  label="Last name"
-                  name="userLastName"
-                  type="text"
-                />
+                <MyTextInput label="Last name" name="lastName" type="text" />
               </Col>
             </Row>
             <Row>
@@ -177,31 +163,23 @@ export default function RegisterRecruiter(props) {
                 />
               </Col>
               <Col>
-                <MyTextInput
-                  label="Phone number"
-                  name="phone"
-                  type="text"
-                  placeholder="+54 342 6 156 014"
-                />
-              </Col>
-              <Col>
-                <MyTextInput
-                  label="Date of birth"
-                  name="userDateofbirth"
-                  type="date"
-                />
+                <MyTextInput label="Password" name="password" type="text" />
               </Col>
             </Row>
             <Row>
               <Col>
-                <MyTextInput
-                  label="Profile"
-                  name="company"
-                  type="textarea"
-                  placeholder="Describe the company"
-                />
+                <MyTextInput label="image" name="image" type="url" />
+              </Col>
+              <Col>
+                <MyTextInput label="LinkedIn profile" name="url" type="url" />
               </Col>
             </Row>
+            <MyTextInput
+              label="Description of company"
+              name="company"
+              type="textarea"
+              placeholder="Tell us about the company"
+            />
             <MyCheckbox name="acceptedTerms">
               {" I accept the terms and conditions"}
             </MyCheckbox>
