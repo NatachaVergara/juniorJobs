@@ -127,7 +127,7 @@ const recruiterController = {
                 delete allRecruiter[i].dataValues.password;
                 }
                 console.log(allRecruiter);
-                return res.status(200).json(allRecruiter.dataValues);
+                return res.status(200).json(allRecruiter);
             }
             else {
                 console.log('No se encontró ningún reclutador en nuestra base de datos');
