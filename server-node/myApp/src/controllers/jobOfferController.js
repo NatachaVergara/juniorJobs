@@ -43,7 +43,39 @@ const jobOfferController = {
     },
 
     update: (req, res) => {
-        res.json("Metodo actualizacion de una Oferta Laboral");
+        //res.json("Metodo actualizacion de una Oferta Laboral");
+        console.log(req.body);
+        db.JobOffer.findByPk(req.params.id)
+        .then((jobOffer) => {
+            if(jobOffer) {
+                db.JobOffer.update({
+                    title: req.body.title,
+                    description: req.body.description,
+                    location: req.body.location,
+                    id_Recruiter: req.body.id_Recruiter,
+                    id_Schedule: req.body.id_Schedule,
+                    id_Remote: req.body.id_Remote,
+                    id_Talent: req.body.id_Talent,
+                    id_Seniority: req.body.id_Seniority,
+                    id_Experience: req.body.id_Experience,
+                    id_Speciality: req.body.id_Speciality
+                },{where: {id:req.params.id}})
+                .then(()=>{
+                    console.log('Se actualizó la oferta de trabajo');
+                    return res.status(201).json({message: 'Se actualizó la oferta de trabajo'});
+                })
+                .catch(function(error){
+                    console.log("No se pudo crear el registro en nuestra base de datos", error);
+                })
+            }
+            else {
+                console.log('No se encontró la oferta de trabajo en nuestra base de datos');
+                return res.status(404).json({message: 'No se encontró la oferta de trabajo en nuestra base de datos'});
+            }
+        })
+        .catch(function(error){
+            console.log(`Se ha producido el siguiente error: `, error);
+        })
     },
 
     destroy: (req, res) => {
