@@ -1,9 +1,9 @@
 const db = require('../database/models');
-const Señority = require('../database/models/Seniority')
+const Seniority = require('../database/models/Seniority')
 
 const señorityController = {
     create: (req, res) => {
-        db.Señority.findOne({where: {
+        db.Seniority.findOne({where: {
             name: req.body.name
         }})
         .then((señority)=>{
@@ -11,7 +11,7 @@ const señorityController = {
                 return res.json({message: "este señority ya se encuentra registrado"})
             } else {
                 console.log(req.body)
-                db.Señority.create({
+                db.Seniority.create({
                     name: req.body.name
                 }).then(señority => {
                     console.log("señority creado")
@@ -27,7 +27,7 @@ const señorityController = {
     },
 
     index: (req, res) => {
-        db.Señority.findAll()
+        db.Seniority.findAll()
         .then((señority) => {
             console.log(señority)
             if(señority) {
@@ -40,7 +40,7 @@ const señorityController = {
 
     show: (req, res) => {
         const id = req.params.id;
-        db.Señority.findOne({where:{id: id}})
+        db.Seniority.findOne({where:{id: id}})
         .then((señority) => {
             if(señority){
                 console.log(señority)
@@ -53,7 +53,7 @@ const señorityController = {
 
     update: (req, res) => {
         const id = req.params.id
-        db.Señority.findOne({where:{id: id}})
+        db.Seniority.findOne({where:{id: id}})
         .then(señority => {
             señority.update({
                 name: req.body.name
@@ -66,7 +66,7 @@ const señorityController = {
     },
 
     destroy: (req, res) => {
-        db.Señority.findOne({where: {id:req.params.id}})
+        db.Seniority.findOne({where: {id:req.params.id}})
         .then(señority => {
             señority.destroy({
                 where: {id:req.params.id}
