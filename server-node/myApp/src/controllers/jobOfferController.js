@@ -79,7 +79,30 @@ const jobOfferController = {
     },
 
     destroy: (req, res) => {
-        res.json("Metodo para eliminar una Oferta Laboral");
+        //res.json("Metodo para eliminar una Oferta Laboral");
+        console.log(req.body);
+        db.JobOffer.findByPk(req.params.id)
+        .then((jobOffer) => {
+            if(jobOffer) {
+                db.JobOffer.destroy({
+                    where: {id:req.params.id}
+                })
+                .then(()=>{
+                    console.log('La oferta de trabajo ha sido borrada de nuestra base de datos');
+                    return res.status(204).json({message: 'La oferta de trabajo ha sido borrada nuestra base de datos'});
+                })
+                .catch(function(error){
+                    console.log("No se pudo borar la oferta de trabajo de nuestra base de datos", error);
+                })
+            }
+            else {
+                console.log('No se encontró la oferta de trabajo en nuestra base de datos');
+                return res.status(404).json({message: 'No se encontró la oferta de trabajo en nuestra base de datos'});
+            }
+        })
+        .catch(function(error){
+            console.log(`Se ha producido el siguiente error: `, error);
+        })
     },
 
     show: (req, res) => {
