@@ -113,10 +113,9 @@ const talentController = {
         db.Talent.findOne({where:{id: id}})
         .then((talent) => {
             if(talent){
-                delete talent.dataValues.password;
+                delete talent.dataValues.password
                 console.log(talent);
-                //res.json(talent)
-                return res.status(200).json(talent.dataValues);
+                return res.status(200).json(talent.dataValues)
             }else {
                 console.log('No se encontró el talento en nuestra base de datos');
                 return res.status(404).json({message: 'No se encontró el talento en nuestra base de datos'});
