@@ -9,7 +9,7 @@ import { useUserContext } from "../Store/UserContext";
 export default function ProfilePage() {
   const [isEditing, setIsEditing] = useState(false);
   const { id = 15, userType = null } = useUserContext();
-  const { fetchData } = useAxios();
+  const { fetchData, response } = useAxios();
 
   const onEditClick = () => {
     setIsEditing(true);

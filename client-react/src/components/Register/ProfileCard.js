@@ -18,16 +18,13 @@ export default function ProfileCard(props) {
           width="100%"
           top
         ></CardImg>
-        <CardTitle tag="h5">Pepe el programador</CardTitle>
+        <CardTitle tag="h5">{props.data.name}</CardTitle>
         <CardSubtitle className="mb-2 text-muted" tag="h6">
-          About me
+          {props.data.profile}
         </CardSubtitle>
-        <CardText>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </CardText>
+        <CardText>{`Visit my page ${props.data.url}`}</CardText>
         <CardSubtitle className="mb-2 text-muted" tag="h6">
-          Contactos
+          {props.data.repository}
         </CardSubtitle>
         <CardText>
           Some quick example text to build on the card title and make up the

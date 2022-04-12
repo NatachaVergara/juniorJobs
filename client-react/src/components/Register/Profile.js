@@ -29,10 +29,10 @@ export default function Profile(props) {
     <Container>
       <Row>
         <Col>
-          <ProfileCard />
+          <ProfileCard data={response} />
         </Col>
         <Col lg="8">
-          <ProjectsCard />
+          <ProjectsCard dta={response} />
         </Col>
       </Row>
     </Container>
