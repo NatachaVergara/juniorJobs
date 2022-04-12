@@ -20,7 +20,7 @@ const userController = {
                     let validatePassword = bcryptjs.compareSync(req.body.password,user.password);
                     if (validatePassword == true){
                         console.log("Bienvenido, " + req.body.email);
-                        return res.json("Bienvenido, " + req.body.email);
+                        return res.json("Bienvenido, " + req.body.email, user);
                     }
                     else{
                         console.log("Las credenciales son inválidas");
@@ -52,7 +52,7 @@ const userController = {
                     let validatePassword = bcryptjs.compareSync(req.body.password,user.password);
                     if (validatePassword == true){
                         console.log("Bienvenido, " + req.body.email);
-                        return res.json("Bienvenido, " + req.body.email);
+                        return res.json("Bienvenido, " + req.body.email, user);
                     }
                     else{
                         console.log("Las credenciales son inválidas");
