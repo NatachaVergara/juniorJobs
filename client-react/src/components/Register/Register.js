@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FcNeutralDecision, FcBusiness, FcApproval } from "react-icons/fc";
 import "./Register.scss";
 import { useAxios } from "../../hooks/use-axios";
@@ -51,18 +51,14 @@ const Register = () => {
     fetchData(params);
   }
 
-  let navigate = useNavigate();
-  //Iria al formulario de talento
   const formTalento = () => {
     setIsRecruiter(false);
     setIsTalent(true);
-    navigate("/register");
   };
   //Iria al formulario de recruter
   const formRecruter = () => {
     setIsRecruiter(true);
     setIsTalent(false);
-    navigate("/register");
   };
 
   return (

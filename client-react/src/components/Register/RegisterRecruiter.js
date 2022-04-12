@@ -163,7 +163,7 @@ export default function RegisterRecruiter(props) {
                 />
               </Col>
               <Col>
-                <MyTextInput label="Password" name="password" type="text" />
+                <MyTextInput label="Password" name="password" type="password" />
               </Col>
             </Row>
             <Row>
