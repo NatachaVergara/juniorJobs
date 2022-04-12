@@ -39,7 +39,7 @@ const userController = {
                 }
             })
             .catch(function(error){
-                console.log("Ocurrió un error por favor vuelva a intentarlo");
+                console.log("Ocurrió un error por favor vuelva a intentarlo " + error);
             })    
         } else if(userType == 'Recruiter') {
             db.Recruiter.findOne({
