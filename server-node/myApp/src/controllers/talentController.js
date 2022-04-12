@@ -82,9 +82,9 @@ const talentController = {
         db.Talent.findOne({where:{id: id}})
         .then((talent) => {
             if(talent){
+                delete talent.dataValues.password
                 console.log(talent);
-                //res.json(talent)
-                res.json({id: talent.id, name: talent.name, lastName: talent.lastName, email: talent.email, birthdate: talent.birthdate, image: talent.image, repository: talent.repository, url: talent.url, profile: talent.profile, phone: talent.phone})
+                return res.status(200).json(talent.dataValues)
             }else {
                 res.json({message: "no existe el talento buscado"})
             }
@@ -93,26 +93,19 @@ const talentController = {
 
     index: (req, res) => {
         db.Talent.findAll()
-        // .then((talent) => {
-        //     let tal = []
-        //     if (talent) {
-        //         for (var i = 0; i < talent.length; i++){
-        //             tal.push(talent[i].dataValues)
-        //             //console.log(tal)
-        //             tal.slice(4,1)
-        //             console.log(tal)
-        //         }
-        //     }
-        // })
-
-        db.Talent.findAll()
-        .then((talent) => {
-            console.log(talent);
-            if (talent) {
-                res.json({id: talent.id, name: talent.name, lastName: talent.lastName, email: talent.email, birthdate: talent.birthdate, image: talent.image, repository: talent.repository, url: talent.url, profile: talent.profile, phone: talent.phone}) 
-            }else {
-                res.json({message: "no existen talentos"})
+        .then((talents) => {
+            if(talents) {
+                for(let i = 0; i < talents.length; i++) {
+                    delete talents[i].dataValues.password
+                }
+                console.log(talents)
+                res.json(talents)
+            } else {
+                res.json({message: "no existen talentos en la base de datos"})
             }
+        })
+        .catch((error) => {
+            console.log(`Se ha producido el siguiente error: `, error);
         })
     }
 }
