@@ -6,9 +6,20 @@ import ProfileCard from "./ProfileCard";
 import ProjectsCard from "./ProjectsCard";
 
 export default function Profile(props) {
-  const { fetchData, response } = useAxios();
+  const {
+    fetchData,
+    response = {
+      data: {
+        name: "gaspi",
+        profile: "ninjavascript coder motherfucker",
+        skills: [{ name: "react", level: "beginner" }],
+        repository: "linkedin.com",
+        url: "github.com",
+      },
+    },
+  } = useAxios();
   const { id = 1, userType = null } = useUserContext();
-  console.log("response in profile ", response);
+  console.log("data in profile ", response.data);
 
   useEffect(() => {
     let config = {

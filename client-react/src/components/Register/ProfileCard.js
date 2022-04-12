@@ -1,12 +1,5 @@
 import { Fragment } from "react";
-import {
-  Button,
-  Card,
-  CardImg,
-  CardSubtitle,
-  CardText,
-  CardTitle,
-} from "reactstrap";
+import { Card, CardImg, CardSubtitle, CardText, CardTitle } from "reactstrap";
 import classes from "./ProfileCard.module.scss";
 
 export default function ProfileCard(props) {
@@ -33,10 +26,7 @@ export default function ProfileCard(props) {
         <CardSubtitle className="mb-2 text-muted" tag="h6">
           Tech stack
         </CardSubtitle>
-        <CardText>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </CardText>
+        <CardText>{props.data.skills[0].name}</CardText>
       </Card>
     </Fragment>
   );
