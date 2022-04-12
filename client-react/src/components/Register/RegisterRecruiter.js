@@ -145,7 +145,7 @@ export default function RegisterRecruiter(props) {
       >
         {({ isSubmitting, isValid }) => (
           <Form>
-            <Row cl>
+            <Row>
               <Col>
                 <MyTextInput label="Name" name="name" type="text" />
               </Col>
