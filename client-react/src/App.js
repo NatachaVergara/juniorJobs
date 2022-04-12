@@ -17,16 +17,13 @@ function App() {
       <Layout>
         <Routes>
           <Route path="*" element={<Navigate replace to="/" />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/job" element={<JobDescriptionPage />} />
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-
           <Route path="/about" element={<AboutUsPage />} />
           <Route path="/resources" element={<ResourcesPage />} />
-
-          <Route path="/about" element={<AboutUsPage />} />
           <Route path="/faq" element={<FaqPage />} />
 
           {/* {authCtx.isLoggedIn && (

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FcNeutralDecision, FcBusiness, FcApproval } from "react-icons/fc";
 import "./Register.scss";
 import { useAxios } from "../../hooks/use-axios";
@@ -8,12 +8,9 @@ import RegisterTalent from "./RegisterTalent";
 import { Container } from "reactstrap";
 import { useUserContext } from "../../Store/UserContext";
 
-
-
 const Register = () => {
   //Traigo del context el estado usertType para poder elegir el formulario que correponde
-  const { setUserType, userType } = useUserContext()
-
+  const { setUserType, userType } = useUserContext();
 
   // const [isRecruiter, setIsRecruiter] = useState(undefined);
   // const [isTalent, setIsTalent] = useState(undefined);
@@ -22,7 +19,7 @@ const Register = () => {
   function onSubmitHandler(values) {
     console.log("on register values:", values);
     let params = {};
-    if (userType === 'Recruiter') {
+    if (userType === "Recruiter") {
       if (isSignup) {
         params.method = "post";
         params.url = "/recruiters";
@@ -58,20 +55,12 @@ const Register = () => {
     fetchData(params);
   }
 
-  let navigate = useNavigate();
-  //Iria al formulario de talento
   const formTalento = () => {
-    setUserType('Talent')
-    // setIsRecruiter(false);
-    // setIsTalent(true);
-    navigate("/register");
+    setUserType("Talent");
   };
   //Iria al formulario de recruter
   const formRecruiter = () => {
-    setUserType('Recruiter')
-    // setIsRecruiter(true);
-    // setIsTalent(false);
-    navigate("/register");
+    setUserType("Recruiter");
   };
 
   return (
@@ -108,11 +97,10 @@ const Register = () => {
         </div>
       </div>
       <Container>
-
-        {userType === 'Recruiter' ? (
+        {userType === "Recruiter" ? (
           <RegisterRecruiter onSubmit={onSubmitHandler}></RegisterRecruiter>
         ) : null}
-        {userType === 'Talent' ? (
+        {userType === "Talent" ? (
           <RegisterTalent onSubmit={onSubmitHandler}></RegisterTalent>
         ) : null}
       </Container>
