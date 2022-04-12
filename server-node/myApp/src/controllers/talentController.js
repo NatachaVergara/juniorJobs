@@ -49,32 +49,63 @@ const talentController = {
         const id = req.params.id
         db.Talent.findOne({where:{id: id}})
         .then(talento => {
-            talento.update({
-                name: req.body.name,
-                lastName: req.body.lastName,
-                email: req.body.email,
-                company: req.body.company,
-                image: req.body.image,
-                url: req.body.url
-            },{where: {id:req.params.id}})
-            .then(newTalent => {
-                res.json(newTalent)
-            })
+            if(talento){
+                db.Talent.update({
+                    name: req.body.name,
+                    lastName: req.body.lastName,
+                    email: req.body.email,
+                    birthdate: req.body.birthdate,
+                    image: req.body.image,
+                    repository: req.body.repository,
+                    url: req.body.url,
+                    profile: req.body.profile,
+                    phone: req.body.phone,
+                    id_Seniority: req.body.id_Seniority,
+                    id_Experience: req.body.id_Experience,
+                    id_Speciality: req.body.id_Speciality,
+                    id_Education: req.body.id_Education
+                },{where: {id:req.params.id}})
+                .then(newTalent => {
+                    console.log('Se actualizó el talento');
+                    return res.status(201).json({message: 'Se actualizó el talento'});
+                })
+                .catch(function(error){
+                    console.log("No se pudo crear el registro en nuestra base de datos", error);
+                })
+            }
+            else {
+                console.log('No se encontró el talento en nuestra base de datos');
+                return res.status(404).json({message: 'No se encontró el talento en nuestra base de datos'});
+            }
         })
-        .catch({message: "no se pudo actualizar el usuario"})
+        .catch(function(error){
+            console.log(`Se ha producido el siguiente error: `, error);
+        })
     },
 
     destroy: (req, res) => {
         db.Talent.findOne({where: {id:req.params.id}})
         .then(talento => {
-            talento.destroy({
-                where: {id:req.params.id}
-            })
-            .then(Talent => {
-                res.json(Talent)
-            })
+            if(talento){
+                db.Talent.destroy({
+                    where: {id:req.params.id}
+                })
+                .then(Talent => {
+                    console.log('El talento ha sido borrado de nuestra base de datos');
+                    return res.status(204).json({message: 'El talento ha sido borrado nuestra base de datos'});
+                })
+                .catch(function(error){
+                    console.log("No se pudo borar el talento de nuestra base de datos", error);
+                })
+            }
+            else {
+                console.log('No se encontró el talento en nuestra base de datos');
+                return res.status(404).json({message: 'No se encontró el talento en nuestra base de datos'});
+            }
         })
-        .catch({message: "no se pudo eliminar el usuario"})
+        .catch(function(error){
+            console.log(`Se ha producido el siguiente error: `, error);
+        })
     },
 
     show: (req, res) => {
@@ -82,37 +113,37 @@ const talentController = {
         db.Talent.findOne({where:{id: id}})
         .then((talent) => {
             if(talent){
+                delete talent.dataValues.password;
                 console.log(talent);
                 //res.json(talent)
-                res.json({id: talent.id, name: talent.name, lastName: talent.lastName, email: talent.email, birthdate: talent.birthdate, image: talent.image, repository: talent.repository, url: talent.url, profile: talent.profile, phone: talent.phone})
+                return res.status(200).json(talent.dataValues);
             }else {
-                res.json({message: "no existe el talento buscado"})
+                console.log('No se encontró el talento en nuestra base de datos');
+                return res.status(404).json({message: 'No se encontró el talento en nuestra base de datos'});
             }
+        })
+        .catch(function(error){
+            console.log(`Se ha producido el siguiente error: `, error);
         })
     },
 
     index: (req, res) => {
         db.Talent.findAll()
-        // .then((talent) => {
-        //     let tal = []
-        //     if (talent) {
-        //         for (var i = 0; i < talent.length; i++){
-        //             tal.push(talent[i].dataValues)
-        //             //console.log(tal)
-        //             tal.slice(4,1)
-        //             console.log(tal)
-        //         }
-        //     }
-        // })
-
-        db.Talent.findAll()
-        .then((talent) => {
-            console.log(talent);
-            if (talent) {
-                res.json({id: talent.id, name: talent.name, lastName: talent.lastName, email: talent.email, birthdate: talent.birthdate, image: talent.image, repository: talent.repository, url: talent.url, profile: talent.profile, phone: talent.phone}) 
-            }else {
-                res.json({message: "no existen talentos"})
+        .then((allTalent) => {
+            if(allTalent) {
+                for(let i = 0; i<allTalent.length; i++){
+                delete allTalent[i].dataValues.password;
+                }
+                console.log(allTalent);
+                return res.status(200).json(allTalent);
             }
+            else {
+                console.log('No se encontró ningún talento en nuestra base de datos');
+                return res.status(404).json({message: 'No se encontró ningún talento en nuestra base de datos'});
+            }
+        })
+        .catch(function(error){
+            console.log(`Se ha producido el siguiente error: `, error);
         })
     }
 }
