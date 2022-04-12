@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { Col, Container, Row } from "reactstrap";
-import { useAxios } from "../../hooks/use-axios";
 import { useUserContext } from "../../Store/UserContext";
+import { useAxios } from "../../hooks/use-axios";
 import ProfileCard from "./ProfileCard";
 import ProjectsCard from "./ProjectsCard";
+import { Col, Container, Row } from "reactstrap";
 
 export default function Profile(props) {
   const {
@@ -22,17 +22,19 @@ export default function Profile(props) {
   console.log("data in profile ", response.data);
 
   useEffect(() => {
-    let config = {
-      method: "GET",
-      headers: { accept: "*/*" },
-      params: { id },
-    };
-    if (userType === "Talent") {
-      config.url = `/talents/${id}`;
-      fetchData(config);
-    } else if (userType === "Recruiter") {
-      config.url = `/recruiters/${id}`;
-      fetchData(config);
+    if (id) {
+      let config = {
+        method: "GET",
+        headers: { accept: "*/*" },
+        params: { id },
+      };
+      if (userType === "Talent") {
+        config.url = `/talents/${id}`;
+        fetchData(config);
+      } else if (userType === "Recruiter") {
+        config.url = `/recruiters/${id}`;
+        fetchData(config);
+      }
     }
   }, [fetchData, userType, id]);
 

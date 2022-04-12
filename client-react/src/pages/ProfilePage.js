@@ -9,7 +9,7 @@ import { useUserContext } from "../Store/UserContext";
 export default function ProfilePage() {
   const [isEditing, setIsEditing] = useState(false);
   const { id = 15, userType = null } = useUserContext();
-  const { fetchData, response } = useAxios();
+  const { fetchData } = useAxios();
 
   const onEditClick = () => {
     setIsEditing(true);
@@ -40,14 +40,16 @@ export default function ProfilePage() {
               Edit
             </Button>
           </Col>
-          <Row>
-            {isEditing & (userType === "Talent") && (
+          {isEditing & (userType === "Talent") && (
+            <Row>
               <RegisterTalent onSubmit={onSubmitHandler}></RegisterTalent>
-            )}
-            {isEditing & (userType === "Recruiter") && (
+            </Row>
+          )}
+          {isEditing & (userType === "Recruiter") && (
+            <Row>
               <RegisterRecruiter onSubmit={onSubmitHandler}></RegisterRecruiter>
-            )}
-          </Row>
+            </Row>
+          )}
         </Row>
       </Container>
     </Fragment>
