@@ -10,8 +10,9 @@ var usersRouter = require('./src/routes/users');
 var recruiterRouter = require('./src/routes/recruiterRouter');
 var talentRouter = require('./src/routes/talentRouter');
 var jobOfferRouter = require('./src/routes/JobOfferRouter');
-var señorityRouter = require('./src/routes/señorityRouter');
+var señorityRouter = require('./src/routes/seniorityRouter');
 var educationRouter = require('./src/routes/educationRouter');
+var experienceRouter = require('./src/routes/experienceRouter');
 
 const PORT = process.env.PORT || 3002
 
@@ -36,6 +37,7 @@ app.use('/talents', talentRouter);
 app.use('/jobOffers', jobOfferRouter);
 app.use('/Seniorities', señorityRouter);
 app.use('/education', educationRouter);
+app.use('/experience', experienceRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
