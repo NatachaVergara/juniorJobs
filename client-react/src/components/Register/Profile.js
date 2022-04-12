@@ -7,30 +7,29 @@ import ProjectsCard from "./ProjectsCard";
 
 export default function Profile(props) {
   const { fetchData, response } = useAxios();
-  const ctx = useUserContext();
-  const { id = 1, userType = null } = ctx;
+  const { id = 1, userType = null } = useUserContext();
   console.log("response in profile ", response);
 
   useEffect(() => {
     let config = {
       method: "GET",
       headers: { accept: "*/*" },
-      params: { ids: items.join(), apiKey },
+      params: { id },
     };
     if (userType === "Talent") {
-      config.url = `/talents`;
+      config.url = `/talents/${id}`;
       fetchData(config);
     } else if (userType === "Recruiter") {
-      config.url = `/recruiters`;
+      config.url = `/recruiters/${id}`;
       fetchData(config);
     }
-  }, [fetchData, userType]);
+  }, [fetchData, userType, id]);
 
   return (
     <Container>
       <Row>
         <Col>
-          <ProfileCard onEdit={props.onEdit} onDelete={props.onDelete} />
+          <ProfileCard />
         </Col>
         <Col lg="8">
           <ProjectsCard />
