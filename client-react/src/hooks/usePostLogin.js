@@ -7,7 +7,8 @@ import { useNavigate } from 'react-router-dom';
 const URL = "http://localhost:3002/users/login";
 
 export const usePostLogin = () => {
-    const { setIsUser, setUsertype } = useUserContext()
+    //Seteo el tipo de user y lo guardo en el context para que se pueda usar en el resto del sitio cuando sea necesario
+    const { setIsUser, setUserType } = useUserContext()
     let navigate = useNavigate()
 
 
@@ -24,14 +25,12 @@ export const usePostLogin = () => {
             )
 
             console.log(response)
-            console.log(response.data)
-            
             swal(response.data)
             resetForm()
             //Aca podriamos usar el userType en vez de es user true-false
             //setIsUser(value.userType)
             setIsUser(true)
-            setUsertype(values.userType)
+            setUserType(values.userType)
             navigate('/')
 
         } catch (error) {

@@ -8,7 +8,7 @@ import { useUserContext } from "../../Store/UserContext";
 import classes from "./MainNavigation.module.scss";
 
 const MainNavigation = () => {
-  const { isUser, setIsUser } = useUserContext();
+  const { isUser, setIsUser, setUserType } = useUserContext();
 
   // const authCtx = useContext(AuthContext);
   // const isLoggedIn = authCtx.isLoggedIn;
@@ -16,6 +16,7 @@ const MainNavigation = () => {
   const navigate = useNavigate();
   const logoutHandler = () => {
     setIsUser(false);
+    setUserType(null)
     navigate("/login");
   };
 

@@ -6,16 +6,20 @@ import { useAxios } from "../../hooks/use-axios";
 import RegisterRecruiter from "./RegisterRecruiter";
 import RegisterTalent from "./RegisterTalent";
 import { Container } from "reactstrap";
+import { useUserContext } from "../../Store/UserContext";
 
 const Register = () => {
-  const [isRecruiter, setIsRecruiter] = useState(undefined);
-  const [isTalent, setIsTalent] = useState(undefined);
+  //Traigo del context el estado usertType para poder elegir el formulario que correponde
+  const { setUserType, userType } = useUserContext();
+
+  // const [isRecruiter, setIsRecruiter] = useState(undefined);
+  // const [isTalent, setIsTalent] = useState(undefined);
   const [isSignup, setIsSignup] = useState(true);
   const { fetchData, response } = useAxios();
   function onSubmitHandler(values) {
     console.log("on register values:", values);
     let params = {};
-    if (isRecruiter) {
+    if (userType === "Recruiter") {
       if (isSignup) {
         params.method = "post";
         params.url = "/recruiters";
@@ -52,13 +56,11 @@ const Register = () => {
   }
 
   const formTalento = () => {
-    setIsRecruiter(false);
-    setIsTalent(true);
+    setUserType("Talent");
   };
   //Iria al formulario de recruter
   const formRecruiter = () => {
-    setIsRecruiter(true);
-    setIsTalent(false);
+    setUserType("Recruiter");
   };
 
   return (
@@ -95,12 +97,12 @@ const Register = () => {
         </div>
       </div>
       <Container>
-        {isRecruiter && (
+        {userType === "Recruiter" ? (
           <RegisterRecruiter onSubmit={onSubmitHandler}></RegisterRecruiter>
-        )}
-        {isTalent && (
+        ) : null}
+        {userType === "Talent" ? (
           <RegisterTalent onSubmit={onSubmitHandler}></RegisterTalent>
-        )}
+        ) : null}
       </Container>
       <Link
         to="/login"
