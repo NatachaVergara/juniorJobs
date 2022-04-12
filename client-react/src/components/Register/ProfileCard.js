@@ -40,10 +40,6 @@ export default function ProfileCard(props) {
           Some quick example text to build on the card title and make up the
           bulk of the card's content.
         </CardText>
-          <div>
-            <Button onClick={props.onDelete} color="warning">DELETE</Button>
-            <Button onClick={props.onEdit} color="danger">EDIT</Button>
-          </div>
       </Card>
     </Fragment>
   );

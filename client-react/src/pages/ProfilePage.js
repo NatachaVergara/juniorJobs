@@ -1,66 +1,55 @@
 import { Fragment, useState } from "react";
+import { Button, Container, Row, Col } from "reactstrap";
 import Profile from "../components/Register/Profile";
 import RegisterRecruiter from "../components/Register/RegisterRecruiter";
 import RegisterTalent from "../components/Register/RegisterTalent";
 import { useAxios } from "../hooks/use-axios";
+import { useUserContext } from "../Store/UserContext";
 
 export default function ProfilePage() {
-  // pide context, porque necesito manejar autorizaciones y estados de signup/editing, talent/recruiter
-  const [isSignup, setIsSignup] = useState(true);
-  const [isRecruiter, setIsRecruiter] = useState(false);
-  function onEditHandler(props) {
-    // setIsSignup(true);
-  }
-  const { fetchData, response } = useAxios();
+  const [isEditing, setIsEditing] = useState(false);
+  const { id = 15, userType = null } = useUserContext();
+  const { fetchData } = useAxios();
+
+  const onEditClick = () => {
+    setIsEditing(true);
+  };
+
   function onSubmitHandler(values) {
-    let params = {};
-    if (isRecruiter) {
-      if (isSignup) {
-        params.method = "post";
-        params.url = "/recruiters";
-        params.headers = { accept: "*/*" };
-        params.data = { values };
-      } else {
-        params.method = "put";
-        params.url = "/recruiters/:id";
-        params.headers = { accept: "*/*" };
-        params.auth = {
-          username: "",
-          password: "",
-        };
-        params.data = { values };
-      }
-    } else {
-      if (isSignup) {
-        params.method = "post";
-        params.url = "/talents";
-        params.headers = { accept: "*/*" };
-        params.data = { values };
-      } else {
-        params.method = "put";
-        params.url = "/talents/:id";
-        params.headers = { accept: "*/*" };
-        params.auth = {
-          username: "",
-          password: "",
-        };
-        params.data = { values };
-      }
+    let config = {
+      method: "PUT",
+      headers: { accept: "*/*" },
+      params: { id },
+    };
+    if (userType === "Talent") {
+      config.url = `/talents/${id}`;
+      fetchData(config);
+    } else if (userType === "Recruiter") {
+      config.url = `/recruiters/${id}`;
+      fetchData(config);
     }
-    fetchData(params);
   }
 
   return (
     <Fragment>
-      <Profile onEdit={onEditHandler} onDelete={onSubmitHandler}></Profile>
-
-      {/* {isSignup && !isRecruiter && ( */}
-      <RegisterTalent onSubmit={onSubmitHandler}></RegisterTalent>
-      {/* )} */}
-
-      {/* {isSignup && isRecruiter && ( */}
-      <RegisterRecruiter onSubmit={onSubmitHandler}></RegisterRecruiter>
-      {/* )} */}
+      <Profile />
+      <Container>
+        <Row>
+          <Col>
+            <Button onClick={onEditClick} color="danger">
+              Edit
+            </Button>
+          </Col>
+          <Row>
+            {isEditing & (userType === "Talent") && (
+              <RegisterTalent onSubmit={onSubmitHandler}></RegisterTalent>
+            )}
+            {isEditing & (userType === "Recruiter") && (
+              <RegisterRecruiter onSubmit={onSubmitHandler}></RegisterRecruiter>
+            )}
+          </Row>
+        </Row>
+      </Container>
     </Fragment>
   );
 }
