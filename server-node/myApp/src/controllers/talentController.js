@@ -4,7 +4,6 @@ const bcryptjs = require('bcryptjs')
 
 const talentController = {
     create: (req, res) => {
-        //res.json("Metodo creación de Talento");
         db.Talent.findOne({where: {
             email: req.body.email
         }})
@@ -47,21 +46,105 @@ const talentController = {
     },
 
     update: (req, res) => {
-        res.json("Metodo edición de Talento");
+        const id = req.params.id
+        db.Talent.findOne({where:{id: id}})
+        .then(talento => {
+            if(talento){
+                db.Talent.update({
+                    name: req.body.name,
+                    lastName: req.body.lastName,
+                    email: req.body.email,
+                    birthdate: req.body.birthdate,
+                    image: req.body.image,
+                    repository: req.body.repository,
+                    url: req.body.url,
+                    profile: req.body.profile,
+                    phone: req.body.phone,
+                    id_Seniority: req.body.id_Seniority,
+                    id_Experience: req.body.id_Experience,
+                    id_Speciality: req.body.id_Speciality,
+                    id_Education: req.body.id_Education
+                },{where: {id:req.params.id}})
+                .then(newTalent => {
+                    console.log('Se actualizó el talento');
+                    return res.status(201).json({message: 'Se actualizó el talento'});
+                })
+                .catch(function(error){
+                    console.log("No se pudo crear el registro en nuestra base de datos", error);
+                })
+            }
+            else {
+                console.log('No se encontró el talento en nuestra base de datos');
+                return res.status(404).json({message: 'No se encontró el talento en nuestra base de datos'});
+            }
+        })
+        .catch(function(error){
+            console.log(`Se ha producido el siguiente error: `, error);
+        })
     },
 
     destroy: (req, res) => {
-        res.json("Metodo borrado de Talento");
+        db.Talent.findOne({where: {id:req.params.id}})
+        .then(talento => {
+            if(talento){
+                db.Talent.destroy({
+                    where: {id:req.params.id}
+                })
+                .then(Talent => {
+                    console.log('El talento ha sido borrado de nuestra base de datos');
+                    return res.status(204).json({message: 'El talento ha sido borrado nuestra base de datos'});
+                })
+                .catch(function(error){
+                    console.log("No se pudo borar el talento de nuestra base de datos", error);
+                })
+            }
+            else {
+                console.log('No se encontró el talento en nuestra base de datos');
+                return res.status(404).json({message: 'No se encontró el talento en nuestra base de datos'});
+            }
+        })
+        .catch(function(error){
+            console.log(`Se ha producido el siguiente error: `, error);
+        })
     },
 
     show: (req, res) => {
-        res.json("Metodo visualización de Talento x id");
+        const id = req.params.id;
+        db.Talent.findOne({where:{id: id}})
+        .then((talent) => {
+            if(talent){
+                delete talent.dataValues.password
+                console.log(talent);
+                return res.status(200).json(talent.dataValues)
+            }else {
+                console.log('No se encontró el talento en nuestra base de datos');
+                return res.status(404).json({message: 'No se encontró el talento en nuestra base de datos'});
+            }
+        })
+        .catch(function(error){
+            console.log(`Se ha producido el siguiente error: `, error);
+        })
     },
 
     index: (req, res) => {
-        res.json("Metodo visualización de todos los Talentos");
+        db.Talent.findAll()
+        .then((allTalent) => {
+            if(allTalent) {
+                for(let i = 0; i<allTalent.length; i++){
+                delete allTalent[i].dataValues.password;
+                }
+                console.log(allTalent);
+                return res.status(200).json(allTalent);
+            }
+            else {
+                console.log('No se encontró ningún talento en nuestra base de datos');
+                return res.status(404).json({message: 'No se encontró ningún talento en nuestra base de datos'});
+            }
+        })
+        .catch(function(error){
+            console.log(`Se ha producido el siguiente error: `, error);
+        })
     }
-    
 }
 
 module.exports = talentController;
