@@ -10,15 +10,15 @@ export default function Profile(props) {
     fetchData,
     response = {
       data: {
-        name: "gaspi",
+        name: "Leo alvez",
         profile: "ninjavascript coder motherfucker",
-        skills: [{ name: "react", level: "beginner" }],
+        skills: [{ name: "React", level: "beginner" }],
         repository: "linkedin.com",
         url: "github.com",
       },
     },
   } = useAxios();
-  const { id = 1, userType = null } = useUserContext();
+  const { id = 13, userType = null } = useUserContext();
   console.log("data in profile ", response.data);
 
   useEffect(() => {

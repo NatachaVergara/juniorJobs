@@ -24,9 +24,11 @@ export default function ProfileCard(props) {
           bulk of the card's content.
         </CardText>
         <CardSubtitle className="mb-2 text-muted" tag="h6">
-          Tech stack
+          TECH STACK
         </CardSubtitle>
-        <CardText>{props.data.skills[0].name}</CardText>
+        <CardText>
+          {props.data.skills[0].name} - {props.data.skills[0].level}
+        </CardText>
       </Card>
     </Fragment>
   );
