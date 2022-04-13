@@ -1,18 +1,20 @@
 import axios from "axios";
 import swal from "sweetalert";
 import { useState, useCallback } from "react";
-
+import { useNavigate } from 'react-router-dom';
 axios.defaults.baseURL = "http://localhost:3002";
 
 export const useAxios = () => {
   const [response, setResponse] = useState(undefined);
-
+  let navigate = useNavigate()
   const fetchData = useCallback((params) => {
     axios
       .request(params)
       .then((res) => {
         console.log(res, "res on use-axios");
         setResponse(res.data);
+        navigate('/login')
+
       })
       .catch(function (error) {
         console.log(error.response, error.message);
@@ -33,7 +35,7 @@ export const useAxios = () => {
           return swal("Last Error", error.message);
         }
       });
-  }, []);
+  }, [navigate]);
 
   return { response, fetchData };
 };

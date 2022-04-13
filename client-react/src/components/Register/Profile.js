@@ -1,36 +1,51 @@
-import { useEffect } from "react";
-import { Col, Container, Row } from "reactstrap";
-import { useAxios } from "../../hooks/use-axios";
+//import { useEffect } from "react";
 import { useUserContext } from "../../Store/UserContext";
+//import { useAxios } from "../../hooks/use-axios";
 import ProfileCard from "./ProfileCard";
 import ProjectsCard from "./ProjectsCard";
+import { Col, Container, Row } from "reactstrap";
 
 export default function Profile(props) {
-  const { fetchData, response } = useAxios();
-  const ctx = useUserContext();
-  const { id = 1, userType = null } = ctx;
-  console.log("response in profile ", response);
+  // const {
+  //   fetchData,
+  //   response = {
+  //     data: {
+  //       name: "Leo alvez",
+  //       profile: "ninjavascript coder motherfucker",
+  //       skills: [{ name: "React", level: "beginner" }],
+  //       repository: "linkedin.com",
+  //       url: "github.com",
+  //     },
+  //   },
+  // } = useAxios();
 
-  useEffect(() => {
-    let config = {
-      method: "GET",
-      headers: { accept: "*/*" },
-      params: { ids: items.join(), apiKey },
-    };
-    if (userType === "Talent") {
-      config.url = `/talents`;
-      fetchData(config);
-    } else if (userType === "Recruiter") {
-      config.url = `/recruiters`;
-      fetchData(config);
-    }
-  }, [fetchData, userType]);
+  
+  const { userType, userData  } = useUserContext();
+  console.log(userData)
+  //console.log("data in profile ", response.data);
+
+  // useEffect(() => {
+  //   if (id) {
+  //     let config = {
+  //       method: "GET",
+  //       headers: { accept: "*/*" },
+  //       params: { id },
+  //     };
+  //     if (userType === "Talent") {
+  //       config.url = `/talents/${id}`;
+  //       fetchData(config);
+  //     } else if (userType === "Recruiter") {
+  //       config.url = `/recruiters/${id}`;
+  //       fetchData(config);
+  //     }
+  //   }
+  // }, [fetchData, userType, id]);
 
   return (
     <Container>
       <Row>
         <Col>
-          <ProfileCard onEdit={props.onEdit} onDelete={props.onDelete} />
+          <ProfileCard data={userData}  />
         </Col>
         <Col lg="8">
           <ProjectsCard />
