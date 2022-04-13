@@ -8,7 +8,7 @@ const URL = "http://localhost:3002/users/login";
 
 export const usePostLogin = () => {
     //Seteo el tipo de user y lo guardo en el context para que se pueda usar en el resto del sitio cuando sea necesario
-    const { setIsUser, setUserType } = useUserContext()
+    const { setIsUser, setUserType, setUserId, setUserData } = useUserContext()
     let navigate = useNavigate()
 
 
@@ -25,12 +25,14 @@ export const usePostLogin = () => {
             )
 
             console.log(response)
-            swal(response.data)
+            swal(`Bienvenido/a ${response.data.user.name}`)
             resetForm()
             //Aca podriamos usar el userType en vez de es user true-false
             //setIsUser(value.userType)
             setIsUser(true)
             setUserType(values.userType)
+            setUserId(response.data.user.id)
+            setUserData(response.data.user)
             navigate('/')
 
         } catch (error) {

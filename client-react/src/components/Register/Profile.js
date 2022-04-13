@@ -18,6 +18,8 @@ export default function Profile(props) {
       },
     },
   } = useAxios();
+
+  
   const { id = 13, userType = null } = useUserContext();
   console.log("data in profile ", response.data);
 
