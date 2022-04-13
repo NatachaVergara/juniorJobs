@@ -127,11 +127,11 @@ export default function RegisterTalent(props) {
           url: "",
           repository: "",
           image: "",
-          // birthdate: new Date(),
-          id_seniority: 1,
-          id_experience: 0,
-          id_speciality: 1,
-          id_education: 1,
+          birthdate: '1986-07-13',
+          id_Seniority: 1,
+          id_Experience: 0,
+          id_Speciality: 1,
+          id_Education: 1,
           // skills: [{ name: 0, level: 0 }],
           // languages: [{ name: 0, level:0}] ,
           profile: "",
@@ -163,17 +163,17 @@ export default function RegisterTalent(props) {
           //   new Date(new Date() - 599616000000),
           //   "Must to be +18 years old"
           // ),
-          id_seniority: Yup.number()
+          id_Seniority: Yup.number()
             .oneOf([0, 1, 2, 3, 4], "Invalid seniority Type")
             .required("Required"),
-          // id_experience: Yup.number()
-          //   .oneOf([0, 1, 2, 3, 4], "Invalid experience range")
-          //   .required("Required"),
-          id_speciality: Yup.number().oneOf(
+          id_Experience: Yup.number()
+            .oneOf([0, 1, 2, 3, 4], "Invalid experience range")
+            .required("Required"),
+          id_Speciality: Yup.number().oneOf(
             [0, 1, 2, 3, 4, 5, 6, 7],
             "Invalid speciality Type"
           ),
-          id_education: Yup.number().oneOf(
+          id_Education: Yup.number().oneOf(
             [0, 1, 2, 3, 4, 5, 6, 7],
             "Invalid Education Type"
           ),
@@ -185,16 +185,14 @@ export default function RegisterTalent(props) {
           //   .oneOf([true], "You must accept the terms and conditions."),
         })}
         onSubmit={(values, { setSubmitting }) => {
-          console.log(values)
           setSubmitting(true);
-          values.id_seniority = +values.id_seniority;
-          values.id_education = +values.id_education;
-          values.id_speciality = +values.id_speciality;
-          values.id_experience = +values.id_experience;
+          values.id_Seniority = +values.id_Seniority;
+          values.id_Education = +values.id_Education;
+          values.id_Speciality = +values.id_Speciality;
+          values.id_Experience = +values.id_Experience;
           // values.skills = values.skills.map((skill) => ({
           //   name: +skill.name,
           //   level: +skill.level,
-
           // }));
           // values.languages = values.languages.map((language) => ({
           //   name: +language.level,
@@ -260,17 +258,17 @@ export default function RegisterTalent(props) {
                 />
               </Col>
             </Row>
-            {/* <MyTextInput label="Date of birth" name="birthdate" type="date" /> */}
+            <MyTextInput label="Date of birth" name="birthdate" type="date" />
             <Row>
               <Col>
-                <MySelect label="Seniority" name="id_seniority">
+                <MySelect label="Seniority" name="id_Seniority">
                   <option value={0}>Select one of the list</option>
                   <option value={1}>Trainee</option>
                   <option value={2}>Junior</option>
                 </MySelect>
               </Col>
               <Col>
-                <MySelect label="Speciality if apply" name="id_speciality">
+                <MySelect label="Speciality if apply" name="id_Speciality">
                   <option value={0}>Aritificial intelligence</option>
                   <option value={1}>Games</option>
                   <option value={2}>Fintech</option>
@@ -407,7 +405,7 @@ export default function RegisterTalent(props) {
             </Row> */}
             <MyTextInput
               label="Education"
-              name="id_education"
+              name="id_Education"
               type="textarea"
               placeholder="Describe your academic background"
             />
@@ -423,7 +421,7 @@ export default function RegisterTalent(props) {
                 <Col>
                   <MyRadio
                     label="0-2 months"
-                    name="id_experience"
+                    name="id_Experience"
                     type="radio"
                     value="0"
                   />
@@ -431,7 +429,7 @@ export default function RegisterTalent(props) {
                 <Col>
                   <MyRadio
                     label="2-6 months"
-                    name="id_experience"
+                    name="id_Experience"
                     type="radio"
                     value="1"
                   />
@@ -439,7 +437,7 @@ export default function RegisterTalent(props) {
                 <Col>
                   <MyRadio
                     label="6-12 months"
-                    name="id_experience"
+                    name="id_Experience"
                     type="radio"
                     value="2"
                   />
@@ -447,7 +445,7 @@ export default function RegisterTalent(props) {
                 <Col>
                   <MyRadio
                     label="1-2 yeas"
-                    name="id_experience"
+                    name="id_Experience"
                     type="radio"
                     value="3"
                   />
@@ -455,7 +453,7 @@ export default function RegisterTalent(props) {
                 <Col>
                   <MyRadio
                     label="2-4 years"
-                    name="id_experience"
+                    name="id_Experience"
                     type="radio"
                     value="4"
                   />

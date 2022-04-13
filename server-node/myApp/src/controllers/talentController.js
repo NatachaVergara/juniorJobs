@@ -4,7 +4,7 @@ const bcryptjs = require('bcryptjs')
 
 const talentController = {
     create: (req, res) => {
-        console.log(req.body)
+        // console.log(req.body)
         db.Talent.findOne({where: {
             email: req.body.email
         }})
@@ -38,6 +38,8 @@ const talentController = {
                 })
                 .catch(function(error){
                     console.log("No se pudo crear el registro en la base de datos");
+                    console.log(req.body)
+                    console.error(error)
                 })
             }
         })
