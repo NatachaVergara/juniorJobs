@@ -35,7 +35,7 @@ export const useAxios = () => {
           return swal("Last Error", error.message);
         }
       });
-  }, []);
+  }, [navigate]);
 
   return { response, fetchData };
 };

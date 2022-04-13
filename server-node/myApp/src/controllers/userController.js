@@ -19,11 +19,9 @@ const userController = {
                 if(user){
                     let validatePassword = bcryptjs.compareSync(req.body.password,user.password);
                     if (validatePassword == true){
+                        delete user.dataValues.password;
                         console.log("Bienvenido, " + req.body.email);
-                        return res.status(200).json(
-                           { message:  "Bienvenido, " + req.body.email,
-                             user}
-                             );
+                        return res.status(200).json(user);
                     }
                     else{
                         console.log("Las credenciales son inválidas");
@@ -54,8 +52,9 @@ const userController = {
                 if(user){
                     let validatePassword = bcryptjs.compareSync(req.body.password,user.password);
                     if (validatePassword == true){
+                        delete user.dataValues.password;
                         console.log("Bienvenido, " + req.body.email);
-                        return res.json("Bienvenido, " + req.body.email, user);
+                        return res.status(200).json(user);
                     }
                     else{
                         console.log("Las credenciales son inválidas");

@@ -25,18 +25,18 @@ export const usePostLogin = () => {
             )
 
             console.log(response)
-            swal(`Bienvenido/a ${response.data.user.name}`)
+            swal(`Bienvenido/a ${response.data.name}`)
             resetForm()
             //Aca podriamos usar el userType en vez de es user true-false
             //setIsUser(value.userType)
             setIsUser(true)
             setUserType(values.userType)
-            setUserId(response.data.user.id)
-            setUserData(response.data.user)
+            setUserId(response.data.id)
+            setUserData(response.data)
             navigate('/')
 
         } catch (error) {
-            return swal(JSON.stringify(error.response.data.message));
+            return swal(JSON.stringify(error.response.message));
             //alert(JSON.stringify(error.response.data.message))
         }
 
