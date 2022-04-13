@@ -59,8 +59,8 @@ const UserContextProvider = ({ children }) => {
   const [userData, setUserData] = useState(getLocalUserData())
 
 
-  console.log(userType);
-  console.log(userID);
+  console.log(`USerType: ${userType}`);
+  console.log(`User id: ${userID}`);
   console.log(userData);
 
   //Creo un estado user dentro de mi localStorage
