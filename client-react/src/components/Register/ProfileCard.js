@@ -3,11 +3,12 @@ import { Card, CardImg, CardSubtitle, CardText, CardTitle } from "reactstrap";
 import classes from "./ProfileCard.module.scss";
 
 export default function ProfileCard(props) {
+  console.log(props.data)
   return (
     <Fragment>
       <Card body color="secondary" inverse className={classes.card}>
         <CardImg
-          src="https://media.istockphoto.com/photos/young-character-actor-headshot-picture-id1211061995?k=20&m=1211061995&s=170667a&w=0&h=KtUBCp33OpGS9VfQ35IIJB8jF7aC1r7tMhI_Rqlxh5I="
+          src={props.data.image}
           width="100%"
           top
         ></CardImg>
@@ -27,7 +28,7 @@ export default function ProfileCard(props) {
           TECH STACK
         </CardSubtitle>
         <CardText>
-          {props.data.skills[0].name} - {props.data.skills[0].level}
+          {/* {props.data.skills[0].name} - {props.data.skills[0].level} */}
         </CardText>
       </Card>
     </Fragment>

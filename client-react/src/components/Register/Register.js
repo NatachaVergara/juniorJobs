@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
+import {qs} from 'qs'
 import { Link } from "react-router-dom";
 import { FcNeutralDecision, FcBusiness, FcApproval } from "react-icons/fc";
 import "./Register.scss";
@@ -20,38 +21,20 @@ const Register = () => {
   function onSubmitHandler(values) {
     console.log("on register values:", values);
     let params = {};
-    if (userType === "Recruiter") {
-      if (isSignup) {
+    if (userType === "Recruiter") {     
         params.method = "post";
         params.url = "/recruiters";
         params.headers = { accept: "*/*" };
         params.data = { values };
-      } else {
-        params.method = "put";
-        params.url = "/recruiters/:id";
-        params.headers = { accept: "*/*" };
-        params.auth = {
-          username: "",
-          password: "",
-        };
-        params.data = { values };
-      }
-    } else {
-      if (isSignup) {
+      
+      
+    } else {      
         params.method = "post";
         params.url = "/talents";
-        params.headers = { accept: "*/*" };
-        params.data = { values };
-      } else {
-        params.method = "put";
-        params.url = "/talents/:id";
-        params.headers = { accept: "*/*" };
-        params.auth = {
-          username: "",
-          password: "",
-        };
-        params.data = { values };
-      }
+        params.header = {'Content-type': 'application/x-www-form-urlencoded'};
+        params.data =  values
+      
+    
     }
     fetchData(params);
   }

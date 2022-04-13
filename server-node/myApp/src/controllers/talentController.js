@@ -4,6 +4,7 @@ const bcryptjs = require('bcryptjs')
 
 const talentController = {
     create: (req, res) => {
+        console.log(req.body)
         db.Talent.findOne({where: {
             email: req.body.email
         }})

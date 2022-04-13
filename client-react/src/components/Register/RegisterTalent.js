@@ -127,15 +127,15 @@ export default function RegisterTalent(props) {
           url: "",
           repository: "",
           image: "",
-          birthdate: new Date(),
+          // birthdate: new Date(),
           id_seniority: 1,
           id_experience: 0,
           id_speciality: 1,
           id_education: 1,
-          skills: [{ name: 0, level: 0 }],
-          languages: [{ name: 0, level:0}] ,
+          // skills: [{ name: 0, level: 0 }],
+          // languages: [{ name: 0, level:0}] ,
           profile: "",
-          acceptedTerms: false,
+          // acceptedTerms: false,
         }}
         validationSchema={Yup.object({
           name: Yup.string()
@@ -159,10 +159,10 @@ export default function RegisterTalent(props) {
           repository: Yup.string()
             // .matches(urlRegex, "Url is not valid")
             .required("Required"),
-          birthdate: Yup.date().max(
-            new Date(new Date() - 599616000000),
-            "Must to be +18 years old"
-          ),
+          // birthdate: Yup.date().max(
+          //   new Date(new Date() - 599616000000),
+          //   "Must to be +18 years old"
+          // ),
           id_seniority: Yup.number()
             .oneOf([0, 1, 2, 3, 4], "Invalid seniority Type")
             .required("Required"),
@@ -180,24 +180,26 @@ export default function RegisterTalent(props) {
           profile: Yup.string()
             .max(350, "Must be 350 characters or less")
             .required("Required"),
-          acceptedTerms: Yup.boolean()
-            .required("Required")
-            .oneOf([true], "You must accept the terms and conditions."),
+          // acceptedTerms: Yup.boolean()
+          //   .required("Required")
+          //   .oneOf([true], "You must accept the terms and conditions."),
         })}
         onSubmit={(values, { setSubmitting }) => {
+          console.log(values)
           setSubmitting(true);
           values.id_seniority = +values.id_seniority;
           values.id_education = +values.id_education;
           values.id_speciality = +values.id_speciality;
           values.id_experience = +values.id_experience;
-          values.skills = values.skills.map((skill) => ({
-            name: +skill.name,
-            level: +skill.level,
-          }));
-          values.languages = values.languages.map((language) => ({
-            name: +language.level,
-            level: +language.level,
-          }))
+          // values.skills = values.skills.map((skill) => ({
+          //   name: +skill.name,
+          //   level: +skill.level,
+
+          // }));
+          // values.languages = values.languages.map((language) => ({
+          //   name: +language.level,
+          //   level: +language.level,
+          // }))
           console.log(values);
           props.onSubmit(values);
           setSubmitting(false);
@@ -258,7 +260,7 @@ export default function RegisterTalent(props) {
                 />
               </Col>
             </Row>
-            <MyTextInput label="Date of birth" name="birthdate" type="date" />
+            {/* <MyTextInput label="Date of birth" name="birthdate" type="date" /> */}
             <Row>
               <Col>
                 <MySelect label="Seniority" name="id_seniority">
@@ -278,7 +280,7 @@ export default function RegisterTalent(props) {
                 </MySelect>
               </Col>
             </Row>
-            <h2 className="mt-4 ">Languages and skills</h2>
+            {/* <h2 className="mt-4 ">Languages and skills</h2>
             <Row>
               <FieldArray name="skills">
                 {({ insert, remove, push }) => (
@@ -340,8 +342,8 @@ export default function RegisterTalent(props) {
                   </div>
                 )}
               </FieldArray>
-            </Row>
-            <Row>
+            </Row> */}
+            {/* <Row>
               <FieldArray name="languages">
                 {({ insert, remove, push }) => (
                   <div>
@@ -402,7 +404,7 @@ export default function RegisterTalent(props) {
                   </div>
                 )}
               </FieldArray>
-            </Row>
+            </Row> */}
             <MyTextInput
               label="Education"
               name="id_education"
@@ -460,9 +462,9 @@ export default function RegisterTalent(props) {
                 </Col>
               </Row>
             </Card>
-            <MyCheckbox name="acceptedTerms">
+            {/* <MyCheckbox name="acceptedTerms">
               {" I accept the terms and conditions"}
-            </MyCheckbox>
+            </MyCheckbox> */}
             <div>
               <Button color="primary" disabled={isSubmitting || !isValid}>
                 Submit
