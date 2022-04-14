@@ -9,9 +9,9 @@ module.exports = (sequelize,DataTypes) => {
             autoIncrement: true,
             null: false
         },
-        id_Skill: {
-            type: DataTypes.INTEGER,
-            foreingKey: true,
+        id_Skill: {                         //references: {
+            type: DataTypes.INTEGER,        //model: Actor, // 'Actors' would also work
+            foreingKey: true,               //key: 'id'}
             null: true, 
         },
         id_JobOffer: {

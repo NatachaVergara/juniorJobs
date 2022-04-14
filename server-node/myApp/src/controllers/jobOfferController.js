@@ -4,6 +4,11 @@ const jobOfferController = {
     create: (req, res) => {
         //res.json("Metodo creación de una Oferta Laboral");
         console.log(req.body);
+        let talent = null;
+        if(req.body.id_Talent){
+            talent = req.body.id_Talent;
+        }
+        let skills = req.body.id_Skill;
 
         db.JobOffer.findOne({where: {
             id_Speciality: req.body.id_Speciality,
@@ -23,12 +28,25 @@ const jobOfferController = {
                     id_Recruiter: req.body.id_Recruiter,
                     id_Schedule: req.body.id_Schedule,
                     id_Remote: req.body.id_Remote,
-                    id_Talent: null,
+                    id_Talent: talent,
                     id_Seniority: req.body.id_Seniority,
                     id_Experience: req.body.id_Experience,
                     id_Speciality: req.body.id_Speciality
                 })
                 .then((jobOffer) => {
+                    for(let i = 0; i<skills.length ; i++){
+                        db.SkillJobOffer.create({
+                            id_Skill: skills[i],
+                            id_JobOffer: jobOffer.id
+                        })
+                        .then((skillJobOffer) => {
+                            console.log("Skill "+i+" agregada");
+                        })
+                        .catch(function(error){
+                            console.log("No se pudo crear el registro en la tabla intermedia de nuestra base de datos", error);
+                        })
+                    }
+                    
                     console.log('Oferta de trabajo creada');
                     res.status(201).json({message: 'Oferta de trabajo creada'});
                 })
