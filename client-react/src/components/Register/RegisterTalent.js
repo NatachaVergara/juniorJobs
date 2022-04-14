@@ -95,7 +95,7 @@ const MyRadio = ({ label, ...props }) => {
           <Input
             {...field}
             {...props}
-            // type="radio"
+            type="radio"
             invalid={meta.error && meta.touched}
             valid={!meta.error && meta.touched}
           />
@@ -108,10 +108,8 @@ const MyRadio = ({ label, ...props }) => {
     </div>
   );
 };
-const urlRegex =
-  /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/gm;
-const phoneRegex =
-  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+const urlRegex = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)$/
+const phoneRegex = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
 export default function RegisterTalent(props) {
   return (
@@ -123,6 +121,7 @@ export default function RegisterTalent(props) {
           lastName: "",
           email: "",
           password: "",
+          passwordConfirmation: "",
           phone: "",
           url: "",
           repository: "",
@@ -132,7 +131,7 @@ export default function RegisterTalent(props) {
           id_Experience: 0,
           id_Speciality: 1,
           id_Education: 1,
-          // skills: [{ name: 0, level: 0 }],
+          skills: [{ name: 0, level: 0 }],
           // languages: [{ name: 0, level:0}] ,
           profile: "",
           // acceptedTerms: false,
@@ -147,22 +146,24 @@ export default function RegisterTalent(props) {
           password: Yup.string()
             .min(4, "Must be 4 characters or more")
             .required("Required"),
+          passwordConfirmation: Yup.string()
+            .oneOf([Yup.ref('password'), null], 'Passwords must match'),
           email: Yup.string()
             .email("Field should contain a valid e-mail")
             .max(255)
             .required("E-mail is required"),
-          phone: Yup.string().matches(phoneRegex, "Phone number is not valid"),
-          // .required("Required"),
+          phone: Yup.string().matches(phoneRegex, "Phone number is not valid")
+            .required("Required"),
           url: Yup.string()
             .matches(urlRegex, "Url is not valid")
             .required("Required"),
           repository: Yup.string()
-            // .matches(urlRegex, "Url is not valid")
+            .matches(urlRegex, "Url is not valid")
             .required("Required"),
-          // birthdate: Yup.date().max(
-          //   new Date(new Date() - 599616000000),
-          //   "Must to be +18 years old"
-          // ),
+          birthdate: Yup.date().max(
+            new Date(new Date() - 599616000000),
+            "Must to be +18 years old"
+          ),
           id_Seniority: Yup.number()
             .oneOf([0, 1, 2, 3, 4], "Invalid seniority Type")
             .required("Required"),
@@ -174,7 +175,7 @@ export default function RegisterTalent(props) {
             "Invalid speciality Type"
           ),
           id_Education: Yup.number().oneOf(
-            [0, 1, 2, 3, 4, 5, 6, 7],
+            [1, 2, 3, 4, 5],
             "Invalid Education Type"
           ),
           profile: Yup.string()
@@ -190,10 +191,10 @@ export default function RegisterTalent(props) {
           values.id_Education = +values.id_Education;
           values.id_Speciality = +values.id_Speciality;
           values.id_Experience = +values.id_Experience;
-          // values.skills = values.skills.map((skill) => ({
-          //   name: +skill.name,
-          //   level: +skill.level,
-          // }));
+          values.skills = values.skills.map((skill) => ({
+            name: +skill.name,
+            level: +skill.level,
+          }));
           // values.languages = values.languages.map((language) => ({
           //   name: +language.level,
           //   level: +language.level,
@@ -202,13 +203,13 @@ export default function RegisterTalent(props) {
           props.onSubmit(values);
           setSubmitting(false);
         }}
-        // onSubmit={(values, { setSubmitting }) => {
-        //   console.log(values);
-        //   setTimeout(() => {
-        //     alert(JSON.stringify(values, null, 2));
-        //     setSubmitting(false);
-        //   }, 400);
-        // }}
+      // onSubmit={(values, { setSubmitting }) => {
+      //   console.log(values);
+      //   setTimeout(() => {
+      //     alert(JSON.stringify(values, null, 2));
+      //     setSubmitting(false);
+      //   }, 400);
+      // }}
       >
         {({ isSubmitting, isValid, values }) => (
           <Form>
@@ -239,6 +240,14 @@ export default function RegisterTalent(props) {
               </Col>
               <Col>
                 <MyTextInput
+                  label="Password Confirmation"
+                  name="passwordConfirmation"
+                  type="password"
+                  placeholder=""
+                />
+              </Col>
+              <Col>
+                <MyTextInput
                   label="Phone number"
                   name="phone"
                   type="text"
@@ -248,11 +257,16 @@ export default function RegisterTalent(props) {
             </Row>
             <Row>
               <Col>
-                <MyTextInput label="LinkedIn Link" name="url" type="url" />
+                <MyTextInput
+                  label="LinkedIn"
+                  name="url"
+                  type="url"
+                />
+
               </Col>
               <Col>
                 <MyTextInput
-                  label="Remote repositories link"
+                  label="Remote repositories "
                   name="repository"
                   type="url"
                 />
@@ -278,7 +292,7 @@ export default function RegisterTalent(props) {
                 </MySelect>
               </Col>
             </Row>
-            {/* <h2 className="mt-4 ">Languages and skills</h2>
+            <h2 className="mt-4 ">Languages and skills</h2>
             <Row>
               <FieldArray name="skills">
                 {({ insert, remove, push }) => (
@@ -340,7 +354,7 @@ export default function RegisterTalent(props) {
                   </div>
                 )}
               </FieldArray>
-            </Row> */}
+            </Row>
             {/* <Row>
               <FieldArray name="languages">
                 {({ insert, remove, push }) => (
@@ -403,12 +417,16 @@ export default function RegisterTalent(props) {
                 )}
               </FieldArray>
             </Row> */}
-            <MyTextInput
-              label="Education"
-              name="id_Education"
-              type="textarea"
-              placeholder="Describe your academic background"
-            />
+            <Col>
+              <MySelect label="Education" name="id_Education">
+                
+                <option value={1}>Bootcamp</option>
+                <option value={2}>Curso</option>
+                <option value={3}>Ingenieria</option>
+                <option value={4}>Licenciatura</option>
+                <option value={5}>Tecnicatura</option>
+              </MySelect>
+            </Col>
             <MyTextInput
               label="Profile description"
               name="profile"

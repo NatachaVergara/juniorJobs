@@ -2,7 +2,7 @@ import React from "react";
 import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
 // import classes from "./RegisterTalent.module.css";
-import { Button, Col, Input, Label, Row } from "reactstrap";
+import { Button, Col, Container, Input, Label, Row } from "reactstrap";
 
 const MyTextInput = ({ label, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
@@ -59,46 +59,46 @@ const MyCheckbox = ({ children, ...props }) => {
     </>
   );
 };
-// const MyRange = ({ label, ...props }) => {
-//   const [field, meta] = useField({ ...props, type: "range" });
-//   return (
-//     <>
-//       <Label htmlFor={props.id || props.name}>
-//         {label}, is <b>{field.value}</b>
-//       </Label>
-//       <Input type="range" {...field} {...props} />
+const MyRange = ({ label, ...props }) => {
+  const [field, meta] = useField({ ...props, type: "range" });
+  return (
+    <>
+      <Label htmlFor={props.id || props.name}>
+        {label}, is <b>{field.value}</b>
+      </Label>
+      <Input type="range" {...field} {...props} />
 
-//       {meta.touched && meta.error ? (
-//         <div className="error">{meta.error}</div>
-//       ) : null}
-//     </>
-//   );
-// };
-// const MyRadio = ({ label, ...props }) => {
-//   const [field, meta] = useField({ ...props, type: "radio" });
-//   return (
-//     <div>
-//       <Label>
-//         <Container>
-//           <Input
-//             {...field}
-//             {...props}
-//             type="radio"
-//             invalid={meta.error && meta.touched}
-//             valid={!meta.error && meta.touched}
-//           />
-//         </Container>
-//         {label}
-//       </Label>
+      {meta.touched && meta.error ? (
+        <div className="error">{meta.error}</div>
+      ) : null}
+    </>
+  );
+};
+const MyRadio = ({ label, ...props }) => {
+  const [field, meta] = useField({ ...props, type: "radio" });
+  return (
+    <div>
+      <Label>
+        <Container>
+          <Input
+            {...field}
+            {...props}
+            type="radio"
+            invalid={meta.error && meta.touched}
+            valid={!meta.error && meta.touched}
+          />
+        </Container>
+        {label}
+      </Label>
 
-//       {meta.touched && meta.error ? (
-//         <div className="error">{meta.error}</div>
-//       ) : null}
-//     </div>
-//   );
-// };
-// const urlRegex =
-//   /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/gm;
+      {meta.touched && meta.error ? (
+        <div className="error">{meta.error}</div>
+      ) : null}
+    </div>
+  );
+};
+const urlRegex =
+  /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/gm;
 
 export default function RegisterRecruiter(props) {
   return (
@@ -110,6 +110,7 @@ export default function RegisterRecruiter(props) {
           lastName: "",
           email: "",
           password: "",
+          comparePassword: "",
           company: "",
           image: "",
           url: "",
