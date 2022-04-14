@@ -97,9 +97,7 @@ const MyRadio = ({ label, ...props }) => {
     </div>
   );
 };
-const urlRegex =
-  /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/gm;
-
+const urlRegex = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)$/
 export default function RegisterRecruiter(props) {
   return (
     <>
@@ -110,11 +108,11 @@ export default function RegisterRecruiter(props) {
           lastName: "",
           email: "",
           password: "",
-          comparePassword: "",
+          passwordConfirmation: "",
           company: "",
           image: "",
           url: "",
-          acceptedTerms: false,
+          // acceptedTerms: false,
         }}
         validationSchema={Yup.object({
           name: Yup.string()
@@ -126,16 +124,21 @@ export default function RegisterRecruiter(props) {
           password: Yup.string()
             .min(4, "Must be 4 characters or more")
             .required("Required"),
+          passwordConfirmation: Yup.string()
+            .oneOf([Yup.ref('password'), null], 'Passwords must match'),
           email: Yup.string()
             .email("Field should contain a valid e-mail")
             .max(255)
             .required("E-mail is required"),
+            url: Yup.string()
+            .matches(urlRegex, "Url is not valid")
+            .required("Required"),
           company: Yup.string()
             .max(350, "Must be 350 characters or less")
             .required("Required"),
-          acceptedTerms: Yup.boolean()
-            .required("Required")
-            .oneOf([true], "You must accept the terms and conditions."),
+          // acceptedTerms: Yup.boolean()
+          //   .required("Required")
+          //   .oneOf([true], "You must accept the terms and conditions."),
         })}
         onSubmit={(values, { setSubmitting }) => {
           setSubmitting(true);
@@ -148,10 +151,16 @@ export default function RegisterRecruiter(props) {
           <Form>
             <Row>
               <Col>
-                <MyTextInput label="Name" name="name" type="text" />
+                <MyTextInput
+                 label="Name" 
+                 name="name"
+                 type="text" />
               </Col>
               <Col>
-                <MyTextInput label="Last name" name="lastName" type="text" />
+                <MyTextInput 
+                label="Last name"
+                 name="lastName" 
+                 type="text" />
               </Col>
             </Row>
             <Row>
@@ -164,15 +173,32 @@ export default function RegisterRecruiter(props) {
                 />
               </Col>
               <Col>
-                <MyTextInput label="Password" name="password" type="password" />
+                <MyTextInput
+                  label="Password"
+                  name="password"
+                  type="password" />
+              </Col>
+              <Col>
+                <MyTextInput
+                  label="Password Confirmation"
+                  name="passwordConfirmation"
+                  type="password"
+                  placeholder=""
+                />
               </Col>
             </Row>
             <Row>
               <Col>
-                <MyTextInput label="image" name="image" type="url" />
+                <MyTextInput
+                  label="image"
+                  name="image"
+                  type="url" />
               </Col>
               <Col>
-                <MyTextInput label="LinkedIn profile" name="url" type="url" />
+                <MyTextInput
+                  label="LinkedIn profile"
+                  name="url"
+                  type="url" />
               </Col>
             </Row>
             <MyTextInput
@@ -181,9 +207,9 @@ export default function RegisterRecruiter(props) {
               type="textarea"
               placeholder="Tell us about the company"
             />
-            <MyCheckbox name="acceptedTerms">
+            {/* <MyCheckbox name="acceptedTerms">
               {" I accept the terms and conditions"}
-            </MyCheckbox>
+            </MyCheckbox> */}
             <div>
               <Button color="primary" disabled={isSubmitting || !isValid}>
                 Submit

@@ -1,10 +1,11 @@
 const db = require('../database/models');
+const Recruiter = require('../database/models/Recruiter')
 const bcryptjs = require('bcryptjs');
 
 const recruiterController = {
     create: (req, res) => {
         //res.json("Metodo creación de Recruiter");
-        console.log(req.body);
+        // console.log(req.body);
 
         db.Recruiter.findOne({where: {
             email: req.body.email
@@ -12,9 +13,10 @@ const recruiterController = {
         .then((recruiter) => {
             if(recruiter) {
                 console.log('Este usuario ya se encuentra registrado');
-                return res.status(202).json({message: 'Este usuario ya se encuentra registrado'});
+                return res.json({message: 'Este usuario ya se encuentra registrado'})
             }
             else {
+                console.log(req.body);
                 const password = req.body.password;
                 const hashPassword = bcryptjs.hashSync(password, 10);
                 db.Recruiter.create({
@@ -27,11 +29,13 @@ const recruiterController = {
                     url: req.body.url
                 })
                 .then((recruiter) => {
-                    console.log('Reclutador creado');
-                    res.status(201).json({message: 'Reclutador creado'});
+                    console.log('recruiter creado');
+                    res.json(recruiter)
                 })
                 .catch(function(error){
-                    console.log("No se pudo crear el registro en nuestra base de datos", error);
+                    console.log("No se pudo crear el registro en la base de datos");
+                    console.log(req.body)
+                    console.error(error)
                 })
             }
         })

@@ -24,17 +24,13 @@ const Register = () => {
     if (userType === "Recruiter") {     
         params.method = "post";
         params.url = "/recruiters";
-        params.headers = { accept: "*/*" };
-        params.data = { values };
-      
-      
+        params.header = {'Content-type': 'application/x-www-form-urlencoded'};
+        params.data =  values
     } else {      
         params.method = "post";
         params.url = "/talents";
         params.header = {'Content-type': 'application/x-www-form-urlencoded'};
         params.data =  values
-      
-    
     }
     fetchData(params);
   }

@@ -129,9 +129,9 @@ export default function RegisterTalent(props) {
           birthdate: '1986-07-13',
           id_Seniority: 1,
           id_Experience: 0,
-          id_Speciality: 1,
+          id_Speciality: 1, 
           id_Education: 1,
-          skills: [{ name: 0, level: 0 }],
+          Skill: [{ name: 0, level:0}],
           // languages: [{ name: 0, level:0}] ,
           profile: "",
           // acceptedTerms: false,
@@ -191,7 +191,7 @@ export default function RegisterTalent(props) {
           values.id_Education = +values.id_Education;
           values.id_Speciality = +values.id_Speciality;
           values.id_Experience = +values.id_Experience;
-          values.skills = values.skills.map((skill) => ({
+          values.Skill = values.Skill.map((skill) => ({
             name: +skill.name,
             level: +skill.level,
           }));
@@ -294,41 +294,41 @@ export default function RegisterTalent(props) {
             </Row>
             <h2 className="mt-4 ">Languages and skills</h2>
             <Row>
-              <FieldArray name="skills">
+              <FieldArray name="Skill">
                 {({ insert, remove, push }) => (
                   <div>
-                    {values.skills.length > 0 &&
-                      values.skills.map((skill, index) => (
+                    {values.Skill.length > 0 &&
+                      values.Skill.map((skill, index) => (
                         <div className="row" key={index}>
                           <div className="col">
-                            <label htmlFor={`skills.${index}.name`}>Name</label>
-                            <Field name={`skills.${index}.name`} as={MySelect}>
-                              <option value={0}>Javascript</option>
-                              <option value={1}>Python</option>
-                              <option value={2}>Go</option>
-                              <option value={3}>NodeJs</option>
-                              <option value={4}>ReactJs</option>
-                              <option value={5}>Remix</option>
+                            <label htmlFor={`Skill.${index}.name`}>Name</label>
+                            <Field name={`Skill.${index}.name`} as={MySelect}>
+                              <option value={1}>Api Rest</option>
+                              <option value={2}>C</option>
+                              <option value={3}>C++</option>
+                              <option value={4}>CSS</option>
+                              <option value={5}>Express</option>
+                              <option value={6}>Git</option>
                               
 
                             </Field>
                             <ErrorMessage
-                              name={`skills.${index}.name`}
+                              name={`Skill.${index}.name`}
                               component="div"
                               className="field-error"
                             />
                           </div>
                           <div className="col">
-                            <label htmlFor={`skills.${index}.level`}>
+                            <label htmlFor={`Skill.${index}.level`}>
                               Level
                             </label>
-                            <Field name={`skills.${index}.level`} as={MySelect}>
+                            <Field name={`Skill.${index}.level`} as={MySelect}>
                               <option value={0}>Basic</option>
                               <option value={1}>Intermidate</option>
                               <option value={2}>Advanced</option>
                             </Field>
                             <ErrorMessage
-                              name={`skills.${index}.level`}
+                              name={`Skill.${index}.level`}
                               component="div"
                               className="field-error"
                             />

@@ -8,73 +8,70 @@ const userController = {
         console.log(req.body);
         let userType = req.body.userType; //Talent o Recruiter
 
-        if(userType == 'Talent') {
+        if (userType == 'Talent') {
 
             db.Talent.findOne({
                 where: {
                     email: req.body.email
                 }
             })
-            .then((user) =>{
-                if(user){
-                    let validatePassword = bcryptjs.compareSync(req.body.password,user.password);
-                    if (validatePassword == true){
-                        delete user.dataValues.password;
-                        console.log("Bienvenido, " + req.body.email);
-                        return res.status(200).json(user);
+                .then((user) => {
+                    if (user) {
+                        let validatePassword = bcryptjs.compareSync(req.body.password, user.password);
+                        if (validatePassword == true) {
+                            delete user.dataValues.password;
+                            console.log("Bienvenido, " + req.body.email);
+                            return res.status(200).json(user);
+                        }
+                        else {
+                            console.log("Las credenciales son inválidas");
+                            return res.status(403).json(
+                                "Las credenciales son inválidas"
+                            );
+                        }
                     }
-                    else{
-                        console.log("Las credenciales son inválidas");
-                        return res.status(403).json(
-                            {message: "Las credenciales son inválidas",
-                            status: 403}
+                    else {
+                        console.log("No se encuentra el email registrado en nuestra base de datos");
+                        return res.status(404).json("No se encuentra el email registrado en nuestra base de datos"
+
                         );
                     }
-                }
-                else{
-                    console.log("No se encuentra el email registrado en nuestra base de datos");
-                    return res.status(404).json(
-                        {message: "No se encuentra el email registrado en nuestra base de datos",
-                        status: 404}
-                    );
-                }
-            })
-            .catch(function(error){
-                console.log("Ocurrió un error por favor vuelva a intentarlo " + error);
-            })    
-        } else if(userType == 'Recruiter') {
+                })
+                .catch(function (error) {
+                    console.log("Ocurrió un error por favor vuelva a intentarlo " + error);
+                })
+        } else if (userType == 'Recruiter') {
             db.Recruiter.findOne({
                 where: {
                     email: req.body.email
                 }
             })
-            .then((user) =>{
-                if(user){
-                    let validatePassword = bcryptjs.compareSync(req.body.password,user.password);
-                    if (validatePassword == true){
-                        delete user.dataValues.password;
-                        console.log("Bienvenido, " + req.body.email);
-                        return res.status(200).json(user);
+                .then((user) => {
+                    if (user) {
+                        let validatePassword = bcryptjs.compareSync(req.body.password, user.password);
+                        if (validatePassword == true) {
+                            delete user.dataValues.password;
+                            console.log("Bienvenido, " + req.body.email);
+                            return res.status(200).json(user);
+                        }
+                        else {
+                            console.log("Las credenciales son inválidas");
+                            return res.status(403).json(
+                                "Las credenciales son inválidas"
+                            );
+                        }
                     }
-                    else{
-                        console.log("Las credenciales son inválidas");
-                        return res.status(403).json(
-                            {message: "Las credenciales son inválidas",
-                            status: 403}
+                    else {
+                        console.log("No se encuentra el email registrado en nuestra base de datos");
+                        return res.status(404).json(
+                            "No se encuentra el email registrado en nuestra base de datos"
+
                         );
                     }
-                }
-                else{
-                    console.log("No se encuentra el email registrado en nuestra base de datos");
-                    return res.status(404).json(
-                        {message: "No se encuentra el email registrado en nuestra base de datos",
-                        status: 404}
-                    );
-                }
-            })
-            .catch(function(error){
-                console.log("Ocurrió un error por favor vuelva a intentarlo");
-            })   
+                })
+                .catch(function (error) {
+                    console.log("Ocurrió un error por favor vuelva a intentarlo");
+                })
         }
     },
 

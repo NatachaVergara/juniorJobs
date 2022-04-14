@@ -31,7 +31,9 @@ const talentController = {
                     id_Seniority: req.body.id_Seniority,
                     id_Experience: req.body.id_Experience,
                     id_Speciality: req.body.id_Speciality,
-                    id_Education: req.body.id_Education
+                    id_Education: req.body.id_Education,
+                    Skill: req.body.Skill,
+                    
                 }).then(talento => {
                     console.log('talento creado');
                     res.json(talento)

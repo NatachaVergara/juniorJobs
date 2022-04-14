@@ -1,27 +1,13 @@
 //import { useEffect } from "react";
 import { useUserContext } from "../../Store/UserContext";
 //import { useAxios } from "../../hooks/use-axios";
-import ProfileCard from "./ProfileCard";
+
 import ProjectsCard from "./ProjectsCard";
 import { Col, Container, Row } from "reactstrap";
-
+import TalentProfileCard from "./TalentProfileCard";
+import RecruiterProfileCard from "./RecruiterProfileCard";
 export default function Profile(props) {
-  // const {
-  //   fetchData,
-  //   response = {
-  //     data: {
-  //       name: "Leo alvez",
-  //       profile: "ninjavascript coder motherfucker",
-  //       skills: [{ name: "React", level: "beginner" }],
-  //       repository: "linkedin.com",
-  //       url: "github.com",
-  //     },
-  //   },
-  // } = useAxios();
-
-  
   const { userType, userData  } = useUserContext();
-  console.log(userData)
   //console.log("data in profile ", response.data);
 
   // useEffect(() => {
@@ -43,14 +29,27 @@ export default function Profile(props) {
 
   return (
     <Container>
-      <Row>
+      {userType === 'Talent' ? <Row>
         <Col>
-          <ProfileCard data={userData}  />
+          <TalentProfileCard data={userData}  />
         </Col>
         <Col lg="8">
           <ProjectsCard />
         </Col>
-      </Row>
+      </Row> : 
+      <Row>
+      <Col>
+        <RecruiterProfileCard data={userData}  />
+      </Col>
+      <Col lg="8">
+        <ProjectsCard />
+      </Col>
+    </Row>
+      
+      }
+
+
+      
     </Container>
   );
 }
