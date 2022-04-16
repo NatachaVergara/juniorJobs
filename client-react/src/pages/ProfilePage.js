@@ -1,57 +1,12 @@
-import { Fragment, useState } from "react";
-import { Button, Container, Row, Col } from "reactstrap";
-import Profile from "../components/Register/Profile";
-import RegisterRecruiter from "../components/Register/RegisterRecruiter";
-import RegisterTalent from "../components/Register/RegisterTalent";
-import { useAxios } from "../hooks/use-axios";
-import { useUserContext } from "../Store/UserContext";
+import React from 'react'
+import Profile from '../components/Profile/Profile'
 
-export default function ProfilePage() {
-  const [isEditing, setIsEditing] = useState(false);
-  const { id = 15, userType = null } = useUserContext();
-  const { fetchData } = useAxios();
-
-  const onEditClick = () => {
-    setIsEditing(true);
-  };
-
-  function onSubmitHandler(values) {
-    let config = {
-      method: "PUT",
-      headers: { accept: "*/*" },
-      params: { id },
-    };
-    if (userType === "Talent") {
-      config.url = `/talents/${id}`;
-      fetchData(config);
-    } else if (userType === "Recruiter") {
-      config.url = `/recruiters/${id}`;
-      fetchData(config);
-    }
-  }
-
+const ProfilePage = () => {
   return (
-    <Fragment>
-      <Profile />
-      <Container>
-        <Row>
-          <Col>
-            <Button onClick={onEditClick} color="danger">
-              Edit
-            </Button>
-          </Col>
-          {isEditing & (userType === "Talent") && (
-            <Row>
-              <RegisterTalent onSubmit={onSubmitHandler}></RegisterTalent>
-            </Row>
-          )}
-          {isEditing & (userType === "Recruiter") && (
-            <Row>
-              <RegisterRecruiter onSubmit={onSubmitHandler}></RegisterRecruiter>
-            </Row>
-          )}
-        </Row>
-      </Container>
-    </Fragment>
-  );
+   
+         <Profile/>
+   
+  )
 }
+
+export default ProfilePage

@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { Card, CardImg, CardLink, CardSubtitle, CardText, CardTitle } from "reactstrap";
 import classes from "./RecruiterProfileCard.module.scss";
 
-export default function TalentProfileCard(props) {
+export default function RecruiterProfileCard(props) {
   console.log(props.data)
   return (
     <Fragment>

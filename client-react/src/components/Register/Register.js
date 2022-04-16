@@ -17,6 +17,7 @@ const Register = () => {
   const { fetchData, response } = useAxios();
   function onSubmitHandler(values) {
     console.log("on register values:", values);
+    
     let params = {};
     if (userType === "Recruiter") {     
         params.method = "post";

@@ -6,9 +6,13 @@ import { Col, Row } from "reactstrap";
 import RegisterBtn from "../Buttons/RegisterBtn";
 // eslint-disable-next-line no-unused-vars
 import { MyCheckbox, MyTextInput } from "../../utils/inputsFunctions";
-import { urlRegex } from "../../utils/regex";
+import { emailRegex, urlRegex } from "../../utils/regex";
+import { errorAlerts} from '../../utils/errorsAlert'
+
+
 
 export default function RegisterRecruiter(props) {
+
   return (
     <>
       <h2 className="h1">Complete your recruiter profile!</h2>
@@ -26,29 +30,32 @@ export default function RegisterRecruiter(props) {
         }}
         validationSchema={Yup.object({
           name: Yup.string()
-            .min(4, "Must be 4 characters or more")
-            .required("Required"),
+            .min(2, errorAlerts[0].nameAlert)
+            .required(errorAlerts[4].requiredAlert),
           lastName: Yup.string()
-            .min(4, "Must be 4 characters or more")
-            .required("Required"),
+            .min(2, errorAlerts[0].nameAlert)
+            .required(errorAlerts[4].requiredAlert),
           password: Yup.string()
-            .min(4, "Must be 4 characters or more")
-            .required("Required"),
+            .min(4, errorAlerts[1].passwordAlert)
+            .required(errorAlerts[4].requiredAlert),
           passwordConfirmation: Yup.string()
-            .oneOf([Yup.ref('password'), null], 'Passwords must match'),
+            .oneOf([Yup.ref('password'), null], 'Passwords must match')
+             .required(errorAlerts[4].requiredAlert),
+
           email: Yup.string()
-            .email("Field should contain a valid e-mail")
+            .email(errorAlerts[2].emailAlert)
+            .matches(emailRegex)
             .max(255)
-            .required("E-mail is required"),
-            url: Yup.string()
-            .matches(urlRegex, "Url is not valid")
-            .required("Required"),
+            .required(errorAlerts[4].requiredAlert),
+          url: Yup.string()
+            .matches(urlRegex, errorAlerts[3].urlAlert)
+            .required(errorAlerts[4].requiredAlert),
           company: Yup.string()
-            .max(350, "Must be 350 characters or less")
-            .required("Required"),
+            .max(350, errorAlerts[5].textDescription)
+            .required(errorAlerts[4].requiredAlert),
           // acceptedTerms: Yup.boolean()
-          //   .required("Required")
-          //   .oneOf([true], "You must accept the terms and conditions."),
+          //   .required(errorAlerts[4].requiredAlert)
+          //   .oneOf([true], errorAlerts[6].acceptedTerms),
         })}
         onSubmit={(values, { setSubmitting }) => {
           setSubmitting(true);
@@ -62,21 +69,21 @@ export default function RegisterRecruiter(props) {
             <Row>
               <Col>
                 <MyTextInput
-                 label="Name" 
-                 name="name"
-                 type="text" />
+                  label="Name *"
+                  name="name"
+                  type="text" />
               </Col>
               <Col>
-                <MyTextInput 
-                label="Last name"
-                 name="lastName" 
-                 type="text" />
+                <MyTextInput
+                  label="Last name *"
+                  name="lastName"
+                  type="text" />
               </Col>
             </Row>
             <Row>
               <Col>
                 <MyTextInput
-                  label="E-mail"
+                  label="E-mail *"
                   name="email"
                   type="text"
                   placeholder="example@juniorjobs.com"
@@ -84,13 +91,13 @@ export default function RegisterRecruiter(props) {
               </Col>
               <Col>
                 <MyTextInput
-                  label="Password"
+                  label="Password *"
                   name="password"
                   type="password" />
               </Col>
               <Col>
                 <MyTextInput
-                  label="Password Confirmation"
+                  label="Password Confirmation *"
                   name="passwordConfirmation"
                   type="password"
                   placeholder=""
@@ -100,30 +107,30 @@ export default function RegisterRecruiter(props) {
             <Row>
               <Col>
                 <MyTextInput
-                  label="image"
+                  label="image *"
                   name="image"
                   type="url" />
               </Col>
               <Col>
                 <MyTextInput
-                  label="LinkedIn profile"
+                  label="LinkedIn profile *"
                   name="url"
                   type="url" />
               </Col>
             </Row>
             <MyTextInput
-              label="Description of company"
+              label="Description of company *"
               name="company"
               type="textarea"
               placeholder="Tell us about the company"
             />
-            {/* <MyCheckbox name="acceptedTerms">
+            {/* <MyCheckbox name="acceptedTerms *">
               {" I accept the terms and conditions"}
             </MyCheckbox> */}
-           <RegisterBtn
-            isSubmitting={isSubmitting}
-            isValid={isValid}
-           />
+            <RegisterBtn
+              isSubmitting={isSubmitting}
+              isValid={isValid}
+            />
           </Form>
         )}
       </Formik>

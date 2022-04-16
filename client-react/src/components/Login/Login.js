@@ -1,18 +1,18 @@
 import React from 'react'
 import { Field, Form, Formik } from 'formik'
-import { BsShieldLockFill } from "react-icons/bs";
+//import { BsShieldLockFill } from "react-icons/bs";
 import './Login.scss'
 
-import {usePostLogin} from '../../hooks/usePostLogin';
-//import axios from 'axios'
-// import { useNavigate } from 'react-router-dom';
-// import { postLogin } from '../../hooks/postLogin-axios';
+import { usePostLogin } from '../../hooks/usePostLogin';
+import { emailRegex} from '../../utils/regex';
+import { errorAlerts} from '../../utils/errorsAlert'
+
 function Login() {
   //const { userLogin } = useUserContext()
   const { fetchData } = usePostLogin()
 
   return (
-    <div className='formPage'>
+    <div className='formPage  mb-5 pb-5'>
 
       <Formik
         initialValues={{
@@ -20,7 +20,7 @@ function Login() {
           password: '',
           userType: ''
         }}
-
+        className=''
 
         //Validando los inputs
         validate={(values) => {
@@ -28,8 +28,8 @@ function Login() {
           //Validando el email
           if (!values.email) {
             isError.email = 'Please, enter your email'
-          } else if (!/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(values.email)) {
-            isError.email = 'El correo solo puede contener letras, números, puntos, guiones, guion bajo y @'
+          } else if (!emailRegex.test(values.email)) {
+            isError.email = errorAlerts[2].emailAlert
           }
           //Validando la contraseña
           if (!values.password) {
@@ -52,15 +52,22 @@ function Login() {
 
         {({ errors, touched }) => (
 
-          <Form className='form container mt-5 pt-5'>
+          <Form className='form container mt-5 pt-5 bt-5'>
             <div className='d-flex flex-column mb-5'>
               <h1 className='d-flex justify-content-center align-items-center'>LOGIN</h1>
               <div className='container d-flex justify-content-center align-items-center'>
                 <div className='pe-2'>
-                  <Field type="radio" name="userType" value="Recruiter" className='me-2'/>
+                  <Field
+                    type="radio"
+                    name="userType"
+                    value="Recruiter"
+                    className='me-2' />
                   as Recruiter</div>
                 <div>
-                  <Field type="radio" name="userType" value="Talent" className='me-2' />
+                  <Field type="radio"
+                    name="userType"
+                    value="Talent"
+                    className='me-2' />
                   as Talent</div>
               </div>
               {errors.userType ? <div className="form-text text-danger fs-6 ms-3">{errors.userType}</div> : null}
@@ -107,9 +114,9 @@ function Login() {
 
       </Formik>
       {/* Link para resetear la contraseña    */}
-      <span className="d-flex justify-content-center align-items-center mt-5 mb-5 pt-5">
+      {/* <span className="d-flex justify-content-center align-items-center mt-5 mb-5 pt-5">
         <BsShieldLockFill /> ¿Olvidaste tu contraseña?
-      </span>
+      </span> */}
 
 
     </div >

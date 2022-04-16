@@ -93,6 +93,7 @@ export const MyRadio = ({ label, ...props }) => {
               type="radio"
               invalid={meta.error && meta.touched}
               valid={!meta.error && meta.touched}
+             
             />
           </Container>
           {label}

@@ -5,20 +5,13 @@ import './AboutUs.scss'
 
 const AboutUs = () => {
   let us = [
-    { name: 'Brayan Tabarez', city: '', rol: 'QA', linkedin: '#', github: '#', skills: ['Tester manual'], img: '' },
-    // { name: 'Gabriel Llanez', city: '', rol: 'FrontEnd', linkedin: '#', github: '#', skills: ['Front End Development', 'HTML', 'CSS', 'JavaScript', 'React'] },
+    { name: 'Brayan Tabarez', city: 'Perimetro Urbano Pereira, Risaralda, Colombia', rol: 'QA', linkedin: 'https://www.linkedin.com/in/brayan-tabares-52a243b5/', github: '#', skills: ['Tester manual'], img: 'https://media-exp1.licdn.com/dms/image/C4E03AQFxC2bBeKV8zQ/profile-displayphoto-shrink_800_800/0/1552109847312?e=1655337600&v=beta&t=l-arRFmAjPZUhvvg3k013wSBt-dFqBAwuMXePtku00k' },
     { name: 'Gaspar Castelo', city: 'Rosario', rol: 'FrontEnd', linkedin: '#', github: 'https://github.com/GaspiCastello', skills: ['Front End Development', 'HTML', 'CSS', 'JavaScript', 'React'], img: '' },
     { name: 'Hernan García', city: '', rol: 'BackEnd', linkedin: '#', github: 'https://github.com/HernanGarcia1985', skills: ['Back End Development', 'HTML', 'CSS', 'JavaScript', 'React', 'NodeJs'], img: '' },
-    { name: 'Leonardo Alvez', city: '', rol: 'FrontEnd', linkedin: '#', github: 'https://github.com/leoalvezmdz', skills: ['Front End Development', 'HTML', 'CSS', 'JavaScript', 'React'], img: 'https://avatars.githubusercontent.com/u/77417865?v=4' },
     { name: 'Matias Mazparrotte', city: 'GBA', rol: 'FrontEnd', linkedin: 'https://www.linkedin.com/in/mat%C3%ADasmazparrotefeli%C3%BA/', github: 'https://github.com/matiasfeliu92', skills: ['Back End Development', 'HTML', 'CSS', 'JavaScript', 'React', 'NodeJs'], img: 'https://avatars.githubusercontent.com/u/88861016?v=4' },
     { name: 'Matias Semelman', city: 'CABA', rol: 'BackEnd', linkedin: 'https://www.linkedin.com/in/matias-semelman/', github: 'https://github.com/matiassemelman', skills: ['Front End Development', 'HTML', 'CSS', 'JavaScript', 'React'], img: 'https://avatars.githubusercontent.com/u/70870015?v=4' },
     { name: 'Natacha Vergara', city: 'CABA', rol: 'FrontEnd', linkedin: 'https://www.linkedin.com/in/natacha-vergara', github: 'https://github.com/NatachaVergara', skills: ['Front End Development', 'HTML', 'CSS', 'JavaScript', 'React'], img: 'https://firebasestorage.googleapis.com/v0/b/portfolio-c32fd.appspot.com/o/aboutMe%2Fimg-portfolio.jpg?alt=media&token=314824cb-ab0a-4442-bd7c-871e163d3b92' }
   ]
-
-
-
-
-
 
 
   return (
