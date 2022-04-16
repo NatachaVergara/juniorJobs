@@ -14,9 +14,6 @@ const Register = () => {
   //Traigo del context el estado usertType para poder elegir el formulario que correponde
   const { setUserType, userType } = useUserContext();
 
-  // const [isRecruiter, setIsRecruiter] = useState(undefined);
-  // const [isTalent, setIsTalent] = useState(undefined);
-  const [isSignup, setIsSignup] = useState(true);
   const { fetchData, response } = useAxios();
   function onSubmitHandler(values) {
     console.log("on register values:", values);

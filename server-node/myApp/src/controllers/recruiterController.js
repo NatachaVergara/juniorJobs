@@ -1,5 +1,4 @@
 const db = require('../database/models');
-const Recruiter = require('../database/models/Recruiter')
 const bcryptjs = require('bcryptjs');
 
 const recruiterController = {

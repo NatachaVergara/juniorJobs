@@ -1,103 +1,13 @@
 import React from "react";
-import { Formik, Form, useField } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 // import classes from "./RegisterTalent.module.css";
-import { Button, Col, Container, Input, Label, Row } from "reactstrap";
+import { Col, Row } from "reactstrap";
+import RegisterBtn from "../Buttons/RegisterBtn";
+// eslint-disable-next-line no-unused-vars
+import { MyCheckbox, MyTextInput } from "../../utils/inputsFunctions";
+import { urlRegex } from "../../utils/regex";
 
-const MyTextInput = ({ label, ...props }) => {
-  // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
-  // which we can spread on <input> and alse replace ErrorMessage entirely.
-  const [field, meta] = useField(props);
-  return (
-    <>
-      <Label htmlFor={props.id || props.name}>{label}</Label>
-      <Input
-        {...field}
-        {...props}
-        invalid={meta.error && meta.touched}
-        valid={!meta.error && meta.touched}
-      />
-      {meta.touched && meta.error ? (
-        <div className="error">{meta.error}</div>
-      ) : null}
-    </>
-  );
-};
-// const MySelect = ({ label, ...props }) => {
-//   const [field, meta] = useField(props);
-//   return (
-//     <>
-//       <Label htmlFor={props.id || props.name}>{label}</Label>
-//       <Input
-//         type="select"
-//         {...field}
-//         {...props}
-//         invalid={meta.error && meta.touched}
-//         valid={!meta.error && meta.touched}
-//       />
-//       {meta.touched && meta.error ? <p>{meta.error}</p> : null}
-//     </>
-//   );
-// };
-const MyCheckbox = ({ children, ...props }) => {
-  const [field, meta] = useField({ ...props, type: "checkbox" });
-  return (
-    <>
-      <Label>
-        <Input
-          {...field}
-          {...props}
-          type="checkbox"
-          invalid={meta.error && meta.touched}
-          valid={!meta.error && meta.touched}
-        />
-        {children}
-      </Label>
-      {meta.touched && meta.error ? (
-        <div className="error">{meta.error}</div>
-      ) : null}
-    </>
-  );
-};
-const MyRange = ({ label, ...props }) => {
-  const [field, meta] = useField({ ...props, type: "range" });
-  return (
-    <>
-      <Label htmlFor={props.id || props.name}>
-        {label}, is <b>{field.value}</b>
-      </Label>
-      <Input type="range" {...field} {...props} />
-
-      {meta.touched && meta.error ? (
-        <div className="error">{meta.error}</div>
-      ) : null}
-    </>
-  );
-};
-const MyRadio = ({ label, ...props }) => {
-  const [field, meta] = useField({ ...props, type: "radio" });
-  return (
-    <div>
-      <Label>
-        <Container>
-          <Input
-            {...field}
-            {...props}
-            type="radio"
-            invalid={meta.error && meta.touched}
-            valid={!meta.error && meta.touched}
-          />
-        </Container>
-        {label}
-      </Label>
-
-      {meta.touched && meta.error ? (
-        <div className="error">{meta.error}</div>
-      ) : null}
-    </div>
-  );
-};
-const urlRegex = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)$/
 export default function RegisterRecruiter(props) {
   return (
     <>
@@ -210,14 +120,10 @@ export default function RegisterRecruiter(props) {
             {/* <MyCheckbox name="acceptedTerms">
               {" I accept the terms and conditions"}
             </MyCheckbox> */}
-            <div>
-              <Button color="primary" disabled={isSubmitting || !isValid}>
-                Submit
-              </Button>
-              <Button color="danger" disabled={isSubmitting || !isValid}>
-                Remove this profile
-              </Button>
-            </div>
+           <RegisterBtn
+            isSubmitting={isSubmitting}
+            isValid={isValid}
+           />
           </Form>
         )}
       </Formik>
