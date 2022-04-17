@@ -1,10 +1,10 @@
 .card{
   width:50%;
-  height: 50rem;
+  height:80rem;
 }
 .card img {
   height: 25rem;
-  object-fit: cover;
+  object-fit:contain;
   object-position: top;
  
 }

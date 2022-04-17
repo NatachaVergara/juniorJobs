@@ -35,7 +35,7 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
           birthdate: data.birthdate,
           id_Seniority: data.id_Seniority,
           id_Experience: data.id_Experience,
-          id_Speciality: data.id_Speciality,
+          // id_Speciality: data.id_Speciality,
           id_Education: data.id_Education,
           // Skill: [{ name: 0, level: 0 }],
           // languages: [{ name: 0, level:0}] ,
@@ -75,10 +75,10 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
             "Must to be +18 years old"
           ),
           id_Seniority: Yup.number()
-            .oneOf([0, 1, 2, 3, 4], "Invalid seniority Type")
+            .oneOf([1, 2], "Invalid seniority Type")
             .required(errorAlerts.requiredAlert),
           id_Experience: Yup.number()
-            .oneOf([0, 1, 2, 3, 4], "Invalid experience range")
+            .oneOf([1, 2, 3, 4, 5], "Invalid experience range")
             .required(errorAlerts.requiredAlert),
           id_Speciality: Yup.number().oneOf(
             [0, 1, 2, 3, 4, 5, 6, 7],
@@ -99,7 +99,7 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
         
           values.id_Seniority = +values.id_Seniority;
           values.id_Education = +values.id_Education;
-          values.id_Speciality = +values.id_Speciality;
+          // values.id_Speciality = +values.id_Speciality;
           values.id_Experience = +values.id_Experience;
 
           // values.Skill = values.Skill.map((skill) => ({
@@ -196,12 +196,11 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
             <Row>
               <Col>
                 <MySelect label="Seniority *" name="id_Seniority">
-                  <option value={0}>Select one of the list</option>
                   <option value={1}>Trainee</option>
                   <option value={2}>Junior</option>
                 </MySelect>
               </Col>
-              <Col>
+              {/* <Col>
                 <MySelect label="Speciality if apply *" name="id_Speciality">
                   <option value={0}>Aritificial intelligence</option>
                   <option value={1}>Games</option>
@@ -210,7 +209,7 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
                   <option value={4}>Networks</option>
                   <option value={5}>Computer-Human Interface</option>
                 </MySelect>
-              </Col>
+              </Col> */}
             </Row>
             <Label className='mt-3 mb-0'>Languages and skills *</Label>
             <Row>
@@ -341,7 +340,6 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
               <MySelect
                 label="Education *"
                 name="id_Education">
-
                 <option value={1}>Bootcamp</option>
                 <option value={2}>Curso</option>
                 <option value={3}>Ingenieria</option>
@@ -363,7 +361,7 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
                     label="0-2 months"
                     name="id_Experience"
                     type="radio"
-                    value="0"
+                    value="1"
                   />
                 </Col>
                 <Col>
@@ -371,7 +369,7 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
                     label="2-6 months"
                     name="id_Experience"
                     type="radio"
-                    value="1"
+                    value="2"
                   />
                 </Col>
                 <Col>
@@ -379,7 +377,7 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
                     label="6-12 months"
                     name="id_Experience"
                     type="radio"
-                    value="2"
+                    value="3"
                   />
                 </Col>
                 <Col>
@@ -387,7 +385,7 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
                     label="1-2 yeas"
                     name="id_Experience"
                     type="radio"
-                    value="3"
+                    value="4"
                   />
                 </Col>
                 <Col>
@@ -395,7 +393,7 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
                     label="2-4 years"
                     name="id_Experience"
                     type="radio"
-                    value="4"
+                    value="5"
                   />
                 </Col>
               </Row>
@@ -405,11 +403,10 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
             </MyCheckbox> */}
             <RegisterBtn
               isSubmitting={isSubmitting}
-              isValid={isValid} />
+              isValid={isValid}
+              id={data.id} />
           </Form>
         )}
-
-
       </Formik>
     </>
   );

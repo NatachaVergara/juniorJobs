@@ -37,8 +37,9 @@ export default function RegisterTalent(props) {
           id_Experience: 0,
           id_Speciality: 1,
           id_Education: 1,
-          Skill: [{ name: 0, level: 0 }],
-          // languages: [{ name: 0, level:0}] ,
+          // id_Remote: 1,
+          // Skill: [{ name: 0, level: 0 }],
+          //languages: [{ name: 1, level:1}] ,
           profile: "",
           // acceptedTerms: false,
         }}
@@ -75,19 +76,21 @@ export default function RegisterTalent(props) {
             "Must to be +18 years old"
           ),
           id_Seniority: Yup.number()
-            .oneOf([0, 1, 2, 3, 4], "Invalid seniority Type")
+            .oneOf([1, 2], "Invalid seniority Type")
             .required(errorAlerts.requiredAlert),
           id_Experience: Yup.number()
-            .oneOf([0, 1, 2, 3, 4], "Invalid experience range")
+            .oneOf([1, 2, 3, 4, 5], "Invalid experience range")
             .required(errorAlerts.requiredAlert),
           id_Speciality: Yup.number().oneOf(
             [0, 1, 2, 3, 4, 5, 6, 7],
             "Invalid speciality Type"
-          ),
+          ).required(errorAlerts[4].requiredAlert),
           id_Education: Yup.number().oneOf(
             [1, 2, 3, 4, 5],
             "Invalid Education Type"
-          ),
+          ).required(errorAlerts[4].requiredAlert),
+          // id_Remote: Yup.number().oneOf(
+          //   [1, 2, 3]).required(errorAlerts[4].requiredAlert),
           profile: Yup.string()
             .max(350, errorAlerts[5].textDescription)
             .required(errorAlerts[4].requiredAlert),
@@ -97,10 +100,11 @@ export default function RegisterTalent(props) {
         })}
         onSubmit={(values, { setSubmitting }) => {
           setSubmitting(true);
-          // values.id_Seniority = +values.id_Seniority;
-          // values.id_Education = +values.id_Education;
+          values.id_Seniority = +values.id_Seniority;
+          values.id_Education = +values.id_Education;
           // values.id_Speciality = +values.id_Speciality;
-          // values.id_Experience = +values.id_Experience;
+          values.id_Experience = +values.id_Experience;
+          // values.id_Remote = +values.id_Remote;
           // values.Skill = values.Skill.map((skill) => ({
           //   name: +skill.name,
           //   level: +skill.level,
@@ -109,12 +113,12 @@ export default function RegisterTalent(props) {
           //   name: +language.level,
           //   level: +language.level,
           // }))
-          console.log(values); 
+          console.log(values);
           props.onSubmit(values);
           setSubmitting(false);
         }}
 
-      > 
+      >
         {({ isSubmitting, isValid, values }) => (
           <Form>
             <Row>
@@ -186,24 +190,24 @@ export default function RegisterTalent(props) {
             <Row>
               <Col>
                 <MySelect label="Seniority *" name="id_Seniority">
-                  <option value={0}>Select one of the list</option>
+                  {/* <option value={0}>Select one of the list</option> */}
                   <option value={1}>Trainee</option>
                   <option value={2}>Junior</option>
                 </MySelect>
               </Col>
               <Col>
-                <MySelect label="Speciality if apply *" name="id_Speciality">
+                {/* <MySelect label="Speciality if apply *" name="id_Speciality">
                   <option value={0}>Aritificial intelligence</option>
                   <option value={1}>Games</option>
                   <option value={2}>Fintech</option>
                   <option value={3}>Data science</option>
                   <option value={4}>Networks</option>
                   <option value={5}>Computer-Human Interface</option>
-                </MySelect>
+                </MySelect> */}
               </Col>
             </Row>
             <Label className='mt-3 mb-0'>Languages and skills *</Label>
-            <Row>
+            {/* <Row>
               <FieldArray name="Skill">
                 {({ insert, remove, push }) => (
                   <div>
@@ -264,7 +268,7 @@ export default function RegisterTalent(props) {
                   </div>
                 )}
               </FieldArray>
-            </Row>
+            </Row> */}
             {/* <Row>
               <FieldArray name="languages">
                 {({ insert, remove, push }) => (
@@ -275,12 +279,12 @@ export default function RegisterTalent(props) {
                           <div className="col">
                             <label htmlFor={`languages.${index}.name`}>Name *</label>
                             <Field name={`languages.${index}.name`} as={MySelect}>
-                              <option value={0}>English</option>
-                              <option value={1}>Spanish</option>
+                              <option value={1}>English</option>
                               <option value={2}>French</option>
                               <option value={3}>German</option>
                               <option value={4}>Italian</option>
                               <option value={5}>Portugues</option>
+                              <option value={6}>Spanish</option>
                               
 
                             </Field>
@@ -331,7 +335,6 @@ export default function RegisterTalent(props) {
               <MySelect
                 label="Education *"
                 name="id_Education">
-
                 <option value={1}>Bootcamp</option>
                 <option value={2}>Curso</option>
                 <option value={3}>Ingenieria</option>
@@ -353,7 +356,7 @@ export default function RegisterTalent(props) {
                     label="0-2 months"
                     name="id_Experience"
                     type="radio"
-                    value="0"
+                    value="1"
                   />
                 </Col>
                 <Col>
@@ -361,7 +364,7 @@ export default function RegisterTalent(props) {
                     label="2-6 months"
                     name="id_Experience"
                     type="radio"
-                    value="1"
+                    value="2"
                   />
                 </Col>
                 <Col>
@@ -369,7 +372,7 @@ export default function RegisterTalent(props) {
                     label="6-12 months"
                     name="id_Experience"
                     type="radio"
-                    value="2"
+                    value="3"
                   />
                 </Col>
                 <Col>
@@ -377,7 +380,7 @@ export default function RegisterTalent(props) {
                     label="1-2 yeas"
                     name="id_Experience"
                     type="radio"
-                    value="3"
+                    value="4"
                   />
                 </Col>
                 <Col>
@@ -385,11 +388,43 @@ export default function RegisterTalent(props) {
                     label="2-4 years"
                     name="id_Experience"
                     type="radio"
-                    value="4"
+                    value="5"
                   />
                 </Col>
               </Row>
+
             </Card>
+
+            {/* <Label>Im willing to work *</Label>
+            <Card>
+              <Row>
+                <Col>
+                  <MyRadio
+                    label='Hibrid'
+                    name='id_Remote'
+                    type='radio'
+                    value='1'
+                  />
+                </Col>
+                <Col>
+                  <MyRadio
+                    label='Presencial'
+                    name='id_Remote'
+                    type='radio'
+                    value='2'
+                  />
+                </Col>
+                <Col>
+                  <MyRadio
+                    label='Remote'
+                    name='id_Remote'
+                    type='radio'
+                    value='3'
+                  />
+                </Col>
+
+              </Row>
+            </Card> */}
             {/* <MyCheckbox name="acceptedTerms">
               {" I accept the terms and conditions"}
             </MyCheckbox> */}

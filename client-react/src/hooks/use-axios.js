@@ -15,11 +15,11 @@ export const useAxios = () => {
       .then((res) => {
        if (userType === 'Talent' && isUser) {
           console.log(res.data)
-          swal(res.data.message);
+          swal(`Your profile has been updated`);
           navigate('/profile')
         } else if (userType === 'Recruiter' && isUser) {
           console.log(res.data)
-          swal(res.data.message);          
+          swal(`Your profile has been updated`);  
           navigate('/profile')
         } else {
           swal(`Welcome, you can now login to your account`)
