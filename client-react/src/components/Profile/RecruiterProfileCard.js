@@ -3,7 +3,7 @@ import { Card, CardImg, CardLink, CardSubtitle, CardText, CardTitle } from "reac
 import classes from "./RecruiterProfileCard.module.scss";
 
 export default function RecruiterProfileCard(props) {
-  console.log(props.data)
+ 
   return (
     <Fragment>
       <Card body color="secondary" inverse className={classes.card}>

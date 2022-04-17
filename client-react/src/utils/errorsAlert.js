@@ -1,7 +1,6 @@
 export const errorAlerts = [
     {
-        nameAlert: 'Must be 2 characters or more',
-        
+        nameAlert: 'Must be 2 characters or more'
     },
     {
         passwordAlert: 'Must be 4 characters or more'
@@ -15,9 +14,9 @@ export const errorAlerts = [
     {
         requiredAlert: 'Required'
     },
-    
+
     {
-        textDescription:'Must be 350 characters or less'
+        textDescription: 'Must be 350 characters or less'
     },
     {
         acceptedTerms: 'You must accept the terms and conditions.'

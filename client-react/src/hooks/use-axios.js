@@ -2,20 +2,40 @@ import axios from "axios";
 import swal from "sweetalert";
 import { useState, useCallback } from "react";
 import { useNavigate } from 'react-router-dom';
+import { useUserContext } from "../Store/UserContext";
 axios.defaults.baseURL = "http://localhost:3002";
 
 export const useAxios = () => {
   const [response, setResponse] = useState(undefined);
+  const { userType, isUser} = useUserContext()
   let navigate = useNavigate()
   const fetchData = useCallback((params) => {
     axios
       .request(params)
       .then((res) => {
-        console.log(res, "res on use-axios");
-        setResponse(res.data);
-        navigate('/login')
+       if (userType === 'Talent' && isUser) {
+          console.log(res.data)
+          swal(res.data.message);
+          navigate('/profile')
+        } else if (userType === 'Recruiter' && isUser) {
+          console.log(res.data)
+          swal(res.data.message);          
+          navigate('/profile')
+        } else {
+          swal(`Welcome, you can now login to your account`)
+          console.log(res.data)
+          setResponse(res.data);
+          navigate('/login')
+        }
+
+
+
+
+
 
       })
+
+
       .catch(function (error) {
         console.log(error.response, error.message);
         if (error.response) {

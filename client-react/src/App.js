@@ -26,19 +26,7 @@ function App() {
           <Route path="/resources" element={<ResourcesPage />} />
           <Route path="/faq" element={<FaqPage />} />
 
-          {/* {authCtx.isLoggedIn && (
-        <>
-        <Route path="*" element={<Navigate replace to="/home" />} />
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/add-recipe" element={<SearchPage />} />
-        </>
-        )}
-        {!authCtx.isLoggedIn && (
-          <>
-          <Route path="*" element={<Navigate replace to="/auth" />} />
-          <Route path="/auth" element={<AuthPage />} />
-          </>
-        )} */}
+       
         </Routes>
       </Layout>
     </UserContextProvider>

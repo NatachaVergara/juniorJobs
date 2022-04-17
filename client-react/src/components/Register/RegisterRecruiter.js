@@ -57,6 +57,8 @@ export default function RegisterRecruiter(props) {
           //   .required(errorAlerts[4].requiredAlert)
           //   .oneOf([true], errorAlerts[6].acceptedTerms),
         })}
+
+        
         onSubmit={(values, { setSubmitting }) => {
           setSubmitting(true);
           console.log(values);
