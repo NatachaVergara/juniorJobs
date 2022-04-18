@@ -7,16 +7,15 @@ axios.defaults.baseURL = "http://localhost:3002";
 
 export const useAxios = () => {
   const [response, setResponse] = useState(undefined);
-  const { userType, isUser} = useUserContext()
+  const { userType, isUser, setUserData} = useUserContext()
   let navigate = useNavigate()
   const fetchData = useCallback((params) => {
     axios
       .request(params)
       .then((res) => {
        if (userType === 'Talent' && isUser) {
-          console.log(res.data)
           swal(`Your profile has been updated`);
-          navigate('/profile')
+          
         } else if (userType === 'Recruiter' && isUser) {
           console.log(res.data)
           swal(`Your profile has been updated`);  

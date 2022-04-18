@@ -37,9 +37,8 @@ export default function RegisterTalent(props) {
           id_Experience: 0,
           id_Speciality: 1,
           id_Education: 1,
-          // id_Remote: 1,
           // Skill: [{ name: 0, level: 0 }],
-          //languages: [{ name: 1, level:1}] ,
+          //Language: [{ name: 1, level:1}] ,
           profile: "",
           // acceptedTerms: false,
         }}
@@ -89,8 +88,14 @@ export default function RegisterTalent(props) {
             [1, 2, 3, 4, 5],
             "Invalid Education Type"
           ).required(errorAlerts[4].requiredAlert),
-          // id_Remote: Yup.number().oneOf(
-          //   [1, 2, 3]).required(errorAlerts[4].requiredAlert),
+          Skill: Yup.number().oneOf(
+            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+            "Invalid Skill Type"
+          ).required(errorAlerts[4].requiredAlert),
+          Language: Yup.number().oneOf(
+            [1, 2, 3, 4, 5, 6],
+            "Invalid Skill Type"
+          ).required(errorAlerts[4].requiredAlert),
           profile: Yup.string()
             .max(350, errorAlerts[5].textDescription)
             .required(errorAlerts[4].requiredAlert),
@@ -197,12 +202,11 @@ export default function RegisterTalent(props) {
               </Col>
               <Col>
                 <MySelect label="Speciality if apply *" name="id_Speciality">
-                  <option value={0}>Aritificial intelligence</option>
-                  <option value={1}>Games</option>
-                  <option value={2}>Fintech</option>
-                  <option value={3}>Data science</option>
-                  <option value={4}>Networks</option>
-                  <option value={5}>Computer-Human Interface</option>
+                  <option value={1}>Backend</option>
+                  <option value={2}>Data Analytis</option>
+                  <option value={3}>Data Scientis</option>
+                  {/* <option value={4}>Networks</option> */}
+                  {/* <option value={5}>Computer-Human Interface</option> */}
                 </MySelect>
               </Col>
             </Row>
@@ -223,6 +227,20 @@ export default function RegisterTalent(props) {
                               <option value={4}>CSS</option>
                               <option value={5}>Express</option>
                               <option value={6}>Git</option>
+                              <option value={7}>Go</option>
+                              <option value={8}>HTML</option>
+                              <option value={9}>Java</option>
+                              <option value={10}>JavaScript</option>
+                              <option value={11}>MongoDB</option>
+                              <option value={12}>NodeJS</option>
+                              <option value={13}>PHP</option>
+                              <option value={14}>POO</option>
+                              <option value={15}>Python</option>
+                              <option value={16}>ReactJS</option>
+                              <option value={17}>Remix</option>
+                              <option value={18}>Sequelize</option>
+                              <option value={19}>SQL</option>
+                              <option value={20}>TypeScript</option>
 
 
                             </Field>

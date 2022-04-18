@@ -11,8 +11,6 @@ import TalentUpdateForm from "./TalentUpdateForm";
 
 
 
-
-
 const Profile = () =>{
     const [isEditing, setIsEditing] = useState(false);
     const { userID, userType, userData } = useUserContext();

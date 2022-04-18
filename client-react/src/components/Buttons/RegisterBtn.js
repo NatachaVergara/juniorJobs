@@ -33,7 +33,8 @@ const RegisterBtn = ({isSubmitting , isValid, id }) => {
       if (result) {
         Swal(
           'Deleted!',
-          `Your profile ${userID} has been deleted`          
+          `Your profile ${userID} has been deleted`     
+               
         )
       }
     })

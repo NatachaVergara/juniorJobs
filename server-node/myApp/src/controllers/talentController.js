@@ -74,12 +74,12 @@ const talentController = {
                         
                     }, { where: { id: req.params.id } })
                         .then(newTalent => {
-                            console.log('Se actualizó el talento');
+                            console.log('Se actualizó el talento', talento);
                             return res.status(201).json(
                                 {
                                     message: 'Se actualizó el talento',
                                     talento
-
+                                    
                                 });
                         })
                         .catch(function (error) {
