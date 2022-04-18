@@ -6,6 +6,7 @@ const RegisterBtn = ({isSubmitting , isValid, id }) => {
   const {isUser, userID} = useUserContext()
 
 
+
   const onRemove = () => {
     Swal({
       title: 'Are you sure?',
@@ -33,8 +34,7 @@ const RegisterBtn = ({isSubmitting , isValid, id }) => {
       if (result) {
         Swal(
           'Deleted!',
-          `Your profile ${userID} has been deleted`     
-               
+          `Your profile ${userID} has been deleted`          
         )
       }
     })
@@ -52,7 +52,7 @@ const RegisterBtn = ({isSubmitting , isValid, id }) => {
      disabled={isSubmitting || !isValid}>
       Submit
     </Button>
-    {isUser ?  <Button color="danger" type='reset' disabled={isSubmitting || !isValid} onClick={onRemove}>
+    {isUser ?  <Button color="danger" type='reset' disabled={isSubmitting || !isValid} onClick={onRemove} >
       Remove this profile
     </Button>: null}
    

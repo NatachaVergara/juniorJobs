@@ -8,11 +8,11 @@ import RegisterBtn from "../Buttons/RegisterBtn";
 import { MyCheckbox, MyTextInput } from "../../utils/inputsFunctions";
 import { emailRegex, urlRegex } from "../../utils/regex";
 import { errorAlerts} from '../../utils/errorsAlert'
-
+import {useCRUD} from '../../services/useCRUD'
 
 
 export default function RegisterRecruiter(props) {
-
+  const {onCreateSubmit}  = useCRUD()
   return (
     <>
       <h2 className="h1">Complete your recruiter profile!</h2>
@@ -26,7 +26,8 @@ export default function RegisterRecruiter(props) {
           company: "",
           image: "",
           url: "",
-          // acceptedTerms: false,
+          register: true,
+          acceptedTerms: false,
         }}
         validationSchema={Yup.object({
           name: Yup.string()
@@ -53,16 +54,16 @@ export default function RegisterRecruiter(props) {
           company: Yup.string()
             .max(350, errorAlerts[5].textDescription)
             .required(errorAlerts[4].requiredAlert),
-          // acceptedTerms: Yup.boolean()
-          //   .required(errorAlerts[4].requiredAlert)
-          //   .oneOf([true], errorAlerts[6].acceptedTerms),
+          acceptedTerms: Yup.boolean()
+            .required(errorAlerts[4].requiredAlert)
+            .oneOf([true], errorAlerts[6].acceptedTerms),
         })}
 
         
         onSubmit={(values, { setSubmitting }) => {
           setSubmitting(true);
           console.log(values);
-          props.onSubmit(values);
+          onCreateSubmit(values);
           setSubmitting(false);
         }}
       >
@@ -126,12 +127,12 @@ export default function RegisterRecruiter(props) {
               type="textarea"
               placeholder="Tell us about the company"
             />
-            {/* <MyCheckbox name="acceptedTerms *">
-              {" I accept the terms and conditions"}
-            </MyCheckbox> */}
+            <MyCheckbox name="acceptedTerms *">
+            {"  "} I accept the terms and conditions
+            </MyCheckbox>
             <RegisterBtn
               isSubmitting={isSubmitting}
-              isValid={isValid}
+              isValid={!isValid}
             />
           </Form>
         )}

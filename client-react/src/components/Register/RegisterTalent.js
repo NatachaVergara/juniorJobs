@@ -13,11 +13,14 @@ import RegisterBtn from "../Buttons/RegisterBtn";
 import { MyCheckbox, MyRadio, MySelect, MyTextInput } from "../../utils/inputsFunctions";
 import { emailRegex, phoneRegex, urlRegex } from "../../utils/regex";
 import { errorAlerts } from '../../utils/errorsAlert'
+import {useCRUD} from '../../services/useCRUD'
+
+
 //import { useUserContext } from "../../Store/UserContext";
 //import SkillsArray from "./SkillsArrayField";
 
 export default function RegisterTalent(props) {
-  //const { userID  } = useUserContext();
+  const {onCreateSubmit}  = useCRUD()
   return (
     <>
       <h1 className="h1">Complete your talent profile!</h1>
@@ -40,7 +43,9 @@ export default function RegisterTalent(props) {
           // Skill: [{ name: 0, level: 0 }],
           //Language: [{ name: 1, level:1}] ,
           profile: "",
-          // acceptedTerms: false,
+          register: true,
+          acceptedTerms: false,
+          
         }}
         validationSchema={Yup.object({
           name: Yup.string()
@@ -73,13 +78,14 @@ export default function RegisterTalent(props) {
           birthdate: Yup.date().max(
             new Date(new Date() - 599616000000),
             "Must to be +18 years old"
+           
           ),
           id_Seniority: Yup.number()
             .oneOf([1, 2], "Invalid seniority Type")
-            .required(errorAlerts.requiredAlert),
+            .required(),
           id_Experience: Yup.number()
             .oneOf([1, 2, 3, 4, 5], "Invalid experience range")
-            .required(errorAlerts.requiredAlert),
+            .required(),
           id_Speciality: Yup.number().oneOf(
             [0, 1, 2, 3, 4, 5, 6, 7],
             "Invalid speciality Type"
@@ -88,20 +94,20 @@ export default function RegisterTalent(props) {
             [1, 2, 3, 4, 5],
             "Invalid Education Type"
           ).required(errorAlerts[4].requiredAlert),
-          Skill: Yup.number().oneOf(
-            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
-            "Invalid Skill Type"
-          ).required(errorAlerts[4].requiredAlert),
-          Language: Yup.number().oneOf(
-            [1, 2, 3, 4, 5, 6],
-            "Invalid Skill Type"
-          ).required(errorAlerts[4].requiredAlert),
+          // Skill: Yup.number().oneOf(
+          //   [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+          //   "Invalid Skill Type"
+          // ).required(errorAlerts[4].requiredAlert),
+          // Language: Yup.number().oneOf(
+          //   [1, 2, 3, 4, 5, 6],
+          //   "Invalid Skill Type"
+          // ).required(errorAlerts[4].requiredAlert),
           profile: Yup.string()
             .max(350, errorAlerts[5].textDescription)
             .required(errorAlerts[4].requiredAlert),
-          // acceptedTerms: Yup.boolean()
-          //   .required(errorAlerts[4].requiredAlert)
-          //   .oneOf([true], errorAlerts[6].acceptedTerms),
+          acceptedTerms: Yup.boolean()
+            .required(errorAlerts[4].requiredAlert)
+            .oneOf([true], errorAlerts[6].acceptedTerms),
         })}
         onSubmit={(values, { setSubmitting }) => {
           setSubmitting(true);
@@ -119,7 +125,7 @@ export default function RegisterTalent(props) {
           //   level: +language.level,
           // }))
           console.log(values);
-          props.onSubmit(values);
+          onCreateSubmit(values);
           setSubmitting(false);
         }}
 
@@ -172,6 +178,14 @@ export default function RegisterTalent(props) {
                   type="text"
                   placeholder="+54 342 6 156 014"
                 />
+              </Col>              
+            </Row>
+            <Row>
+            <Col>
+                <MyTextInput
+                  label="image *"
+                  name="image"
+                  type="url" />
               </Col>
             </Row>
             <Row>
@@ -201,13 +215,13 @@ export default function RegisterTalent(props) {
                 </MySelect>
               </Col>
               <Col>
-                <MySelect label="Speciality if apply *" name="id_Speciality">
+                {/* <MySelect label="Speciality if apply *" name="id_Speciality">
                   <option value={1}>Backend</option>
                   <option value={2}>Data Analytis</option>
                   <option value={3}>Data Scientis</option>
-                  {/* <option value={4}>Networks</option> */}
-                  {/* <option value={5}>Computer-Human Interface</option> */}
-                </MySelect>
+                  <option value={4}>Networks</option>
+                  <option value={5}>Computer-Human Interface</option>
+                </MySelect> */}
               </Col>
             </Row>
             <Label className='mt-3 mb-0'>Languages and skills *</Label>
@@ -410,48 +424,13 @@ export default function RegisterTalent(props) {
                   />
                 </Col>
               </Row>
-
-            </Card>
-
-            {/* <Label>Im willing to work *</Label>
-            <Card>
-              <Row>
-                <Col>
-                  <MyRadio
-                    label='Hibrid'
-                    name='id_Remote'
-                    type='radio'
-                    value='1'
-                  />
-                </Col>
-                <Col>
-                  <MyRadio
-                    label='Presencial'
-                    name='id_Remote'
-                    type='radio'
-                    value='2'
-                  />
-                </Col>
-                <Col>
-                  <MyRadio
-                    label='Remote'
-                    name='id_Remote'
-                    type='radio'
-                    value='3'
-                  />
-                </Col>
-
-              </Row>
-            </Card> */}
-            {/* <MyCheckbox name="acceptedTerms">
-              {" I accept the terms and conditions"}
-            </MyCheckbox> */}
+            </Card>            
+            <MyCheckbox name="acceptedTerms">
+            {"  "} I accept the terms and conditions
+            </MyCheckbox>
             <RegisterBtn
               isSubmitting={isSubmitting}
-              isValid={isValid} />
-
-
-
+              isValid={!isValid} />
 
           </Form>
         )}

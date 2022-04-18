@@ -14,24 +14,7 @@ const Register = () => {
   //Traigo del context el estado usertType para poder elegir el formulario que correponde
   const { setUserType, userType } = useUserContext();
 
-  const { fetchData, response } = useAxios();
-  function onSubmitHandler(values) {
-    console.log("on register values:", values);
-    
-    let params = {};
-    if (userType === "Recruiter") {     
-        params.method = "post";
-        params.url = "/recruiters";
-        params.header = {'Content-type': 'application/x-www-form-urlencoded'};
-        params.data =  values
-    } else {      
-        params.method = "post";
-        params.url = "/talents";
-        params.header = {'Content-type': 'application/x-www-form-urlencoded'};
-        params.data =  values
-    }
-    fetchData(params);
-  }
+
 
   const formTalento = () => {
     setUserType("Talent");
@@ -76,10 +59,10 @@ const Register = () => {
       </div>
       <Container>
         {userType === "Recruiter" ? (
-          <RegisterRecruiter onSubmit={onSubmitHandler}></RegisterRecruiter>
+          <RegisterRecruiter ></RegisterRecruiter>
         ) : null}
         {userType === "Talent" ? (
-          <RegisterTalent onSubmit={onSubmitHandler}></RegisterTalent>
+          <RegisterTalent ></RegisterTalent>
         ) : null}
       </Container>
       <Link
