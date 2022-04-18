@@ -196,14 +196,14 @@ export default function RegisterTalent(props) {
                 </MySelect>
               </Col>
               <Col>
-                {/* <MySelect label="Speciality if apply *" name="id_Speciality">
+                <MySelect label="Speciality if apply *" name="id_Speciality">
                   <option value={0}>Aritificial intelligence</option>
                   <option value={1}>Games</option>
                   <option value={2}>Fintech</option>
                   <option value={3}>Data science</option>
                   <option value={4}>Networks</option>
                   <option value={5}>Computer-Human Interface</option>
-                </MySelect> */}
+                </MySelect>
               </Col>
             </Row>
             <Label className='mt-3 mb-0'>Languages and skills *</Label>

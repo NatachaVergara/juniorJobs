@@ -20,7 +20,7 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
  
   return (
     <>
-      <h1 className="h1">Update your profile!</h1>
+      <h1 className="h1">Edit your profile!</h1>
       <Formik
         initialValues={{
           name: data.name,

@@ -15,7 +15,7 @@ const RecruiterUpdateForm = ({data, onSubmit, setIsEditing}) => {
  const {setUserData} = useUserContext()
     return (
         <>
-          <h2 className="h1">Update your profile!</h2>
+          <h2 className="h1">Edit your profile!</h2>
           <Formik
             initialValues={{
               name: data.name,
