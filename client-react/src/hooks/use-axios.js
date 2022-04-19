@@ -1,45 +1,27 @@
 import axios from "axios";
+import { useState, useCallback,useEffect } from "react";
 import swal from "sweetalert";
-import { useState, useCallback } from "react";
-import { useNavigate } from 'react-router-dom';
-import { useUserContext } from "../Store/UserContext";
-axios.defaults.baseURL = "http://localhost:3002";
+
+axios.defaults.baseURL = "https://api.spoonacular.com";
 
 export const useAxios = () => {
   const [response, setResponse] = useState(undefined);
-  const { userType, isUser} = useUserContext()
-  let navigate = useNavigate()
+
   const fetchData = useCallback((params) => {
-    axios
-      .request(params)
+    axios.request(params)
       .then((res) => {
-       if (userType === 'Talent' && isUser) {
-          console.log(res.data)
-          swal(`Your profile has been updated`);
-          navigate('/profile')
-        } else if (userType === 'Recruiter' && isUser) {
-          console.log(res.data)
-          swal(`Your profile has been updated`);  
-          navigate('/profile')
-        } else {
-          swal(`Welcome, you can now login to your account`)
-          console.log(res.data)
-          setResponse(res.data);
-          navigate('/login')
-        }
-
+          // console.log(res,'res on use-axios')
+        setResponse(res.data);
       })
-
-
       .catch(function (error) {
-        console.log(error.response, error.message);
+        console.log(error.response,error.message)
         if (error.response) {
           // The request was made and the server responded with a status code
           // that falls out of the range of 2xx
           console.log(error.response.data);
           console.log(error.response.status);
           console.log(error.response.headers);
-          return swal(error.response.data.message, "from database", "warning");
+          return swal(error.response.data.message, "from spoonacular", "warning");
         } else if (error.request) {
           // The request was made but no response was received
           // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
@@ -49,8 +31,7 @@ export const useAxios = () => {
           // Something happened in setting up the request that triggered an Error
           return swal("Last Error", error.message);
         }
-      });
-  }, [navigate]);
+      })
+  },[]);
 
-  return { response, fetchData };
-};
+  return {response,fetchData};

@@ -13,8 +13,8 @@ import { useUserContext } from "../../Store/UserContext";
 const Register = () => {
   //Traigo del context el estado usertType para poder elegir el formulario que correponde
   const { setUserType, userType } = useUserContext();
-
   const { fetchData, response } = useAxios();
+
   function onSubmitHandler(values) {
     console.log("on register values:", values);
 
