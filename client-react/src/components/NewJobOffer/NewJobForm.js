@@ -1,12 +1,14 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import React, { useState } from "react";
 import { Container } from "reactstrap";
+import { useAxios } from "../../hooks/use-axios";
 import { useUserContext } from "../../Store/UserContext";
 import "./NewJobForm.scss";
 
 const NewJobForm = () => {
+  const { fetchData, response } = useAxios();
   const { userID } = useUserContext();
-  const [formularioEnviado, cambiarFormularioEnviado] = useState(false);
+  const [sendingForm, setSendingForm] = useState(false);
   return (
     <Container>
       <Formik
@@ -15,20 +17,27 @@ const NewJobForm = () => {
           description: "",
           location: "",
           id_Recruiter: userID,
-          id_Schedule: 0,
-          id_Remote: 0,
-          id_Talent: 0,
-          id_Seniority: 0,
-          id_Experience: 0,
-          id_Speciality: 0,
+          id_Talent: null,
+          id_Schedule: 1,
+          id_Remote: 1,
+          id_Seniority: 1,
+          id_Experience: 1,
+          id_Speciality: 1,
           //   jobArea: 1,
           //   checked: [],
         }}
         onSubmit={(values, { resetForm }) => {
           resetForm();
           console.log(values);
-          cambiarFormularioEnviado(true);
-          setTimeout(() => cambiarFormularioEnviado(false), 3000);
+          const config = {
+            method: "P",
+            url: "/jobOffers",
+            data: values,
+            header: { "Content-type": "application/json" },
+          };
+          fetchData(config);
+          setSendingForm(true);
+          setTimeout(() => setSendingForm(false), 3000);
         }}
       >
         {() => (
@@ -104,14 +113,14 @@ const NewJobForm = () => {
               </Field>
             </div>
 
-            {!formularioEnviado && (
+            {!sendingForm && (
               <div className="btnContainer">
                 <button type="submit" className="publishButton">
                   Publicar
                 </button>
               </div>
             )}
-            {formularioEnviado && (
+            {sendingForm && (
               <p className="ofertaPublicada">Oferta publicada!</p>
             )}
           </Form>
