@@ -1,17 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import './custom.scss';
-import './index.scss';
+import "./custom.scss";
+import "./index.scss";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-
+import { BrowserRouter } from "react-router-dom";
+import UserContextProvider from "./Store/UserContext";
 
 ReactDOM.render(
+  <UserContextProvider>
+    <BrowserRouter>
+      <React.StrictMode>
 
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+        <App />
+
+      </React.StrictMode>
+    </BrowserRouter>
+  </UserContextProvider>,
   document.getElementById("root")
 );
 

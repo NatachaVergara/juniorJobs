@@ -1,8 +1,9 @@
 import axios from "axios";
 import swal from "sweetalert";
 import { useState, useCallback } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../Store/UserContext";
+
 axios.defaults.baseURL = "http://localhost:3002";
 
 export const useAxios = () => {

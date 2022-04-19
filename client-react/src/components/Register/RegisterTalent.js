@@ -1,26 +1,24 @@
 import React from "react";
-import {
-  Formik,
-  Form,
-  FieldArray,
-  Field,
-  ErrorMessage,
-} from "formik";
+import { Formik, Form, FieldArray, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Button, Card, Col, Label, Row } from "reactstrap";
 import RegisterBtn from "../Buttons/RegisterBtn";
 // eslint-disable-next-line no-unused-vars
-import { MyCheckbox, MyRadio, MySelect, MyTextInput } from "../../utils/inputsFunctions";
+import {
+  MyCheckbox,
+  MyRadio,
+  MySelect,
+  MyTextInput,
+} from "../../utils/inputsFunctions";
 import { emailRegex, phoneRegex, urlRegex } from "../../utils/regex";
-import { errorAlerts } from '../../utils/errorsAlert'
-import {useCRUD} from '../../services/useCRUD'
-
+import { errorAlerts } from "../../utils/errorsAlert";
+import { useCRUD } from "../../services/useCRUD";
 
 //import { useUserContext } from "../../Store/UserContext";
 //import SkillsArray from "./SkillsArrayField";
 
 export default function RegisterTalent(props) {
-  const {onCreateSubmit}  = useCRUD()
+  const { onCreateSubmit } = useCRUD();
   return (
     <>
       <h1 className="h1">Complete your talent profile!</h1>
@@ -35,7 +33,7 @@ export default function RegisterTalent(props) {
           url: "",
           repository: "",
           image: "",
-          birthdate: '1986-07-13',
+          birthdate: "1986-07-13",
           id_Seniority: 1,
           id_Experience: 0,
           id_Speciality: 1,
@@ -45,7 +43,6 @@ export default function RegisterTalent(props) {
           profile: "",
           register: true,
           acceptedTerms: false,
-          
         }}
         validationSchema={Yup.object({
           name: Yup.string()
@@ -58,7 +55,7 @@ export default function RegisterTalent(props) {
             .min(4, errorAlerts[1].passwordAlert)
             .required(errorAlerts[4].requiredAlert),
           passwordConfirmation: Yup.string()
-            .oneOf([Yup.ref('password'), null], 'Passwords must match')
+            .oneOf([Yup.ref("password"), null], "Passwords must match")
             .required(errorAlerts[4].requiredAlert),
 
           email: Yup.string()
@@ -78,7 +75,6 @@ export default function RegisterTalent(props) {
           birthdate: Yup.date().max(
             new Date(new Date() - 599616000000),
             "Must to be +18 years old"
-           
           ),
           id_Seniority: Yup.number()
             .oneOf([1, 2], "Invalid seniority Type")
@@ -86,14 +82,12 @@ export default function RegisterTalent(props) {
           id_Experience: Yup.number()
             .oneOf([1, 2, 3, 4, 5], "Invalid experience range")
             .required(),
-          id_Speciality: Yup.number().oneOf(
-            [0, 1, 2, 3, 4, 5, 6, 7],
-            "Invalid speciality Type"
-          ).required(errorAlerts[4].requiredAlert),
-          id_Education: Yup.number().oneOf(
-            [1, 2, 3, 4, 5],
-            "Invalid Education Type"
-          ).required(errorAlerts[4].requiredAlert),
+          id_Speciality: Yup.number()
+            .oneOf([0, 1, 2, 3, 4, 5, 6, 7], "Invalid speciality Type")
+            .required(errorAlerts[4].requiredAlert),
+          id_Education: Yup.number()
+            .oneOf([1, 2, 3, 4, 5], "Invalid Education Type")
+            .required(errorAlerts[4].requiredAlert),
           // Skill: Yup.number().oneOf(
           //   [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
           //   "Invalid Skill Type"
@@ -128,22 +122,15 @@ export default function RegisterTalent(props) {
           onCreateSubmit(values);
           setSubmitting(false);
         }}
-
       >
         {({ isSubmitting, isValid, values }) => (
           <Form>
             <Row>
               <Col>
-                <MyTextInput
-                  label="Name *"
-                  name="name"
-                  type="text" />
+                <MyTextInput label="Name *" name="name" type="text" />
               </Col>
               <Col>
-                <MyTextInput
-                  label="Last name *"
-                  name="lastName"
-                  type="text" />
+                <MyTextInput label="Last name *" name="lastName" type="text" />
               </Col>
             </Row>
             <Row>
@@ -178,24 +165,16 @@ export default function RegisterTalent(props) {
                   type="text"
                   placeholder="+54 342 6 156 014"
                 />
-              </Col>              
-            </Row>
-            <Row>
-            <Col>
-                <MyTextInput
-                  label="image *"
-                  name="image"
-                  type="url" />
               </Col>
             </Row>
             <Row>
               <Col>
-                <MyTextInput
-                  label="LinkedIn *"
-                  name="url"
-                  type="url"
-                />
-
+                <MyTextInput label="image *" name="image" type="url" />
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <MyTextInput label="LinkedIn *" name="url" type="url" />
               </Col>
               <Col>
                 <MyTextInput
@@ -224,7 +203,7 @@ export default function RegisterTalent(props) {
                 </MySelect> */}
               </Col>
             </Row>
-            <Label className='mt-3 mb-0'>Languages and skills *</Label>
+            <Label className="mt-3 mb-0">Languages and skills *</Label>
             {/* <Row>
               <FieldArray name="Skill">
                 {({ insert, remove, push }) => (
@@ -364,9 +343,7 @@ export default function RegisterTalent(props) {
               </FieldArray>
             </Row> */}
             <Col>
-              <MySelect
-                label="Education *"
-                name="id_Education">
+              <MySelect label="Education *" name="id_Education">
                 <option value={1}>Bootcamp</option>
                 <option value={2}>Curso</option>
                 <option value={3}>Ingenieria</option>
@@ -409,7 +386,7 @@ export default function RegisterTalent(props) {
                 </Col>
                 <Col>
                   <MyRadio
-                    label="1-2 yeas"
+                    label="1-2 years"
                     name="id_Experience"
                     type="radio"
                     value="4"
@@ -424,20 +401,14 @@ export default function RegisterTalent(props) {
                   />
                 </Col>
               </Row>
-            </Card>            
+            </Card>
             <MyCheckbox name="acceptedTerms">
-            {"  "} I accept the terms and conditions
+              {"  "} I accept the terms and conditions
             </MyCheckbox>
-            <RegisterBtn
-              isSubmitting={isSubmitting}
-              isValid={!isValid} />
-
+            <RegisterBtn isSubmitting={isSubmitting} isValid={!isValid} />
           </Form>
         )}
-
-
       </Formik>
     </>
   );
 }
-

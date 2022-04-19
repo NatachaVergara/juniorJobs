@@ -1,10 +1,9 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
-import {qs} from 'qs'
+import { qs } from "qs";
 import { Link } from "react-router-dom";
 import { FcNeutralDecision, FcBusiness, FcApproval } from "react-icons/fc";
 import "./Register.scss";
-import { useAxios } from "../../hooks/use-axios";
 import RegisterRecruiter from "./RegisterRecruiter";
 import RegisterTalent from "./RegisterTalent";
 import { Container } from "reactstrap";
@@ -13,8 +12,6 @@ import { useUserContext } from "../../Store/UserContext";
 const Register = () => {
   //Traigo del context el estado usertType para poder elegir el formulario que correponde
   const { setUserType, userType } = useUserContext();
-
-
 
   const formTalento = () => {
     setUserType("Talent");
@@ -59,11 +56,9 @@ const Register = () => {
       </div>
       <Container>
         {userType === "Recruiter" ? (
-          <RegisterRecruiter ></RegisterRecruiter>
+          <RegisterRecruiter></RegisterRecruiter>
         ) : null}
-        {userType === "Talent" ? (
-          <RegisterTalent ></RegisterTalent>
-        ) : null}
+        {userType === "Talent" ? <RegisterTalent></RegisterTalent> : null}
       </Container>
       <Link
         to="/login"
