@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import { HomePage } from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
@@ -14,6 +14,7 @@ import UserContextProvider from "./Store/UserContext";
 function App() {
   return (
     <UserContextProvider>
+       <BrowserRouter>
       <Layout>
         <Routes>
           <Route path="*" element={<Navigate replace to="/" />} />
@@ -29,6 +30,7 @@ function App() {
        
         </Routes>
       </Layout>
+      </BrowserRouter>
     </UserContextProvider>
   );
 }

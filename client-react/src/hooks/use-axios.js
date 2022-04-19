@@ -6,24 +6,36 @@ import { useUserContext } from "../Store/UserContext";
 axios.defaults.baseURL = "http://localhost:3002";
 
 export const useAxios = () => {
-  const [response, setResponse] = useState(undefined);
-  const { userType, isUser, setIsUser, setUserType, setUserId, setUserData } = useUserContext()
+  const [response, setResponse] = useState();
+  const { userType, isUser, setIsUser, setUserType, setUserId,userData, setUserData } = useUserContext()
   let navigate = useNavigate()
   const fetchData = useCallback((params) => {
     axios
       .request(params)
       .then((res) => {
-        //Metodo register Talent
+        // console.log(res.data)
+        // setResponse(res.data)
+        // setUserData(res.data)
+        // console.log(response)
+        // console.log(userData)
+
+
+        // setUserId(res.id)
+        // setUserData(res.data)
+
+
+
+        // Metodo update Talent
         if (userType === 'Talent' && isUser) {
           console.log(res.data)
           swal(`Your profile has been updated`);
-          //Metodo register Recruiter
+        //Metodo update Recruiter
         } else if (userType === 'Recruiter' && isUser) {
           console.log(res.data)
           swal(`Your profile has been updated`);
         }
-        
-        //Metodo Create
+
+       // Metodo Create
         if(params.data.register) {
           console.log(res.data)
           setResponse(res.data);
@@ -31,7 +43,7 @@ export const useAxios = () => {
           navigate('/login')
         }
 
-        //Metodo Login
+       // Metodo Login
         if (params.data.login) {       
           console.log(res.data)
           swal(`Bienvenido/a ${res.data.name}`)
@@ -42,7 +54,6 @@ export const useAxios = () => {
           navigate('/')
         }
 
-        
 
 
 
@@ -64,11 +75,11 @@ export const useAxios = () => {
           return swal(JSON.stringify(error.statusText));
         } else {
           // Something happened in setting up the request that triggered an Error
-          return swal("Last Error",JSON.stringify(error.data));
+          return swal("Last Error", JSON.stringify(error.data));
         }
       });
 
-  }, [navigate]);
+  }, [setUserData, response, userData, setUserId, userType, isUser, navigate, setIsUser, setUserType]);
 
   return { response, fetchData };
 };
