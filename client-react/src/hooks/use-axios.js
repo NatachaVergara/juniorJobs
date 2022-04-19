@@ -6,13 +6,13 @@ axios.defaults.baseURL = "http://localhost:3002";
 
 export const useAxios = () => {
   const [response, setResponse] = useState(undefined);
+
   const fetchData = useCallback((params) => {
     axios
       .request(params)
       .then((res) => {
         setResponse(res.data);
       })
-
       .catch(function (error) {
         console.log(error.response, error.message);
         if (error.response) {
