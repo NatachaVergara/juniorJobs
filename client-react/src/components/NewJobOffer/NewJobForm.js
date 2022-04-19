@@ -128,7 +128,7 @@ const NewJobForm = () => {
             </Field>
           </div>
 
-          {isSubmitting && (
+          {!isSubmitting && (
             <div className="btnContainer">
               <button type="submit" className="publishButton">
                 Publicar
