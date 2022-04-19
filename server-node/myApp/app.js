@@ -15,6 +15,7 @@ var educationRouter = require('./src/routes/educationRouter');
 var experienceRouter = require('./src/routes/experienceRouter');
 var specialityRouter = require('./src/routes/specialityRouter');
 var skillsRouter = require('./src/routes/skillRouter');
+var languageRouter = require('./src/routes/languageRouter');
 
 const PORT = process.env.PORT || 3002
 
@@ -42,6 +43,7 @@ app.use('/education', educationRouter);
 app.use('/experience', experienceRouter);
 app.use('/speciality', specialityRouter);
 app.use('/skills', skillsRouter);
+app.use('/language', languageRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
