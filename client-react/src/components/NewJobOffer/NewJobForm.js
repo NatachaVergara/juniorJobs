@@ -2,7 +2,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import React, { useEffect, useState } from "react";
 import { useAxios } from "../../hooks/use-axios";
 import { useUserContext } from "../../Store/UserContext";
-import "./NewJobForm.scss";
+import "./NewJobForm.module.scss";
 
 const NewJobForm = () => {
   const { fetchData, response } = useAxios();
