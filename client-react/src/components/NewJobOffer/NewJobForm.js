@@ -1,6 +1,5 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import React, { useEffect, useState } from "react";
-import { Container } from "reactstrap";
 import { useAxios } from "../../hooks/use-axios";
 import { useUserContext } from "../../Store/UserContext";
 import "./NewJobForm.scss";
@@ -8,7 +7,6 @@ import "./NewJobForm.scss";
 const NewJobForm = () => {
   const { fetchData, response } = useAxios();
   const { userID } = useUserContext();
-  const [sendingForm, setSendingForm] = useState(false);
   const [seniorities, setSeniorities] = useState([]);
   console.log("seniorities in new job form", seniorities);
   useEffect(() => {
@@ -35,7 +33,8 @@ const NewJobForm = () => {
         //   jobArea: 1,
         //   checked: [],
       }}
-      onSubmit={(values, { resetForm, isS }) => {
+      onSubmit={(values, { resetForm, setSubmitting }) => {
+        setSubmitting(true);
         resetForm();
         console.log("values on submit new job form", values);
         const config = {
@@ -45,12 +44,11 @@ const NewJobForm = () => {
           header: { "Content-type": "application/json" },
         };
         fetchData(config);
+        setSubmitting(false);
         console.log("response in new job form on submit", response);
-        setSendingForm(true);
-        setTimeout(() => setSendingForm(false), 3000);
       }}
     >
-      {() => (
+      {({ isSubmitting }) => (
         <Form className="newjob-form">
           <div>
             <label htmlFor="title" className="formTitle">
@@ -130,14 +128,14 @@ const NewJobForm = () => {
             </Field>
           </div>
 
-          {!sendingForm && (
+          {isSubmitting && (
             <div className="btnContainer">
               <button type="submit" className="publishButton">
                 Publicar
               </button>
             </div>
           )}
-          {sendingForm && <p className="ofertaPublicada">Oferta publicada!</p>}
+          {isSubmitting && <p className="ofertaPublicada">Oferta publicada!</p>}
         </Form>
       )}
     </Formik>
