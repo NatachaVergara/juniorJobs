@@ -1,5 +1,5 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from "reactstrap";
 import { useAxios } from "../../hooks/use-axios";
 import { useUserContext } from "../../Store/UserContext";
@@ -9,6 +9,16 @@ const NewJobForm = () => {
   const { fetchData, response } = useAxios();
   const { userID } = useUserContext();
   const [sendingForm, setSendingForm] = useState(false);
+  const [seniorities, setSeniorities] = useState([]);
+  console.log("seniorities in new job form", seniorities);
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("http://localhost:3002/Seniorities");
+      const data = await response.json();
+      setSeniorities(data);
+    };
+    fetchData();
+  }, []);
   return (
     <Container>
       <Formik
@@ -26,16 +36,17 @@ const NewJobForm = () => {
           //   jobArea: 1,
           //   checked: [],
         }}
-        onSubmit={(values, { resetForm }) => {
+        onSubmit={(values, { resetForm, isS }) => {
           resetForm();
-          console.log(values);
+          console.log("values on submit new job form", values);
           const config = {
-            method: "P",
+            method: "POST",
             url: "/jobOffers",
             data: values,
             header: { "Content-type": "application/json" },
           };
           fetchData(config);
+          console.log("response in new job form on submit", response);
           setSendingForm(true);
           setTimeout(() => setSendingForm(false), 3000);
         }}
@@ -86,8 +97,15 @@ const NewJobForm = () => {
                 Seniority
               </label>
               <Field name="id_Seniority" as="select" id="id_Seniority">
-                <option value={0}>Trainee</option>
-                <option value={1}>Junior</option>
+                {seniorities &&
+                  seniorities.length > 0 &&
+                  seniorities.map((seniority, index) => {
+                    return (
+                      <option value={index} key={index}>
+                        {seniority.name}
+                      </option>
+                    );
+                  })}
               </Field>
             </div>
             <div>
