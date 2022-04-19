@@ -26,17 +26,13 @@ export const useAxios = () => {
         //Metodo Create
         if(params.data.register) {
           console.log(res.data)
-         setResponse(res.data);
+          setResponse(res.data);
           swal(`Welcome, you can now login to your account`)          
           navigate('/login')
         }
 
         //Metodo Login
-        if (params.data.login) {
-          // console.log(params.method)          
-          // console.log(params.data.userType)
-          // console.log(res.data.id)
-          // console.log(res.data.name)
+        if (params.data.login) {       
           console.log(res.data)
           swal(`Bienvenido/a ${res.data.name}`)
           setIsUser(true)
