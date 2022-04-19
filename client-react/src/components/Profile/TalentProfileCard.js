@@ -3,6 +3,27 @@ import { Card, CardImg, CardLink, CardSubtitle, CardText, CardTitle } from "reac
 import classes from "./TalentProfileCard.module.scss";
 
 export default function TalentProfileCard(props) {
+  const education = props.data.id_Education;
+  const EDUCATION = {
+    1 : "Bootcamp",
+    2 : "Course",
+    3 : "Engineering",
+    4 : "Bachelor's Degree",
+    5 : "Technician"
+  }
+
+  const seniority = props.data.id_Seniority;
+  const SENIORITY = {
+    1 : "Junior",
+    2 : "Trainee"
+  }
+
+  const speciality = props.data.id_Speciality;
+  const SPECIALITY = {
+    1 : "Backend",
+    2 : "Data Analytics",
+    3 : "Data Scientist"
+  }
   // console.log(props.data)
   return (
     <Fragment>
@@ -21,10 +42,12 @@ export default function TalentProfileCard(props) {
         <CardSubtitle className="mb-2 text-muted" tag="h3">
           {props.data.profile}
         </CardSubtitle>
-        <CardText>Date of birth {props.data.birthdate} </CardText>
-        <CardText>Education {props.data.id_Education} </CardText>
-        <CardText>Seniority {props.data.id_Seniority} </CardText>
-        <CardText>Years of experience {props.data.id_Experience} </CardText>
+    {console.log(props.data)}
+        <CardText>Date of birth : {props.data.birthdate} </CardText>
+        <CardText>Education : {EDUCATION[education]} </CardText>
+        <CardText>Speciality : {SPECIALITY[speciality]} </CardText>
+        <CardText>Seniority : {SENIORITY[seniority]} </CardText>
+        <CardText>Years of experience : {props.data.id_Experience} </CardText>
         <CardText 
         className='text-light m-0'>
           Email: {props.data.email}

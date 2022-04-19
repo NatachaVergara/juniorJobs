@@ -4,7 +4,6 @@ import { qs } from "qs";
 import { Link } from "react-router-dom";
 import { FcNeutralDecision, FcBusiness, FcApproval } from "react-icons/fc";
 import "./Register.scss";
-import { useAxios } from "../../hooks/use-axios";
 import RegisterRecruiter from "./RegisterRecruiter";
 import RegisterTalent from "./RegisterTalent";
 import { Container } from "reactstrap";
@@ -13,25 +12,6 @@ import { useUserContext } from "../../Store/UserContext";
 const Register = () => {
   //Traigo del context el estado usertType para poder elegir el formulario que correponde
   const { setUserType, userType } = useUserContext();
-  const { fetchData, response } = useAxios();
-
-  function onSubmitHandler(values) {
-    console.log("on register values:", values);
-
-    let config = {};
-    if (userType === "Recruiter") {
-      config.method = "post";
-      config.url = "/recruiters";
-      config.header = { "Content-type": "application/x-www-form-urlencoded" };
-      config.data = values;
-    } else {
-      config.method = "post";
-      config.url = "/talents";
-      config.header = { "Content-type": "application/x-www-form-urlencoded" };
-      config.data = values;
-    }
-    fetchData(config);
-  }
 
   const formTalento = () => {
     setUserType("Talent");
@@ -76,11 +56,9 @@ const Register = () => {
       </div>
       <Container>
         {userType === "Recruiter" ? (
-          <RegisterRecruiter onSubmit={onSubmitHandler}></RegisterRecruiter>
+          <RegisterRecruiter></RegisterRecruiter>
         ) : null}
-        {userType === "Talent" ? (
-          <RegisterTalent onSubmit={onSubmitHandler}></RegisterTalent>
-        ) : null}
+        {userType === "Talent" ? <RegisterTalent></RegisterTalent> : null}
       </Container>
       <Link
         to="/login"

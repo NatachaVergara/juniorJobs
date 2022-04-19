@@ -14,10 +14,14 @@ import { MyCheckbox, MyRadio, MySelect, MyTextInput } from "../../utils/inputsFu
 import { emailRegex, phoneRegex, urlRegex } from "../../utils/regex";
 import { errorAlerts } from '../../utils/errorsAlert'
 import { useUserContext } from "../../Store/UserContext";
+import {useCRUD} from '../../services/useCRUD'
+
+
 
 const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
   const {setUserData} = useUserContext()
- 
+  const {onUpdateSubmit} = useCRUD()
+  
   return (
     <>
       <h1 className="h1">Edit your profile!</h1>
@@ -110,10 +114,9 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
           //   name: +language.level,
           //   level: +language.level,
           // }))
-          
           setSubmitting(true);              
           setUserData(values)
-          onSubmit(values);
+          onUpdateSubmit(values)
           setSubmitting(false);
           setIsEditing(false)
         }}
@@ -398,9 +401,7 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
                 </Col>
               </Row>
             </Card>
-            {/* <MyCheckbox name="acceptedTerms">
-              {" I accept the terms and conditions"}
-            </MyCheckbox> */}
+         
             <RegisterBtn
               isSubmitting={isSubmitting}
               isValid={isValid}

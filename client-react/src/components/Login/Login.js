@@ -3,14 +3,17 @@ import { Field, Form, Formik } from 'formik'
 //import { BsShieldLockFill } from "react-icons/bs";
 import './Login.scss'
 
-import { usePostLogin } from '../../hooks/usePostLogin';
+//import { usePostLogin } from '../../hooks/usePostLogin';
 import { emailRegex} from '../../utils/regex';
 import { errorAlerts} from '../../utils/errorsAlert'
+import {useCRUD} from '../../services/useCRUD'
+
+
 
 function Login() {
   //const { userLogin } = useUserContext()
-  const { fetchData } = usePostLogin()
-
+ // const { fetchData } = usePostLogin()
+const {onLoginSubmit} = useCRUD()
   return (
     <div className='formPage  mb-5 pb-5'>
 
@@ -18,7 +21,8 @@ function Login() {
         initialValues={{
           email: '',
           password: '',
-          userType: ''
+          userType: '', 
+          login: true
         }}
         className=''
 
@@ -45,7 +49,9 @@ function Login() {
         }}
 
         onSubmit={(values, { resetForm }) => {
-          fetchData(values, resetForm)
+         //fetchData(values, resetForm)
+         onLoginSubmit(values)
+        
 
         }}
       >
