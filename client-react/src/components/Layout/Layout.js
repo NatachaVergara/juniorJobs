@@ -5,7 +5,6 @@ import MainNavigation from "./MainNavigation";
 import Sidebar from "./Sidebar";
 
 const Layout = (props) => {
- 
   return (
     <Fragment>
       <MainNavigation />
@@ -25,7 +24,7 @@ const Layout = (props) => {
           </Col>
         </Row>
       </Container>
-      <Footer/>
+      <Footer />
     </Fragment>
   );
 };

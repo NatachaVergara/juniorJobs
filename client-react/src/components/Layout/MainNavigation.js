@@ -8,7 +8,8 @@ import { useUserContext } from "../../Store/UserContext";
 import classes from "./MainNavigation.module.scss";
 
 const MainNavigation = () => {
-  const { isUser, setIsUser, setUserType, setUserId, setUserData } = useUserContext();
+  const { isUser, setIsUser, userType, setUserType, setUserId, setUserData } =
+    useUserContext();
 
   // const authCtx = useContext(AuthContext);
   // const isLoggedIn = authCtx.isLoggedIn;
@@ -16,9 +17,9 @@ const MainNavigation = () => {
   const navigate = useNavigate();
   const logoutHandler = () => {
     setIsUser(false);
-    setUserType(null)
-    setUserId(null)
-    setUserData(null)
+    setUserType(null);
+    setUserId(null);
+    setUserData(null);
     navigate("/login");
   };
 
@@ -55,7 +56,14 @@ const MainNavigation = () => {
             Faqs
           </Button>
         </NavLink>
-        {isUser === true ? (
+        {userType === "Recruiter" && (
+          <NavLink to="/newjob">
+            <Button className="m-1" color="info">
+              Post a new job
+            </Button>
+          </NavLink>
+        )}
+        {isUser ? (
           <Button onClick={logoutHandler} color="warning">
             Logout
           </Button>
