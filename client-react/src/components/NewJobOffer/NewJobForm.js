@@ -24,7 +24,7 @@ const NewJobForm = () => {
         description: "",
         location: "",
         id_Recruiter: userID,
-        id_Talent: null,
+        // id_Talent: null,
         id_Schedule: 1,
         id_Remote: 1,
         id_Seniority: 1,
@@ -32,6 +32,7 @@ const NewJobForm = () => {
         id_Speciality: 1,
         //   jobArea: 1,
         //   checked: [],
+        id_Skill:[1,2,3]
       }}
       onSubmit={(values, { resetForm, setSubmitting }) => {
         setSubmitting(true);
