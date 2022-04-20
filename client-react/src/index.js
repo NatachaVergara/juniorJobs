@@ -9,13 +9,13 @@ import { BrowserRouter } from "react-router-dom";
 import UserContextProvider from "./Store/UserContext";
 
 ReactDOM.render(
-  <BrowserRouter>
-    <React.StrictMode>
-      <UserContextProvider>
+  <UserContextProvider>
+    <BrowserRouter>
+      <React.StrictMode>
         <App />
-      </UserContextProvider>
-    </React.StrictMode>
-  </BrowserRouter>,
+      </React.StrictMode>
+    </BrowserRouter>
+  </UserContextProvider>,
   document.getElementById("root")
 );
 
