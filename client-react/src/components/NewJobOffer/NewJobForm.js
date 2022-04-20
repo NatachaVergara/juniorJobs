@@ -2,20 +2,36 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import React, { useEffect, useState } from "react";
 import { useAxios } from "../../hooks/use-axios";
 import { useUserContext } from "../../Store/UserContext";
-import "./NewJobForm.module.scss";
+import styles from "./NewJobForm.module.scss";
 
 const NewJobForm = () => {
   const { fetchData, response } = useAxios();
   const { userID } = useUserContext();
   const [seniorities, setSeniorities] = useState([]);
+  const [education, setEducation] = useState([]);
+  const [experience, setExperience] = useState([]);
+  const [remote, setRemote] = useState([]);
+  const [speciality, setSpeciality] = useState([]);
   console.log("seniorities in new job form", seniorities);
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchDataSeniorities = async () => {
       const response = await fetch("http://localhost:3002/Seniorities");
       const data = await response.json();
       setSeniorities(data);
     };
-    fetchData();
+    fetchDataSeniorities();
+    const fetchDataEducation = async () => {
+      const response = await fetch("http://localhost:3002/education");
+      const data = await response.json();
+      setEducation(data);
+    };
+    fetchDataEducation();
+    const fetchDataExperience = async () => {
+      const response = await fetch("http://localhost:3002/experience");
+      const data = await response.json();
+      setExperience(data);
+    };
+    fetchDataExperience();
   }, []);
   return (
     <Formik
@@ -50,28 +66,28 @@ const NewJobForm = () => {
       }}
     >
       {({ isSubmitting }) => (
-        <Form className="newjob-form">
+        <Form className={styles.newjobForm}>
           <div>
-            <label htmlFor="title" className="formTitle">
+            <label htmlFor="title" className={styles.formTitle}>
               Puesto / Título del aviso <span>*</span>
             </label>
             <Field type="textarea" id="title" name="title" />
           </div>
           <div>
-            <label htmlFor="description" className="formTitle">
+            <label htmlFor="description" className={styles.formTitle}>
               Descripción del puesto <span>*</span>
             </label>
             <Field as="textarea" id="description" name="description" />
           </div>
           <div>
-            <label htmlFor="location" className="formTitle">
+            <label htmlFor="location" className={styles.formTitle}>
               Descripción del puesto <span>*</span>
             </label>
             <Field as="textarea" id="location" name="location" />
           </div>
 
           <div>
-            <label className="formTitle" htmlFor="id_Schedule">
+            <label className={styles.formTitle} htmlFor="id_Schedule">
               Schedule
             </label>
             <Field name="id_Schedule" as="select" id="id_Schedule">
@@ -81,7 +97,7 @@ const NewJobForm = () => {
             </Field>
           </div>
           <div>
-            <label className="formTitle" htmlFor="id_Remote">
+            <label className={styles.formTitle} htmlFor="id_Remote">
               Remote
             </label>
             <Field name="id_Remote" as="select" id="id_Remote">
@@ -91,7 +107,7 @@ const NewJobForm = () => {
           </div>
 
           <div>
-            <label className="formTitle" htmlFor="id_Seniority">
+            <label className={styles.formTitle} htmlFor="id_Seniority">
               Seniority
             </label>
             <Field name="id_Seniority" as="select" id="id_Seniority">
@@ -107,7 +123,7 @@ const NewJobForm = () => {
             </Field>
           </div>
           <div>
-            <label className="formTitle" htmlFor="id_Experience">
+            <label className={styles.formTitle} htmlFor="id_Experience">
               Experience
             </label>
             <Field name="id_Experience" as="select" id="id_Experience">
@@ -119,7 +135,7 @@ const NewJobForm = () => {
             </Field>
           </div>
           <div>
-            <label className="formTitle" htmlFor="id_Speciality">
+            <label className={styles.formTitle} htmlFor="id_Speciality">
               Speciality
             </label>
             <Field name="id_Speciality" as="select" id="id_Speciality">
@@ -130,13 +146,15 @@ const NewJobForm = () => {
           </div>
 
           {!isSubmitting && (
-            <div className="btnContainer">
-              <button type="submit" className="publishButton">
+            <div className={styles.btnContainer}>
+              <button type="submit" className={styles.publishButton}>
                 Publicar
               </button>
             </div>
           )}
-          {isSubmitting && <p className="ofertaPublicada">Oferta publicada!</p>}
+          {isSubmitting && (
+            <p className={styles.ofertaPublicada}>Oferta publicada!</p>
+          )}
         </Form>
       )}
     </Formik>
