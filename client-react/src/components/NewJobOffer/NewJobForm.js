@@ -8,14 +8,30 @@ const NewJobForm = () => {
   const { fetchData, response } = useAxios();
   const { userID } = useUserContext();
   const [seniorities, setSeniorities] = useState([]);
+  const [education, setEducation] = useState([]);
+  const [experience, setExperience] = useState([]);
+  const [remote, setRemote] = useState([]);
+  const [speciality, setSpeciality] = useState([]);
   console.log("seniorities in new job form", seniorities);
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchDataSeniorities = async () => {
       const response = await fetch("http://localhost:3002/Seniorities");
       const data = await response.json();
       setSeniorities(data);
     };
-    fetchData();
+    fetchDataSeniorities();
+    const fetchDataEducation = async () => {
+      const response = await fetch("http://localhost:3002/education");
+      const data = await response.json();
+      setEducation(data);
+    };
+    fetchDataEducation();
+    const fetchDataExperience = async () => {
+      const response = await fetch("http://localhost:3002/experience");
+      const data = await response.json();
+      setExperience(data);
+    };
+    fetchDataExperience();
   }, []);
   return (
     <Formik
