@@ -1,4 +1,4 @@
-import { Formik, Form, Field, FieldArray, Button, ErrorMessage } from "formik";
+import { Formik, Form, Field, FieldArray, ErrorMessage } from "formik";
 import React, { useEffect, useState } from "react";
 import { useAxios } from "../../hooks/use-axios";
 import { useUserContext } from "../../Store/UserContext";
@@ -7,17 +7,18 @@ import styles from "./NewJobForm.module.scss";
 const NewJobForm = () => {
   const { fetchData, response } = useAxios();
   const { userID } = useUserContext();
-  const [optionsFromDb, setOptionsFromDb] = useState({
-    level: [
-      { id: 1, name: "Beginner" },
-      { id: 1, name: "Intermediate" },
-      { id: 1, name: "Advanced" },
-    ],
-  });
+  const [optionsFromDb, setOptionsFromDb] = useState({});
   console.log("options from db", optionsFromDb);
+  console.log("response in new job form on submit", response);
 
   useEffect(() => {
-    let optionsFromDb = {};
+    let optionsFromDb = {
+      level: [
+        { id: 1, name: "Beginner" },
+        { id: 2, name: "Intermediate" },
+        { id: 3, name: "Advanced" },
+      ],
+    };
     const getFormOptions = async () => {
       try {
         let seniorities = await fetch("http://localhost:3002/Seniorities");
@@ -60,13 +61,11 @@ const NewJobForm = () => {
         description: "",
         location: "",
         id_Recruiter: userID,
-        id_Talent: null,
         id_Seniority: 1,
         id_Education: 1,
         id_Experience: 1,
         id_Speciality: 1,
-        id_SkillJobOffer: [(name: 0), (level: 0)],
-        // id_LanguageJobOffer: [(name: 0), (level: 0)],
+        id_Skill: [],
         id_Remotes: 1,
         id_Schedule: 1,
       }}
@@ -83,7 +82,6 @@ const NewJobForm = () => {
         };
         fetchData(config);
         setSubmitting(false);
-        console.log("response in new job form on submit", response);
       }}
     >
       {({ isSubmitting, values }) => (
@@ -165,6 +163,7 @@ const NewJobForm = () => {
                 })}
             </Field>
           </div>
+
           <div>
             <label className={styles.formTitle} htmlFor="id_Speciality">
               Speciality
@@ -182,20 +181,17 @@ const NewJobForm = () => {
             </Field>
           </div>
           <div>
-            <FieldArray name="id_SkillJobOffer">
+            <label className={styles.formTitle} htmlFor="id_Skill">
+              SKILLS
+            </label>
+            <FieldArray name="id_Skill">
               {({ insert, remove, push }) => (
                 <div>
-                  {values.id_SkillJobOffer.length > 0 &&
-                    values.id_SkillJobOffer.map((skill, index) => (
+                  {values.id_Skill.length > 0 &&
+                    values.id_Skill.map((skill, index) => (
                       <div className="row" key={index}>
                         <div className="col">
-                          <label htmlFor={`id_SkillJobOffer.${index}.name`}>
-                            Name *
-                          </label>
-                          <Field
-                            name={`id_SkillJobOffer.${index}.name`}
-                            as="select"
-                          >
+                          <Field name={`id_Skill.${index}.id`} as="select">
                             {optionsFromDb.skills &&
                               optionsFromDb.skills.length > 0 &&
                               optionsFromDb.skills.map(({ name, id }) => {
@@ -207,54 +203,28 @@ const NewJobForm = () => {
                               })}
                           </Field>
                           <ErrorMessage
-                            name={`id_SkillJobOffer.${index}.name`}
+                            name={`id_Skill.${index}.id`}
                             component="div"
                             className="field-error"
                           />
                         </div>
                         <div className="col">
-                          <label htmlFor={`id_SkillJobOffer.${index}.level`}>
-                            Level *
-                          </label>
-                          <Field
-                            name={`id_SkillJobOffer.${index}.level`}
-                            as="select"
-                          >
-                            {optionsFromDb.level &&
-                              optionsFromDb.level.length > 0 &&
-                              optionsFromDb.level.map(({ name, id }) => {
-                                return (
-                                  <option value={id} key={id}>
-                                    {name}
-                                  </option>
-                                );
-                              })}
-                          </Field>
-                          <ErrorMessage
-                            name={`id_SkillJobOffer.${index}.level`}
-                            component="div"
-                            className="field-error"
-                          />
-                        </div>
-                        <div className="col">
-                          <button
-                            className={styles.publishButton}
-                            onClick={() => remove(index)}
-                          >
-                            X
+                          <button type="button" onClick={() => remove(index)}>
+                            Delete
                           </button>
                         </div>
                       </div>
                     ))}
                   <button
                     className={styles.publishButton}
-                    onClick={() => push({ name: "", level: "" })}
+                    type="button"
+                    onClick={() => push({ id: "" })}
                   >
                     Add skill
                   </button>
                 </div>
               )}
-            </FieldArray>
+            </FieldArray>{" "}
           </div>
           {!isSubmitting && (
             <div className={styles.btnContainer}>
