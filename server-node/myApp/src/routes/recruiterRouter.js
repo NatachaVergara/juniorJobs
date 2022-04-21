@@ -1,15 +1,21 @@
 var express = require('express');
 var router = express.Router();
 const recruiterController = require('../controllers/recruiterController');
+var cors = require('cors');
 
-router.get('/',recruiterController.index);
+var corsOptions = {
+    origin: '*',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
 
-router.get('/:id',recruiterController.show);
+router.get('/',cors(corsOptions),recruiterController.index);
 
-router.post('/',recruiterController.create);
+router.get('/:id',cors(corsOptions),recruiterController.show);
 
-router.put('/:id',recruiterController.update);
+router.post('/',cors(corsOptions),recruiterController.create);
 
-router.delete('/:id',recruiterController.destroy);
+router.put('/:id',cors(corsOptions),recruiterController.update);
+
+router.delete('/:id',cors(corsOptions),recruiterController.destroy);
 
 module.exports = router;
