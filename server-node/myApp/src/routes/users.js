@@ -4,7 +4,7 @@ const userController = require('../controllers/userController');
 var cors = require('cors');
 
 var corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: '*',
   credentials:true,
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
