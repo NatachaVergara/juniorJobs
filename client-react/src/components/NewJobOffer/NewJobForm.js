@@ -10,9 +10,18 @@ const NewJobForm = () => {
   const [seniorities, setSeniorities] = useState([]);
   const [education, setEducation] = useState([]);
   const [experience, setExperience] = useState([]);
-  const [remote, setRemote] = useState([]);
   const [speciality, setSpeciality] = useState([]);
-  console.log("seniorities in new job form", seniorities);
+  const [skills, setSkills] = useState([]);
+  const [languages, setLanguages] = useState([]);
+  console.log(
+    "options from db",
+    seniorities,
+    education,
+    experience,
+    speciality,
+    skills,
+    languages
+  );
   useEffect(() => {
     const fetchDataSeniorities = async () => {
       const response = await fetch("http://localhost:3002/Seniorities");
@@ -32,6 +41,24 @@ const NewJobForm = () => {
       setExperience(data);
     };
     fetchDataExperience();
+    const fetchDataSpeciality = async () => {
+      const response = await fetch("http://localhost:3002/speciality");
+      const data = await response.json();
+      setSpeciality(data);
+    };
+    fetchDataSpeciality();
+    const fetchDataSkills = async () => {
+      const response = await fetch("http://localhost:3002/skills");
+      const data = await response.json();
+      setSkills(data);
+    };
+    fetchDataSkills();
+    const fetchDataLanguages = async () => {
+      const response = await fetch("http://localhost:3002/language");
+      const data = await response.json();
+      setLanguages(data);
+    };
+    fetchDataLanguages();
   }, []);
   return (
     <Formik
@@ -41,13 +68,12 @@ const NewJobForm = () => {
         location: "",
         id_Recruiter: userID,
         id_Talent: null,
-        id_Schedule: 1,
-        id_Remote: 1,
+        id_Education: 1,
         id_Seniority: 1,
         id_Experience: 1,
         id_Speciality: 1,
-        //   jobArea: 1,
-        //   checked: [],
+        // id_SkillJobOffer: [(name: 0), (level: 0)],
+        // id_LanguageJobOffer: [(name: 0), (level: 0)],
       }}
       onSubmit={(values, { resetForm, setSubmitting }) => {
         setSubmitting(true);
@@ -86,10 +112,10 @@ const NewJobForm = () => {
           </div>
 
           <div>
-            <label className={styles.formTitle} htmlFor="id_Schedule">
-              Schedule
+            <label className={styles.formTitle} htmlFor="id_Education">
+              Education
             </label>
-            <Field name="id_Schedule" as="select" id="id_Schedule">
+            <Field name="id_Education" as="select" id="id_Education">
               <option value={0}>Presencial</option>
               <option value={1}>Hybrid</option>
               <option value={2}>Remote</option>
