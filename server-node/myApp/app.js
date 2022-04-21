@@ -5,14 +5,19 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var cors = require("cors");
 
-var indexRouter = require("./src/routes/index");
-var usersRouter = require("./src/routes/users");
-var recruiterRouter = require("./src/routes/recruiterRouter");
-var talentRouter = require("./src/routes/talentRouter");
-var jobOfferRouter = require("./src/routes/jobOfferRouter");
-var señorityRouter = require("./src/routes/seniorityRouter");
-var educationRouter = require("./src/routes/educationRouter");
-var experienceRouter = require("./src/routes/experienceRouter");
+var indexRouter = require('./src/routes/index');
+var usersRouter = require('./src/routes/users');
+var recruiterRouter = require('./src/routes/recruiterRouter');
+var talentRouter = require('./src/routes/talentRouter');
+var jobOfferRouter = require('./src/routes/JobOfferRouter');
+var señorityRouter = require('./src/routes/seniorityRouter');
+var educationRouter = require('./src/routes/educationRouter');
+var experienceRouter = require('./src/routes/experienceRouter');
+var specialityRouter = require('./src/routes/specialityRouter');
+var skillsRouter = require('./src/routes/skillRouter');
+var languageRouter = require('./src/routes/languageRouter');
+var remoteRouter = require('./src/routes/remoteRouter');
+var scheduleRouter = require('./src/routes/scheduleRouter');
 
 const PORT = process.env.PORT || 3002;
 
@@ -30,14 +35,19 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(cors());
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
-app.use("/recruiters", recruiterRouter);
-app.use("/talents", talentRouter);
-app.use("/jobOffers", jobOfferRouter);
-app.use("/Seniorities", señorityRouter);
-app.use("/education", educationRouter);
-app.use("/experience", experienceRouter);
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use('/recruiters', recruiterRouter);
+app.use('/talents', talentRouter);
+app.use('/jobOffers', jobOfferRouter);
+app.use('/Seniorities', señorityRouter);
+app.use('/education', educationRouter);
+app.use('/experience', experienceRouter);
+app.use('/speciality', specialityRouter);
+app.use('/skills', skillsRouter);
+app.use('/language', languageRouter);
+app.use('/remotes', remoteRouter);
+app.use('/schedules', scheduleRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
