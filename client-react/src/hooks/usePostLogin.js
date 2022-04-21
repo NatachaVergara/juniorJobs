@@ -31,7 +31,7 @@ export const usePostLogin = () => {
             setUserType(values.userType)
             setUserId(response.data.id)
             setUserData(response.data)
-            navigate('/')
+            //navigate('/')
 
         } catch (error) {
             return swal(JSON.stringify(error.response.data))

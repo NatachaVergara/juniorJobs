@@ -1,14 +1,15 @@
 import { useUserContext } from '../Store/UserContext';
 import { useAxios } from "../hooks/use-axios";
-
+import { useNavigate } from 'react-router-dom';
+import swal from "sweetalert";
 
 export const useCRUD = () => {
-    const { userID, userType } = useUserContext();
-    const { fetchData } = useAxios();
+    const { userID, userType, setUserType, setIsUser } = useUserContext();
+    const { fetchData, response } = useAxios();
     let params = {}
-
+    let navigate = useNavigate()
     function onCreateSubmit(values) {
-        console.log("on register values:", values);       
+        console.log("on register values:", values);      
       
         if (userType === "Recruiter") {     
             params.method = "post";
@@ -27,7 +28,7 @@ export const useCRUD = () => {
 
 
     function onUpdateSubmit(values) {
-        
+        console.log("on updata values:", values);   
         if (userType === "Talent") {
             params.method = 'put'
             params.url = `/talents/${userID}`;
@@ -46,12 +47,17 @@ export const useCRUD = () => {
 
 
     function onLoginSubmit(values){
+        console.log("on login values:", values);   
         params.method = 'post'
         params.url = '/users/login'
         params.header = { 'Content-type': 'application/x-www-form-urlencoded' };
         params.data = values
         fetchData(params);
-
+       
+        // setUserType(values.userType)
+        // setIsUser(true)
+        // navigate('/')
+        // swal(`Bienvenido/a`)
     }
 
 
