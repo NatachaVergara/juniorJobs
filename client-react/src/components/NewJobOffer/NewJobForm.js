@@ -7,58 +7,52 @@ import styles from "./NewJobForm.module.scss";
 const NewJobForm = () => {
   const { fetchData, response } = useAxios();
   const { userID } = useUserContext();
-  const [seniorities, setSeniorities] = useState([]);
-  const [education, setEducation] = useState([]);
-  const [experience, setExperience] = useState([]);
-  const [speciality, setSpeciality] = useState([]);
-  const [skills, setSkills] = useState([]);
-  const [languages, setLanguages] = useState([]);
-  console.log(
-    "options from db",
-    seniorities,
-    education,
-    experience,
-    speciality,
-    skills,
-    languages
-  );
+  // const [seniorities, setSeniorities] = useState([]);
+  // const [education, setEducation] = useState([]);
+  // const [experience, setExperience] = useState([]);
+  // const [speciality, setSpeciality] = useState([]);
+  // const [skills, setSkills] = useState([]);
+  // const [languages, setLanguages] = useState([]);
+  // const [remotes, setRemotes] = useState([]);
+  // const [schedules, setSchedules] = useState([]);
+  const [values, setValues] = useState([]);
+  console.log("options from db", values);
   useEffect(() => {
-    const fetchDataSeniorities = async () => {
-      const response = await fetch("http://localhost:3002/Seniorities");
-      const data = await response.json();
-      setSeniorities(data);
+    let values = [];
+    const getFormOptions = async () => {
+      try {
+        let seniorities = await fetch("http://localhost:3002/Seniorities");
+        seniorities = await seniorities.json();
+        values.push(seniorities);
+        let education = await fetch("http://localhost:3002/education");
+        education = await education.json();
+        values.push(education);
+        let experience = await fetch("http://localhost:3002/experience");
+        experience = await experience.json();
+        values.push(experience);
+        let speciality = await fetch("http://localhost:3002/speciality");
+        speciality = await speciality.json();
+        values.push(speciality);
+        let skills = await fetch("http://localhost:3002/skills");
+        skills = await skills.json();
+        values.push(skills);
+        let languages = await fetch("http://localhost:3002/language");
+        languages = await languages.json();
+        values.push(languages);
+        let remotes = await fetch("http://localhost:3002/remote");
+        remotes = await remotes.json();
+        values.push(remotes);
+        let schedules = await fetch("http://localhost:3002/Schedule");
+        schedules = await schedules.json();
+        values.push(schedules);
+
+        setValues(values);
+      } catch (err) {
+        console.log(err);
+        return err;
+      }
     };
-    fetchDataSeniorities();
-    const fetchDataEducation = async () => {
-      const response = await fetch("http://localhost:3002/education");
-      const data = await response.json();
-      setEducation(data);
-    };
-    fetchDataEducation();
-    const fetchDataExperience = async () => {
-      const response = await fetch("http://localhost:3002/experience");
-      const data = await response.json();
-      setExperience(data);
-    };
-    fetchDataExperience();
-    const fetchDataSpeciality = async () => {
-      const response = await fetch("http://localhost:3002/speciality");
-      const data = await response.json();
-      setSpeciality(data);
-    };
-    fetchDataSpeciality();
-    const fetchDataSkills = async () => {
-      const response = await fetch("http://localhost:3002/skills");
-      const data = await response.json();
-      setSkills(data);
-    };
-    fetchDataSkills();
-    const fetchDataLanguages = async () => {
-      const response = await fetch("http://localhost:3002/language");
-      const data = await response.json();
-      setLanguages(data);
-    };
-    fetchDataLanguages();
+    getFormOptions();
   }, []);
   return (
     <Formik
@@ -136,9 +130,9 @@ const NewJobForm = () => {
               Seniority
             </label>
             <Field name="id_Seniority" as="select" id="id_Seniority">
-              {seniorities &&
-                seniorities.length > 0 &&
-                seniorities.map((seniority, index) => {
+              {values.seniorities &&
+                values.seniorities.length > 0 &&
+                values.seniorities.map((seniority, index) => {
                   return (
                     <option value={index} key={index}>
                       {seniority.name}
