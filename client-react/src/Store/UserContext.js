@@ -56,6 +56,8 @@ const UserContextProvider = ({ children }) => {
 
   console.log(`USerType: ${userType}`);
   console.log(`User id: ${userID}`);
+ 
+
 
   //Creo un estado user dentro de mi localStorage
   useEffect(() => {

@@ -1,3 +1,4 @@
 node_modules
 .env
 peticiones.http
+.vercel

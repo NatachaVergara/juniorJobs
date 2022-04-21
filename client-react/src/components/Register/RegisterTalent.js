@@ -405,7 +405,7 @@ export default function RegisterTalent(props) {
             <MyCheckbox name="acceptedTerms">
               {"  "} I accept the terms and conditions
             </MyCheckbox>
-            <RegisterBtn isSubmitting={isSubmitting} isValid={!isValid} />
+            <RegisterBtn isSubmitting={isSubmitting} isValid={isValid} />
           </Form>
         )}
       </Formik>

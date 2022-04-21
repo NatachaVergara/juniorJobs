@@ -8,30 +8,35 @@ axios.defaults.baseURL = "http://localhost:3002";
 
 export const useAxios = () => {
   const [response, setResponse] = useState();
-  const { userType, isUser, setIsUser, setUserType, setUserId,userData, setUserData } = useUserContext()
+  const { userType, setIsUser, setUserType, setUserId, setUserData } = useUserContext()
   let navigate = useNavigate()
   const fetchData = useCallback((params) => {
     axios
       .request(params)
       .then((res) => {
-        // console.log(res.data)
-        // setResponse(res.data)
-        // setUserData(res.data)
-        // console.log(response)
-        // console.log(userData)
+        console.log(params)
+        console.log(res.data)
 
 
-        // setUserId(res.id)
-        // setUserData(res.data)
 
+
+        if(params.method === 'delete' ){
+           swal(`Your profile has been deleted`)    
+           navigate('/login')       
+           setIsUser(false)
+           setUserType(null)
+           setUserId(null)
+           setUserData(null)
+         }
+ 
 
 
         // Metodo update Talent
-        if (userType === 'Talent' && isUser) {
+        if (userType === 'Talent' && params.method === 'put') {
           console.log(res.data)
           swal(`Your profile has been updated`);
         //Metodo update Recruiter
-        } else if (userType === 'Recruiter' && isUser) {
+        } else if (userType === 'Recruiter' && params.method === 'put') {
           console.log(res.data)
           swal(`Your profile has been updated`);
         }
@@ -54,10 +59,6 @@ export const useAxios = () => {
           setUserData(res.data)
           navigate('/')
         }
-
-
-
-
       })
 
 
@@ -80,7 +81,7 @@ export const useAxios = () => {
         }
       });
 
-  }, [setUserData, response, userData, setUserId, userType, isUser, navigate, setIsUser, setUserType]);
+  }, [setUserData, setUserId, userType, navigate, setIsUser, setUserType]);
 
   return { response, fetchData };
 };

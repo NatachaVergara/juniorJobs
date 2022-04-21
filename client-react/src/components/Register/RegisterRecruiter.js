@@ -132,7 +132,7 @@ export default function RegisterRecruiter(props) {
             </MyCheckbox>
             <RegisterBtn
               isSubmitting={isSubmitting}
-              isValid={!isValid}
+              isValid={isValid}
             />
           </Form>
         )}

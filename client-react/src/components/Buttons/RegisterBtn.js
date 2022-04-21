@@ -2,10 +2,12 @@ import React from 'react'
 import { Button } from 'reactstrap'
 import { useUserContext } from '../../Store/UserContext'
 import Swal from "sweetalert";
+import { useCRUD } from '../../services/useCRUD';
+
 const RegisterBtn = ({isSubmitting , isValid, id }) => {
-  const {isUser, userID} = useUserContext()
-
-
+  const {isUser} = useUserContext()
+  const {onDeleteSubmit} = useCRUD()
+ 
 
   const onRemove = () => {
     Swal({
@@ -32,10 +34,7 @@ const RegisterBtn = ({isSubmitting , isValid, id }) => {
       }  
     }).then((result) => {
       if (result) {
-        Swal(
-          'Deleted!',
-          `Your profile ${userID} has been deleted`          
-        )
+        onDeleteSubmit()               
       }
     })
 

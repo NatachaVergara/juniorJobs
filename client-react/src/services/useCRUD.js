@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import swal from "sweetalert";
 
 export const useCRUD = () => {
-    const { userID, userType, setUserType, setIsUser } = useUserContext();
+    const { userID, userType, isUser, setIsUser, setUserType, setUserId, setUserData  } = useUserContext();
     const { fetchData, response } = useAxios();
     let params = {}
     let navigate = useNavigate()
@@ -41,7 +41,6 @@ export const useCRUD = () => {
             params.header = { 'Content-type': 'application/x-www-form-urlencoded' };
             params.data = values
         }
-
         fetchData(params);
     }
 
@@ -53,15 +52,28 @@ export const useCRUD = () => {
         params.header = { 'Content-type': 'application/x-www-form-urlencoded' };
         params.data = values
         fetchData(params);
-       
-        // setUserType(values.userType)
-        // setIsUser(true)
-        // navigate('/')
-        // swal(`Bienvenido/a`)
+    
     }
 
 
-    return {onLoginSubmit, onCreateSubmit,onUpdateSubmit}
+    function onDeleteSubmit(){
+        if (userType === "Recruiter") {     
+            params.method = "delete";
+            params.url = `/recruiters/${userID}`;
+            params.header = {'Content-type': 'application/x-www-form-urlencoded'};
+           
+            
+        } else {      
+            params.method = "delete";
+            params.url = `/talents/${userID}`;
+            params.header = {'Content-type': 'application/x-www-form-urlencoded'};
+            
+        }
+        fetchData(params);
+    }
+
+
+    return {onLoginSubmit, onCreateSubmit,onUpdateSubmit, onDeleteSubmit}
     
 }
 
