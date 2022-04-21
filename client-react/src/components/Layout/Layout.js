@@ -8,8 +8,8 @@ const Layout = (props) => {
   return (
     <Fragment>
       <MainNavigation />
-      <Container fluid>
-        <Row>
+      <Container fluid className="h-100">
+        <Row className="h-100">
           <Sidebar />
           <Col
             tag="main"

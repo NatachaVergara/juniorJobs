@@ -10,11 +10,11 @@ import { Navbar, NavItem, NavLink } from "reactstrap";
 
 export default function Footer(props) {
   return (
-    <Navbar tag="footer" className="mt-auto bg-secondary text-light h-100">
+    <Navbar tag="footer" className="mt-auto bg-secondary text-light ">
       <NavItem>Developed by JJ team</NavItem>
       <NavItem>
         <NavLink to="/">
-          <TiSocialGithub size="2em"  color="white" />
+          <TiSocialGithub size="2em" color="white" />
         </NavLink>
       </NavItem>
       <NavItem>
