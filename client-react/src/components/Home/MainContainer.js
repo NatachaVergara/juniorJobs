@@ -1,16 +1,15 @@
 import { Col, Row, CardTitle, CardText, Card } from "reactstrap";
-import {categoriesArray} from './dbHome'
+import { categoriesArray } from "./dbHome";
 
 const jobs = [1, 2];
 export default function MainContainer() {
-
   return (
     <>
       {categoriesArray.map((c, i) => (
         <Row key={i}>
-          <Col >
+          <Col>
             <h1 key={i}>{c.category}</h1>
-            {jobs.map((j,i) => (
+            {jobs.map((j, i) => (
               <Col key={i}>
                 <Row>
                   <a href="/">
