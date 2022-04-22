@@ -3,13 +3,13 @@
 
 [VER DEMO](https://juniorjobs.netlify.app "demo") 
 
-![](https://firebasestorage.googleapis.com/v0/b/busco-libro-app.appspot.com/o/readme%2Fchrome_Oh5POoQF8o.png?alt=media&token=3e1d12a9-57cf-473c-86ae-211b359a610b)
+![](https://firebasestorage.googleapis.com/v0/b/portfolio-c32fd.appspot.com/o/noCountry%2Flogin.png?alt=media&token=ef9acceb-3615-432b-8341-a181705f7dfe)
 
-![](https://firebasestorage.googleapis.com/v0/b/busco-libro-app.appspot.com/o/readme%2Fchrome_XVANqOKFg8.png?alt=media&token=c2e6d3e7-f804-4026-981e-0f3bfce7d402)
+![](https://firebasestorage.googleapis.com/v0/b/portfolio-c32fd.appspot.com/o/noCountry%2Fregister.png?alt=media&token=22737284-4d5c-415c-9b9d-9e6caa7a2108)
 
-![](https://firebasestorage.googleapis.com/v0/b/busco-libro-app.appspot.com/o/readme%2Fchrome_iO18xNfE2g.png?alt=media&token=9f8a4cd5-94c0-4b6b-8bb0-e1952b983dc1)
+![](https://firebasestorage.googleapis.com/v0/b/portfolio-c32fd.appspot.com/o/noCountry%2Ffqa.png?alt=media&token=e4730eb9-c1d3-4b99-8030-2d7da14421a6)
 
-![](https://firebasestorage.googleapis.com/v0/b/busco-libro-app.appspot.com/o/readme%2Fchrome_XGCMmdJ9TT.png?alt=media&token=dbaa6ba1-a735-40ee-a270-3e0629054080)
+![](https://firebasestorage.googleapis.com/v0/b/portfolio-c32fd.appspot.com/o/noCountry%2FtalentCard.png?alt=media&token=f8d90ea2-4d91-466b-b6d8-382cb72cf885)
 
 :gear: Tecnologías
 
