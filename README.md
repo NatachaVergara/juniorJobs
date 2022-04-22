@@ -20,18 +20,24 @@ Una vez registrados estos usuarios acceden a distintas opciones dentro de la app
 
 ### Instalación 🔧
 
-_Para correr esta app localmente se debe correr la base de datos localmente, descargando el repositorio e instalando dependencias: NPM INSTALL_
-_Luego en el directorio /server-node/myApp ejectuar el comando que corre la base de datos en modo dev: NPM RUN DEV_
+Para correr esta app localmente se debe correr la base de datos localmente, descargando el repositorio e instalando dependencias: 
+```
+npm i
+```
+Luego en el directorio /server-node/myApp ejectuar el comando que corre la base de datos en modo dev: 
+```
+npm run dev
+```
 
 
 
 ## Roles 🚀_
-Natacha Vergara, front end
-Gaspar Castello, front end 
-Matias Semelman, front end 
-Hernan Garcia, Back end
-Matias Mazparrote, Back end
-Brayan Tabarez, QA tester
+* **Natacha Vergara**, front end
+* **Gaspar Castello**, front end 
+* **Matias Semelman*, front end 
+* **Hernan Garcia**, Back end
+* **Matias Mazparrote**, Back end
+* **Brayan Tabarez**, QA tester
 
 Link del Deploy 
 https://juniorjobs.netlify.app/
