@@ -1,7 +1,6 @@
 
 
-# Título del Proyecto
-**Junior Jobs**
+# Junior jobs
 * Deployed en: https://juniorjobs.netlify.app/
 
 ### Descripción de Proyecto
