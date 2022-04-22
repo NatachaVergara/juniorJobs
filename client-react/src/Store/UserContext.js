@@ -53,6 +53,7 @@ const UserContextProvider = ({ children }) => {
   const [userType, setUserType] = useState(getLocalUserType());
   const [userID, setUserId] = useState(getLocalUserID());
   const [userData, setUserData] = useState(getLocalUserData());
+  const [jobOffer, setJobOffer]= useState([])
 
   console.log(`USerType: ${userType}`);
   console.log(`User id: ${userID}`);
@@ -89,6 +90,8 @@ const UserContextProvider = ({ children }) => {
         setUserId,
         userData,
         setUserData,
+        setJobOffer,
+        jobOffer
       }}
     >
       {children}

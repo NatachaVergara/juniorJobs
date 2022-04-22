@@ -1,5 +1,5 @@
 import React from 'react'
-import { AccessTimeRounded, CakeOutlined, CheckroomOutlined, DinnerDiningOutlined, LaptopMacOutlined, LocalHospitalOutlined, TagFacesOutlined,  WatchLater } from '@mui/icons-material';
+import { AccessTimeRounded, CakeOutlined, CheckroomOutlined, DinnerDiningOutlined, Face, LaptopMacOutlined, LocalHospitalOutlined, Person, TagFacesOutlined, Watch, WatchLater } from '@mui/icons-material';
 import PersonIcon from '@mui/icons-material/Person';
 import { Col, Row } from 'reactstrap';
 import classes from './JobDescription.module.scss'
@@ -8,7 +8,7 @@ const JobDescription = () => {
   return (
   <>
    <div className={classes.wrapper}>
-                    <h1 className={classes.title}>Job Description</h1>
+                    <h1 className={classes.title}>Job Description Page</h1>
                     <ul>
                         <li>Argentina</li>
                         <li>|</li>
@@ -22,16 +22,16 @@ const JobDescription = () => {
                     <ul className={classes.items}>
                         <li>
                             <PersonIcon className={classes.icon} />
-                            <span>22 postulation</span>
+                            <span>22 postulaciones</span>
                         </li>
-                        {/* <li>
+                        <li>
                             <WatchLater className={classes.icon} />
                             <span>Responde entre 2 y 10 días</span>
-                        </li> */}
-                        {/* <li>
+                        </li>
+                        <li>
                             <TagFacesOutlined  className={classes.icon}/>
                             <span >Revisado por última vez ayer</span>
-                        </li> */}
+                        </li>
                     </ul>
                     <div>
                         <button className='btn btn-primary'>Postulate</button>
@@ -79,7 +79,7 @@ const JobDescription = () => {
 
                         -Deseable experiencia en industria Telecomunicaciones, Bancaria / Financiera, Retail</p>
                     <div className='conditions '>
-                        <h3 className='title m-3 p-3 '>Conditions</h3>
+                        <h3 className='title '>Conditions</h3>
                         <Row>
                             <Col className='col-left'>
                                 <ul>

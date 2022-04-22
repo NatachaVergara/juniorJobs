@@ -4,9 +4,9 @@ import { Col, Row, CardTitle, CardText, Card } from "reactstrap";
 export const FeaturedCard = ({ color, offer }) => {
   console.log(offer)
   return (
-    <Col className='p-3'>
+    <Col className='p-3' sm='6'>
       <Row>
-        <Link to='/job'>
+        <Link to='/job' >
           <Col sm="12">
             <Card body color={color}>
               <Row>
