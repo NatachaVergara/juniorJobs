@@ -52,7 +52,7 @@ npm run dev
 |  animate.css | 4.1.1  | Estilos|
 | @popperjs/core  |  2.10.2 | javascript|
 
-### :computer: NoCountry - Junior JObs 
+### :computer: DEMO 
 
 
 [VER DEMO](https://juniorjobs.netlify.app "demo") 
