@@ -20,7 +20,7 @@ npm run dev
 
 
 
-### Roles 🚀_
+### Roles 🚀
 
 * **Natacha Vergara**, front end - [Natacha](https://www.linkedin.com/in/natacha-vergara)
 * **Gaspar Castello**, front end - [Gaspar](https://www.linkedin.com/in/gaspar-castello-4860a9a7/)
