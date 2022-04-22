@@ -25,31 +25,31 @@ const Register = () => {
     <>
       <div className="container m-auto d-flex flex-column mt-5 pt-5 registerContainer">
         <h1 className="d-flex justify-content-center">
-          ¿CÓMO TE VAS A REGISTRAR?
+          ¿HOW WILL YOU REGISTER?
         </h1>
         <div className="mt-5 registerBody">
           <div className="registerCard">
             <h3 className="text-center">
-              Soy Talento <FcNeutralDecision />
+              Im Talent <FcNeutralDecision />
             </h3>
             <button
               className="btn btn-primary"
               type="submit"
               onClick={() => formTalento()}
             >
-              Ir a formulario Talento
+              Go to talent form
             </button>
           </div>
           <div className="registerCard">
             <h3>
-              Soy Recruter <FcBusiness />
+              Im Recruiter <FcBusiness />
             </h3>
             <button
               className="btn btn-primary"
               type="submit"
               onClick={() => formRecruiter()}
             >
-              Ir a formulario Recruter
+             Go to recruiter form
             </button>
           </div>
         </div>
@@ -65,7 +65,7 @@ const Register = () => {
         className="d-flex justify-content-center align-items-center mb-5 mt-5 pt-5 text-decoration-none text-black"
       >
         {" "}
-        <FcApproval /> Ya tengo cuenta{" "}
+        <FcApproval /> I already have an account{" "}
       </Link>
     </>
   );
