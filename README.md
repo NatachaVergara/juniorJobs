@@ -1,4 +1,4 @@
-# :computer: NoCountry - Junio JObs - Coderhouse
+# :computer: NoCountry - Junior JObs 
 
 
 [VER DEMO](https://juniorjobs.netlify.app "demo") 
