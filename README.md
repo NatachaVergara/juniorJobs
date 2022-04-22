@@ -11,6 +11,31 @@
 
 ![](https://firebasestorage.googleapis.com/v0/b/portfolio-c32fd.appspot.com/o/noCountry%2FtalentCard.png?alt=media&token=f8d90ea2-4d91-466b-b6d8-382cb72cf885)
 
+# Título del Proyecto
+Junior Jobs
+
+### Descripción de Proyecto
+Este equipo desarrolló una plataforma de trabajo exclusiva para juniors en donde dos tipos de usuarios se registran en nuesta base de datos: "talents" y "recruiters"
+Una vez registrados estos usuarios acceden a distintas opciones dentro de la app, por ej siendo recruiter se postean nuevos trabajos para poder mostrarlos en el home.  
+
+### Instalación 🔧
+
+_Para correr esta app localmente se debe correr la base de datos localmente, descargando el repositorio e instalando dependencias: NPM INSTALL_
+_Luego en el directorio /server-node/myApp ejectuar el comando que corre la base de datos en modo dev: NPM RUN DEV_
+
+
+
+## Roles 🚀_
+Natacha Vergara, front end
+Gaspar Castello, front end 
+Matias Semelman, front end 
+Hernan Garcia, Back end
+Matias Mazparrote, Back end
+Brayan Tabarez, QA tester
+
+Link del Deploy 
+https://juniorjobs.netlify.app/
+
 :gear: Tecnologías
 
 - ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
