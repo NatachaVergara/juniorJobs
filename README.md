@@ -13,8 +13,7 @@
 
 # Título del Proyecto
 **Junior Jobs**
-* Link del Deploy 
-* https://juniorjobs.netlify.app/
+* Deployed en: https://juniorjobs.netlify.app/
 
 ### Descripción de Proyecto
 Este equipo desarrolló una plataforma de trabajo exclusiva para juniors en donde dos tipos de usuarios se registran en nuesta base de datos: "talents" y "recruiters"
