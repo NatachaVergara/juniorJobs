@@ -5,7 +5,8 @@
 
 ### Descripción de Proyecto
 Este equipo desarrolló una plataforma de trabajo exclusiva para juniors en donde dos tipos de usuarios se registran en nuesta base de datos: "talents" y "recruiters"
-Una vez registrados estos usuarios acceden a distintas opciones dentro de la app, por ej siendo recruiter se postean nuevos trabajos para poder mostrarlos en el home.  
+Una vez registrados estos usuarios acceden a distintas opciones dentro de la app, por ej siendo recruiter se postean nuevos trabajos para poder mostrarlos en el home.
+Las funcionalidades basicas de CRUD para los usuarios permiten crear, editar, actualizar y  borrar la informacion de los perfiles y trabajos publicados.
 
 ### Instalación 🔧
 
