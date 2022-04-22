@@ -1,15 +1,4 @@
-# :computer: NoCountry - Junior JObs 
 
-
-[VER DEMO](https://juniorjobs.netlify.app "demo") 
-
-![](https://firebasestorage.googleapis.com/v0/b/portfolio-c32fd.appspot.com/o/noCountry%2Flogin.png?alt=media&token=ef9acceb-3615-432b-8341-a181705f7dfe)
-
-![](https://firebasestorage.googleapis.com/v0/b/portfolio-c32fd.appspot.com/o/noCountry%2Fregister.png?alt=media&token=22737284-4d5c-415c-9b9d-9e6caa7a2108)
-
-![](https://firebasestorage.googleapis.com/v0/b/portfolio-c32fd.appspot.com/o/noCountry%2Ffqa.png?alt=media&token=e4730eb9-c1d3-4b99-8030-2d7da14421a6)
-
-![](https://firebasestorage.googleapis.com/v0/b/portfolio-c32fd.appspot.com/o/noCountry%2FtalentCard.png?alt=media&token=f8d90ea2-4d91-466b-b6d8-382cb72cf885)
 
 # Título del Proyecto
 **Junior Jobs**
@@ -64,6 +53,17 @@ npm run dev
 |  animate.css | 4.1.1  | Estilos|
 | @popperjs/core  |  2.10.2 | javascript|
 
+# :computer: NoCountry - Junior JObs 
 
+
+[VER DEMO](https://juniorjobs.netlify.app "demo") 
+
+![](https://firebasestorage.googleapis.com/v0/b/portfolio-c32fd.appspot.com/o/noCountry%2Flogin.png?alt=media&token=ef9acceb-3615-432b-8341-a181705f7dfe)
+
+![](https://firebasestorage.googleapis.com/v0/b/portfolio-c32fd.appspot.com/o/noCountry%2Fregister.png?alt=media&token=22737284-4d5c-415c-9b9d-9e6caa7a2108)
+
+![](https://firebasestorage.googleapis.com/v0/b/portfolio-c32fd.appspot.com/o/noCountry%2Ffqa.png?alt=media&token=e4730eb9-c1d3-4b99-8030-2d7da14421a6)
+
+![](https://firebasestorage.googleapis.com/v0/b/portfolio-c32fd.appspot.com/o/noCountry%2FtalentCard.png?alt=media&token=f8d90ea2-4d91-466b-b6d8-382cb72cf885)
 
 
