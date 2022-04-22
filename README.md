@@ -21,12 +21,13 @@ npm run dev
 
 
 ### Roles 🚀_
-* **Natacha Vergara**, front end [Natacha] (https://www.linkedin.com/in/natacha-vergara)
-* **Gaspar Castello**, front end [Gaspar] (https://www.linkedin.com/in/gaspar-castello-4860a9a7/)
-* **Matias Semelman**, front end [Matias S] (https://www.linkedin.com/in/matias-semelman/)
-* **Hernan Garcia**, Back end [Hernan] (https://www.linkedin.com/in/hernan-horacio-garcia/)
-* **Matias Mazparrote**, Back end [Matias M] (https://www.linkedin.com/in/mat%C3%ADasmazparrotefeli%C3%BA/)
-* **Brayan Tabarez**, QA tester [Brayan](https://www.linkedin.com/in/brayan-tabares-52a243b5/) 
+
+* **Natacha Vergara**, front end - [Natacha](https://www.linkedin.com/in/natacha-vergara)
+* **Gaspar Castello**, front end - [Gaspar](https://www.linkedin.com/in/gaspar-castello-4860a9a7/)
+* **Matias Semelman**, front end - [Matias S](https://www.linkedin.com/in/matias-semelman/)
+* **Hernan Garcia**, Back end - [Hernan](https://www.linkedin.com/in/hernan-horacio-garcia/)
+* **Matias Mazparrote**, Back end - [Matias M](https://www.linkedin.com/in/mat%C3%ADasmazparrotefeli%C3%BA/)
+* **Brayan Tabarez**, QA tester - [Brayan](https://www.linkedin.com/in/brayan-tabares-52a243b5/) 
 
 ### :gear: Tecnologías
 
