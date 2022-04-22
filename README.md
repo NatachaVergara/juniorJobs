@@ -20,7 +20,7 @@ npm run dev
 
 
 
-## Roles 🚀_
+### Roles 🚀_
 * **Natacha Vergara**, front end
 * **Gaspar Castello**, front end 
 * **Matias Semelman**, front end 
@@ -28,7 +28,7 @@ npm run dev
 * **Matias Mazparrote**, Back end
 * **Brayan Tabarez**, QA tester
 
-:gear: Tecnologías
+### :gear: Tecnologías
 
 - ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 - ![NPM](https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white)
@@ -52,7 +52,7 @@ npm run dev
 |  animate.css | 4.1.1  | Estilos|
 | @popperjs/core  |  2.10.2 | javascript|
 
-# :computer: NoCountry - Junior JObs 
+### :computer: NoCountry - Junior JObs 
 
 
 [VER DEMO](https://juniorjobs.netlify.app "demo") 
