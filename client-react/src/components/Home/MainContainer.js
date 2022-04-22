@@ -18,11 +18,12 @@ export default function MainContainer() {
                       <Card body>
                         <Row>
                           <Col sm="3">
+                            
                             <img
-                              src="https://cdn1.iconfinder.com/data/icons/social-black-buttons/512/anonymous-512.png"
+                              src={c.jobs[0].img} 
                               width="96px"
                               height="96px"
-                              style={{ borderRadius: "20px" }}
+                              style={{ borderRadius: "10px" }}
                               alt="Logo"
                             />
                           </Col>

@@ -3,7 +3,7 @@ import JobAreas from "./JobAreas";
 
 const Hero = () => {
   return (
-    <Row>
+    <Row className='p-5'>
       <Col>
         <Row>
           <Col>

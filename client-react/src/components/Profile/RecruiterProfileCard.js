@@ -6,37 +6,37 @@ export default function RecruiterProfileCard(props) {
  
   return (
     <Fragment>
-      <Card body color="secondary" inverse className={classes.card}>
+      <Card inverse className={classes.card}>
         <CardImg
           src={props.data.image}
-          width="100%"
-          top
+          className={classes.img}        
         >
         </CardImg>
+        <div className={classes.profile}>
         <CardTitle
           tag="h1"
           className='mt-3'>
           {props.data.name} {props.data.lastName}
         </CardTitle>
-        <CardSubtitle className="mb-2 text-muted" tag="h5">
+        <CardSubtitle className={classes.text} tag="h5">
           Company name: {props.data.company}
         </CardSubtitle>
+       
         <CardLink
-          href={props.data.url}
-          className='text-light text-decoration-none'
+          href={props.data.url}          
           target="_blank"
           rel="noopener noreferrer"
+          className={classes.cardLink}
         >Company web Site - Linkedin: 
         <CardSubtitle className="mb-2" tag="h6">
         {props.data.url}
         </CardSubtitle>
         </CardLink>
+        </div>
         <CardText
           className='text-light m-0'>
           Email: {props.data.email}
         </CardText>
-      
-
       </Card>
     </Fragment>
   );

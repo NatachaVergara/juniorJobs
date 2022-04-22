@@ -1,19 +1,20 @@
 import { Fragment, useState } from "react";
 import { Button, Container, Row, Col } from "reactstrap";
 import { useUserContext } from "../../Store/UserContext";
-import ProjectsCard from "./ProjectsCard";
+import RecruiterProjectsCard from "./RecruiterProjectsCard";
 import RecruiterProfileCard from "./RecruiterProfileCard";
 import RecruiterUpdateForm from "./RecruiterUpdateForm";
 import TalentProfileCard from "./TalentProfileCard";
 import TalentUpdateForm from "./TalentUpdateForm";
+import TalentProyectsCard from "./TalentProyectsCard";
 
 
 
 
 const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
-  const {  userType, userData } = useUserContext();
- 
+  const { userType, userData } = useUserContext();
+
 
 
   const onEdit = () => {
@@ -25,19 +26,20 @@ const Profile = () => {
   }
 
 
+  
+
 
   return (
     <>
       {userType === 'Talent' ?
         <div className="d-flex flex-column flex-md-row">
           <TalentProfileCard data={userData} />
-          <ProjectsCard />
+          <TalentProyectsCard />
         </div>
         :
-        <div className="d-flex flex-column flex-md-row ">
-          <RecruiterProfileCard data={userData}
-          />
-          <ProjectsCard />
+        <div className="d-flex flex-column  flex-md-row">
+          <RecruiterProfileCard data={userData}/>
+          <RecruiterProjectsCard />
         </div>
       }
 
@@ -71,24 +73,24 @@ const Profile = () => {
             </Col>
 
 
-            {isEditing & (userType === "Talent") && (
-              <Row>
+            {isEditing & userType === "Talent" ? (
+              <Row className='d-flex flex-column flex-md-row'>
                 <TalentUpdateForm
                   data={userData}
                   setIsEditing={setIsEditing}
                 >
                 </TalentUpdateForm>
               </Row>
-            )}
-            {isEditing & (userType === "Recruiter") && (
-              <Row>
+            ) : null}
+            {isEditing & userType === "Recruiter" ? (
+              <Row className='d-flex flex-column flex-md-row'>
                 <RecruiterUpdateForm
                   data={userData}
                   setIsEditing={setIsEditing}
                 >
                 </RecruiterUpdateForm>
               </Row>
-            )}
+            ): null}
           </Row>
         </Container>
       </Fragment>

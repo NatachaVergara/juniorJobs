@@ -1,7 +1,7 @@
 import React from 'react';
-import { Col, Container, Nav, NavItem, NavLink, Row } from "reactstrap";
+import { Col, Container, Nav, NavItem,  Row } from "reactstrap";
 import classes from "./Sidebar.module.scss";
-import { MdOutlineCases,MdList,MdPersonOutline,MdBuild} from "react-icons/md";
+import { MdList,MdBuild} from "react-icons/md";
 import { useUserContext } from '../../Store/UserContext';
 import { Link } from 'react-router-dom';
 
@@ -11,23 +11,12 @@ export default function (props) {
 
   return (
    <>   
-      {isUser && <Col tag="nav" xs="2" className="bg-secondary">
-        <Row>
-          <Nav vertical>
+      {isUser && 
+      <Col tag="nav" xs="12" md="2" className="bg-secondary">
+        <Row className={classes.nav} >
+          <Nav>       
             <NavItem>
-              <Link className={classes.anchor} to="/">
-                <Container fluid>
-                  <Row>
-                    <Col sm="2">
-                      <MdOutlineCases />
-                    </Col>
-                    <Col>Jobs for you</Col>
-                  </Row>
-                </Container>
-              </Link>
-            </NavItem>
-            <NavItem>
-              <Link className={classes.anchor} to="/">
+              <Link className={classes.anchor} to="/profile">
                 <Container fluid>
                   <Row>
                     <Col sm="2">
@@ -38,18 +27,7 @@ export default function (props) {
                 </Container>
               </Link>
             </NavItem>
-            {/* <NavItem>
-              <Link className={classes.anchor} to="/profile">
-                <Container fluid>
-                  <Row>
-                    <Col sm="2">
-                      <MdPersonOutline />
-                    </Col>
-                    <Col>Profile</Col>
-                  </Row>
-                </Container>
-              </Link>
-            </NavItem> */}
+            
 
             <NavItem>
               <Link className={classes.anchor} to="/resources">

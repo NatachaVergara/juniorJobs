@@ -13,7 +13,9 @@ const Layout = (props) => {
           <Sidebar />
           <Col
             tag="main"
+            className='p-0'
             md={{
+              
               offset: 0,
               size: 10,
             }}

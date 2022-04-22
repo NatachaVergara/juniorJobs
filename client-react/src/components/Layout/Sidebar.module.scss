@@ -1,4 +1,14 @@
-.anchor {
+
+.anchor{
     color: white;
     text-decoration: none;
+    padding: 15px;
+  
+    
+  & :visited{
+    text-decoration: none;
   }
+
+  }
+
+  

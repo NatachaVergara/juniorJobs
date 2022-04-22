@@ -46,14 +46,15 @@ const RegisterBtn = ({isSubmitting , isValid, id }) => {
   return (
     <div className='d-flex justify-content-around align-items-center mt-3 mb-3'>
     <Button 
-    color="primary"
+     color="primary"
      type='submit'
      disabled={isSubmitting || !isValid}>
       Submit
     </Button>
-    {isUser ?  <Button color="danger" type='reset' disabled={isSubmitting || !isValid} onClick={onRemove} >
+    {isUser &&  
+    <Button color="danger" type='reset' disabled={isSubmitting || !isValid} onClick={onRemove} >
       Remove this profile
-    </Button>: null}
+    </Button> }
    
   </div>
   )

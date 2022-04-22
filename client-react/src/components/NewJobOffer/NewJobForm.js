@@ -1,5 +1,6 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAxios } from "../../hooks/use-axios";
 import { useUserContext } from "../../Store/UserContext";
 import styles from "./NewJobForm.module.scss";
@@ -12,6 +13,10 @@ const NewJobForm = () => {
   const [experience, setExperience] = useState([]);
   const [remote, setRemote] = useState([]);
   const [speciality, setSpeciality] = useState([]);
+  const [skills, setSkills] = useState([]);
+
+  let navigate = useNavigate()
+
   console.log("seniorities in new job form", seniorities);
   useEffect(() => {
     const fetchDataSeniorities = async () => {
@@ -32,7 +37,22 @@ const NewJobForm = () => {
       setExperience(data);
     };
     fetchDataExperience();
+
+    const fetchDatasetSpeciality = async () => {
+      const response = await fetch("http://localhost:3002/speciality");
+      const data = await response.json();
+      setSpeciality(data);
+    };
+    fetchDatasetSpeciality();
+
+
+
   }, []);
+
+  console.log(speciality)
+
+
+
   return (
     <Formik
       initialValues={{
@@ -48,7 +68,7 @@ const NewJobForm = () => {
         id_Speciality: 1,
         //   jobArea: 1,
         //   checked: [],
-        id_Skill:[1,2,3]
+        id_Skill: [1, 2, 3]
       }}
       onSubmit={(values, { resetForm, setSubmitting }) => {
         setSubmitting(true);
@@ -63,19 +83,20 @@ const NewJobForm = () => {
         fetchData(config);
         setSubmitting(false);
         console.log("response in new job form on submit", response);
+        navigate('/home')
       }}
     >
       {({ isSubmitting }) => (
         <Form className={styles.newjobForm}>
           <div>
             <label htmlFor="title" className={styles.formTitle}>
-              Puesto / Título del aviso <span>*</span>
+              Puesto / Job Offer <span>*</span>
             </label>
             <Field type="textarea" id="title" name="title" />
           </div>
           <div>
             <label htmlFor="description" className={styles.formTitle}>
-              Descripción del puesto <span>*</span>
+              Job Description <span>*</span>
             </label>
             <Field as="textarea" id="description" name="description" />
           </div>
@@ -139,16 +160,16 @@ const NewJobForm = () => {
               Speciality
             </label>
             <Field name="id_Speciality" as="select" id="id_Speciality">
-              <option value={1}>Administrador de Base de Datos/DBA</option>
-              <option value={2}>Administrador de Infraestructura</option>
-              <option value={3}>Administrador de Redes</option>
+              {speciality.map((s, i) => (
+              <option key={i} value={s.id}>{s.category} </option>
+              ))}
             </Field>
           </div>
 
           {!isSubmitting && (
             <div className={styles.btnContainer}>
               <button type="submit" className={styles.publishButton}>
-                Publicar
+                Publish offer
               </button>
             </div>
           )}

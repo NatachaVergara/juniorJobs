@@ -1,15 +1,20 @@
+import classes from './Resources.module.scss'
+
 const IndividualResource = ({ imgLink, title, description, link }) => {
   return (
-    <div className="card" style={{ width: "18rem" }}>
-      <a href={link} target="_blank"
-          rel="noreferrer">
+    <div className={classes.card}>
+      <a href={link}
+        target="_blank"
+        rel="noreferrer">
         {" "}
-        <img src={imgLink} className="card-img-top" alt={`${title} image`} />
+        <img src={imgLink}
+         className={classes.img} 
+         alt={`${title}`} />
       </a>
 
-      <div className="card-body">
-        <h5 className="card-title">{title}</h5>
-        <p className="card-text">{description}</p>
+      <div className={classes.cardBody}>
+        <h5 className={classes.cardTitle}>{title}</h5>
+        <p className={classes.cardDesc}>{description}</p>
         <a
           href={link}
           className="btn btn-primary"

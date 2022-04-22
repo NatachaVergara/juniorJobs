@@ -16,8 +16,7 @@ export const useAxios = () => {
       .then((res) => {
         console.log(params)
         console.log(res.data)
-
-
+        setResponse(res.data)
 
 
         if(params.method === 'delete' ){

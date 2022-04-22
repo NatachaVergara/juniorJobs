@@ -2,7 +2,7 @@ import React from "react";
 import {
   Formik,
   Form,
- // FieldArray,
+  // FieldArray,
   //Field,
   //ErrorMessage,
 } from "formik";
@@ -14,14 +14,14 @@ import { MyCheckbox, MyRadio, MySelect, MyTextInput } from "../../utils/inputsFu
 import { emailRegex, phoneRegex, urlRegex } from "../../utils/regex";
 import { errorAlerts } from '../../utils/errorsAlert'
 import { useUserContext } from "../../Store/UserContext";
-import {useCRUD} from '../../services/useCRUD'
-
+import { useCRUD } from '../../services/useCRUD'
+import classes from './TalentUpdateForm.module.scss'
 
 
 const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
-  const {setUserData} = useUserContext()
-  const {onUpdateSubmit} = useCRUD()
-  
+  const { setUserData } = useUserContext()
+  const { onUpdateSubmit } = useCRUD()
+
   return (
     <>
       <h1 className="h1">Edit your profile!</h1>
@@ -30,8 +30,8 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
           name: data.name,
           lastName: data.lastName,
           email: data.email,
-          password: "pr123",
-          passwordConfirmation: "pr123",
+          // password: "pr123",
+          // passwordConfirmation: "pr123",
           phone: data.phone,
           url: data.url,
           repository: data.repository,
@@ -53,12 +53,12 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
           lastName: Yup.string()
             .min(2, errorAlerts[0].nameAlert)
             .required(errorAlerts[4].requiredAlert),
-          password: Yup.string()
-            .min(4, errorAlerts[1].passwordAlert)
-            .required(errorAlerts[4].requiredAlert),
-          passwordConfirmation: Yup.string()
-            .oneOf([Yup.ref('password'), null], 'Passwords must match')
-            .required(errorAlerts[4].requiredAlert),
+          // password: Yup.string()
+          //   .min(4, errorAlerts[1].passwordAlert)
+          //   .required(errorAlerts[4].requiredAlert),
+          // passwordConfirmation: Yup.string()
+          //   .oneOf([Yup.ref('password'), null], 'Passwords must match')
+          //   .required(errorAlerts[4].requiredAlert),
 
           email: Yup.string()
             .email(errorAlerts[2].emailAlert)
@@ -100,7 +100,7 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
           //   .oneOf([true], errorAlerts[6].acceptedTerms),
         })}
         onSubmit={(values, { setSubmitting }) => {
-        
+
           values.id_Seniority = +values.id_Seniority;
           values.id_Education = +values.id_Education;
           // values.id_Speciality = +values.id_Speciality;
@@ -114,7 +114,7 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
           //   name: +language.level,
           //   level: +language.level,
           // }))
-          setSubmitting(true);              
+          setSubmitting(true);
           setUserData(values)
           onUpdateSubmit(values)
           setSubmitting(false);
@@ -123,15 +123,18 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
 
       >
         {({ isSubmitting, isValid, values }) => (
-          <Form>
+          <Form className={classes.updateForm}>
             <Row>
-              <Col>
+              <Col xs='12'
+                md='6'
+              >
                 <MyTextInput
                   label="Name *"
                   name="name"
                   type="text" />
               </Col>
-              <Col>
+              <Col xs='12'
+                md='6'>
                 <MyTextInput
                   label="Last name *"
                   name="lastName"
@@ -139,7 +142,9 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
               </Col>
             </Row>
             <Row>
-              <Col>
+              <Col 
+              xs='12'
+              md='6'>
                 <MyTextInput
                   label="E-mail *"
                   name="email"
@@ -147,7 +152,7 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
                   placeholder="example@juniorjobs.com"
                 />
               </Col>
-              <Col>
+              {/* <Col>
                 <MyTextInput
                   label="Password *"
                   name="password"
@@ -162,8 +167,10 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
                   type="password"
                   placeholder=""
                 />
-              </Col>
-              <Col>
+              </Col> */}
+              <Col
+              xs='12'
+              md='6'>
                 <MyTextInput
                   label="Phone number *"
                   name="phone"
@@ -173,13 +180,17 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
               </Col>
             </Row>
             <Row>
-              <Col>
+              <Col
+              xs='12'
+              md='6'>
                 <MyTextInput
                   label="image *"
                   name="image"
                   type="url" />
               </Col>
-              <Col>
+              <Col
+              xs='12'
+              md='6'>
                 <MyTextInput
                   label="LinkedIn *"
                   name="url"
@@ -187,7 +198,9 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
                 />
 
               </Col>
-              <Col>
+              <Col
+              xs='12'
+              md='6'>
                 <MyTextInput
                   label="Remote repositories *"
                   name="repository"
@@ -197,7 +210,9 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
             </Row>
             <MyTextInput label="Date of birth *" name="birthdate" type="date" />
             <Row>
-              <Col>
+              <Col
+              xs='12'
+              md='6'>
                 <MySelect label="Seniority *" name="id_Seniority">
                   <option value={1}>Trainee</option>
                   <option value={2}>Junior</option>
@@ -214,7 +229,7 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
                 </MySelect>
               </Col> */}
             </Row>
-            <Label className='mt-3 mb-0'>Languages and skills *</Label>
+            {/* <Label className='mt-3 mb-0'>Languages and skills *</Label> */}
             <Row>
               {/* <FieldArray name="Skill">
                 {({ insert, remove, push }) => (
@@ -339,7 +354,8 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
                 )}
               </FieldArray>
             </Row> */}
-            <Col>
+            <Col xs='12'
+                md='6'>
               <MySelect
                 label="Education *"
                 name="id_Education">
@@ -359,7 +375,9 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
             <Label>Experience *</Label>
             <Card body color="" className="my-3 mt-0">
               <Row>
-                <Col>
+                <Col
+                xs='12'
+                md='6'>
                   <MyRadio
                     label="0-2 months"
                     name="id_Experience"
@@ -367,7 +385,9 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
                     value="1"
                   />
                 </Col>
-                <Col>
+                <Col
+                xs='12'
+                md='6'>
                   <MyRadio
                     label="2-6 months"
                     name="id_Experience"
@@ -375,7 +395,9 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
                     value="2"
                   />
                 </Col>
-                <Col>
+                <Col
+                xs='12'
+                md='6'>
                   <MyRadio
                     label="6-12 months"
                     name="id_Experience"
@@ -383,7 +405,9 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
                     value="3"
                   />
                 </Col>
-                <Col>
+                <Col
+                xs='12'
+                md='6'>
                   <MyRadio
                     label="1-2 yeas"
                     name="id_Experience"
@@ -391,7 +415,9 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
                     value="4"
                   />
                 </Col>
-                <Col>
+                <Col
+                xs='12'
+                md='6'>
                   <MyRadio
                     label="2-4 years"
                     name="id_Experience"
@@ -401,7 +427,7 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
                 </Col>
               </Row>
             </Card>
-         
+
             <RegisterBtn
               isSubmitting={isSubmitting}
               isValid={isValid}

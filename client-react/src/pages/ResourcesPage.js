@@ -8,25 +8,24 @@ import { frontendResources } from "../components/Resources/dbResources";
 const ResourcesPage = () => {
   return (
     <Fragment>
-      <h2>Frontend Development</h2>
       <Row >
-{frontendResources.map((r, i) => ( 
+        {frontendResources.map((r, i) => (
 
-    <Col>
+          <Col>
+            <IndividualResource
+              key={i}
+              title={r.title}
+              imgLink={r.imgLink}
+              description={r.description}
+              link={r.link} />
 
-<IndividualResource key={i} title={r.title} imgLink={r.imgLink} description={r.description} link={r.link} />
-
-</Col>
-
-
-
-
-
-))}
-<h1>Backend</h1>
-</Row>
+          </Col>
+        ))}
+        {/* <h1>Backend</h1> */}
+      </Row>
     </Fragment>
- 
 
-  )}
+
+  )
+}
 export default ResourcesPage;

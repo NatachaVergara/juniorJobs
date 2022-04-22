@@ -29,23 +29,23 @@ const MainNavigation = () => {
         <NavbarBrand>Junior Jobs app</NavbarBrand>
       </NavItem>
 
-      <NavItem>
+      {/* <NavItem>
         <Input
           placeholder="Search an open position"
           className={classes.searchInput}
           type="search"
         ></Input>
-      </NavItem>
+      </NavItem> */}
 
       <NavItem>
         <NavLink to="/">
           <Button color="primary">Home</Button>
         </NavLink>
-        {isUser === true && (
+        {isUser === true ? (
           <NavLink to="/profile">
-            <Button color="primary">Profile</Button>
+            <Button color="primary" className="m-1">Profile</Button>
           </NavLink>
-        )}
+        ) : null}
         <NavLink to="/about">
           <Button className="m-1" color="primary">
             About us
@@ -56,23 +56,23 @@ const MainNavigation = () => {
             Faqs
           </Button>
         </NavLink>
-        {userType === "Recruiter" && (
+        {userType === "Recruiter" & isUser ?
           <NavLink to="/newjob">
             <Button className="m-1" color="info">
               Post a new job
             </Button>
           </NavLink>
-        )}
+        : null}
         {isUser ? (
           <Button onClick={logoutHandler} color="warning">
             Logout
           </Button>
         ) : (
           <Fragment>
-            <Button color="warning" onClick={() => navigate("/register")}>
+            <Button color="warning" className="m-1" onClick={() => navigate("/register")}>
               SignUp
             </Button>
-            <Button color="warning" onClick={() => navigate("/login")}>
+            <Button color="warning" className="m-1" onClick={() => navigate("/login")}>
               LogIn
             </Button>
           </Fragment>

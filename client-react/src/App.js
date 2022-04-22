@@ -12,7 +12,7 @@ import { useUserContext } from "./Store/UserContext";
 import NewJobOffer from "./pages/NewJobOffer";
 
 function App() {
-  const { userType } = useUserContext();
+  const { userType, isUser } = useUserContext();
   return (
     <Layout>
       <Routes>
@@ -25,9 +25,11 @@ function App() {
         <Route path="/about" element={<AboutUsPage />} />
         <Route path="/resources" element={<ResourcesPage />} />
         <Route path="/faq" element={<FaqPage />} />
-        {userType === "Recruiter" && (
+
+
+        {userType === "Recruiter" & isUser ? 
           <Route path="/newjob" element={<NewJobOffer />} />
-        )}
+        : null}
       </Routes>
     </Layout>
   );

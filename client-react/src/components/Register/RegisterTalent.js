@@ -126,15 +126,24 @@ export default function RegisterTalent(props) {
         {({ isSubmitting, isValid, values }) => (
           <Form>
             <Row>
-              <Col>
-                <MyTextInput label="Name *" name="name" type="text" />
+              <Col xs='12'
+                md='6'>
+                <MyTextInput
+                  label="Name *"
+                  name="name"
+                  type="text" />
               </Col>
-              <Col>
-                <MyTextInput label="Last name *" name="lastName" type="text" />
+              <Col xs='12'
+                md='6'>
+                <MyTextInput
+                  label="Last name *"
+                  name="lastName"
+                  type="text" />
               </Col>
             </Row>
             <Row>
-              <Col>
+              <Col xs='12'
+                md='6'>
                 <MyTextInput
                   label="E-mail *"
                   name="email"
@@ -142,7 +151,8 @@ export default function RegisterTalent(props) {
                   placeholder="example@juniorjobs.com"
                 />
               </Col>
-              <Col>
+              <Col xs='12'
+                md='6'>
                 <MyTextInput
                   label="Password *"
                   name="password"
@@ -150,7 +160,8 @@ export default function RegisterTalent(props) {
                   placeholder=""
                 />
               </Col>
-              <Col>
+              <Col xs='12'
+                md='6'>
                 <MyTextInput
                   label="Password Confirmation *"
                   name="passwordConfirmation"
@@ -158,7 +169,8 @@ export default function RegisterTalent(props) {
                   placeholder=""
                 />
               </Col>
-              <Col>
+              <Col xs='12'
+                md='6'>
                 <MyTextInput
                   label="Phone number *"
                   name="phone"
@@ -168,17 +180,26 @@ export default function RegisterTalent(props) {
               </Col>
             </Row>
             <Row>
-              <Col>
-                <MyTextInput label="image *" name="image" type="url" />
+              <Col xs='12'
+                md='6'>
+                <MyTextInput
+                  label="image *"
+                  name="image"
+                  type="url" />
               </Col>
             </Row>
             <Row>
-              <Col>
-                <MyTextInput label="LinkedIn *" name="url" type="url" />
-              </Col>
-              <Col>
+              <Col xs='12'
+                md='6'>
                 <MyTextInput
-                  label="Remote repositories *"
+                  label="LinkedIn *"
+                  name="url"
+                  type="url" />
+              </Col>
+              <Col xs='12'
+                md='6'>
+                <MyTextInput
+                  label="Remote repository *"
                   name="repository"
                   type="url"
                 />
@@ -186,7 +207,8 @@ export default function RegisterTalent(props) {
             </Row>
             <MyTextInput label="Date of birth *" name="birthdate" type="date" />
             <Row>
-              <Col>
+              <Col xs='12'
+                md='6'>
                 <MySelect label="Seniority *" name="id_Seniority">
                   {/* <option value={0}>Select one of the list</option> */}
                   <option value={1}>Trainee</option>
@@ -342,7 +364,8 @@ export default function RegisterTalent(props) {
                 )}
               </FieldArray>
             </Row> */}
-            <Col>
+            <Col xs='12'
+              md='6'>
               <MySelect label="Education *" name="id_Education">
                 <option value={1}>Bootcamp</option>
                 <option value={2}>Curso</option>
@@ -351,16 +374,20 @@ export default function RegisterTalent(props) {
                 <option value={5}>Tecnicatura</option>
               </MySelect>
             </Col>
-            <MyTextInput
-              label="Profile description *"
-              name="profile"
-              type="textarea"
-              placeholder="Describe yourself"
-            />
+            <Col xs='12'
+              md='12'>
+              <MyTextInput
+                label="Profile description *"
+                name="profile"
+                type="textarea"
+                placeholder="Describe yourself"
+              />
+            </Col>
             <Label>Experience *</Label>
-            <Card body color="" className="my-3 mt-0">
+            <Card body color="" className="mt-0">
               <Row>
-                <Col>
+                <Col xs='12'
+                  md='2'>
                   <MyRadio
                     label="0-2 months"
                     name="id_Experience"
@@ -368,7 +395,8 @@ export default function RegisterTalent(props) {
                     value="1"
                   />
                 </Col>
-                <Col>
+                <Col xs='12'
+                  md='2'>
                   <MyRadio
                     label="2-6 months"
                     name="id_Experience"
@@ -376,7 +404,8 @@ export default function RegisterTalent(props) {
                     value="2"
                   />
                 </Col>
-                <Col>
+                <Col xs='12'
+                  md='2'>
                   <MyRadio
                     label="6-12 months"
                     name="id_Experience"
@@ -384,7 +413,8 @@ export default function RegisterTalent(props) {
                     value="3"
                   />
                 </Col>
-                <Col>
+                <Col xs='12'
+                  md='2'>
                   <MyRadio
                     label="1-2 years"
                     name="id_Experience"
@@ -392,7 +422,8 @@ export default function RegisterTalent(props) {
                     value="4"
                   />
                 </Col>
-                <Col>
+                <Col xs='12'
+                  md='2'>
                   <MyRadio
                     label="2-4 years"
                     name="id_Experience"
@@ -401,11 +432,21 @@ export default function RegisterTalent(props) {
                   />
                 </Col>
               </Row>
+            
             </Card>
-            <MyCheckbox name="acceptedTerms">
-              {"  "} I accept the terms and conditions
-            </MyCheckbox>
-            <RegisterBtn isSubmitting={isSubmitting} isValid={isValid} />
+            <Row>
+                <Col xs='12'
+                  md='6'>
+                  <MyCheckbox name="acceptedTerms">
+                    {"  "} I accept the terms and conditions
+                  </MyCheckbox>
+                </Col>
+
+              </Row>
+
+            <RegisterBtn
+              isSubmitting={isSubmitting}
+              isValid={isValid} />
           </Form>
         )}
       </Formik>
