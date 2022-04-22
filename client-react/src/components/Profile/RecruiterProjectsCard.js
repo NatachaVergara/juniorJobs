@@ -11,7 +11,7 @@ export default function ProjectsCard(props) {
 
   useEffect(() => {
     const fetchOffers = async () => {
-      const response = await fetch(`http://localhost:3002/jobOffers`)
+      const response = await fetch(`http://localhost:3002/jobOffers?recruiter=${userID}`);
       const data = await response.json()
       console.log(data)
       setJobOffers(data)
@@ -20,6 +20,7 @@ export default function ProjectsCard(props) {
 
   }, [userID])
 
+  console.log(jobOffers)
   return (
 
     <Card body color="light" className={classes.profile}>

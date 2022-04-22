@@ -166,9 +166,9 @@ const jobOfferController = {
         } else {
             db.JobOffer.findAll({where:
                 {
-                    id_Speciality: speciality,
+                 //   id_Speciality: speciality,
                     id_Recruiter: recruiter,
-                    id_Talent: talent
+                   // id_Talent: talent
                 }
             })
             .then((allJobOffer) => {

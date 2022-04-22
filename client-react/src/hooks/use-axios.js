@@ -51,7 +51,7 @@ export const useAxios = () => {
        // Metodo Login
         if (params.data.login) {       
           console.log(res.data)
-          swal(`Bienvenido/a ${res.data.name}`)
+          swal(`Welcome ${res.data.name}`)
           setIsUser(true)
           setUserType(params.data.userType)
           setUserId(res.data.id)
