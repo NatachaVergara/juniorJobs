@@ -12,7 +12,9 @@
 ![](https://firebasestorage.googleapis.com/v0/b/portfolio-c32fd.appspot.com/o/noCountry%2FtalentCard.png?alt=media&token=f8d90ea2-4d91-466b-b6d8-382cb72cf885)
 
 # Título del Proyecto
-Junior Jobs
+**Junior Jobs**
+* Link del Deploy 
+* https://juniorjobs.netlify.app/
 
 ### Descripción de Proyecto
 Este equipo desarrolló una plataforma de trabajo exclusiva para juniors en donde dos tipos de usuarios se registran en nuesta base de datos: "talents" y "recruiters"
@@ -34,7 +36,7 @@ npm run dev
 ## Roles 🚀_
 * **Natacha Vergara**, front end
 * **Gaspar Castello**, front end 
-* **Matias Semelman*, front end 
+* **Matias Semelman**, front end 
 * **Hernan Garcia**, Back end
 * **Matias Mazparrote**, Back end
 * **Brayan Tabarez**, QA tester
