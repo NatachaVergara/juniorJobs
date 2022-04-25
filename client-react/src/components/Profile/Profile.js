@@ -33,7 +33,14 @@ const Profile = () => {
     <>
       {userType === 'Talent' ?
         <div className="d-flex flex-column flex-md-row">
-          <TalentProfileCard data={userData} />
+          <TalentProfileCard 
+          data={userData}
+          edu={userData.id_Education}
+          exp={userData.id_Experience}
+          sr={userData.id_Seniority}
+          sp={userData.id_Speciality}
+          
+          />
           <TalentProyectsCard />
         </div>
         :

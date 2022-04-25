@@ -12,7 +12,23 @@ const specialityController = {
                 res.json({message: "no existen specialities"})
             }
         })
-    }
+    },
+
+
+    show: (req, res) => {
+        const id = req.params.id;
+        db.Speciality.findOne({where:{id: id}})
+        .then((speciality) => {
+            if(speciality){
+                console.log(speciality)
+                res.json(speciality)
+            } else {
+                res.json({message: "no existe el speciality buscado"})
+            }
+        })
+    },
+
+
 }
 
 module.exports = specialityController

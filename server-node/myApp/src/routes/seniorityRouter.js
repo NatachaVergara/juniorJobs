@@ -10,7 +10,7 @@ var corsOptions = {
 
 // router.post('/',cors(corsOptions),señorityController.create)
 router.get('/',cors(corsOptions),señorityController.index)
-// router.get('/:id',cors(corsOptions),señorityController.show)
+router.get('/:id',cors(corsOptions),señorityController.show)
 // router.put('/:id',cors(corsOptions),señorityController.update)
 // router.delete('/:id',cors(corsOptions),señorityController.destroy);
 

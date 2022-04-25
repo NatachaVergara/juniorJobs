@@ -38,18 +38,18 @@ const señorityController = {
         })
     },
 
-    // show: (req, res) => {
-    //     const id = req.params.id;
-    //     db.Seniority.findOne({where:{id: id}})
-    //     .then((señority) => {
-    //         if(señority){
-    //             console.log(señority)
-    //             res.json(señority)
-    //         } else {
-    //             res.json({message: "no existe el señority buscado"})
-    //         }
-    //     })
-    // },
+    show: (req, res) => {
+        const id = req.params.id;
+        db.Seniority.findOne({where:{id: id}})
+        .then((señority) => {
+            if(señority){
+                console.log(señority)
+                res.json(señority)
+            } else {
+                res.json({message: "no existe el señority buscado"})
+            }
+        })
+    },
 
     // update: (req, res) => {
     //     const id = req.params.id

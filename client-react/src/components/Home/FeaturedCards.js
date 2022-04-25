@@ -1,25 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Row } from "reactstrap";
+import useFetch from "../../Fetch/fetch";
 import { useUserContext } from '../../Store/UserContext'
 import FeaturedCard from "./FeaturedCard";
 
 const FeaturedCards = () => {
-
-  const [jobOffers, setJobOffers] = useState([])
-  const [offer, setOffer] = useState([])
-  const { userID, isUser } = useUserContext();
-
+ 
+  const { userID, jobOffers } = useUserContext();
+  const {fetchOffers} = useFetch()
 
   useEffect(() => {
-    const fetchOffers = async () => {
-      const response = await fetch(`http://localhost:3002/jobOffers`)
-      const data = await response.json()
-      console.log(data)
-      setJobOffers(data)
-    }
-    fetchOffers()
-
+    fetchOffers('jobOffers')
   }, [userID])
+
 
 
 
@@ -27,26 +20,21 @@ const FeaturedCards = () => {
     <>
       <h3>Active Job posting</h3>
       <Row>
-
         {jobOffers.map((offer, index) => (
-           <FeaturedCard color="info" key={index} offer={offer} />
+           <FeaturedCard color="info"
+            key={index} 
+            offer={offer}
+            id={offer.id}
+            experience={offer.id_Experience}
+            seniority={offer.id_Seniority}
+            spe={offer.id_Speciality}
+            sch={offer.id_Schedule}
+            
+            
+            />
           ))}
       </Row>
-      {/* <Row>
-        <FeaturedCard />
-
-        <FeaturedCard color="info" />
-      </Row>{" "}
-      <Row>
-        <FeaturedCard color="info" />
-
-        <FeaturedCard />
-      </Row>{" "}
-      <Row>
-        <FeaturedCard />
-
-        <FeaturedCard color="info" />
-      </Row> */}
+   
     </>
   );
 };

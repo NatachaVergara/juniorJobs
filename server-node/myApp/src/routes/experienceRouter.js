@@ -9,5 +9,5 @@ var corsOptions = {
 }
 
 router.get('/',cors(corsOptions),experienceController.index)
-
+router.get('/:id',cors(corsOptions),experienceController.show)
 module.exports = router

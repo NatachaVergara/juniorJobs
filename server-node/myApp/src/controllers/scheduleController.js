@@ -18,7 +18,23 @@ const scheduleController = {
         .catch(function(error){
             console.log(`Se ha producido el siguiente error: `, error);
         })
-    }
+    }, 
+
+
+    show: (req, res) => {
+        const id = req.params.id;
+        db.Schedule.findOne({where:{id: id}})
+        .then((schedule) => {
+            if(schedule){
+                console.log(schedule)
+                res.json(schedule)
+            } else {
+                res.json({message: "no existe el schedule buscado"})
+            }
+        })
+    },
+
+    
 }
 
 module.exports = scheduleController;

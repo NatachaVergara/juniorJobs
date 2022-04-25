@@ -8,6 +8,7 @@ var corsOptions = {
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
-router.get('/',cors(corsOptions),scheduleController.index)
+router.get('/', cors(corsOptions), scheduleController.index)
+router.get('/:id', cors(corsOptions), scheduleController.show)
 
 module.exports = router

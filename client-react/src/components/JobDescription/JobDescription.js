@@ -1,10 +1,12 @@
 import React from 'react'
-import { AccessTimeRounded, CakeOutlined, CheckroomOutlined, DinnerDiningOutlined, Face, LaptopMacOutlined, LocalHospitalOutlined, Person, TagFacesOutlined, Watch, WatchLater } from '@mui/icons-material';
+import { AccessTimeRounded, CakeOutlined, CheckroomOutlined, DinnerDiningOutlined,  LaptopMacOutlined, LocalHospitalOutlined,  TagFacesOutlined,  WatchLater } from '@mui/icons-material';
 import PersonIcon from '@mui/icons-material/Person';
 import { Col, Row } from 'reactstrap';
 import classes from './JobDescription.module.scss'
 
 const JobDescription = () => {
+
+
   return (
   <>
    <div className={classes.wrapper}>

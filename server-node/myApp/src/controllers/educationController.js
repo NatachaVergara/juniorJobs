@@ -38,18 +38,18 @@ const educationController = {
         })
     },
 
-    // show: (req, res) => {
-    //     const id = req.params.id;
-    //     db.Education.findOne({where:{id: id}})
-    //     .then((education) => {
-    //         if(education){
-    //             console.log(education)
-    //             res.json(education)
-    //         } else {
-    //             res.json({message: "no existe el education buscado"})
-    //         }
-    //     })
-    // },
+    show: (req, res) => {
+        const id = req.params.id;
+        db.Education.findOne({where:{id: id}})
+        .then((education) => {
+            if(education){
+                console.log(education)
+                res.json(education)
+            } else {
+                res.json({message: "no existe el education buscado"})
+            }
+        })
+    },
 
     // update: (req, res) => {
     //     const id = req.params.id
