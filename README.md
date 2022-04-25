@@ -5,7 +5,8 @@
 
 ### Descripción de Proyecto
 Este equipo desarrolló una plataforma de trabajo exclusiva para juniors en donde dos tipos de usuarios se registran en nuesta base de datos: "talents" y "recruiters"
-Una vez registrados estos usuarios acceden a distintas opciones dentro de la app, por ej siendo recruiter se postean nuevos trabajos para poder mostrarlos en el home.  
+Una vez registrados estos usuarios acceden a distintas opciones dentro de la app, por ej siendo recruiter se postean nuevos trabajos para poder mostrarlos en el home.
+Las funcionalidades basicas de CRUD para los usuarios permiten crear, editar, actualizar y  borrar la informacion de los perfiles y trabajos publicados.
 
 ### Instalación 🔧
 
@@ -13,7 +14,18 @@ Para correr esta app localmente se debe correr la base de datos localmente, desc
 ```
 npm i
 ```
-Luego en el directorio /server-node/myApp ejectuar el comando que corre la base de datos en modo dev: 
+
+Crear el .env en el directorio /server-node/myApp y copiarle la siguiente configuración:
+
+```
+DB_HOST = mysql-matiasmazparrote92.alwaysdata.net
+DB_USER = 262689_matias92
+DB_PASS = Matias92
+DB_NAME = matiasmazparrote92_juniorjobs
+```
+
+
+Luego en el mismo directorio ejectuar el comando que corre la base de datos en modo dev: 
 ```
 npm run dev
 ```
