@@ -14,7 +14,18 @@ Para correr esta app localmente se debe correr la base de datos localmente, desc
 ```
 npm i
 ```
-Luego en el directorio /server-node/myApp ejectuar el comando que corre la base de datos en modo dev: 
+
+Crear el .env en el directorio /server-node/myApp y copiarle la siguiente configuración:
+
+```
+DB_HOST = mysql-matiasmazparrote92.alwaysdata.net
+DB_USER = 262689_matias92
+DB_PASS = Matias92
+DB_NAME = matiasmazparrote92_juniorjobs
+```
+
+
+Luego en el mismo directorio ejectuar el comando que corre la base de datos en modo dev: 
 ```
 npm run dev
 ```
