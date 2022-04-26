@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle, Col, Row } from "reactstrap";
-import { useCRUD } from "../../services/useCRUD";
+//import { useCRUD } from "../../services/useCRUD";
 import { useUserContext } from "../../Store/UserContext";
+import { BASE_URL } from "../../utils/URL";
 import classes from "./RecruiterProjectsCard.module.scss";
 
 export default function ProjectsCard(props) {
@@ -11,7 +12,7 @@ export default function ProjectsCard(props) {
 
   useEffect(() => {
     const fetchOffers = async () => {
-      const response = await fetch(`http://localhost:3002/jobOffers?recruiter=${userID}`);
+      const response = await fetch(`${BASE_URL}/jobOffers?recruiter=${userID}`);
       const data = await response.json()
       console.log(data)
       setJobOffers(data)

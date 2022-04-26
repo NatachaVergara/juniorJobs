@@ -2,6 +2,7 @@ import { Fragment, useEffect, useState } from "react";
 import { Card, CardImg, CardLink, CardSubtitle, CardText, CardTitle } from "reactstrap";
 import { AiFillGithub, AiFillLinkedin } from 'react-icons/ai';
 import classes from "./TalentProfileCard.module.scss";
+import { BASE_URL } from "../../utils/URL";
 
 export default function TalentProfileCard({ data, edu, exp, sp, sr }) {
 
@@ -18,27 +19,27 @@ export default function TalentProfileCard({ data, edu, exp, sp, sr }) {
   // console.log("seniorities in new job form", seniorities);
   useEffect(() => {
     const fetchDataSeniorities = async () => {
-      const response = await fetch(`http://localhost:3002/Seniorities/${sr}`);
+      const response = await fetch(`${BASE_URL}/Seniorities/${sr}`);
       const data = await response.json();
       setSeniorities(data);
     };
 
     fetchDataSeniorities();
     const fetchDataEducation = async () => {
-      const response = await fetch(`http://localhost:3002/education/${edu}`);
+      const response = await fetch(`${BASE_URL}/education/${edu}`);
       const data = await response.json();
       setEducation(data);
     };
     fetchDataEducation();
     const fetchDataExperience = async () => {
-      const response = await fetch(`http://localhost:3002/experience/${exp}`);
+      const response = await fetch(`${BASE_URL}/experience/${exp}`);
       const data = await response.json();
       setExperience(data);
     };
     fetchDataExperience();
 
     const fetchDatasetSpeciality = async () => {
-      const response = await fetch(`http://localhost:3002/speciality/${sp}`);
+      const response = await fetch(`${BASE_URL}/speciality/${sp}`);
       const data = await response.json();
       setSpeciality(data);
     };
@@ -46,7 +47,7 @@ export default function TalentProfileCard({ data, edu, exp, sp, sr }) {
 
 
 
-  }, []);
+  }, [edu, exp, sp, sr]);
 
 
   return (

@@ -3,8 +3,9 @@ import swal from "sweetalert";
 import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../Store/UserContext";
+import { BASE_URL } from "../utils/URL";
 
-axios.defaults.baseURL = "http://localhost:3002";
+axios.defaults.baseURL = BASE_URL;
 
 export const useAxios = () => {
   const [response, setResponse] = useState();

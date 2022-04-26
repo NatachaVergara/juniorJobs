@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Col, Row, CardTitle, CardText, Card } from "reactstrap";
+import { BASE_URL } from "../../utils/URL";
 
 export const FeaturedCard = ({ color, offer,experience, seniority, sch, spe   }) => {
   const [sr, setSR] = useState([])
@@ -9,7 +10,7 @@ export const FeaturedCard = ({ color, offer,experience, seniority, sch, spe   })
   const [speciality, setSspeciality] = useState([])
 
   
-  const BASE_URL = `http://localhost:3002`
+  
 
 
   useEffect(() => {
@@ -21,7 +22,7 @@ export const FeaturedCard = ({ color, offer,experience, seniority, sch, spe   })
     }
     fetchSeniority()
 
-  }, [BASE_URL, seniority])
+  }, [seniority])
 
 
   useEffect(() => {
@@ -33,7 +34,7 @@ export const FeaturedCard = ({ color, offer,experience, seniority, sch, spe   })
     }
     fetchExperience()
 
-  }, [BASE_URL, experience])
+  }, [experience])
   
  
 
@@ -46,7 +47,7 @@ export const FeaturedCard = ({ color, offer,experience, seniority, sch, spe   })
     }
     fetchShedules()
 
-  }, [BASE_URL, sch])
+  }, [sch])
 
   useEffect(() => {
     const fetchspeciality = async () => {
@@ -56,7 +57,7 @@ export const FeaturedCard = ({ color, offer,experience, seniority, sch, spe   })
     }
     fetchspeciality()
 
-  }, [BASE_URL, spe])
+  }, [spe])
 
 
 

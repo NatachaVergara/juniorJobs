@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAxios } from "../../hooks/use-axios";
 import { useUserContext } from "../../Store/UserContext";
+import { BASE_URL } from "../../utils/URL";
 import styles from "./NewJobForm.module.scss";
 
 const NewJobForm = () => {
@@ -20,33 +21,33 @@ const NewJobForm = () => {
   console.log("seniorities in new job form", seniorities);
   useEffect(() => {
     const fetchDataSeniorities = async () => {
-      const response = await fetch("http://localhost:3002/Seniorities");
+      const response = await fetch(`${BASE_URL}/Seniorities`);
       const data = await response.json();
       setSeniorities(data);
     };
     fetchDataSeniorities();
     const fetchDataEducation = async () => {
-      const response = await fetch("http://localhost:3002/education");
+      const response = await fetch(`${BASE_URL}/education`);
       const data = await response.json();
       setEducation(data);
     };
     fetchDataEducation();
     const fetchDataExperience = async () => {
-      const response = await fetch("http://localhost:3002/experience");
+      const response = await fetch(`${BASE_URL}/experience`);
       const data = await response.json();
       setExperience(data);
     };
     fetchDataExperience();
 
     const fetchDatasetSpeciality = async () => {
-      const response = await fetch("http://localhost:3002/speciality");
+      const response = await fetch(`${BASE_URL}/speciality`);
       const data = await response.json();
       setSpeciality(data);
     };
     fetchDatasetSpeciality();
 
     const fetchDataSkills = async () => {
-      const response = await fetch("http://localhost:3002/skills");
+      const response = await fetch(`${BASE_URL}/skill`);
       const data = await response.json();
       setSkills(data);
     };
