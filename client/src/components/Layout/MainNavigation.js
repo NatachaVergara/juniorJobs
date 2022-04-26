@@ -66,10 +66,10 @@ const MainNavigation = () => {
           </Button>
         ) : (
           <Fragment>
-            <Button color="warning" className="m-1" onClick={() => navigate("/register")}>
+            <Button color="success" className="m-1 text-dark" onClick={() => navigate("/register")}>
               SignUp
             </Button>
-            <Button color="warning" className="m-1" onClick={() => navigate("/login")}>
+            <Button color="success" className="m-1 text-dark" onClick={() => navigate("/login")}>
               LogIn
             </Button>
           </Fragment>
