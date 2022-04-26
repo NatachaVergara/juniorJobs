@@ -11,9 +11,9 @@ const NewJobForm = () => {
   const [seniorities, setSeniorities] = useState([]);
   const [education, setEducation] = useState([]);
   const [experience, setExperience] = useState([]);
-  const [remote, setRemote] = useState([]);
+//  const [remote, setRemote] = useState([]);
   const [speciality, setSpeciality] = useState([]);
-  const [skills, setSkills] = useState([]);
+ const [skills, setSkills] = useState([]);
 
   let navigate = useNavigate()
 
@@ -45,11 +45,23 @@ const NewJobForm = () => {
     };
     fetchDatasetSpeciality();
 
+    const fetchDataSkills = async () => {
+      const response = await fetch("http://localhost:3002/skills");
+      const data = await response.json();
+      setSkills(data);
+    };
+    fetchDataSkills();
+
 
 
   }, []);
 
-  console.log(speciality)
+  console.log(`Especility:`, speciality)
+  console.log('Education', education)
+  console.log(`experience:`, experience)
+  console.log(`skills:`, skills)
+ // console.log(`remote: ${remote}`)
+
 
 
 
@@ -80,17 +92,18 @@ const NewJobForm = () => {
           data: values,
           header: { "Content-type": "application/json" },
         };
+        
         fetchData(config);
         setSubmitting(false);
         console.log("response in new job form on submit", response);
-        navigate('/home')
+        navigate('/profile')
       }}
     >
       {({ isSubmitting }) => (
         <Form className={styles.newjobForm}>
           <div>
             <label htmlFor="title" className={styles.formTitle}>
-              Puesto / Job Offer <span>*</span>
+              Job Offer <span>*</span>
             </label>
             <Field type="textarea" id="title" name="title" />
           </div>
@@ -122,7 +135,7 @@ const NewJobForm = () => {
               Remote
             </label>
             <Field name="id_Remote" as="select" id="id_Remote">
-              <option value={1}>Si</option>
+              <option value={1}>Yes</option>
               <option value={2}>No</option>
             </Field>
           </div>
@@ -136,7 +149,7 @@ const NewJobForm = () => {
                 seniorities.length > 0 &&
                 seniorities.map((seniority, index) => {
                   return (
-                    <option value={index} key={index}>
+                    <option value={seniority.id} key={index}>
                       {seniority.name}
                     </option>
                   );
@@ -152,7 +165,7 @@ const NewJobForm = () => {
               <option value={2}>2-6 months</option>
               <option value={3}>6-12 monts</option>
               <option value={4}>1-2 years</option>
-              <option value={5}>2-4 years</option>
+             
             </Field>
           </div>
           <div>

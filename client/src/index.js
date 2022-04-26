@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./custom.scss";
 import "./index.scss";
+import 'bootswatch/dist/darkly/bootstrap.min.css';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
