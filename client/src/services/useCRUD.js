@@ -1,13 +1,12 @@
 import { useUserContext } from '../Store/UserContext';
 import { useAxios } from "../hooks/use-axios";
-import { useNavigate } from 'react-router-dom';
-import swal from "sweetalert";
+
 
 export const useCRUD = () => {
-    const { userID, userType, isUser, setIsUser, setUserType, setUserId, setUserData  } = useUserContext();
-    const { fetchData, response } = useAxios();
+    const { userID, userType} = useUserContext();
+    const { fetchData} = useAxios();
     let params = {}
-    let navigate = useNavigate()
+   
     function onCreateSubmit(values) {
         console.log("on register values:", values);      
       

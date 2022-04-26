@@ -5,15 +5,19 @@
   background-color: none;
 
   & img {
-    width: 100%;
+    width: 90%;
+    margin:auto;
     height: 25rem;
-    object-fit: contain;
-    object-position: top;
+    object-fit:cover;
+    padding: 10px;
+    
 
   }
 
   & .profile {
     width: 100%;
+    padding:15px;
+    margin-bottom: 15px;
     display: flex;
     flex-direction: column;
     justify-content:space-around;
@@ -23,22 +27,17 @@
   & .cardText {
     width:300px;
     font-size:20px;
-    color:black;
+    color:white;
   }
 
 
-  & .link{
-    display:flex;
-    justify-content:center;
-    align-items: center;
-
-    & .cardLink{
-      color:black;
+.cardLink{
+      color:white;
       font-size:50px;
       margin:10px;
       text-decoration: none;
     }
-  }
+  
  
 
 }

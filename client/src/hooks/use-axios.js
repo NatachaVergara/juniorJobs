@@ -15,11 +15,11 @@ export const useAxios = () => {
     axios
       .request(params)
       .then((res) => {
-        console.log(params)
+        // console.log(params)
         console.log(res.data)
         setResponse(res.data)
 
-
+        //Metodo delete profile
         if(params.method === 'delete' ){
            swal(`Your profile has been deleted`)    
            navigate('/login')       
@@ -33,17 +33,17 @@ export const useAxios = () => {
 
         // Metodo update Talent
         if (userType === 'Talent' && params.method === 'put') {
-          console.log(res.data)
+          // console.log(res.data)
           swal(`Your profile has been updated`);
         //Metodo update Recruiter
         } else if (userType === 'Recruiter' && params.method === 'put') {
-          console.log(res.data)
+          // console.log(res.data)
           swal(`Your profile has been updated`);
         }
 
        // Metodo Create
         if(params.data.register) {
-          console.log(res.data)
+          // console.log(res.data)
           setResponse(res.data);
           swal(`Welcome, you can now login to your account`)          
           navigate('/login')
@@ -51,7 +51,7 @@ export const useAxios = () => {
 
        // Metodo Login
         if (params.data.login) {       
-          console.log(res.data)
+          // console.log(res.data)
           swal(`Welcome ${res.data.name}`)
           setIsUser(true)
           setUserType(params.data.userType)

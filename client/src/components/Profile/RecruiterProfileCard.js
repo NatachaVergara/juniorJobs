@@ -14,28 +14,29 @@ export default function RecruiterProfileCard(props) {
         </CardImg>
         <div className={classes.profile}>
           <CardTitle
-            tag="h1"
-            className='mt-3'>
+            tag="h2"
+            className='m-5'>
             {props.data.name} {props.data.lastName}
           </CardTitle>
           <CardSubtitle 
           className={classes.cardText} 
           tag="h5">            
             Company name: {props.data.company}
-          </CardSubtitle>
-          <CardLink
+          </CardSubtitle>         
+          <CardText
+          className={classes.cardText}>
+          Email: {props.data.email}
+        </CardText>
+        <CardLink
             href={props.data.url}
             target="_blank"
             rel="noopener noreferrer"
             className={classes.cardLink}
           >
-            <AiFillLinkedin />
+            <AiFillLinkedin  />
           </CardLink>
         </div>
-        <CardText
-          className={classes.cardText}>
-          Email: {props.data.email}
-        </CardText>
+        
       </Card>
     </Fragment>
   );

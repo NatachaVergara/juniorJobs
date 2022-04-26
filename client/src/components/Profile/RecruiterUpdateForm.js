@@ -5,13 +5,13 @@ import * as Yup from "yup";
 import { Col, Row } from "reactstrap";
 import RegisterBtn from "../Buttons/RegisterBtn";
 // eslint-disable-next-line no-unused-vars
-import { MyCheckbox, MyTextInput } from "../../utils/inputsFunctions";
+import { MyTextInput } from "../../utils/inputsFunctions";
 import { emailRegex, urlRegex } from "../../utils/regex";
 import { errorAlerts } from '../../utils/errorsAlert'
 import { useUserContext } from "../../Store/UserContext";
 import { useCRUD } from '../../services/useCRUD'
 
-const RecruiterUpdateForm = ({ data, onSubmit, setIsEditing }) => {
+const RecruiterUpdateForm = ({ data, setIsEditing }) => {
   const { setUserData } = useUserContext()
   const { onUpdateSubmit } = useCRUD()
   return (
@@ -21,13 +21,10 @@ const RecruiterUpdateForm = ({ data, onSubmit, setIsEditing }) => {
         initialValues={{
           name: data.name,
           lastName: data.lastName,
-          email: data.email,
-          // password: "",
-          // passwordConfirmation: "",
+          email: data.email,     
           company: data.company,
           image: data.image,
-          url: data.url,
-          // acceptedTerms: false,
+          url: data.url         
         }}
         validationSchema={Yup.object({
           name: Yup.string()
@@ -36,14 +33,7 @@ const RecruiterUpdateForm = ({ data, onSubmit, setIsEditing }) => {
           lastName: Yup.string()
             .min(2, errorAlerts[0].nameAlert)
             .required(errorAlerts[4].requiredAlert),
-          // password: Yup.string()
-          //   .min(4, errorAlerts[1].passwordAlert)
-          //   .required(errorAlerts[4].requiredAlert),
-          // passwordConfirmation: Yup.string()
-          //   .oneOf([Yup.ref('password'), null], 'Passwords must match')
-          //    .required(errorAlerts[4].requiredAlert),
-
-          email: Yup.string()
+        email: Yup.string()
             .email(errorAlerts[2].emailAlert)
             .matches(emailRegex)
             .max(255)
@@ -54,9 +44,7 @@ const RecruiterUpdateForm = ({ data, onSubmit, setIsEditing }) => {
           company: Yup.string()
             .max(350, errorAlerts[5].textDescription)
             .required(errorAlerts[4].requiredAlert),
-          // acceptedTerms: Yup.boolean()
-          //   .required(errorAlerts[4].requiredAlert)
-          //   .oneOf([true], errorAlerts[6].acceptedTerms),
+         
         })}
 
 
@@ -97,20 +85,7 @@ const RecruiterUpdateForm = ({ data, onSubmit, setIsEditing }) => {
                   placeholder="example@juniorjobs.com"
                 />
               </Col>
-              {/* <Col>
-                    <MyTextInput
-                      label="Password *"
-                      name="password"
-                      type="password" />
-                  </Col>
-                  <Col>
-                    <MyTextInput
-                      label="Password Confirmation *"
-                      name="passwordConfirmation"
-                      type="password"
-                      placeholder=""
-                    />
-                  </Col> */}
+          
             </Row>
             <Row>
               <Col xs='12'

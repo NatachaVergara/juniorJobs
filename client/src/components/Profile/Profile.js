@@ -58,9 +58,8 @@ const Profile = () => {
                 !isEditing ?
                   <>
                     <Button
-                      onClick={onEdit}
-                      color="danger"
-                      className='m-5'
+                      onClick={onEdit}                      
+                      className='m-5 btn btn-success'
                       type="submit">
                       Edit Profile
                     </Button>
@@ -71,7 +70,7 @@ const Profile = () => {
                       onClick={onCancelEdit}
                       color="primary"
                       type="submit"
-                      className='m-5'
+                      className='m-5 btn btn-danger'
                     >
                       Cancel Edit
                     </Button>

@@ -21,25 +21,42 @@ export default function ProjectsCard(props) {
 
   }, [userID])
 
+
+
+
+
+
+
+
+
+
   console.log(jobOffers)
   return (
 
-    <Card body color="light" className={classes.profile}>
+    <Card body  className={classes.profile}>
       <CardBody>
-        <CardTitle tag="h5">Active offers</CardTitle>
+        <CardTitle tag="h5" className='fs-2 text-center text-secondary'>ACTIVE OFFERS</CardTitle>
         <Row>
           {jobOffers.map((o, i) => (
-            <Col>
-              <Card body color="light" className={classes.projects}>
+            <Col  key={i}>
+              <Card body color="dark" className={classes.projects}>
                 <CardBody>
-                  <CardTitle tag="h5"> {o.title} </CardTitle>
-                  <CardSubtitle className="mb-2 text-muted" tag="h6">
+                  <CardTitle tag="h5" className='text-center m-2 p-2'> {o.title} </CardTitle>
+                  <CardSubtitle className="mb-2 text-light " tag="h6">
                     {o.description}
                   </CardSubtitle>
+                  <CardText className={classes.cardText}>Location: {o.location} </CardText>
+                  <CardText className={classes.cardText}>Experience:  </CardText>
+                  <CardText className={classes.cardText}>Seniotity:  </CardText>
+                  <CardText className={classes.cardText}>Schedule:  </CardText>
+                  <CardText className={classes.cardText}>Speciality:  </CardText>
                   <CardText>
                   </CardText>
                 </CardBody>
-                <Button className={classes.button} > Delete</Button>
+                <div className={classes.button}>
+                <Button type="submit" className='btn btn-outline-success' > Edit offer</Button>
+                <Button type="submit" className='btn btn-outline-danger' > Delete</Button>
+                </div>
               </Card>
             </Col>
           ))}

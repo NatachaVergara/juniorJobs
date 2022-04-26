@@ -60,7 +60,6 @@ const UserContextProvider = ({ children }) => {
   const [speciality, setSspeciality] = useState([])
   
  
-console.log(sr)
 
   //Creo un estado user dentro de mi localStorage
   useEffect(() => {

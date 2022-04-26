@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Col, Row, CardTitle, CardText, Card } from "reactstrap";
+import { Col, Row, CardText } from "reactstrap";
 import { BASE_URL } from "../../utils/URL";
 
-export const FeaturedCard = ({ color, offer,experience, seniority, sch, spe   }) => {
+export const FeaturedCard = ({ offer, experience, seniority, sch, spe }) => {
   const [sr, setSR] = useState([])
   const [exp, setExp] = useState([])
   const [schedule, setSchedule] = useState([])
   const [speciality, setSspeciality] = useState([])
 
-  
-  
 
 
   useEffect(() => {
@@ -35,8 +33,8 @@ export const FeaturedCard = ({ color, offer,experience, seniority, sch, spe   })
     fetchExperience()
 
   }, [experience])
-  
- 
+
+
 
   useEffect(() => {
     const fetchShedules = async () => {
@@ -62,26 +60,24 @@ export const FeaturedCard = ({ color, offer,experience, seniority, sch, spe   })
 
 
   return (
-    <Col className='p-3' sm='6'>
+    <Col className='p-3' sm='6' >
       <Row>
         <Link to='/job'
-        className='text-decoration-none btn' >
-          <Col sm="12">
-            <Card body color={color}>
+          className='text-decoration-none btn' >
+          <Col sm="12">         
               <Row>
-                <Col >
-                  <CardTitle tag="h5">{offer.title} </CardTitle>
-                  <CardText>{offer.description} </CardText>
-                  <div className='d-flex justify-content-between align-item-center'>
-                  <CardText>{sr.name} </CardText>
-                  <CardText>{exp.period} </CardText>
-                  <CardText>{schedule.schedule} </CardText>
-                  <CardText>{speciality.category} </CardText>
+                <div class="card text-white  border-light mb-3 p-3" style={{maxWidth: '100%'}}>
+                  <div class="card-header">{offer.title}</div>
+                  <div class="card-body">
+                    <div className='d-flex justify-content-between align-item-center'>
+                      <CardText>{sr.name} </CardText>
+                      <CardText>{exp.period} </CardText>
+                      <CardText>{schedule.schedule} </CardText>
+                      <CardText>{speciality.category} </CardText>
+                    </div>
                   </div>
-                 
-                </Col>
-              </Row>
-            </Card>
+                </div>
+              </Row>            
           </Col>
         </Link>
       </Row>

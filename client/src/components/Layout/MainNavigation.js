@@ -1,9 +1,6 @@
-// import { useContext } from "react";
-// import { Link } from "react-router-dom";
-// import AuthContext from "../../store/auth-context";
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { Navbar, NavbarBrand, NavItem, Button, Input } from "reactstrap";
+import { Navbar, NavbarBrand, NavItem, Button } from "reactstrap";
 import { useUserContext } from "../../Store/UserContext";
 import classes from "./MainNavigation.module.scss";
 
@@ -24,9 +21,9 @@ const MainNavigation = () => {
   };
 
   return (
-    <Navbar className={classes.navbar} sticky="top" color="secondary" dark>
-      <NavItem>
-        <NavbarBrand>Junior Jobs app</NavbarBrand>
+    <Navbar className={classes.navbar} sticky="top" dark>
+      <NavItem >
+        <NavbarBrand className='ms-5'>Junior Jobs app</NavbarBrand>
       </NavItem>
 
       {/* <NavItem>
@@ -56,15 +53,15 @@ const MainNavigation = () => {
             Faqs
           </Button>
         </NavLink>
-        {userType === "Recruiter" & isUser ?
+        {/* {userType === "Recruiter" & isUser ?
           <NavLink to="/newjob">
             <Button className="m-1" color="info">
               Post a new job
             </Button>
           </NavLink>
-        : null}
+        : null} */}
         {isUser ? (
-          <Button onClick={logoutHandler} color="warning">
+          <Button onClick={logoutHandler} color="danger">
             Logout
           </Button>
         ) : (
