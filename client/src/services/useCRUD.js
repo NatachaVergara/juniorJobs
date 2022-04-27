@@ -72,7 +72,18 @@ export const useCRUD = () => {
     }
 
 
-    return {onLoginSubmit, onCreateSubmit,onUpdateSubmit, onDeleteSubmit}
+
+    function PostJobOffer(values){
+        params.method = 'post'
+        params.url = '/jobOffers'
+        params.header = { 'Content-type': 'application/x-www-form-urlencoded' };
+        params.data = values
+        fetchData(params);       
+
+
+    }
+
+    return {onLoginSubmit, onCreateSubmit,onUpdateSubmit, onDeleteSubmit, PostJobOffer}
     
 }
 

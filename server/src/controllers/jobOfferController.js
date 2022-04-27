@@ -40,7 +40,7 @@ const jobOfferController = {
                             id_JobOffer: jobOffer.id
                         })
                         .then((skillJobOffer) => {
-                            console.log("Skill "+i+" agregada");
+                            console.log("Skill "+i+ skillJobOffer+" agregada");
                         })
                         .catch(function(error){
                             console.log("No se pudo crear el registro en la tabla intermedia de nuestra base de datos", error);

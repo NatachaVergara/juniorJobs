@@ -5,7 +5,7 @@
             max-height:700px;
             border: 3px solid black;
             border-radius: 15px;
-            background:#d5edda;
+            background:white;
 
         & h1{
 
@@ -15,10 +15,7 @@
             font-style: normal;
             font-weight: 400;
             font-size: 38px;
-            line-height: 46px;
-            /*Le da el color al border la letra*/
-            -webkit-text-stroke-width: 1px;
-            -webkit-text-stroke-color: #6A8D73;           
+            line-height: 46px;                    
        
          }
          .registerBody{

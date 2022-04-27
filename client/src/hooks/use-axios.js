@@ -59,8 +59,11 @@ export const useAxios = () => {
           setUserData(res.data)
           navigate('/')
         }
+        
       })
 
+
+    
 
       .catch(function (error) {
         if (error) {

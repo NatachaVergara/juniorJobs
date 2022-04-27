@@ -2,19 +2,28 @@ import { useEffect } from "react";
 import { Row } from "reactstrap";
 import useFetch from "../../Fetch/fetch";
 import { useUserContext } from '../../Store/UserContext'
+import { BASE_URL } from "../../utils/URL";
 import FeaturedCard from "./FeaturedCard";
 
 const FeaturedCards = () => {
  
-  const { userID, jobOffers } = useUserContext();
-  const {fetchOffers} = useFetch()
+  const { jobOffers, setJobOffers } = useUserContext();
+  //const {fetchOffers} = useFetch()
+
 
   useEffect(() => {
-    fetchOffers('jobOffers')
-  }, [userID])
+    const fetchOffers = async () => {
+      const response = await fetch(`${BASE_URL}/jobOffers`)
+      const data = await response.json()
+      console.log(data)
+      setJobOffers(data)
+    }
+    fetchOffers()
+  },[setJobOffers])
 
 
 
+console.log(jobOffers)
 
   return (
     <>

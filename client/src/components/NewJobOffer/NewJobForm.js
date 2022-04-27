@@ -1,70 +1,17 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import React, { useEffect, useState } from "react";
+import { Formik, Form, Field } from "formik";
+//import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import FetchRoutes from "../../Fetch/FetchRoutes";
 import { useAxios } from "../../hooks/use-axios";
 import { useUserContext } from "../../Store/UserContext";
-import { BASE_URL } from "../../utils/URL";
+//import { BASE_URL } from "../../utils/URL";
 import styles from "./NewJobForm.module.scss";
 
 const NewJobForm = () => {
   const { fetchData, response } = useAxios();
-  const { userID } = useUserContext();
-  const [seniorities, setSeniorities] = useState([]);
-  const [education, setEducation] = useState([]);
-  const [experience, setExperience] = useState([]);
-//  const [remote, setRemote] = useState([]);
-  const [speciality, setSpeciality] = useState([]);
- const [skills, setSkills] = useState([]);
-
+  const { userID, seniorities, exp, schedule, speciality, remote } = useUserContext();
   let navigate = useNavigate()
-
-  console.log("seniorities in new job form", seniorities);
-  useEffect(() => {
-    const fetchDataSeniorities = async () => {
-      const response = await fetch(`${BASE_URL}/Seniorities`);
-      const data = await response.json();
-      setSeniorities(data);
-    };
-    fetchDataSeniorities();
-    const fetchDataEducation = async () => {
-      const response = await fetch(`${BASE_URL}/education`);
-      const data = await response.json();
-      setEducation(data);
-    };
-    fetchDataEducation();
-    const fetchDataExperience = async () => {
-      const response = await fetch(`${BASE_URL}/experience`);
-      const data = await response.json();
-      setExperience(data);
-    };
-    fetchDataExperience();
-
-    const fetchDatasetSpeciality = async () => {
-      const response = await fetch(`${BASE_URL}/speciality`);
-      const data = await response.json();
-      setSpeciality(data);
-    };
-    fetchDatasetSpeciality();
-
-    const fetchDataSkills = async () => {
-      const response = await fetch(`${BASE_URL}/skill`);
-      const data = await response.json();
-      setSkills(data);
-    };
-    fetchDataSkills();
-
-
-
-  }, []);
-
-  console.log(`Especility:`, speciality)
-  console.log('Education', education)
-  console.log(`experience:`, experience)
-  console.log(`skills:`, skills)
- // console.log(`remote: ${remote}`)
-
-
-
+  FetchRoutes()
 
   return (
     <Formik
@@ -73,27 +20,23 @@ const NewJobForm = () => {
         description: "",
         location: "",
         id_Recruiter: userID,
-        // id_Talent: null,
         id_Schedule: 1,
         id_Remote: 1,
         id_Seniority: 1,
         id_Experience: 1,
-        id_Speciality: 1,
-        //   jobArea: 1,
-        //   checked: [],
-        id_Skill: [1, 2, 3]
+        id_Speciality: 1
       }}
       onSubmit={(values, { resetForm, setSubmitting }) => {
         setSubmitting(true);
         resetForm();
-        console.log("values on submit new job form", values);
+       
         const config = {
           method: "POST",
           url: "/jobOffers",
           data: values,
           header: { "Content-type": "application/json" },
         };
-        
+
         fetchData(config);
         setSubmitting(false);
         console.log("response in new job form on submit", response);
@@ -126,9 +69,7 @@ const NewJobForm = () => {
               Schedule
             </label>
             <Field name="id_Schedule" as="select" id="id_Schedule">
-              {/* <option value={0}>Presencial</option> */}
-              <option value={1}>Hybrid</option>
-              <option value={2}>Remote</option>
+              {schedule.map(sch => (<option key={sch.id} value={sch.id}>{sch.schedule} </option>))}
             </Field>
           </div>
           <div>
@@ -136,8 +77,7 @@ const NewJobForm = () => {
               Remote
             </label>
             <Field name="id_Remote" as="select" id="id_Remote">
-              <option value={1}>Yes</option>
-              <option value={2}>No</option>
+              {remote.map(r => (<option key={r.id} value={r.id}>{r.name} </option>))}
             </Field>
           </div>
 
@@ -162,11 +102,7 @@ const NewJobForm = () => {
               Experience
             </label>
             <Field name="id_Experience" as="select" id="id_Experience">
-              <option value={1}>0-2 months</option>
-              <option value={2}>2-6 months</option>
-              <option value={3}>6-12 monts</option>
-              <option value={4}>1-2 years</option>
-             
+              {exp.map(e => (<option key={e.id} value={e.id}> {e.period} </option>))}
             </Field>
           </div>
           <div>
@@ -175,14 +111,14 @@ const NewJobForm = () => {
             </label>
             <Field name="id_Speciality" as="select" id="id_Speciality">
               {speciality.map((s, i) => (
-              <option key={i} value={s.id}>{s.category} </option>
+                <option key={i} value={s.id}>{s.category} </option>
               ))}
             </Field>
           </div>
 
           {!isSubmitting && (
             <div className={styles.btnContainer}>
-              <button type="submit" className={styles.publishButton}>
+              <button type="submit" className='btn btn-outline-success m-2'>
                 Publish offer
               </button>
             </div>

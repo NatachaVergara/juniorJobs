@@ -24,12 +24,12 @@ const Register = () => {
   return (
     <>
       <div className="container m-auto d-flex flex-column mt-5 pt-5 registerContainer">
-        <h1 className="d-flex justify-content-center">
+        <h1 className="d-flex justify-content-center text-dark">
           ¿HOW WILL YOU REGISTER?
         </h1>
         <div className="mt-5 registerBody">
           <div className="registerCard">
-            <h3 className="text-center">
+            <h3 className="text-center text-dark">
               Im Talent <FcNeutralDecision />
             </h3>
             <button
@@ -37,10 +37,10 @@ const Register = () => {
               type="submit"
               onClick={() => formTalento()}
             >
-              Go to talent form
+             Talent form
             </button>
           </div>
-          <div className="registerCard">
+          <div className="registerCard text-dark">
             <h3>
               Im Recruiter <FcBusiness />
             </h3>
@@ -49,7 +49,7 @@ const Register = () => {
               type="submit"
               onClick={() => formRecruiter()}
             >
-             Go to recruiter form
+            Recruiter form
             </button>
           </div>
         </div>
@@ -62,7 +62,7 @@ const Register = () => {
       </Container>
       <Link
         to="/login"
-        className="d-flex justify-content-center align-items-center mb-5 mt-5 pt-5 text-decoration-none text-black"
+        className="d-flex justify-content-center align-items-center mb-5 mt-5 pt-5 text-decoration-none text-light"
       >
         {" "}
         <FcApproval /> I already have an account{" "}

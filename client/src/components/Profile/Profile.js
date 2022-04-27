@@ -46,7 +46,7 @@ const Profile = () => {
         :
         <div className="d-flex flex-column  flex-md-row">
           <RecruiterProfileCard data={userData}/>
-          <RecruiterProjectsCard />
+          <RecruiterProjectsCard  />
         </div>
       }
 

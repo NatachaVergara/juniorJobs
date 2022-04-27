@@ -1,21 +1,23 @@
-
 import { useUserContext } from '../Store/UserContext'
+import { BASE_URL } from '../utils/URL'
 
 function useFetch() {
-    const { setJobOffers } = useUserContext()
-
-    console.log()
-    const fetchOffers = async (jobOffers, id) => {
-        const response = await fetch(`http://localhost:3002/${jobOffers}`)
-        const data = await response.json()
-       // console.log(data)
-        setJobOffers(data)
-      }
-
+  const { setJobOffers, setOfferID } = useUserContext()
     
 
+    
+   
+    const fetchJobbOfferRecuiter = async (id) =>{
+      const response = await fetch(`${BASE_URL}/jobOffers?recruiter=${id}`);
+      const data = await response.json()      
+      setOfferID(data)
 
-      return {fetchOffers}
+    }
+
+
+
+
+      return {fetchJobbOfferRecuiter }
 
 
 

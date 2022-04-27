@@ -66,9 +66,9 @@ export const FeaturedCard = ({ offer, experience, seniority, sch, spe }) => {
           className='text-decoration-none btn' >
           <Col sm="12">         
               <Row>
-                <div class="card text-white  border-light mb-3 p-3" style={{maxWidth: '100%'}}>
-                  <div class="card-header">{offer.title}</div>
-                  <div class="card-body">
+                <div className="card text-white  border-light mb-3 p-3" style={{maxWidth: '100%'}}>
+                  <div className="card-header">{offer.title}</div>
+                  <div className="card-body">
                     <div className='d-flex justify-content-between align-item-center'>
                       <CardText>{sr.name} </CardText>
                       <CardText>{exp.period} </CardText>

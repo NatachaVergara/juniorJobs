@@ -22,27 +22,30 @@ export default function TalentProfileCard({ data, edu, exp, sp, sr }) {
       const response = await fetch(`${BASE_URL}/Seniorities/${sr}`);
       const data = await response.json();
       setSeniorities(data);
-    };
+    }
 
     fetchDataSeniorities();
+
     const fetchDataEducation = async () => {
       const response = await fetch(`${BASE_URL}/education/${edu}`);
       const data = await response.json();
       setEducation(data);
-    };
+    }
     fetchDataEducation();
+
+
     const fetchDataExperience = async () => {
       const response = await fetch(`${BASE_URL}/experience/${exp}`);
       const data = await response.json();
       setExperience(data);
-    };
+    }
     fetchDataExperience();
 
     const fetchDatasetSpeciality = async () => {
       const response = await fetch(`${BASE_URL}/speciality/${sp}`);
       const data = await response.json();
       setSpeciality(data);
-    };
+    }
     fetchDatasetSpeciality();
 
 

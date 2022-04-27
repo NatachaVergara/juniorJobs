@@ -53,13 +53,18 @@ const UserContextProvider = ({ children }) => {
   const [userType, setUserType] = useState(getLocalUserType());
   const [userID, setUserId] = useState(getLocalUserID());
   const [userData, setUserData] = useState(getLocalUserData());
-  const [jobOffers, setJobOffers]= useState([])
-  const [sr, setSR] = useState([])
+  const [jobOffers, setJobOffers] = useState([])
+  const [offerData, setOfferData] = useState([])
+  const [seniorities, setSeniorities] = useState([])
   const [exp, setExp] = useState([])
   const [schedule, setSchedule] = useState([])
-  const [speciality, setSspeciality] = useState([])
-  
- 
+  const [speciality, setSpeciality] = useState([])
+  const [skills, setSkills] = useState([])
+  const [education, setEducation] = useState([])
+  const [remote, setRemote] = useState([])
+  const [offerID, setOfferID] = useState([])
+
+
 
   //Creo un estado user dentro de mi localStorage
   useEffect(() => {
@@ -93,14 +98,24 @@ const UserContextProvider = ({ children }) => {
         setUserData,
         setJobOffers,
         jobOffers,
-        sr,
+        seniorities,
         exp,
         schedule,
         speciality,
-        setSR,
+        skills,
+        education,
+        remote,
+        offerData,
+        offerID, 
+        setSeniorities,
         setExp,
         setSchedule,
-        setSspeciality
+        setSpeciality,
+        setSkills,
+        setEducation,
+        setRemote,
+        setOfferData,
+        setOfferID
       }}
     >
       {children}

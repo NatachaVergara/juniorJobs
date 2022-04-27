@@ -4,16 +4,16 @@ import { Field, Form, Formik } from 'formik'
 import './Login.scss'
 
 //import { usePostLogin } from '../../hooks/usePostLogin';
-import { emailRegex} from '../../utils/regex';
-import { errorAlerts} from '../../utils/errorsAlert'
-import {useCRUD} from '../../services/useCRUD'
+import { emailRegex } from '../../utils/regex';
+import { errorAlerts } from '../../utils/errorsAlert'
+import { useCRUD } from '../../services/useCRUD'
 
 
 
 function Login() {
   //const { userLogin } = useUserContext()
- // const { fetchData } = usePostLogin()
-const {onLoginSubmit} = useCRUD()
+  // const { fetchData } = usePostLogin()
+  const { onLoginSubmit } = useCRUD()
   return (
     <div className='formPage  mb-5 pb-5'>
 
@@ -21,7 +21,7 @@ const {onLoginSubmit} = useCRUD()
         initialValues={{
           email: '',
           password: '',
-          userType: '', 
+          userType: '',
           login: true
         }}
         className=''
@@ -49,9 +49,9 @@ const {onLoginSubmit} = useCRUD()
         }}
 
         onSubmit={(values, { resetForm }) => {
-         //fetchData(values, resetForm)
-         onLoginSubmit(values)
-        
+          //fetchData(values, resetForm)
+          onLoginSubmit(values)
+
 
         }}
       >
@@ -60,21 +60,22 @@ const {onLoginSubmit} = useCRUD()
 
           <Form className='form container mt-5 pt-5 bt-5'>
             <div className='d-flex flex-column mb-5'>
-              <h1 className='d-flex justify-content-center align-items-center'>LOGIN</h1>
+              <h1 className='d-flex justify-content-center align-items-center text-dark'>LOGIN</h1>
               <div className='container d-flex justify-content-center align-items-center'>
-                <div className='pe-2'>
+                <div className='pe-2  text-dark'>
                   <Field
                     type="radio"
                     name="userType"
                     value="Recruiter"
-                    className='me-2' />
+                    className='me-2 text-dark' />
                   as Recruiter</div>
-                <div>
+                <div className=' text-dark'>
                   <Field type="radio"
                     name="userType"
                     value="Talent"
-                    className='me-2' />
-                  as Talent</div>
+                    className='me-2 text-dark' />
+                  as Talent
+                </div>
               </div>
               {errors.userType ? <div className="form-text text-danger fs-6 ms-3">{errors.userType}</div> : null}
 
@@ -82,12 +83,12 @@ const {onLoginSubmit} = useCRUD()
             <div className="fields d-flex flex-column flex-md-row justify-content-around align-items-stretch">
 
 
-              <div className="emailDiv mb-3 d-flex flex-column justify-content-center align-item-center">
-                <label htmlFor="email" className='mb-2'>Email</label>
+              <div className="emailDiv mb-3 d-flex flex-column justify-content-center align-item-center text-dark">
+                <label htmlFor="email" className='mb-2 text-dark'>Email</label>
 
                 <Field
                   type="email"
-                  className="emailField form-control"
+                  className="emailField form-control text-dark"
                   id="email"
                   name="email"
                   aria-labelledby="emailHelp"
@@ -97,7 +98,7 @@ const {onLoginSubmit} = useCRUD()
                 {touched.email && errors.email ? <div className="form-text text-danger fs-6">{errors.email}</div> : <div id="emailHelp" className="form-text ">We will never share your email with others</div>}
               </div>
 
-              <div className='mb-3 passwordDiv'>
+              <div className='mb-3 passwordDiv text-dark'>
                 <label htmlFor="email m-1" className='mb-2'>Password</label>
                 <Field
                   type="password"
@@ -110,7 +111,7 @@ const {onLoginSubmit} = useCRUD()
               </div>
             </div>
             <button
-              type='submit' className='boton btn btn-primary'>Log in
+              type='submit' className='boton btn btn-outline-success'>Log in
             </button>
           </Form>
 
@@ -119,12 +120,6 @@ const {onLoginSubmit} = useCRUD()
 
 
       </Formik>
-      {/* Link para resetear la contraseña    */}
-      {/* <span className="d-flex justify-content-center align-items-center mt-5 mb-5 pt-5">
-        <BsShieldLockFill /> ¿Olvidaste tu contraseña?
-      </span> */}
-
-
     </div >
   )
 }

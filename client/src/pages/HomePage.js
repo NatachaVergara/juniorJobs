@@ -1,6 +1,6 @@
 import { Container } from "reactstrap";
 import FeaturedCards from "../components/Home/FeaturedCards";
-import Hero from "../components/Home/Hero";
+
 import MainContainer from "../components/Home/MainContainer";
 import SubFooter from "../components/Home/SubFooter";
 
@@ -15,8 +15,7 @@ export const HomePage = () => {
           awesome startups and tech companies. We filter jobs so you don't have
           to.
         </p>
-       <div className="">
-        <Hero />
+       <div className="">       
         <FeaturedCards />
         <MainContainer />
         <SubFooter />

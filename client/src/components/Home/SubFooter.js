@@ -17,7 +17,7 @@ let jobsByTag = ["Back-end", "Javascript", "English", "Front-end"];
 const SubFooter = () => (
   <Row>
     <Col>
-      <h1>Jobs by Category</h1>
+      <h3>Jobs by Category</h3>
       {jobsByCategory.map((e, i) => (
         <Col key={i}>
           <Row>
@@ -34,7 +34,7 @@ const SubFooter = () => (
       ))}
     </Col>
     <Col>
-      <h1>Jobs by Country</h1>
+      <h3>Jobs by Country</h3>
       {jobsByCountry.map((e, i) => (
         <Col key={i}>
           <Row>
@@ -49,7 +49,7 @@ const SubFooter = () => (
           </Row>
         </Col>
       ))}
-      <h1>Jobs by City</h1>
+      <h3>Jobs by City</h3>
       {jobsByCity.map((e, i) => (
         <Col key={i}>
           <Row>
@@ -66,7 +66,7 @@ const SubFooter = () => (
       ))}
     </Col>
     <Col>
-      <h1>Jobs by tags</h1>
+      <h3>Jobs by tags</h3>
       {jobsByTag.map((e, i) => (
         <Col key={i}>
           <Row>

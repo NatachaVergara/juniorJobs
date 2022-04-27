@@ -18,7 +18,20 @@ const remoteController = {
         .catch(function(error){
             console.log(`Se ha producido el siguiente error: `, error);
         })
-    }
+    },
+
+    show: (req, res) => {
+        const id = req.params.id;
+        db.Remote.findOne({where:{id: id}})
+        .then((remote) => {
+            if(remote){
+                console.log(remote)
+                res.json(remote)
+            } else {
+                res.json({message: "no existe el remote buscado"})
+            }
+        })
+    },
 }
 
 module.exports = remoteController;

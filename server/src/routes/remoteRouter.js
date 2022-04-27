@@ -9,5 +9,6 @@ var corsOptions = {
 }
 
 router.get('/',cors(corsOptions),remoteController.index)
+router.get('/:id',cors(corsOptions),remoteController.show)
 
 module.exports = router
