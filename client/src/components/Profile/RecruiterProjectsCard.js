@@ -38,7 +38,7 @@ export default function ProjectsCard(props) {
         <CardTitle tag="h5" className='fs-2 text-center text-secondary'>ACTIVE OFFERS</CardTitle>
         <Row>
           {jobOffers.map((o, i) => (
-            <Col  key={i}>
+            <Col sm='5'  key={i}>
               <Card body color="dark" className={classes.projects}>
                 <CardBody>
                   <CardTitle tag="h5" className='text-center m-2 p-2'> {o.title} </CardTitle>
