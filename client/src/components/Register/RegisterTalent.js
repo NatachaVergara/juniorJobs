@@ -1,7 +1,7 @@
-import React from "react";
-import { Formik, Form, FieldArray, Field, ErrorMessage } from "formik";
+import React, { useEffect, useState } from "react";
+import { Formik, Form, FieldArray, Field } from "formik";
 import * as Yup from "yup";
-import { Button, Card, Col, Label, Row } from "reactstrap";
+import { Card, Col, Input, Label, Row } from "reactstrap";
 import RegisterBtn from "../Buttons/RegisterBtn";
 // eslint-disable-next-line no-unused-vars
 import {
@@ -13,12 +13,37 @@ import {
 import { emailRegex, phoneRegex, urlRegex } from "../../utils/regex";
 import { errorAlerts } from "../../utils/errorsAlert";
 import { useCRUD } from "../../services/useCRUD";
+import { BASE_URL } from "../../utils/URL";
 
-//import { useUserContext } from "../../Store/UserContext";
-//import SkillsArray from "./SkillsArrayField";
+
 
 export default function RegisterTalent(props) {
   const { onCreateSubmit } = useCRUD();
+  const [speciality, setSpeciality] = useState([])
+  const [skills, setSkills] = useState([])
+
+
+  useEffect(() => {
+    const fetchDatasetSpeciality = async () => {
+      const response = await fetch(`${BASE_URL}/speciality`);
+      const data = await response.json();
+      setSpeciality(data);
+    };
+    fetchDatasetSpeciality();
+
+    const fetchDataSkills = async () => {
+      const response = await fetch(`${BASE_URL}/skills`)
+      const data = await response.json()
+      setSkills(data)
+    }
+    fetchDataSkills()
+
+
+  }, [])
+
+  console.log(skills)
+
+
   return (
     <>
       <h1 className="h1">Complete your talent profile!</h1>
@@ -38,7 +63,7 @@ export default function RegisterTalent(props) {
           id_Experience: 0,
           id_Speciality: 1,
           id_Education: 1,
-          // Skill: [{ name: 0, level: 0 }],
+          Skill: [],
           //Language: [{ name: 1, level:1}] ,
           profile: "",
           register: true,
@@ -88,10 +113,7 @@ export default function RegisterTalent(props) {
           id_Education: Yup.number()
             .oneOf([1, 2, 3, 4, 5], "Invalid Education Type")
             .required(errorAlerts[4].requiredAlert),
-          // Skill: Yup.number().oneOf(
-          //   [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
-          //   "Invalid Skill Type"
-          // ).required(errorAlerts[4].requiredAlert),
+          Skill: Yup.number().required(errorAlerts[4].requiredAlert).transform((v) => parseInt(v)),
           // Language: Yup.number().oneOf(
           //   [1, 2, 3, 4, 5, 6],
           //   "Invalid Skill Type"
@@ -107,23 +129,23 @@ export default function RegisterTalent(props) {
           setSubmitting(true);
           values.id_Seniority = +values.id_Seniority;
           values.id_Education = +values.id_Education;
-          // values.id_Speciality = +values.id_Speciality;
+          values.id_Speciality = +values.id_Speciality;
           values.id_Experience = +values.id_Experience;
+          values.Skill = +values.Skill;
           // values.id_Remote = +values.id_Remote;
-          // values.Skill = values.Skill.map((skill) => ({
-          //   name: +skill.name,
-          //   level: +skill.level,
-          // }));
+
           // values.languages = values.languages.map((language) => ({
           //   name: +language.level,
           //   level: +language.level,
           // }))
-          console.log(values);
+
+          
+          console.log(values.Skill);
           onCreateSubmit(values);
           setSubmitting(false);
         }}
       >
-        {({ isSubmitting, isValid, values }) => (
+        {({ isSubmitting, isValid, value }) => (
           <Form>
             <Row>
               <Col xs='12'
@@ -210,163 +232,41 @@ export default function RegisterTalent(props) {
               <Col xs='12'
                 md='6'>
                 <MySelect label="Seniority *" name="id_Seniority">
-                  {/* <option value={0}>Select one of the list</option> */}
                   <option value={1}>Trainee</option>
                   <option value={2}>Junior</option>
                 </MySelect>
               </Col>
-              <Col>
-                {/* <MySelect label="Speciality if apply *" name="id_Speciality">
-                  <option value={1}>Backend</option>
-                  <option value={2}>Data Analytis</option>
-                  <option value={3}>Data Scientis</option>
-                  <option value={4}>Networks</option>
-                  <option value={5}>Computer-Human Interface</option>
-                </MySelect> */}
+              <Col >
+                <MySelect label="Speciality*" name="id_Speciality">
+                  {speciality.map((s, i) => (
+                    <option className='text-dark' key={i} value={s.id}>{s.category} </option>
+                  ))}
+                </MySelect>
               </Col>
+
+              <Label className="mt-3 mb-0">Skills *</Label>
+              <Row>
+                {skills.map((sk, i) => (
+                  <Col key={i} sm='3'>
+                    <label>
+                      <Field
+                        key={sk.id}
+                        type="checkbox"
+                        name="Skill"
+                        value={sk.id.toString()}
+
+                      />
+                      {sk.name}
+                    </label>
+                  </Col>
+                ))}
+
+              </Row>
             </Row>
-            <Label className="mt-3 mb-0">Languages and skills *</Label>
-            {/* <Row>
-              <FieldArray name="Skill">
-                {({ insert, remove, push }) => (
-                  <div>
-                    {values.Skill.length > 0 &&
-                      values.Skill.map((skill, index) => (
-                        <div className="row" key={index}>
-                          <div className="col">
-                            <label htmlFor={`Skill.${index}.name`}>Name *</label>
-                            <Field name={`Skill.${index}.name`} as={MySelect}>
-                              <option value={1}>Api Rest</option>
-                              <option value={2}>C</option>
-                              <option value={3}>C++</option>
-                              <option value={4}>CSS</option>
-                              <option value={5}>Express</option>
-                              <option value={6}>Git</option>
-                              <option value={7}>Go</option>
-                              <option value={8}>HTML</option>
-                              <option value={9}>Java</option>
-                              <option value={10}>JavaScript</option>
-                              <option value={11}>MongoDB</option>
-                              <option value={12}>NodeJS</option>
-                              <option value={13}>PHP</option>
-                              <option value={14}>POO</option>
-                              <option value={15}>Python</option>
-                              <option value={16}>ReactJS</option>
-                              <option value={17}>Remix</option>
-                              <option value={18}>Sequelize</option>
-                              <option value={19}>SQL</option>
-                              <option value={20}>TypeScript</option>
-
-
-                            </Field>
-                            <ErrorMessage
-                              name={`Skill.${index}.name`}
-                              component="div"
-                              className="field-error"
-                            />
-                          </div>
-                          <div className="col">
-                            <label htmlFor={`Skill.${index}.level`}>
-                              Level *
-                            </label>
-                            <Field name={`Skill.${index}.level`} as={MySelect}>
-                              <option value={0}>Basic</option>
-                              <option value={1}>Intermidate</option>
-                              <option value={2}>Advanced</option>
-                            </Field>
-                            <ErrorMessage
-                              name={`Skill.${index}.level`}
-                              component="div"
-                              className="field-error"
-                            />
-                          </div>
-                          <div className="col">
-                            <Button
-                              color="danger"
-                              className="mt-4"
-                              onClick={() => remove(index)}
-                            >
-                              X
-                            </Button>
-                          </div>
-                        </div>
-                      ))}
-                    <Button
-                      color="success"
-                      className="my-3"
-                      onClick={() => push({ name: "", level: "" })}
-                    >
-                      Add skill
-                    </Button>
-                  </div>
-                )}
-              </FieldArray>
-            </Row> */}
-            {/* <Row>
-              <FieldArray name="languages">
-                {({ insert, remove, push }) => (
-                  <div>
-                    {values.languages.length > 0 &&
-                      values.languages.map((language, index) => (
-                        <div className="row" key={index}>
-                          <div className="col">
-                            <label htmlFor={`languages.${index}.name`}>Name *</label>
-                            <Field name={`languages.${index}.name`} as={MySelect}>
-                              <option value={1}>English</option>
-                              <option value={2}>French</option>
-                              <option value={3}>German</option>
-                              <option value={4}>Italian</option>
-                              <option value={5}>Portugues</option>
-                              <option value={6}>Spanish</option>
-                              
-
-                            </Field>
-                            <ErrorMessage
-                              name={`languages.${index}.name`}
-                              component="div"
-                              className="field-error"
-                            />
-                          </div>
-                          <div className="col">
-                            <label htmlFor={`languages.${index}.level`}>
-                              Level *
-                            </label>
-                            <Field name={`languages.${index}.level`} as={MySelect}>
-                              <option value={0}>Basic</option>
-                              <option value={1}>Intermidate</option>
-                              <option value={2}>Advanced</option>
-                            </Field>
-                            <ErrorMessage
-                              name={`languages.${index}.level`}
-                              component="div"
-                              className="field-error"
-                            />
-                          </div>
-                          <div className="col">
-                            <Button
-                              color="danger"
-                              className="mt-4"
-                              onClick={() => remove(index)}
-                            >
-                              X
-                            </Button>
-                          </div>
-                        </div>
-                      ))}
-                    <Button
-                      color="success"
-                      className="my-3"
-                      onClick={() => push({ name: "", level: "" })}
-                    >
-                      Add Language
-                    </Button>
-                  </div>
-                )}
-              </FieldArray>
-            </Row> */}
+            <Label className="mt-3 mb-0">Education/Formation*</Label>
             <Col xs='12'
               md='6'>
-              <MySelect label="Education *" name="id_Education">
+              <MySelect name="id_Education">
                 <option value={1}>Bootcamp</option>
                 <option value={2}>Curso</option>
                 <option value={3}>Ingenieria</option>
@@ -432,17 +332,18 @@ export default function RegisterTalent(props) {
                   />
                 </Col>
               </Row>
-            
+
             </Card>
             <Row>
-                <Col xs='12'
-                  md='6'>
-                  <MyCheckbox name="acceptedTerms">
-                    {"  "} I accept the terms and conditions
-                  </MyCheckbox>
-                </Col>
+              <Col xs='12'
+                md='6'>
+                <MyCheckbox name="acceptedTerms">
+                  {"  "} I accept the terms and conditions
+                </MyCheckbox>
 
-              </Row>
+              </Col>
+
+            </Row>
 
             <RegisterBtn
               isSubmitting={isSubmitting}

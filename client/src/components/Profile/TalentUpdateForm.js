@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Formik,
   Form,
@@ -16,11 +16,23 @@ import { errorAlerts } from '../../utils/errorsAlert'
 import { useUserContext } from "../../Store/UserContext";
 import { useCRUD } from '../../services/useCRUD'
 import classes from './TalentUpdateForm.module.scss'
+import { BASE_URL } from "../../utils/URL";
 
 
 const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
   const { setUserData } = useUserContext()
   const { onUpdateSubmit } = useCRUD()
+  const [speciality, setSpeciality] = useState([])
+
+
+  useEffect(() => {
+    const fetchDatasetSpeciality = async () => {
+      const response = await fetch(`${BASE_URL}/speciality`);
+      const data = await response.json();
+      setSpeciality(data);
+    };
+    fetchDatasetSpeciality();
+  }, [])
 
   return (
     <>
@@ -30,8 +42,6 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
           name: data.name,
           lastName: data.lastName,
           email: data.email,
-          // password: "pr123",
-          // passwordConfirmation: "pr123",
           phone: data.phone,
           url: data.url,
           repository: data.repository,
@@ -39,12 +49,12 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
           birthdate: data.birthdate,
           id_Seniority: data.id_Seniority,
           id_Experience: data.id_Experience,
-          // id_Speciality: data.id_Speciality,
+          id_Speciality: data.id_Speciality,
           id_Education: data.id_Education,
           // Skill: [{ name: 0, level: 0 }],
           // languages: [{ name: 0, level:0}] ,
           profile: data.profile,
-          // acceptedTerms: false,
+
         }}
         validationSchema={Yup.object({
           name: Yup.string()
@@ -53,13 +63,6 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
           lastName: Yup.string()
             .min(2, errorAlerts[0].nameAlert)
             .required(errorAlerts[4].requiredAlert),
-          // password: Yup.string()
-          //   .min(4, errorAlerts[1].passwordAlert)
-          //   .required(errorAlerts[4].requiredAlert),
-          // passwordConfirmation: Yup.string()
-          //   .oneOf([Yup.ref('password'), null], 'Passwords must match')
-          //   .required(errorAlerts[4].requiredAlert),
-
           email: Yup.string()
             .email(errorAlerts[2].emailAlert)
             .matches(emailRegex)
@@ -94,26 +97,15 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
           ),
           profile: Yup.string()
             .max(350, errorAlerts[5].textDescription)
-            .required(errorAlerts[4].requiredAlert),
-          // acceptedTerms: Yup.boolean()
-          //   .required(errorAlerts[4].requiredAlert)
-          //   .oneOf([true], errorAlerts[6].acceptedTerms),
+            .required(errorAlerts[4].requiredAlert)
         })}
         onSubmit={(values, { setSubmitting }) => {
 
           values.id_Seniority = +values.id_Seniority;
           values.id_Education = +values.id_Education;
-          // values.id_Speciality = +values.id_Speciality;
+          values.id_Speciality = +values.id_Speciality;
           values.id_Experience = +values.id_Experience;
 
-          // values.Skill = values.Skill.map((skill) => ({
-          //   name: +skill.name,
-          //   level: +skill.level,
-          // }));
-          // values.languages = values.languages.map((language) => ({
-          //   name: +language.level,
-          //   level: +language.level,
-          // }))
           setSubmitting(true);
           setUserData(values)
           onUpdateSubmit(values)
@@ -142,9 +134,9 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
               </Col>
             </Row>
             <Row>
-              <Col 
-              xs='12'
-              md='6'>
+              <Col
+                xs='12'
+                md='6'>
                 <MyTextInput
                   label="E-mail *"
                   name="email"
@@ -152,25 +144,10 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
                   placeholder="example@juniorjobs.com"
                 />
               </Col>
-              {/* <Col>
-                <MyTextInput
-                  label="Password *"
-                  name="password"
-                  type="password"
-                  placeholder=""
-                />
-              </Col>
-              <Col>
-                <MyTextInput
-                  label="Password Confirmation *"
-                  name="passwordConfirmation"
-                  type="password"
-                  placeholder=""
-                />
-              </Col> */}
+
               <Col
-              xs='12'
-              md='6'>
+                xs='12'
+                md='6'>
                 <MyTextInput
                   label="Phone number *"
                   name="phone"
@@ -181,16 +158,16 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
             </Row>
             <Row>
               <Col
-              xs='12'
-              md='6'>
+                xs='12'
+                md='6'>
                 <MyTextInput
                   label="image *"
                   name="image"
                   type="url" />
               </Col>
               <Col
-              xs='12'
-              md='6'>
+                xs='12'
+                md='6'>
                 <MyTextInput
                   label="LinkedIn *"
                   name="url"
@@ -199,8 +176,8 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
 
               </Col>
               <Col
-              xs='12'
-              md='6'>
+                xs='12'
+                md='6'>
                 <MyTextInput
                   label="Remote repositories *"
                   name="repository"
@@ -211,23 +188,21 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
             <MyTextInput label="Date of birth *" name="birthdate" type="date" />
             <Row>
               <Col
-              xs='12'
-              md='6'>
+                xs='12'
+                md='6'>
                 <MySelect label="Seniority *" name="id_Seniority">
                   <option value={1}>Trainee</option>
                   <option value={2}>Junior</option>
                 </MySelect>
               </Col>
-              {/* <Col>
+              <Col>
                 <MySelect label="Speciality if apply *" name="id_Speciality">
-                  <option value={0}>Aritificial intelligence</option>
-                  <option value={1}>Games</option>
-                  <option value={2}>Fintech</option>
-                  <option value={3}>Data science</option>
-                  <option value={4}>Networks</option>
-                  <option value={5}>Computer-Human Interface</option>
+                  {speciality.map((s, i) => (
+                    <option className='text-dark' key={i} value={s.id}>{s.category} </option>
+                  ))}
+
                 </MySelect>
-              </Col> */}
+              </Col>
             </Row>
             {/* <Label className='mt-3 mb-0'>Languages and skills *</Label> */}
             <Row>
@@ -355,7 +330,7 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
               </FieldArray>
             </Row> */}
             <Col xs='12'
-                md='6'>
+              md='6'>
               <MySelect
                 label="Education *"
                 name="id_Education">
@@ -376,8 +351,8 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
             <Card body color="" className="my-3 mt-0">
               <Row>
                 <Col
-                xs='12'
-                md='6'>
+                  xs='12'
+                  md='6'>
                   <MyRadio
                     label="0-2 months"
                     name="id_Experience"
@@ -386,8 +361,8 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
                   />
                 </Col>
                 <Col
-                xs='12'
-                md='6'>
+                  xs='12'
+                  md='6'>
                   <MyRadio
                     label="2-6 months"
                     name="id_Experience"
@@ -396,8 +371,8 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
                   />
                 </Col>
                 <Col
-                xs='12'
-                md='6'>
+                  xs='12'
+                  md='6'>
                   <MyRadio
                     label="6-12 months"
                     name="id_Experience"
@@ -406,8 +381,8 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
                   />
                 </Col>
                 <Col
-                xs='12'
-                md='6'>
+                  xs='12'
+                  md='6'>
                   <MyRadio
                     label="1-2 yeas"
                     name="id_Experience"
@@ -416,8 +391,8 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
                   />
                 </Col>
                 <Col
-                xs='12'
-                md='6'>
+                  xs='12'
+                  md='6'>
                   <MyRadio
                     label="2-4 years"
                     name="id_Experience"

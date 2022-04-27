@@ -5,48 +5,48 @@ import { AiTwotoneDelete } from 'react-icons/ai';
 
 const TalentProyectsCard = () => {
     return (
-        <Card body color="light" className={classes.card}>
+        <Card body className={classes.card}>
             <CardBody>
-                <CardTitle tag="h5">Jobs Applied</CardTitle>
+                <CardTitle tag="h2" className='text-dark fs-3 text-center m-3'>JOBS APPLIED</CardTitle>
                 <Row className={classes.row}>
-                    <Col>
-                        <Card body color="light" className={classes.col}>
+                    <Col sm='5' >
+                        <Card body color="dark" className={classes.col}>
                             <CardBody className={classes.cardBody}>
-                                <CardTitle tag="h5"> Title </CardTitle>
+                                <CardTitle tag="h5"> Frontend Engineer (Junior Frontend Developer) </CardTitle>
                                 <CardSubtitle className="mb-2 text-muted" tag="h6">
                                     Description
                                 </CardSubtitle>
                                 <CardText>
                                 </CardText>
                             </CardBody>
-                            <Button className={classes.cardButton} > <AiTwotoneDelete/></Button>
+                            <Button className={classes.cardButton} > <AiTwotoneDelete /></Button>
                         </Card>
                     </Col>
-                    <Col>
-                        <Card body color="light" className={classes.col}>
+                    <Col sm='5'>
+                        <Card body color="dark" className={classes.col}>
                             <CardBody className={classes.cardBody}>
-                                <CardTitle tag="h5"> Title </CardTitle>
+                                <CardTitle tag="h5">  Frontend Engineer (Junior Frontend Developer) </CardTitle>
                                 <CardSubtitle className="mb-2 text-muted" tag="h6">
                                     Description
                                 </CardSubtitle>
                                 <CardText>
                                 </CardText>
                             </CardBody>
-                            <Button className={classes.cardButton} > <AiTwotoneDelete/></Button>
+                            <Button className={classes.cardButton} > <AiTwotoneDelete /></Button>
                         </Card>
                     </Col>
 
-                    <Col>
-                        <Card body color="light" className={classes.col}>
+                    <Col sm='5'>
+                        <Card body color="dark" className={classes.col}>
                             <CardBody className={classes.cardBody}>
-                                <CardTitle tag="h5"> Title </CardTitle>
+                                <CardTitle tag="h5">  Frontend Engineer (Junior Frontend Developer) </CardTitle>
                                 <CardSubtitle className="mb-2 text-muted" tag="h6">
                                     Description
                                 </CardSubtitle>
                                 <CardText>
                                 </CardText>
                             </CardBody>
-                            <Button className={classes.cardButton} > <AiTwotoneDelete/> </Button>
+                            <Button className={classes.cardButton} > <AiTwotoneDelete /> </Button>
                         </Card>
                     </Col>
 

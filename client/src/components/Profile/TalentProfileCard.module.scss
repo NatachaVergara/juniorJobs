@@ -1,6 +1,6 @@
 .card {
   width: 20%;
-  height: 70rem;
+  height: auto;
   border-radius: 0;
 
   & img {
@@ -20,7 +20,7 @@
 
   & .cardText {
     width:300px;
-    color:black;
+    color:white;
   }
 
 
@@ -30,7 +30,7 @@
     align-items: center;
 
     & .cardLink{
-      color:black;
+      color:white;
       font-size:50px;
       margin:10px;
       text-decoration: none;
@@ -63,7 +63,7 @@
   
     & .cardText {
       width:300px;
-      color:black;
+      color:white;
     }
   
   
@@ -73,7 +73,7 @@
       align-items: center;
   
       & .cardLink{
-        color:black;
+        color:white;
         font-size:50px;
         margin:10px;
         text-decoration: none;

@@ -62,6 +62,7 @@ export const MyCheckbox = ({ children, ...props }) => {
           <Input
             {...field}
             {...props}
+            
             type="checkbox"
             invalid={meta.error && meta.touched}
             valid={!meta.error && meta.touched}

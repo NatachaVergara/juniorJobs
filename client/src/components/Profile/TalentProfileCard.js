@@ -49,7 +49,7 @@ export default function TalentProfileCard({ data, edu, exp, sp, sr }) {
 
   }, [edu, exp, sp, sr]);
 
-
+console.log(speciality)
   return (
     <Fragment>
       <Card body
@@ -60,10 +60,10 @@ export default function TalentProfileCard({ data, edu, exp, sp, sr }) {
         </CardImg>
         <CardTitle
           tag="h1"
-          className='mt-3 text-dark m-5 text-center'>
+          className='mt-3 text-light m-5 text-center'>
           {data.name} {data.lastName}
         </CardTitle>
-        <CardSubtitle className="mt-3 text-dark m-5 text-center" tag="h3">
+        <CardSubtitle className="mt-3 text-light m-5 text-center" tag="h3">
           {data.profile}
         </CardSubtitle>
 
@@ -78,7 +78,8 @@ export default function TalentProfileCard({ data, edu, exp, sp, sr }) {
             className={classes.cardText}>
             Email: {data.email}
           </CardText>
-          <CardText>
+          <CardText
+          className={classes.cardText}>
             Phone number: {data.phone}
           </CardText>
         </div >
@@ -98,13 +99,7 @@ export default function TalentProfileCard({ data, edu, exp, sp, sr }) {
             rel="noopener noreferrer"
           ><AiFillGithub />
           </CardLink>
-        </div >
-        {/* <CardSubtitle className="mb-2 text-muted" tag="h6">
-          FULL STACK
-        </CardSubtitle> */}
-        <CardText>
-          {/* {data.skills[0].name} - {data.skills[0].level} */}
-        </CardText>
+        </div >       
       </Card>
     </Fragment>
   );
