@@ -10,14 +10,16 @@ import { useUserContext } from '../../Store/UserContext'
 
 const JobDescription = () => {
     const { id } = useParams()
-    const { isUser } = useUserContext()
+    const { isUser} = useUserContext()
     const [offer, setOffer] = useState([])
     const [sr, setSR] = useState([])
     const [exp, setExp] = useState([])
     const [schedule, setSchedule] = useState([])
     const [speciality, setSspeciality] = useState([])
 
+  
     useEffect(() => {
+
         const fetchOffer = async () => {
             try {
                 const response = await fetch(`${BASE_URL}/jobOffers/${id}`)
@@ -28,12 +30,9 @@ const JobDescription = () => {
             }
         }
         fetchOffer()
-    }, [id])
-
-    console.log(offer)
 
 
-    useEffect(() => {
+
         const fetchSeniority = async () => {
             try {
                 const response = await fetch(`${BASE_URL}/Seniorities/${offer.id_Seniority}`)
@@ -91,10 +90,10 @@ const JobDescription = () => {
 
 
 
-    }, [offer.id_Experience, offer.id_Schedule, offer.id_Seniority, offer.id_Speciality])
+    }, [id, offer.id_Experience, offer.id_Schedule, offer.id_Seniority, offer.id_Speciality])
 
 
-    console.log(exp)
+    
 
 
 
@@ -102,7 +101,7 @@ const JobDescription = () => {
         <>
             <div className={classes.wrapper}>
                 <h1 className={classes.title}>{offer.title} </h1>
-                <ul>
+                <ul >
                     <li>{offer.location} </li>
                     <li>|</li>
                     <li>{sr.name} </li>
@@ -130,9 +129,9 @@ const JobDescription = () => {
                 </ul>
                 <div>
                     {isUser ?
-                     <button className='btn btn-outline-warning'>Apply</button> 
+                     <button className='btn btn-outline-warning ms-5 ms-md-0'>Apply</button> 
                      :
-                      <Link to='/login' className='btn btn-outline-success'>Login/Register to apply</Link>}
+                      <Link to='/login' className='btn btn-outline-success ms-5 ms-md-0'>Login/Register to apply</Link>}
 
                 </div>
             </div>

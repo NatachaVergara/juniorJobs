@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { Navbar, NavbarBrand, NavItem, Button } from "reactstrap";
+import { Navbar, NavbarBrand, NavItem, Button, Nav } from "reactstrap";
 import { useUserContext } from "../../Store/UserContext";
 import classes from "./MainNavigation.module.scss";
 
@@ -13,14 +13,14 @@ const MainNavigation = () => {
     setIsUser(false);
     setUserType(null);
     setUserId(null);
-    setUserData(null);   
+    setUserData(null);
     navigate("/login");
   };
 
   return (
     <Navbar className={classes.navbar} sticky="top" dark>
-      <NavItem >
-        <NavbarBrand className='ms-5'>Junior Jobs app</NavbarBrand>
+      <NavItem className={classes.brand}>
+        <NavbarBrand >Junior Jobs app</NavbarBrand>
       </NavItem>
 
       {/* <NavItem>
@@ -30,48 +30,58 @@ const MainNavigation = () => {
           type="search"
         ></Input>
       </NavItem> */}
+     
+        <Nav className={classes.nav} >
+          <NavItem>
+            <NavLink to="/">
+              <Button color="primary">Home</Button>
+            </NavLink>
+          </NavItem >
 
-      <NavItem>
-        <NavLink to="/">
-          <Button color="primary">Home</Button>
-        </NavLink>
-        {isUser === true ? (
-          <NavLink to="/profile">
-            <Button color="primary" className="m-1">Profile</Button>
-          </NavLink>
-        ) : null}
-        <NavLink to="/about">
-          <Button className="m-1" color="primary">
-            About us
-          </Button>
-        </NavLink>
-        <NavLink to="/faq">
-          <Button className="m-1" color="primary">
-            Faqs
-          </Button>
-        </NavLink>
-        {/* {userType === "Recruiter" & isUser ?
-          <NavLink to="/newjob">
-            <Button className="m-1" color="info">
-              Post a new job
+          {isUser === true ? (
+            <NavItem> <NavLink to="/profile">
+              <Button color="primary" >Profile</Button>
+            </NavLink>
+            </NavItem>
+
+          ) : null}
+          <NavItem>
+            <NavLink to="/about">
+              <Button color="primary">
+                About us
+              </Button>
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink to="/faq">
+              <Button color="primary">
+                Faqs
+              </Button>
+            </NavLink>
+          </NavItem>
+          {isUser ? (
+            <NavItem> <Button onClick={logoutHandler} color="danger">
+              Logout
             </Button>
-          </NavLink>
-        : null} */}
-        {isUser ? (
-          <Button onClick={logoutHandler} color="danger">
-            Logout
-          </Button>
-        ) : (
-          <Fragment>
-            <Button color="success" className="m-1 text-dark" onClick={() => navigate("/register")}>
-              SignUp
-            </Button>
-            <Button color="success" className="m-1 text-dark" onClick={() => navigate("/login")}>
-              LogIn
-            </Button>
-          </Fragment>
-        )}
-      </NavItem>
+            </NavItem>
+          ) : (
+            <Fragment>
+              <NavItem>
+                <Button color="success" className="text-dark" onClick={() => navigate("/register")}>
+                  SignUp
+                </Button>
+              </NavItem>
+              <NavItem>
+                <Button color="success" className="text-dark" onClick={() => navigate("/login")}>
+                  LogIn
+                </Button>
+              </NavItem>
+            </Fragment>
+          )}
+
+        </Nav>
+     
+
     </Navbar>
   );
 };

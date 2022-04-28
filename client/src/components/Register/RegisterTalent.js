@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Formik, Form, FieldArray, Field } from "formik";
+import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { Card, Col, Input, Label, Row } from "reactstrap";
+import { Card, Col, Label, Row } from "reactstrap";
 import RegisterBtn from "../Buttons/RegisterBtn";
 // eslint-disable-next-line no-unused-vars
 import {
@@ -21,6 +21,9 @@ export default function RegisterTalent(props) {
   const { onCreateSubmit } = useCRUD();
   const [speciality, setSpeciality] = useState([])
   const [skills, setSkills] = useState([])
+
+
+ 
 
 
   useEffect(() => {
@@ -254,7 +257,6 @@ export default function RegisterTalent(props) {
                         type="checkbox"
                         name="Skill"
                         value={sk.id.toString()}
-
                       />
                       {sk.name}
                     </label>

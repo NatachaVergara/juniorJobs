@@ -8,41 +8,41 @@ export const useUserContext = () => {
   return useContext(UserContext);
 };
 
-//Creo una funcion para utilizar el localStorage y que no se pierda el logueo del user cada vez que se refresca el sitio
+//Creo una funcion para utilizar el sessionStorage y que no se pierda el logueo del user cada vez que se refresca el sitio
 
 const getLocalUser = () => {
-  let user = localStorage.getItem("user");
+  let user = sessionStorage.getItem("user");
 
   if (user) {
-    return JSON.parse(localStorage.getItem("user"));
+    return JSON.parse(sessionStorage.getItem("user"));
   } else {
     return false;
   }
 };
 const getLocalUserType = () => {
-  let userTypeLS = localStorage.getItem("userTypeLS");
+  let userTypeLS = sessionStorage.getItem("userTypeLS");
 
   if (userTypeLS) {
-    return JSON.parse(localStorage.getItem("userTypeLS"));
+    return JSON.parse(sessionStorage.getItem("userTypeLS"));
   } else {
     return null;
   }
 };
 const getLocalUserID = () => {
-  let userIDLS = localStorage.getItem("userIDS");
+  let userIDLS = sessionStorage.getItem("userIDS");
 
   if (userIDLS) {
-    return JSON.parse(localStorage.getItem("userIDS"));
+    return JSON.parse(sessionStorage.getItem("userIDS"));
   } else {
     return null;
   }
 };
 
 const getLocalUserData = () => {
-  let userDataLS = localStorage.getItem("userData");
+  let userDataLS = sessionStorage.getItem("userData");
 
   if (userDataLS) {
-    return JSON.parse(localStorage.getItem("userData"));
+    return JSON.parse(sessionStorage.getItem("userData"));
   } else {
     return null;
   }
@@ -50,10 +50,10 @@ const getLocalUserData = () => {
 
 
 const getLocalJobOffers = () => {
-  let jobOffersLS = localStorage.getItem("jobOffersLS")
+  let jobOffersLS = sessionStorage.getItem("jobOffersLS")
 
   if (jobOffersLS) {
-    return JSON.parse(localStorage.getItem("jobOffersLS"))
+    return JSON.parse(sessionStorage.getItem("jobOffersLS"))
   } else {
     return []
   }
@@ -77,41 +77,42 @@ const UserContextProvider = ({ children }) => {
   const [remote, setRemote] = useState([])
   const [offerID, setOfferID] = useState([])
 
-  console.log(jobOffers)
-  //Creo un estado user dentro de mi localStorage
+  //console.log(jobOffers[0])
+  //Creo un estado user dentro de mi sessionStorage
   useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(isUser));
+    sessionStorage.setItem("user", JSON.stringify(isUser));
   }, [isUser]);
 
-  //Creo un estado userType dentro de mi localStorage
+  //Creo un estado userType dentro de mi sessionStorage
   useEffect(() => {
-    localStorage.setItem("userTypeLS", JSON.stringify(userType));
+    sessionStorage.setItem("userTypeLS", JSON.stringify(userType));
   }, [userType]);
 
-  //Creo un estado userID dentro de mi localStorage
+  //Creo un estado userID dentro de mi sessionStorage
   useEffect(() => {
-    localStorage.setItem("userIDS", JSON.stringify(userID));
+    sessionStorage.setItem("userIDS", JSON.stringify(userID));
   }, [userID]);
-  //Creo un estado userData dentro de mi localStorage
+  //Creo un estado userData dentro de mi sessionStorage
   useEffect(() => {
-    localStorage.setItem("userData", JSON.stringify(userData));
+    sessionStorage.setItem("userData", JSON.stringify(userData));
   }, [userData]);
 
 
   useEffect(() => {
-    localStorage.setItem('jobOffersLS', JSON.stringify(jobOffers))
+    sessionStorage.setItem('jobOffersLS', JSON.stringify(jobOffers))
   }, [jobOffers])
+
 
 
   useEffect(() => {
     const fetchOffers = async () => {
       const response = await fetch(`${BASE_URL}/jobOffers`)
       const data = await response.json()
-      console.log(data)
-      setJobOffers(data)
+      sessionStorage.setItem('jobOffersLS', JSON.stringify(data))
+     // setJobOffers(data)
     }
     fetchOffers()
-  }, [setJobOffers])
+  }, [])
 
 
 

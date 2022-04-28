@@ -11,10 +11,18 @@
   & ul {
     display: flex;
     justify-content: space-evenly;
+    flex-wrap: wrap;
 
     & li {
       list-style: none;
     }
+
+    @media screen and (max-width: 500px){
+      li{
+        padding:9px;
+      }
+    }
+
   }
 
   .items {

@@ -9,7 +9,7 @@ const FeaturedCards = () => {
     <>
       <h3>Active Job posting</h3>
       <Row>
-        {jobOffers.map((offer, index) => (
+        {jobOffers[0].map((offer, index) => (
            <FeaturedCard 
             key={index} 
             offer={offer}
