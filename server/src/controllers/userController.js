@@ -6,6 +6,7 @@ const User = require('../database/models/index')
 let invalidPassword = 'Password is incorrect'
 let userNotFound = 'User not found'
 let conecctionError = 'a problem has been detected, try again'
+
 const userController = {
     login: (req, res) => {
 
