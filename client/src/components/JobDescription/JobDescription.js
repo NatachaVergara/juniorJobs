@@ -3,22 +3,22 @@ import { AccessTimeRounded, CakeOutlined, CheckroomOutlined, DinnerDiningOutline
 import PersonIcon from '@mui/icons-material/Person';
 import { Col, Row } from 'reactstrap';
 import classes from './JobDescription.module.scss'
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { BASE_URL } from '../../utils/URL';
-
+import { useUserContext } from '../../Store/UserContext'
 
 
 const JobDescription = () => {
     const { id } = useParams()
-   
+    const { isUser } = useUserContext()
     const [offer, setOffer] = useState([])
     const [sr, setSR] = useState([])
     const [exp, setExp] = useState([])
     const [schedule, setSchedule] = useState([])
     const [speciality, setSspeciality] = useState([])
-  
-    useEffect(()=>{
-        const fetchOffer = async ()=>{
+
+    useEffect(() => {
+        const fetchOffer = async () => {
             try {
                 const response = await fetch(`${BASE_URL}/jobOffers/${id}`)
                 const data = await response.json()
@@ -28,75 +28,73 @@ const JobDescription = () => {
             }
         }
         fetchOffer()
-    }, [id])    
+    }, [id])
 
     console.log(offer)
-  
-    
+
+
     useEffect(() => {
-      const fetchSeniority = async () => {
-        try {
-          const response = await fetch(`${BASE_URL}/Seniorities/${offer.id_Seniority}`)
-          const data = await response.json()
-          setSR(data)
-  
-        } catch (error) {
-          console.log(error)
+        const fetchSeniority = async () => {
+            try {
+                const response = await fetch(`${BASE_URL}/Seniorities/${offer.id_Seniority}`)
+                const data = await response.json()
+                setSR(data)
+
+            } catch (error) {
+                console.log(error)
+            }
         }
-  
-  
-      }
-      fetchSeniority()
-  
-      const fetchExperience = async () => {
-  
-        try {
-          const response = await fetch(`${BASE_URL}/experience/${offer.id_Experience}`);
-          const data = await response.json()
-          setExp(data)
-  
-        } catch (error) {
-          console.log(error)
+        fetchSeniority()
+
+        const fetchExperience = async () => {
+
+            try {
+                const response = await fetch(`${BASE_URL}/experience/${offer.id_Experience}`);
+                const data = await response.json()
+                setExp(data)
+
+            } catch (error) {
+                console.log(error)
+            }
         }
-      }
-  
-      fetchExperience()
-  
-      const fetchShedules = async () => {
-  
-        try {
-          const response = await fetch(`${BASE_URL}/schedules/${offer.id_Schedule}`);
-          const data = await response.json()
-  
-          setSchedule(data)
-        } catch (error) {
-          console.log(error)
+
+        fetchExperience()
+
+        const fetchShedules = async () => {
+
+            try {
+                const response = await fetch(`${BASE_URL}/schedules/${offer.id_Schedule}`);
+                const data = await response.json()
+
+                setSchedule(data)
+            } catch (error) {
+                console.log(error)
+            }
+
         }
-  
-      }
-      fetchShedules()
-  
-  
-  
-      const fetchspeciality = async () => {
-  
-        try {
-          const response = await fetch(`${BASE_URL}/speciality/${offer.id_Speciality}`);
-          const data = await response.json()
-          setSspeciality(data)
-        } catch (error) {
-          console.log(error)
+        fetchShedules()
+
+
+
+        const fetchspeciality = async () => {
+
+            try {
+                const response = await fetch(`${BASE_URL}/speciality/${offer.id_Speciality}`);
+                const data = await response.json()
+                setSspeciality(data)
+            } catch (error) {
+                console.log(error)
+            }
+
         }
-  
-      }
-      fetchspeciality()
-  
-  
-  
+        fetchspeciality()
+
+
+
     }, [offer.id_Experience, offer.id_Schedule, offer.id_Seniority, offer.id_Speciality])
 
 
-console.log(exp)
+    console.log(exp)
 
 
 
@@ -131,7 +129,11 @@ console.log(exp)
                     </li>
                 </ul>
                 <div>
-                    <button className='btn btn-primary'>Postulate</button>
+                    {isUser ?
+                     <button className='btn btn-outline-warning'>Apply</button> 
+                     :
+                      <Link to='/login' className='btn btn-outline-success'>Login/Register to apply</Link>}
+
                 </div>
             </div>
             <div className={classes.wrapperDesc}>

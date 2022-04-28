@@ -73,7 +73,7 @@ export const FeaturedCard = ({ offer, experience, seniority, sch, spe }) => {
 
   }, [experience, sch, seniority, spe])
 
-let id = offer.id
+  let id = offer.id
 
 
 
@@ -85,16 +85,18 @@ let id = offer.id
             <div className="card text-white  border-light mb-3 p-3" style={{ maxWidth: '100%' }}>
               <div className="card-header">{offer.title}</div>
               <div className="card-body">
-                <div className='d-flex justify-content-between align-item-center'>
+                <div className='d-flex flex-column justify-content-between align-item-center'>
                   <CardText>{sr.name} </CardText>
                   <CardText>{exp.period} </CardText>
                   <CardText>{schedule.schedule} </CardText>
                   <CardText>{speciality.category} </CardText>
                 </div>
               </div>
-              <Link className=" btn btn-danger card-date w-50" to={`/job/${id}`} >Ver mas.. </Link>
+              <div className='d-flex justify-content-center align-items-center'>
+                <Link className=" btn btn-danger card-date w-50" to={`/job/${id}`} >Go to offer </Link>
+              </div>
             </div>
-           
+
           </Row>
         </Col>
       </Row>

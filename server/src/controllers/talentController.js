@@ -2,6 +2,11 @@ const db = require('../database/models');
 const Talent = require('../database/models/Talent')
 const bcryptjs = require('bcryptjs')
 
+let usedEmail = 'This email has already been use. Do you already have an account?'
+let notFound = 'Talent not found'
+
+
+
 const talentController = {
     create: (req, res) => {
         // console.log(req.body)
@@ -12,8 +17,8 @@ const talentController = {
         })
             .then((talent) => {
                 if (talent) {
-                    console.log('message: Este usuario ya se encuentra registrado');
-                    return res.json({ message: 'Este usuario ya se encuentra registrado' })
+                    console.log(`message:${usedEmail}`);
+                    return res.json({ message: usedEmail })
                 } else {
                     console.log(req.body);
                     const password = req.body.password;
@@ -34,21 +39,24 @@ const talentController = {
                         id_Experience: req.body.id_Experience,
                         id_Speciality: req.body.id_Speciality,
                         id_Education: req.body.id_Education,
-                     
+
 
                     }).then(talento => {
-                        console.log('talento creado');
-                        res.json(talento)
+                        console.log('Talent created');
+                        res.json({
+                            message: 'Talent created',
+                            talento
+                        })
                     })
                         .catch(function (error) {
-                            console.log("No se pudo crear el registro en la base de datos");
+                            console.log("Talent not created");
                             console.log(req.body)
-                            console.error(error)
+                            console.error("Error: ", error)
                         })
                 }
             })
             .catch(function (error) {
-                console.log(`Se ha producido el siguiente error: `, error);
+                console.log(`Error: `, error);
             })
     },
 
@@ -71,28 +79,28 @@ const talentController = {
                         id_Experience: req.body.id_Experience,
                         id_Speciality: req.body.id_Speciality,
                         id_Education: req.body.id_Education,
-                        
+
                     }, { where: { id: req.params.id } })
                         .then(newTalent => {
-                            console.log('Se actualizó el talento', talento);
+                            console.log('Talent updated', talento);
                             return res.status(201).json(
                                 {
-                                    message: 'Se actualizó el talento',
+                                    message: 'Talent updated',
                                     talento
-                                    
+
                                 });
                         })
                         .catch(function (error) {
-                            console.log("No se pudo crear el registro en nuestra base de datos", error);
+                            console.log("Not possible to update talent", error);
                         })
                 }
                 else {
-                    console.log('No se encontró el talento en nuestra base de datos');
-                    return res.status(404).json({ message: 'No se encontró el talento en nuestra base de datos' });
+                    console.log(notFound);
+                    return res.status(404).json({ message: notFound });
                 }
             })
             .catch(function (error) {
-                console.log(`Se ha producido el siguiente error: `, error);
+                console.log(`Error: `, error);
             })
     },
 
@@ -104,20 +112,20 @@ const talentController = {
                         where: { id: req.params.id }
                     })
                         .then(Talent => {
-                            console.log('El talento ha sido borrado de nuestra base de datos');
-                            return res.status(204).json({ message: 'El talento ha sido borrado nuestra base de datos' });
+                            console.log('Talent deleted');
+                            return res.status(204).json({ message: 'Talent deleted' });
                         })
                         .catch(function (error) {
-                            console.log("No se pudo borar el talento de nuestra base de datos", error);
+                            console.log("Talent not deleted", error);
                         })
                 }
                 else {
-                    console.log('No se encontró el talento en nuestra base de datos');
-                    return res.status(404).json({ message: 'No se encontró el talento en nuestra base de datos' });
+                    console.log(notFound);
+                    return res.status(404).json({ message: notFound });
                 }
             })
             .catch(function (error) {
-                console.log(`Se ha producido el siguiente error: `, error);
+                console.log(`Error: `, error);
             })
     },
 
@@ -130,12 +138,12 @@ const talentController = {
                     console.log(talent);
                     return res.status(200).json(talent.dataValues)
                 } else {
-                    console.log('No se encontró el talento en nuestra base de datos');
-                    return res.status(404).json({ message: 'No se encontró el talento en nuestra base de datos' });
+                    console.log(notFound);
+                    return res.status(404).json({ message: notFound });
                 }
             })
             .catch(function (error) {
-                console.log(`Se ha producido el siguiente error: `, error);
+                console.log(`Error: `, error);
             })
     },
 
@@ -150,12 +158,12 @@ const talentController = {
                     return res.status(200).json(allTalent);
                 }
                 else {
-                    console.log('No se encontró ningún talento en nuestra base de datos');
-                    return res.status(404).json({ message: 'No se encontró ningún talento en nuestra base de datos' });
+                    console.log(notFound);
+                    return res.status(404).json({ message: notFound });
                 }
             })
             .catch(function (error) {
-                console.log(`Se ha producido el siguiente error: `, error);
+                console.log(`Error: `, error);
             })
     }
 }

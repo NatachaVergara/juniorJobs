@@ -1,6 +1,10 @@
 const db = require('../database/models');
 const bcryptjs = require('bcryptjs');
 
+
+let notFound = 'Recluter not found'
+
+
 const recruiterController = {
     create: (req, res) => {
         //res.json("Metodo creación de Recruiter");
@@ -13,8 +17,8 @@ const recruiterController = {
         })
             .then((recruiter) => {
                 if (recruiter) {
-                    console.log('Este usuario ya se encuentra registrado');
-                    return res.json({ message: 'Este usuario ya se encuentra registrado' })
+                    console.log('Email is already in our data base');
+                    return res.json({ message: 'Email is already in our data base' })
                 }
                 else {
                     console.log(req.body);
@@ -30,18 +34,20 @@ const recruiterController = {
                         url: req.body.url
                     })
                         .then((recruiter) => {
-                            console.log('recruiter creado');
-                            res.json(recruiter)
+                            console.log('Recruiter created');
+                            res.json({
+                                message: 'Recruiter created',
+                                recruiter})
                         })
                         .catch(function (error) {
-                            console.log("No se pudo crear el registro en la base de datos");
+                            console.log("Not possible to create recruiter", error);
                             console.log(req.body)
                             console.error(error)
                         })
                 }
             })
             .catch(function (error) {
-                console.log(`Se ha producido el siguiente error: `, error);
+                console.log(`Error: `, error);
             })
     },
 
@@ -60,24 +66,24 @@ const recruiterController = {
                         url: req.body.url
                     }, { where: { id: req.params.id } })
                         .then(() => {
-                            console.log('Se actualizó el reclutador');
+                            console.log('Recruiter updated');
                             return res.status(201).json(
                                 {
-                                    message: 'Se actualizó el reclutador',
+                                    message: 'Recruiter updated',
                                     recruiter
                                 });
                         })
                         .catch(function (error) {
-                            console.log("No se pudo crear el registro en nuestra base de datos", error);
+                            console.log("Not possible to delete recruiter", error);
                         })
                 }
                 else {
-                    console.log('No se encontró el reclutador en nuestra base de datos');
-                    return res.status(404).json({ message: 'No se encontró el reclutador en nuestra base de datos' });
+                    console.log(notFound);
+                    return res.status(404).json({ message: notFound });
                 }
             })
             .catch(function (error) {
-                console.log(`Se ha producido el siguiente error: `, error);
+                console.log(`Error: `, error);
             })
     },
 
@@ -91,20 +97,20 @@ const recruiterController = {
                         where: { id: req.params.id }
                     })
                         .then(() => {
-                            console.log('El reclutador ha sido borrado de nuestra base de datos');
-                            return res.status(204).json({ message: 'El reclutador ha sido borrado nuestra base de datos' });
+                            console.log('Recruiter deleted');
+                            return res.status(204).json({ message: 'Recruiter deleted' });
                         })
                         .catch(function (error) {
-                            console.log("No se pudo borar el reclutador de nuestra base de datos", error);
+                            console.log("Not possible to delet recruiter", error);
                         })
                 }
                 else {
-                    console.log('No se encontró el reclutador en nuestra base de datos');
-                    return res.status(404).json({ message: 'No se encontró el reclutador en nuestra base de datos' });
+                    console.log(notFound);
+                    return res.status(404).json({ message: notFound });
                 }
             })
             .catch(function (error) {
-                console.log(`Se ha producido el siguiente error: `, error);
+                console.log(`Error: `, error);
             })
     },
 
@@ -118,12 +124,12 @@ const recruiterController = {
                     return res.status(200).json(recruiter.dataValues);
                 }
                 else {
-                    console.log('No se encontró el reclutador en nuestra base de datos');
-                    return res.status(404).json({ message: 'No se encontró el reclutador en nuestra base de datos' });
+                    console.log(notFound);
+                    return res.status(404).json({ message: notFound });
                 }
             })
             .catch(function (error) {
-                console.log(`Se ha producido el siguiente error: `, error);
+                console.log(`Error: `, error);
             })
     },
 
@@ -139,12 +145,12 @@ const recruiterController = {
                     return res.status(200).json(allRecruiter);
                 }
                 else {
-                    console.log('No se encontró ningún reclutador en nuestra base de datos');
-                    return res.status(404).json({ message: 'No se encontró ningún reclutador en nuestra base de datos' });
+                    console.log(notFound);
+                    return res.status(404).json({ message: notFound });
                 }
             })
             .catch(function (error) {
-                console.log(`Se ha producido el siguiente error: `, error);
+                console.log(`Error: `, error);
             })
     }
 }

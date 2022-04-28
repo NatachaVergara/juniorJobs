@@ -2,6 +2,10 @@ const db = require('../database/models');
 const Sequelize = require('sequelize')
 const bcryptjs = require('bcryptjs');
 const User = require('../database/models/index')
+
+let invalidPassword = 'Password is incorrect'
+let userNotFound = 'User not found'
+let conecctionError = 'a problem has been detected, try again'
 const userController = {
     login: (req, res) => {
 
@@ -20,25 +24,23 @@ const userController = {
                         let validatePassword = bcryptjs.compareSync(req.body.password, user.password);
                         if (validatePassword == true) {
                             delete user.dataValues.password;
-                            console.log("Bienvenido, " + req.body.email);
+                            console.log("Welcome, " + req.body.email);
                             return res.status(200).json(user);
                         }
                         else {
-                            console.log("Las credenciales son inválidas");
+                            console.log(invalidPassword);
                             return res.status(403).json(
-                                "Las credenciales son inválidas"
+                                invalidPassword
                             );
                         }
                     }
                     else {
-                        console.log("No se encuentra el email registrado en nuestra base de datos");
-                        return res.status(404).json("No se encuentra el email registrado en nuestra base de datos"
-
-                        );
+                        console.log(userNotFound);
+                        return res.status(404).json( userNotFound  );
                     }
                 })
                 .catch(function (error) {
-                    console.log("Ocurrió un error por favor vuelva a intentarlo " + error);
+                    console.log(conecctionError, error);
                 })
         } else if (userType == 'Recruiter') {
             db.Recruiter.findOne({
@@ -51,26 +53,24 @@ const userController = {
                         let validatePassword = bcryptjs.compareSync(req.body.password, user.password);
                         if (validatePassword == true) {
                             delete user.dataValues.password;
-                            console.log("Bienvenido, " + req.body.email);
+                            console.log("Welcome, " + req.body.email);
                             return res.status(200).json(user);
                         }
                         else {
-                            console.log("Las credenciales son inválidas");
+                            console.log(invalidPassword);
                             return res.status(403).json(
-                                "Las credenciales son inválidas"
-                            );
+                                invalidPassword );
                         }
                     }
                     else {
-                        console.log("No se encuentra el email registrado en nuestra base de datos");
+                        console.log(userNotFound);
                         return res.status(404).json(
-                            "No se encuentra el email registrado en nuestra base de datos"
-
+                            userNotFound
                         );
                     }
                 })
                 .catch(function (error) {
-                    console.log("Ocurrió un error por favor vuelva a intentarlo");
+                    console.log(conecctionError);
                 })
         }
     },

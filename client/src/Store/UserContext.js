@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { BASE_URL } from "../utils/URL";
 
 const UserContext = createContext(null);
 //Esta es la funcion que tengo que llamar en los componentes
@@ -47,13 +48,25 @@ const getLocalUserData = () => {
   }
 };
 
+
+const getLocalJobOffers = () => {
+  let jobOffersLS = localStorage.getItem("jobOffersLS")
+
+  if (jobOffersLS) {
+    return JSON.parse(localStorage.getItem("jobOffersLS"))
+  } else {
+    return []
+  }
+}
+
+
 const UserContextProvider = ({ children }) => {
   const [isUser, setIsUser] = useState(getLocalUser());
   //Cree un estado para setear el userType que por ahora se va a utilizar en el Register
   const [userType, setUserType] = useState(getLocalUserType());
+  const [jobOffers, setJobOffers] = useState([getLocalJobOffers()])
   const [userID, setUserId] = useState(getLocalUserID());
   const [userData, setUserData] = useState(getLocalUserData());
-  const [jobOffers, setJobOffers] = useState([])
   const [offerData, setOfferData] = useState([])
   const [seniorities, setSeniorities] = useState([])
   const [exp, setExp] = useState([])
@@ -64,8 +77,7 @@ const UserContextProvider = ({ children }) => {
   const [remote, setRemote] = useState([])
   const [offerID, setOfferID] = useState([])
 
-
-
+  console.log(jobOffers)
   //Creo un estado user dentro de mi localStorage
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(isUser));
@@ -84,6 +96,26 @@ const UserContextProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem("userData", JSON.stringify(userData));
   }, [userData]);
+
+
+  useEffect(() => {
+    localStorage.setItem('jobOffersLS', JSON.stringify(jobOffers))
+  }, [jobOffers])
+
+
+  useEffect(() => {
+    const fetchOffers = async () => {
+      const response = await fetch(`${BASE_URL}/jobOffers`)
+      const data = await response.json()
+      console.log(data)
+      setJobOffers(data)
+    }
+    fetchOffers()
+  }, [setJobOffers])
+
+
+
+
 
   return (
     <UserContext.Provider
@@ -106,7 +138,7 @@ const UserContextProvider = ({ children }) => {
         education,
         remote,
         offerData,
-        offerID, 
+        offerID,
         setSeniorities,
         setExp,
         setSchedule,

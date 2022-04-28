@@ -1,36 +1,16 @@
-import { useEffect } from "react";
 import { Row } from "reactstrap";
-
 import { useUserContext } from '../../Store/UserContext'
-import { BASE_URL } from "../../utils/URL";
 import FeaturedCard from "./FeaturedCard";
 
 const FeaturedCards = () => {
- 
-  const { jobOffers, setJobOffers } = useUserContext();
-  //const {fetchOffers} = useFetch()
-
-
-  useEffect(() => {
-    const fetchOffers = async () => {
-      const response = await fetch(`${BASE_URL}/jobOffers`)
-      const data = await response.json()
-      console.log(data)
-      setJobOffers(data)
-    }
-    fetchOffers()
-  },[setJobOffers])
-
-
-
-console.log(jobOffers)
-
+   const { jobOffers } = useUserContext();
+  
   return (
     <>
       <h3>Active Job posting</h3>
       <Row>
         {jobOffers.map((offer, index) => (
-           <FeaturedCard color="info"
+           <FeaturedCard 
             key={index} 
             offer={offer}
             id={offer.id}
