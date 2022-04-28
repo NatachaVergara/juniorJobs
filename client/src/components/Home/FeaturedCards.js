@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Row } from "reactstrap";
-import useFetch from "../../Fetch/fetch";
+
 import { useUserContext } from '../../Store/UserContext'
 import { BASE_URL } from "../../utils/URL";
 import FeaturedCard from "./FeaturedCard";
@@ -38,8 +38,6 @@ console.log(jobOffers)
             seniority={offer.id_Seniority}
             spe={offer.id_Speciality}
             sch={offer.id_Schedule}
-            
-            
             />
           ))}
       </Row>

@@ -5,8 +5,6 @@ import classes from "./TalentProfileCard.module.scss";
 import { BASE_URL } from "../../utils/URL";
 
 export default function TalentProfileCard({ data, edu, exp, sp, sr }) {
-
-
   const [seniorities, setSeniorities] = useState([]);
   const [education, setEducation] = useState([]);
   const [experience, setExperience] = useState([]);
@@ -15,8 +13,6 @@ export default function TalentProfileCard({ data, edu, exp, sp, sr }) {
   // const [skills, setSkills] = useState([]);
 
 
-
-  // console.log("seniorities in new job form", seniorities);
   useEffect(() => {
     const fetchDataSeniorities = async () => {
       const response = await fetch(`${BASE_URL}/Seniorities/${sr}`);
@@ -52,7 +48,7 @@ export default function TalentProfileCard({ data, edu, exp, sp, sr }) {
 
   }, [edu, exp, sp, sr]);
 
-console.log(speciality)
+
   return (
     <Fragment>
       <Card body

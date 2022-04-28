@@ -13,73 +13,90 @@ export const FeaturedCard = ({ offer, experience, seniority, sch, spe }) => {
 
   useEffect(() => {
     const fetchSeniority = async () => {
-      const response = await fetch(`${BASE_URL}/Seniorities/${seniority}`)
-      const data = await response.json()
+      try {
+        const response = await fetch(`${BASE_URL}/Seniorities/${seniority}`)
+        const data = await response.json()
+        setSR(data)
 
-      setSR(data)
+      } catch (error) {
+        console.log(error)
+      }
+
+
     }
     fetchSeniority()
 
-  }, [seniority])
-
-
-  useEffect(() => {
     const fetchExperience = async () => {
-      const response = await fetch(`${BASE_URL}/experience/${experience}`);
-      const data = await response.json()
 
-      setExp(data)
+      try {
+        const response = await fetch(`${BASE_URL}/experience/${experience}`);
+        const data = await response.json()
+        setExp(data)
+
+      } catch (error) {
+        console.log(error)
+      }
     }
+
     fetchExperience()
 
-  }, [experience])
-
-
-
-  useEffect(() => {
     const fetchShedules = async () => {
-      const response = await fetch(`${BASE_URL}/schedules/${sch}`);
-      const data = await response.json()
 
-      setSchedule(data)
+      try {
+        const response = await fetch(`${BASE_URL}/schedules/${sch}`);
+        const data = await response.json()
+
+        setSchedule(data)
+      } catch (error) {
+        console.log(error)
+      }
+
     }
     fetchShedules()
 
-  }, [sch])
 
-  useEffect(() => {
+
     const fetchspeciality = async () => {
-      const response = await fetch(`${BASE_URL}/speciality/${spe}`);
-      const data = await response.json()
-      setSspeciality(data)
+
+      try {
+        const response = await fetch(`${BASE_URL}/speciality/${spe}`);
+        const data = await response.json()
+        setSspeciality(data)
+      } catch (error) {
+        console.log(error)
+      }
+
     }
     fetchspeciality()
 
-  }, [spe])
+
+
+  }, [experience, sch, seniority, spe])
+
+let id = offer.id
 
 
 
   return (
-    <Col className='p-3' sm='6' >
+    <Col className='p-3' sm='4' >
       <Row>
-        <Link to='/job'
-          className='text-decoration-none btn' >
-          <Col sm="12">         
-              <Row>
-                <div className="card text-white  border-light mb-3 p-3" style={{maxWidth: '100%'}}>
-                  <div className="card-header">{offer.title}</div>
-                  <div className="card-body">
-                    <div className='d-flex justify-content-between align-item-center'>
-                      <CardText>{sr.name} </CardText>
-                      <CardText>{exp.period} </CardText>
-                      <CardText>{schedule.schedule} </CardText>
-                      <CardText>{speciality.category} </CardText>
-                    </div>
-                  </div>
+        <Col sm="12">
+          <Row>
+            <div className="card text-white  border-light mb-3 p-3" style={{ maxWidth: '100%' }}>
+              <div className="card-header">{offer.title}</div>
+              <div className="card-body">
+                <div className='d-flex justify-content-between align-item-center'>
+                  <CardText>{sr.name} </CardText>
+                  <CardText>{exp.period} </CardText>
+                  <CardText>{schedule.schedule} </CardText>
+                  <CardText>{speciality.category} </CardText>
                 </div>
-              </Row>            
-          </Col>
-        </Link>
+              </div>
+              <Link className=" btn btn-danger card-date w-50" to={`/job/${id}`} >Ver mas.. </Link>
+            </div>
+           
+          </Row>
+        </Col>
       </Row>
     </Col>
   );
