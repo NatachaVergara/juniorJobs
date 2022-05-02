@@ -37,7 +37,8 @@ const recruiterController = {
                             console.log('Recruiter created');
                             res.json({
                                 message: 'Recruiter created',
-                                recruiter})
+                                recruiter
+                            })
                         })
                         .catch(function (error) {
                             console.log("Not possible to create recruiter", error);
@@ -98,10 +99,11 @@ const recruiterController = {
                     })
                         .then(() => {
                             console.log('Recruiter deleted');
-                            return res.status(204).json({ message: 'Recruiter deleted' });
+                            return res.status(204).json(
+                                { message: 'Recruiter deleted' });
                         })
                         .catch(function (error) {
-                            console.log("Not possible to delet recruiter", error);
+                            console.log("Not possible to delete recruiter", error);
                         })
                 }
                 else {

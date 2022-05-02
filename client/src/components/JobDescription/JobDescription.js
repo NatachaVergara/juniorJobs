@@ -12,6 +12,7 @@ const JobDescription = () => {
     const { id } = useParams()
     const { isUser} = useUserContext()
     const [offer, setOffer] = useState([])
+    
     const [sr, setSR] = useState([])
     const [exp, setExp] = useState([])
     const [schedule, setSchedule] = useState([])

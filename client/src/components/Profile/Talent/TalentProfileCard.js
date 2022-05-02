@@ -2,7 +2,7 @@ import { Fragment, useEffect, useState } from "react";
 import { Card, CardImg, CardLink, CardSubtitle, CardText, CardTitle } from "reactstrap";
 import { AiFillGithub, AiFillLinkedin } from 'react-icons/ai';
 import classes from "./TalentProfileCard.module.scss";
-import { BASE_URL } from "../../utils/URL";
+import { BASE_URL } from "../../../utils/URL";
 
 export default function TalentProfileCard({ data, edu, exp, sp, sr }) {
   const [seniorities, setSeniorities] = useState([]);

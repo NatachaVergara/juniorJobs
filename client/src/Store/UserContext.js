@@ -49,22 +49,22 @@ const getLocalUserData = () => {
 };
 
 
-const getLocalJobOffers = () => {
-  let jobOffersLS = sessionStorage.getItem("jobOffersLS")
+// const getLocalJobOffers = () => {
+//   let jobOffersLS = sessionStorage.getItem("jobOffersLS")
 
-  if (jobOffersLS) {
-    return JSON.parse(sessionStorage.getItem("jobOffersLS"))
-  } else {
-    return []
-  }
-}
+//   if (jobOffersLS) {
+//     return JSON.parse(sessionStorage.getItem("jobOffersLS"))
+//   } else {
+//     return []
+//   }
+// }
 
 
 const UserContextProvider = ({ children }) => {
   const [isUser, setIsUser] = useState(getLocalUser());
   //Cree un estado para setear el userType que por ahora se va a utilizar en el Register
   const [userType, setUserType] = useState(getLocalUserType());
-  const [jobOffers, setJobOffers] = useState([getLocalJobOffers()])
+  const [jobOffers, setJobOffers] = useState([])
   const [userID, setUserId] = useState(getLocalUserID());
   const [userData, setUserData] = useState(getLocalUserData());
   const [offerData, setOfferData] = useState([])
@@ -77,7 +77,7 @@ const UserContextProvider = ({ children }) => {
   const [remote, setRemote] = useState([])
   const [offerID, setOfferID] = useState([])
 
-  //console.log(jobOffers[0])
+
   //Creo un estado user dentro de mi sessionStorage
   useEffect(() => {
     sessionStorage.setItem("user", JSON.stringify(isUser));
@@ -108,8 +108,7 @@ const UserContextProvider = ({ children }) => {
     const fetchOffers = async () => {
       const response = await fetch(`${BASE_URL}/jobOffers`)
       const data = await response.json()
-      sessionStorage.setItem('jobOffersLS', JSON.stringify(data))
-     // setJobOffers(data)
+      setJobOffers(data)
     }
     fetchOffers()
   }, [])

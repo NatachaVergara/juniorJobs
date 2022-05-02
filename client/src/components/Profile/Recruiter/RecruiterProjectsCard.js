@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Card, CardBody, CardTitle, Row } from "reactstrap";
 //import { useCRUD } from "../../services/useCRUD";
-import { useUserContext } from "../../Store/UserContext";
-import { BASE_URL } from "../../utils/URL";
+import { useUserContext } from "../../../Store/UserContext";
+import { BASE_URL } from "../../../utils/URL";
 import ProyectCard from "./ProyectCard";
 import classes from "./RecruiterProjectsCard.module.scss";
 
@@ -22,6 +22,10 @@ export default function ProjectsCard(props) {
 
   }, [userID])
 
+
+
+
+
   console.log(jobOffers)
 
   return (
@@ -32,7 +36,9 @@ export default function ProjectsCard(props) {
         <Row>
           {jobOffers.map((o, i) => (
             <ProyectCard
-              key={i}
+              key={i}              
+              offer={o}
+              offerId={o.id}
               description={o.description}
               exp={o.id_Experience}
               remote={o.id_Remote}

@@ -3,13 +3,14 @@ import { Link } from "react-router-dom";
 import { Col, Row, CardText } from "reactstrap";
 import { BASE_URL } from "../../utils/URL";
 
+
+
 export const FeaturedCard = ({ offer, experience, seniority, sch, spe }) => {
   const [sr, setSR] = useState([])
   const [exp, setExp] = useState([])
   const [schedule, setSchedule] = useState([])
   const [speciality, setSspeciality] = useState([])
-
-
+  
 
   useEffect(() => {
     const fetchSeniority = async () => {
@@ -21,10 +22,10 @@ export const FeaturedCard = ({ offer, experience, seniority, sch, spe }) => {
       } catch (error) {
         console.log(error)
       }
-
-
     }
     fetchSeniority()
+
+    
 
     const fetchExperience = async () => {
 

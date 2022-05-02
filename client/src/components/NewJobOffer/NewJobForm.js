@@ -1,16 +1,18 @@
 import { Formik, Form, Field } from "formik";
 //import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 import FetchRoutes from "../../Fetch/FetchRoutes";
-import { useAxios } from "../../hooks/use-axios";
+//import { useAxios } from "../../hooks/use-axios";
+import { useCRUD } from "../../services/useCRUD";
 import { useUserContext } from "../../Store/UserContext";
 //import { BASE_URL } from "../../utils/URL";
 import styles from "./NewJobForm.module.scss";
 
 const NewJobForm = () => {
-  const { fetchData, response } = useAxios();
+  //const { fetchData, response } = useAxios();
   const { userID, seniorities, exp, schedule, speciality, remote } = useUserContext();
-  let navigate = useNavigate()
+  const {onPostJobOffer} = useCRUD()
+  
   FetchRoutes()
 
   return (
@@ -24,23 +26,14 @@ const NewJobForm = () => {
         id_Remote: 1,
         id_Seniority: 1,
         id_Experience: 1,
-        id_Speciality: 1
+        id_Speciality:1
       }}
       onSubmit={(values, { resetForm, setSubmitting }) => {
-        setSubmitting(true);
-        resetForm();
-       
-        const config = {
-          method: "POST",
-          url: "/jobOffers",
-          data: values,
-          header: { "Content-type": "application/json" },
-        };
-
-        fetchData(config);
+       setSubmitting(true);     
+       onPostJobOffer(values)
         setSubmitting(false);
-        console.log("response in new job form on submit", response);
-        navigate('/profile')
+
+
       }}
     >
       {({ isSubmitting }) => (
@@ -123,9 +116,7 @@ const NewJobForm = () => {
               </button>
             </div>
           )}
-          {isSubmitting && (
-            <p className={styles.ofertaPublicada}>Oferta publicada!</p>
-          )}
+         
         </Form>
       )}
     </Formik>

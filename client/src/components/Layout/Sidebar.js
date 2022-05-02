@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Container, Nav, NavItem, Row } from "reactstrap";
+import { Col, Nav, NavItem, Row } from "reactstrap";
 import classes from "./Sidebar.module.scss";
 import { MdList, MdBuild } from "react-icons/md";
 import { useUserContext } from '../../Store/UserContext';
@@ -13,42 +13,47 @@ export default function (props) {
     <>
       {isUser &&
         <Col tag="nav" xs="12" md="2" className={classes.anchor}>
-          <Row className={classes.nav} >
-            <Nav>
+          <Row  >
+            <Nav className={classes.nav}>
               <NavItem>
-
-                {userType === 'Recruiter' ? <Link className={classes.anchor} to="/newjob">
-                  <Container fluid>
+                {userType === 'Recruiter' ? 
+                <Link className={classes.link} to="/newjob">
+                
                     <Row>
-                      <Col sm="2">
+                      <Col >
                         <MdList />
-                      </Col>
-                      <Col>Post a new offer</Col>
+                        
+                        Post a new offer
+                      </Col>                      
                     </Row>
-                  </Container>
+                
                 </Link> :
-                  <Link className={classes.anchor} to="/profile">
-                    <Container fluid>
+                  <Link className={classes.link} to="/profile">
+                  
                       <Row>
-                        <Col sm="2">
-                          <MdList />
+                        <Col>
+                          <MdList />                          
+                          Jobs applied
                         </Col>
-                        <Col>Jobs applied</Col>
+                        
                       </Row>
-                    </Container>
+                   
                   </Link>}
               </NavItem>
 
-              {userType === 'Talent' && <NavItem>
-                <Link className={classes.anchor} to="/resources">
-                  <Container fluid>
-                    <Row>
-                      <Col sm="2">
+              {userType === 'Talent' && 
+              <NavItem>
+                <Link className={classes.link} to="/resources">
+               
+                    <Row >
+                      <Col>
                         <MdBuild />
+                       
+                       Resources
                       </Col>
-                      <Col>Resources</Col>
+                     
                     </Row>
-                  </Container>
+                 
                 </Link>
               </NavItem>}
 

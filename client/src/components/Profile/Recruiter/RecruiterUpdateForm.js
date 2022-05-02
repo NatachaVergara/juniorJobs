@@ -3,13 +3,13 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 // import classes from "./RegisterTalent.module.css";
 import { Col, Row } from "reactstrap";
-import RegisterBtn from "../Buttons/RegisterBtn";
+import RegisterBtn from "../../Buttons/RegisterBtn";
 // eslint-disable-next-line no-unused-vars
-import { MyTextInput } from "../../utils/inputsFunctions";
-import { emailRegex, urlRegex } from "../../utils/regex";
-import { errorAlerts } from '../../utils/errorsAlert'
-import { useUserContext } from "../../Store/UserContext";
-import { useCRUD } from '../../services/useCRUD'
+import { MyTextInput } from "../../../utils/inputsFunctions";
+import { emailRegex, urlRegex } from "../../../utils/regex";
+import { errorAlerts } from '../../../utils/errorsAlert'
+import { useUserContext } from "../../../Store/UserContext";
+import { useCRUD } from '../../../services/useCRUD'
 
 const RecruiterUpdateForm = ({ data, setIsEditing }) => {
   const { setUserData } = useUserContext()

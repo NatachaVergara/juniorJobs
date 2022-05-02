@@ -5,11 +5,13 @@ import FeaturedCard from "./FeaturedCard";
 const FeaturedCards = () => {
    const { jobOffers } = useUserContext();
   
+
+   
   return (
     <>
       <h3>Active Job posting</h3>
       <Row>
-        {jobOffers[0].map((offer, index) => (
+        {jobOffers.map((offer, index) => (
            <FeaturedCard 
             key={index} 
             offer={offer}

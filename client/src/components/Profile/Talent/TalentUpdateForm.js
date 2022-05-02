@@ -8,15 +8,15 @@ import {
 } from "formik";
 import * as Yup from "yup";
 import { Card, Col, Label, Row } from "reactstrap";
-import RegisterBtn from "../Buttons/RegisterBtn";
+import RegisterBtn from "../../Buttons/RegisterBtn";
 // eslint-disable-next-line no-unused-vars
-import { MyCheckbox, MyRadio, MySelect, MyTextInput } from "../../utils/inputsFunctions";
-import { emailRegex, phoneRegex, urlRegex } from "../../utils/regex";
-import { errorAlerts } from '../../utils/errorsAlert'
-import { useUserContext } from "../../Store/UserContext";
-import { useCRUD } from '../../services/useCRUD'
+import { MyCheckbox, MyRadio, MySelect, MyTextInput } from "../../../utils/inputsFunctions";
+import { emailRegex, phoneRegex, urlRegex } from "../../../utils/regex";
+import { errorAlerts } from '../../../utils/errorsAlert'
+import { useUserContext } from "../../../Store/UserContext";
+import { useCRUD } from '../../../services/useCRUD'
 import classes from './TalentUpdateForm.module.scss'
-import { BASE_URL } from "../../utils/URL";
+import { BASE_URL } from "../../../utils/URL";
 
 
 const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {

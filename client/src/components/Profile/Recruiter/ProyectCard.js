@@ -1,15 +1,20 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle, Col } from 'reactstrap'
-import { BASE_URL } from '../../utils/URL';
+import { useCRUD } from '../../../services/useCRUD';
+import { BASE_URL } from '../../../utils/URL';
+
 import classes from "./RecruiterProjectsCard.module.scss";
-const ProyectCard = ({ description, exp, remote, schedule, seniority, speciality, title, createDate, location }) => {
+const ProyectCard = ({ offerId, offer, description, exp, remote, schedule, seniority, speciality, title, createDate, location }) => {
+    const [isOpen, setIsOpen] = useState(false)
     const [experiences, setExperiences] = useState([])
     const [remotes, setRemotes] = useState([])
     const [schedules, setSchedules] = useState([])
     const [seniorities, setSeniorities] = useState([])
     const [specialities, setSpecialities] = useState([])
-
-
+  //  const { onDeleteJobOffer } = useCRUD()
+  const navigate = useNavigate()
     useEffect(() => {
         const fetchDataSeniorities = async () => {
             const response = await fetch(`${BASE_URL}/Seniorities/${seniority}`);
@@ -45,13 +50,23 @@ const ProyectCard = ({ description, exp, remote, schedule, seniority, speciality
         }
         fetchDataSchedule();
 
-
-
-
-
     }, [exp, remote, schedule, seniority, speciality])
 
+    const onHandleDelete = async (id) => {
+        
+        axios.delete(`${BASE_URL}/jobOffers/${id}`)
+            .then(({ data }) => {
+                alert('Offer has been deleted', data)
+                navigate('/profile')
+            })
+            .catch(error => { console.log(error) })
 
+    }
+
+
+   
+
+  
 
 
 
@@ -61,7 +76,7 @@ const ProyectCard = ({ description, exp, remote, schedule, seniority, speciality
         <><Col sm='12'>
             <Card body color="dark" className={classes.projects}>
                 <CardBody>
-                    <CardTitle tag="h5" className='text-center m-2 p-2'> {title} </CardTitle>
+                    <CardTitle tag="h5" className='text-center m-2 p-2'> OFFER ID  {offerId} || {title} </CardTitle>
                     <CardSubtitle className="mb-2 text-light " tag="h6">
                         {description}
                     </CardSubtitle>
@@ -76,11 +91,18 @@ const ProyectCard = ({ description, exp, remote, schedule, seniority, speciality
                     </CardText>
                 </CardBody>
                 <div className={classes.button}>
-                    <Button type="submit" className='btn btn-outline-success' > Edit offer</Button>
-                    <Button type="submit" className='btn btn-outline-danger' > Delete</Button>
+                    <Button type="submit" className='btn btn-outline-success' onClick={() => setIsOpen(false)} > Edit offer</Button>
+                    <Button type="submit" className='btn btn-outline-danger' onClick={() => onHandleDelete(offerId)} > Delete</Button>
                 </div>
+
             </Card>
-        </Col></>
+
+
+        </Col>
+
+
+
+        </>
     )
 }
 

@@ -1,12 +1,12 @@
 import { Fragment, useState } from "react";
 import { Button, Container, Row, Col } from "reactstrap";
 import { useUserContext } from "../../Store/UserContext";
-import RecruiterProjectsCard from "./RecruiterProjectsCard";
-import RecruiterProfileCard from "./RecruiterProfileCard";
-import RecruiterUpdateForm from "./RecruiterUpdateForm";
-import TalentProfileCard from "./TalentProfileCard";
-import TalentUpdateForm from "./TalentUpdateForm";
-import TalentProyectsCard from "./TalentProyectsCard";
+import RecruiterProjectsCard from "./Recruiter/RecruiterProjectsCard";
+import RecruiterProfileCard from "./Recruiter/RecruiterProfileCard";
+import RecruiterUpdateForm from "./Recruiter/RecruiterUpdateForm";
+import TalentProfileCard from "./Talent/TalentProfileCard";
+import TalentUpdateForm from "./Talent/TalentUpdateForm";
+import TalentProyectsCard from "./Talent/TalentProyectsCard";
 
 
 
