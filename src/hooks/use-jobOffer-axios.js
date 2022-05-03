@@ -2,12 +2,12 @@ import { useState, useCallback } from 'react'
 import axios from 'axios'
 import swal from 'sweetalert'
 import { BASE_URL } from '../utils/URL'
-import {useNavigate} from 'react-router-dom'
+
 axios.defaults.baseURL = BASE_URL
 
 
 export const useAxiosJobOffers = () => {
-    const [response, setResponse] = useState()
+    const [response] = useState()
     //let navigate = useNavigate()
     const fetchDataJO = useCallback((params) => {
         axios

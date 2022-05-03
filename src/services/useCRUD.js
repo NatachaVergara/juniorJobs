@@ -88,7 +88,7 @@ export const useCRUD = () => {
 
 
 
-    return { onLoginSubmit, onCreateSubmit, onUpdateSubmit, onPostJobOffer }
+    return { onLoginSubmit, onCreateSubmit, onDeleteSubmit, onUpdateSubmit, onPostJobOffer }
 
 }
 

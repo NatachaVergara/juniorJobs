@@ -3,7 +3,7 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 // import classes from "./RegisterTalent.module.css";
 import { Button, Col, Row } from "reactstrap";
-import RegisterBtn from "../Buttons/RegisterBtn";
+
 // eslint-disable-next-line no-unused-vars
 import { MyCheckbox, MyTextInput } from "../../utils/inputsFunctions";
 import { emailRegex, urlRegex } from "../../utils/regex";

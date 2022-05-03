@@ -36,8 +36,3 @@ export let frontendResources = [  {
   }
 ]
 
-let backendResources = [
-  {
-    
-  }
-]

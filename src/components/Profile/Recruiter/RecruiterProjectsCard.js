@@ -9,7 +9,7 @@ import classes from "./RecruiterProjectsCard.module.scss";
 import swal from 'sweetalert'
 
 export default function ProjectsCard(props) {
-  const { userID, setJobOffers, setRecruiterOffers, recruiterOffers } = useUserContext();
+  const { userID, setRecruiterOffers, recruiterOffers } = useUserContext();
 
 
   
