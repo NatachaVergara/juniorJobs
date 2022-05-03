@@ -9,7 +9,7 @@ import classes from "./RecruiterProjectsCard.module.scss";
 import swal from 'sweetalert'
 
 export default function ProjectsCard(props) {
-  const { userID, jobOffers, setJobOffers } = useUserContext();
+  const { userID, setJobOffers, setRecruiterOffers, recruiterOffers } = useUserContext();
 
 
   
@@ -19,11 +19,11 @@ export default function ProjectsCard(props) {
       const response = await fetch(`${BASE_URL}/jobOffers?recruiter=${userID}`);
       const data = await response.json()
       console.log(data)
-      setJobOffers(data)
+      setRecruiterOffers(data)
     }
     fetchOffers()
 
-  }, [setJobOffers, userID])
+  }, [setRecruiterOffers, userID])
 
   const onHandleDelete = async (id) => {
         
@@ -35,7 +35,7 @@ export default function ProjectsCard(props) {
             console.log(res.status)          
 
             if(res.status === 204)
-            setJobOffers(jobOffers.filter((i)=> i.id !== id))
+            setRecruiterOffers(recruiterOffers.filter((i)=> i.id !== id))
             swal('Offer has been deleted')
          
         })
@@ -47,15 +47,15 @@ export default function ProjectsCard(props) {
 }
 
 
-  console.log(jobOffers)
+  console.log(recruiterOffers)
 
   return (
 
     <Card body className={classes.profile}>
       <CardBody>
         <CardTitle tag="h5" className='fs-2 text-center text-secondary'>ACTIVE OFFERS</CardTitle>
-        <Row>
-          {jobOffers.map((o, i) => (
+        {!recruiterOffers ? <CardTitle tag="h5" className='fs-2 text-center text-secondary'> NO ACTIVE OFFERS</CardTitle> : <Row>
+          {recruiterOffers.map((o, i) => (
             <ProyectCard
               key={i}              
               offer={o}
@@ -72,7 +72,8 @@ export default function ProjectsCard(props) {
               onHandleDelete={onHandleDelete}
             />
           ))}
-        </Row>
+        </Row>}
+
       </CardBody>
     </Card>
   );

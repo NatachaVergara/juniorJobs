@@ -65,6 +65,7 @@ const UserContextProvider = ({ children }) => {
   //Cree un estado para setear el userType que por ahora se va a utilizar en el Register
   const [userType, setUserType] = useState(getLocalUserType());
   const [jobOffers, setJobOffers] = useState([])
+  const [recruiterOffers, setRecruiterOffers] = useState([])
   const [userID, setUserId] = useState(getLocalUserID());
   const [userData, setUserData] = useState(getLocalUserData());
   const [offerData, setOfferData] = useState([])
@@ -120,15 +121,10 @@ const UserContextProvider = ({ children }) => {
   return (
     <UserContext.Provider
       value={{
-        isUser,
-        setIsUser,
-        userType,
-        setUserType,
-        userID,
-        setUserId,
-        userData,
-        setUserData,
-        setJobOffers,
+        isUser,       
+        userType,     
+        userID,        
+        userData,        
         jobOffers,
         seniorities,
         exp,
@@ -139,6 +135,12 @@ const UserContextProvider = ({ children }) => {
         remote,
         offerData,
         offerID,
+        recruiterOffers,
+        setIsUser,
+        setUserType,
+        setUserId,
+        setUserData,
+        setJobOffers,
         setSeniorities,
         setExp,
         setSchedule,
@@ -147,7 +149,8 @@ const UserContextProvider = ({ children }) => {
         setEducation,
         setRemote,
         setOfferData,
-        setOfferID
+        setOfferID,
+        setRecruiterOffers
       }}
     >
       {children}
