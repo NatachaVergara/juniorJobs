@@ -120,9 +120,10 @@ const jobOfferController = {
                 if (jobOffer) {
                     db.JobOffer.destroy({
                         where: { id: req.params.id }
-                    }).then(() => {
+                    }).then((jobOffer) => {
                             console.log('La oferta de trabajo ha sido borrada de nuestra base de datos')
-                            return res.status(204).json({message: 'La oferta de trabajo ha sido borrada nuestra base de datos'
+                            return res.status(204).json({message: 'La oferta de trabajo ha sido borrada nuestra base de datos',
+                            jobOffer
                                })
                         })
                         .catch(function (error) {

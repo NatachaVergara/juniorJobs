@@ -1,15 +1,18 @@
-import { useEffect, useState } from "react";
+import axios from "axios";
+import { useEffect } from "react";
 import { Card, CardBody, CardTitle, Row } from "reactstrap";
 //import { useCRUD } from "../../services/useCRUD";
 import { useUserContext } from "../../../Store/UserContext";
 import { BASE_URL } from "../../../utils/URL";
 import ProyectCard from "./ProyectCard";
 import classes from "./RecruiterProjectsCard.module.scss";
+import swal from 'sweetalert'
 
 export default function ProjectsCard(props) {
-  const [jobOffers, setJobOffers] = useState([])
-  const { userID } = useUserContext();
+  const { userID, jobOffers, setJobOffers } = useUserContext();
 
+
+  
 
   useEffect(() => {
     const fetchOffers = async () => {
@@ -20,10 +23,28 @@ export default function ProjectsCard(props) {
     }
     fetchOffers()
 
-  }, [userID])
+  }, [setJobOffers, userID])
 
+  const onHandleDelete = async (id) => {
+        
+    axios.delete(`${BASE_URL}/jobOffers/${id}`)
+        .then(( res ) => {
+            console.log(res)
+            console.log(res.data)
+            console.log(res.data.message)
+            console.log(res.status)          
 
-
+            if(res.status === 204)
+            setJobOffers(jobOffers.filter((i)=> i.id !== id))
+            swal('Offer has been deleted')
+         
+        })
+        .catch((error) => { 
+            console.log(error)
+            console.log(error.status)
+            console.log(error.message)          
+                })
+}
 
 
   console.log(jobOffers)
@@ -48,6 +69,7 @@ export default function ProjectsCard(props) {
               title={o.title}
               createDate={o.createDate}
               location={o.location}
+              onHandleDelete={onHandleDelete}
             />
           ))}
         </Row>

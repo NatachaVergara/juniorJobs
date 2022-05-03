@@ -4,11 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import FetchRoutes from '../../Fetch/FetchRoutes';
 import { useUserContext } from '../../Store/UserContext';
 import { BASE_URL } from '../../utils/URL';
+import swal from "sweetalert";
 import styles from "./NewJobForm.module.scss";
 const AddJobOffer = () => {
     const { userID, seniorities, exp, schedule, speciality, remote } = useUserContext();
     FetchRoutes()
-
     const navigate = useNavigate();
     const [offer, setOffer] = useState({
         title: "",
@@ -41,10 +41,26 @@ const AddJobOffer = () => {
                 id_Speciality
 
             })
-            .then(({ data }) => {
-                alert('Offer has been created', data)
-                navigate('/profile')
-            }).catch(err => { console.log(err) })       
+            .then((res) => {
+                console.log(res)
+                console.log(res.data)
+                console.log(res.data.message)
+                console.log(res.status)
+
+                if (res.status === 201) {
+                    //Oferta de trabajo creada
+                    swal(res.data.message)
+                    navigate('/profile')
+                }
+
+                if (res.status === 202) {
+                    //Oferta ya existe
+                    swal(res.data.message)
+                }
+
+
+
+            }).catch(err => { console.log(err) })
     }
 
     const onChanges = (e) => {
@@ -54,9 +70,12 @@ const AddJobOffer = () => {
         })
     }
 
+    const noValidate = !(title.length && description.length && location.length > 0)
+
+
+
     return (
         <div>
-            <h1>Create a new Job offer</h1>
 
             <form onSubmit={createJobOffer} className={styles.newjobForm}>
                 <div>
@@ -153,18 +172,22 @@ const AddJobOffer = () => {
                 <div>
                     <label htmlFor='id_Speciality' className={styles.formTitle}>Speciality</label>
                     <select
-                    value={id_Speciality}
-                    name='id_Speciality'
-                    id='id_Speciality'
-                    onChange={onChanges}
-                    >   
-                    {speciality.map(s=>(
-                        <option key={s.id} value={s.id}> {s.category}</option>
-                    ))}
+                        value={id_Speciality}
+                        name='id_Speciality'
+                        id='id_Speciality'
+                        onChange={onChanges}
+                    >
+                        {speciality.map(s => (
+                            <option key={s.id} value={s.id}> {s.category}</option>
+                        ))}
                     </select>
                 </div>
-
-                <button type='submit' className='btn btn-outline-success' >Enviar</button>
+                <div className={styles.btnContainer}>
+                    <button
+                        type='submit'
+                        className='btn btn-outline-success m-2'
+                        disabled={noValidate}>Enviar</button>
+                </div>
             </form>
 
 
