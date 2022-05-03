@@ -12,7 +12,7 @@ export default function ProjectsCard(props) {
   const { userID, setRecruiterOffers, recruiterOffers } = useUserContext();
 
 
-  
+
 
   useEffect(() => {
     const fetchOffers = async () => {
@@ -26,25 +26,25 @@ export default function ProjectsCard(props) {
   }, [setRecruiterOffers, userID])
 
   const onHandleDelete = async (id) => {
-        
-    axios.delete(`${BASE_URL}/jobOffers/${id}`)
-        .then(( res ) => {
-            console.log(res)
-            console.log(res.data)
-            console.log(res.data.message)
-            console.log(res.status)          
 
-            if(res.status === 204)
-            setRecruiterOffers(recruiterOffers.filter((i)=> i.id !== id))
-            swal('Offer has been deleted')
-         
-        })
-        .catch((error) => { 
-            console.log(error)
-            console.log(error.status)
-            console.log(error.message)          
-                })
-}
+    axios.delete(`${BASE_URL}/jobOffers/${id}`)
+      .then((res) => {
+        console.log(res)
+        console.log(res.data)
+        console.log(res.data.message)
+        console.log(res.status)
+
+        if (res.status === 204)
+          setRecruiterOffers(recruiterOffers.filter((i) => i.id !== id))
+        swal('Offer has been deleted')
+
+      })
+      .catch((error) => {
+        console.log(error)
+        console.log(error.status)
+        console.log(error.message)
+      })
+  }
 
 
   console.log(recruiterOffers)
@@ -57,7 +57,7 @@ export default function ProjectsCard(props) {
         {!recruiterOffers ? <CardTitle tag="h5" className='fs-2 text-center text-secondary'> NO ACTIVE OFFERS</CardTitle> : <Row>
           {recruiterOffers.map((o, i) => (
             <ProyectCard
-              key={i}              
+              key={i}
               offer={o}
               offerId={o.id}
               description={o.description}
