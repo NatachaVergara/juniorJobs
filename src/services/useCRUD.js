@@ -85,25 +85,10 @@ export const useCRUD = () => {
 
     }
 
-    // function updateJobOffer(values) {
-    //     params.method = 'put'
-    //     params.url = `/jobOffers/${values.id}`
-    //     params.header = { 'Content-type': 'application/x-www-form-urlencoded' };
-    //     // fetchData(params)
-    //     console.log(values)
-
-    // }
-    function onDeleteJobOffer(values) {
-        params.method = 'delete'
-        params.url = `/jobOffers/${values}`
-        params.header = { 'Content-type': 'application/x-www-form-urlencoded' };        
-        fetchDataJO(params)
-    }
 
 
 
-
-    return { onLoginSubmit, onCreateSubmit, onUpdateSubmit, onDeleteSubmit, onPostJobOffer, onDeleteJobOffer }
+    return { onLoginSubmit, onCreateSubmit, onUpdateSubmit, onDeleteSubmit, onPostJobOffer }
 
 }
 
