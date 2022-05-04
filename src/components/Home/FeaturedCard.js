@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import { CardText } from "reactstrap";
 import { BASE_URL } from "../../utils/URL";
 import style from './Styles/FeatureCard.module.scss'
 
