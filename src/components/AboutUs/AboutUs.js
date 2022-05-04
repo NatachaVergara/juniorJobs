@@ -17,8 +17,8 @@ const AboutUs = () => {
   return (
     <div className='mt-5 pt-5 mb-0 body'>
 
-      <section className="aboutBody ms-md-5">
-        <p>Our mission</p>
+      <section className="aboutBody ms-md-5 text-light">
+        <p className='text-light'>Our mission</p>
         <h4>We believe every junior can find their first job just a few months after the search is started.
         </h4>
         <h4>We also believe that it can be done without having to look in a hundred different jobs sites, without having to write over and over the same information everytime is time to apply for a job offer.

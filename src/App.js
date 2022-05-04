@@ -25,8 +25,6 @@ function App() {
         <Route path="/about" element={<AboutUsPage />} />
         <Route path="/resources" element={<ResourcesPage />} />
         <Route path="/faq" element={<FaqPage />} />
-
-
         {userType === "Recruiter" & isUser ? 
           <Route path="/newjob" element={<NewJobOffer />} />
         : null}

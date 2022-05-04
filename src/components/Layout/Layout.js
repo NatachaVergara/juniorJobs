@@ -12,15 +12,7 @@ const Layout = (props) => {
         <Row>
           <Sidebar />
           <Col
-            tag="main"
-            className='p-0'
-            md={{
-              
-              offset: 0,
-              size: 10,
-            }}
-            sm="12"
-            height="100"
+            tag="main"           
           >
             {props.children}
           </Col>

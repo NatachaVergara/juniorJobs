@@ -2,7 +2,7 @@ import React from "react";
 import { Container } from "reactstrap";
 import AddJobOffer from "../components/NewJobOffer/AddJobOffer";
 
-import "./NewJobOffer.module.scss";
+import "./Styles/NewJobOffer.module.scss";
 
 const NewJobOffer = () => {
   return (

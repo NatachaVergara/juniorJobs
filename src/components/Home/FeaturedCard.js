@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Col, Row, CardText } from "reactstrap";
 import { BASE_URL } from "../../utils/URL";
-
+import style from './Styles/FeatureCard.module.scss'
 
 
 export const FeaturedCard = ({ offer, experience, seniority, sch, spe }) => {
@@ -83,18 +83,18 @@ export const FeaturedCard = ({ offer, experience, seniority, sch, spe }) => {
       <Row>
         <Col sm="12">
           <Row>
-            <div className="card text-white  border-light mb-3 p-3" style={{ maxWidth: '100%' }}>
-              <div className="card-header">{offer.title}</div>
-              <div className="card-body">
-                <div className='d-flex flex-column justify-content-between align-item-center'>
+            <div className={style.card}>
+              <div className={style.header}>{offer.title}</div>
+             
+                <div className={style.body}>
                   <CardText>{sr.name} </CardText>
                   <CardText>{exp.period} </CardText>
                   <CardText>{schedule.schedule} </CardText>
                   <CardText>{speciality.category} </CardText>
                 </div>
-              </div>
-              <div className='d-flex justify-content-center align-items-center'>
-                <Link className=" btn btn-danger card-date w-50" to={`/job/${id}`} >Go to offer </Link>
+             
+              <div className={style.button}>
+                <Link className="btn btn-outline-danger" to={`/job/${id}`} >Go to offer </Link>
               </div>
             </div>
 

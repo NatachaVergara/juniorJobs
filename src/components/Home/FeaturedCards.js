@@ -9,7 +9,7 @@ const FeaturedCards = () => {
    
   return (
     <>
-      <h3>Active Job posting</h3>
+      <h3 className='text-center'>Active Job posting</h3>
       <Row>
         {jobOffers.map((offer, index) => (
            <FeaturedCard 

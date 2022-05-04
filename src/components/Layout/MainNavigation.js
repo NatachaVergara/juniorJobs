@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Navbar, NavbarBrand, NavItem, Button, Nav } from "reactstrap";
 import { useUserContext } from "../../Store/UserContext";
+import { BiLogOut } from "react-icons/bi";
 import classes from "./MainNavigation.module.scss";
 
 const MainNavigation = () => {
@@ -23,24 +24,17 @@ const MainNavigation = () => {
         <NavbarBrand >Junior Jobs app</NavbarBrand>
       </NavItem>
 
-      {/* <NavItem>
-        <Input
-          placeholder="Search an open position"
-          className={classes.searchInput}
-          type="search"
-        ></Input>
-      </NavItem> */}
      
         <Nav className={classes.nav} >
           <NavItem>
             <NavLink to="/">
-              <Button color="primary">Home</Button>
+              <Button color="primary">HOME</Button>
             </NavLink>
           </NavItem >
 
           {isUser === true ? (
             <NavItem> <NavLink to="/profile">
-              <Button color="primary" >Profile</Button>
+              <Button color="primary" >PROFILE</Button>
             </NavLink>
             </NavItem>
 
@@ -48,39 +42,38 @@ const MainNavigation = () => {
           <NavItem>
             <NavLink to="/about">
               <Button color="primary">
-                About us
+                ABOUT US
               </Button>
             </NavLink>
           </NavItem>
           <NavItem>
             <NavLink to="/faq">
               <Button color="primary">
-                Faqs
+                FAQ
               </Button>
             </NavLink>
           </NavItem>
           {isUser ? (
             <NavItem> <Button onClick={logoutHandler} color="danger">
-              Logout
+             <BiLogOut/>
             </Button>
             </NavItem>
           ) : (
             <Fragment>
               <NavItem>
                 <Button color="success" className="text-dark" onClick={() => navigate("/register")}>
-                  SignUp
+                  SIGN UP
                 </Button>
               </NavItem>
               <NavItem>
                 <Button color="success" className="text-dark" onClick={() => navigate("/login")}>
-                  LogIn
+                  LOG IN
                 </Button>
               </NavItem>
             </Fragment>
           )}
 
-        </Nav>
-     
+        </Nav>  
 
     </Navbar>
   );
