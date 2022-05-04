@@ -21,7 +21,7 @@ const MainNavigation = () => {
   return (
     <Navbar className={classes.navbar} sticky="top" dark>
       <NavItem className={classes.brand}>
-        <NavbarBrand >Junior Jobs app</NavbarBrand>
+        <NavbarBrand >JUNIOR JOBS</NavbarBrand>
       </NavItem>
 
      
