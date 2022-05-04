@@ -79,10 +79,9 @@ export const FeaturedCard = ({ offer, experience, seniority, sch, spe }) => {
 
 
   return (
-    <Col className='p-3' sm='4' >
-      <Row>
-        <Col sm="12">
-          <Row>
+   
+    
+         
             <div className={style.card}>
               <div className={style.header}>{offer.title}</div>
              
@@ -97,11 +96,9 @@ export const FeaturedCard = ({ offer, experience, seniority, sch, spe }) => {
                 <Link className="btn btn-outline-danger" to={`/job/${id}`} >Go to offer </Link>
               </div>
             </div>
-
-          </Row>
-        </Col>
-      </Row>
-    </Col>
+       
+      
+   
   );
 };
 
