@@ -11,8 +11,7 @@ import { useCRUD } from '../../services/useCRUD'
 
 
 function Login() {
-  //const { userLogin } = useUserContext()
-  // const { fetchData } = usePostLogin()
+ 
   const { onLoginSubmit } = useCRUD()
   return (
     <div className='formPage  mb-5 pb-5'>
@@ -49,7 +48,7 @@ function Login() {
         }}
 
         onSubmit={(values, { resetForm }) => {
-          //fetchData(values, resetForm)
+         
           onLoginSubmit(values)
 
 

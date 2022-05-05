@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Col, Row } from "reactstrap";
 import { useUserContext } from '../../Store/UserContext'
+import Spinner from "../Spinner/Spinner";
 import FeaturedCard from "./FeaturedCard";
 import style from './Styles/FeatureCards.module.scss'
 const FeaturedCards = () => {
@@ -22,7 +23,7 @@ const FeaturedCards = () => {
               spe={jobOffers[0].id_Speciality}
               sch={jobOffers[0].id_Schedule}
 
-            /> : <h1>cargando.....</h1>}
+            /> : <Spinner/>}
         </Col>
 
         <Col className={style.col} sm='12' md='4'>
@@ -35,7 +36,7 @@ const FeaturedCards = () => {
               spe={jobOffers[1].id_Speciality}
               sch={jobOffers[1].id_Schedule}
 
-            /> : <h1>cargando.....</h1>}
+            /> : <Spinner/>}
         </Col>
         <Col className={style.col} sm='12'md='4'>
           {jobOffers[2] ?
@@ -47,7 +48,7 @@ const FeaturedCards = () => {
               spe={jobOffers[2].id_Speciality}
               sch={jobOffers[2].id_Schedule}
 
-            /> : <h6>loading.....</h6>}
+            /> :  <Spinner/>}
         </Col>
       </Row>
 

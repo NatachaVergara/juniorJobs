@@ -79,7 +79,7 @@ export const FeaturedCard = ({ offer, experience, seniority, sch, spe }) => {
 
 
   return (
-   
+          
     
          
             <div className={style.card}>
