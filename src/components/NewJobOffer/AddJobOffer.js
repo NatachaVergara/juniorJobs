@@ -58,8 +58,6 @@ const AddJobOffer = () => {
                     swal(res.data.message)
                 }
 
-
-
             }).catch(err => { console.log(err) })
     }
 

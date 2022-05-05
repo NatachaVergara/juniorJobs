@@ -27,23 +27,57 @@ export default function ProjectsCard(props) {
 
   const onHandleDelete = async (id) => {
 
-    axios.delete(`${BASE_URL}/jobOffers/${id}`)
-      .then((res) => {
-        console.log(res)
-        console.log(res.data)
-        console.log(res.data.message)
-        console.log(res.status)
 
-        if (res.status === 204)
-          setRecruiterOffers(recruiterOffers.filter((i) => i.id !== id))
-        swal('Offer has been deleted')
+    swal({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      buttons:{
+        cancel: {
+          text: "Cancel",
+          value: false,
+          visible: true,
+          className: "",
+          closeModal: true,
+          
+        },
+        confirm: {
+          text: "OK",
+          value: true,
+          visible: true,
+          className: "bg-danger",
+          closeModal: true
+        }
+        
+      }
+    }).then((result) => {
+      if (result) {
+        axios.delete(`${BASE_URL}/jobOffers/${id}`)
+          .then((res) => {
+            console.log(res)
+            console.log(res.data)
+            console.log(res.data.message)
+            console.log(res.status)
 
-      })
-      .catch((error) => {
-        console.log(error)
-        console.log(error.status)
-        console.log(error.message)
-      })
+            if (res.status === 204)
+              setRecruiterOffers(recruiterOffers.filter((i) => i.id !== id))
+            swal('Offer has been deleted')
+
+
+            if (res.status === 404) {
+              swal('No job offer found in out data base')
+            }
+          })
+          .catch((error) => {
+            console.log(error)
+            console.log(error.status)
+            console.log(error.message)
+          })
+       }
+    })
+
+
+
+
   }
 
 
