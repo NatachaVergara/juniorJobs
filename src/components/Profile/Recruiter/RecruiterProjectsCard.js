@@ -36,7 +36,7 @@ export default function ProjectsCard(props) {
           text: "Cancel",
           value: false,
           visible: true,
-          className: "",
+          className: "btn btn-outline-danger text-dark",
           closeModal: true,
           
         },
@@ -44,7 +44,7 @@ export default function ProjectsCard(props) {
           text: "OK",
           value: true,
           visible: true,
-          className: "bg-danger",
+          className: "btn btn-outline-success",
           closeModal: true
         }
         
