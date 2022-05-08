@@ -1,13 +1,14 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Col, Row } from "reactstrap";
 import { useUserContext } from '../../Store/UserContext'
+import Offercard from "../OffersCard/Offercard";
 import Spinner from "../Spinner/Spinner";
-import FeaturedCard from "./FeaturedCard";
+
 import style from './Styles/FeatureCards.module.scss'
 const FeaturedCards = () => {
   const { jobOffers } = useUserContext();
 
-  console.log(jobOffers[2])
 
   return (
     <section className={style.section}>
@@ -15,38 +16,28 @@ const FeaturedCards = () => {
       <Row>
         <Col className={style.col} sm='12' md='4'>
           {jobOffers[0] ?
-            <FeaturedCard
+            <Offercard
               id={jobOffers[0].id}
               offer={jobOffers[0]}
-              experience={jobOffers[0].id_Experience}
-              seniority={jobOffers[0].id_Seniority}
-              spe={jobOffers[0].id_Speciality}
-              sch={jobOffers[0].id_Schedule}
+              
 
             /> : <Spinner/>}
         </Col>
 
         <Col className={style.col} sm='12' md='4'>
           {jobOffers[1] ?
-            <FeaturedCard
+            <Offercard
               id={jobOffers[1].id}
               offer={jobOffers[1]}
-              experience={jobOffers[1].id_Experience}
-              seniority={jobOffers[1].id_Seniority}
-              spe={jobOffers[1].id_Speciality}
-              sch={jobOffers[1].id_Schedule}
+             
 
             /> : <Spinner/>}
         </Col>
         <Col className={style.col} sm='12'md='4'>
           {jobOffers[2] ?
-            <FeaturedCard
+            <Offercard
               id={jobOffers[2].id}
-              offer={jobOffers[2]}
-              experience={jobOffers[2].id_Experience}
-              seniority={jobOffers[2].id_Seniority}
-              spe={jobOffers[2].id_Speciality}
-              sch={jobOffers[2].id_Schedule}
+              offer={jobOffers[2]}           
 
             /> :  <Spinner/>}
         </Col>

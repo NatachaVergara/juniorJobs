@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Col } from 'reactstrap';
 import { useUserContext } from '../../Store/UserContext';
-import FeaturedCard from '../Home/FeaturedCard'
+
+import Offercard from '../OffersCard/Offercard';
 import Spinner from '../Spinner/Spinner';
 import style from './JobOffersContainer.module.scss'
 
@@ -9,8 +10,8 @@ const JobOffersContainer = () => {
     const { jobOffers } = useUserContext();
 
     const [offers, setOffers] = useState(jobOffers)
-
-
+    
+    
     const searchAll = () => {
         setOffers(jobOffers)
     }
@@ -27,11 +28,10 @@ const JobOffersContainer = () => {
             return
     }
 
-    console.log(offers)
 
 
 
-
+  
 
     return (
         <div className={style.container}>
@@ -43,27 +43,17 @@ const JobOffersContainer = () => {
                 <button className='m-2 btn' onClick={() => searchSchedule(2)}>Part-Time</button>
                 <button className='m-2 btn' onClick={() => searchSeniority(1)}  >Junior</button>
                 <button className='m-2 btn' onClick={() => searchSeniority(2)}>Trainee</button>
-
-
-
             </div>
-
-
-
 
             <Col className={style.col} sm='12' md='4'>
                 {!jobOffers ?
                     <Spinner /> :
                     <>
                     {offers.map((offer, index) => (
-                            <FeaturedCard
+                            <Offercard
                                 key={index}
                                 offer={offer}
-                                id={offer.id}
-                                experience={offer.id_Experience}
-                                seniority={offer.id_Seniority}
-                                spe={offer.id_Speciality}
-                                sch={offer.id_Schedule}
+                                id={offer.id}                                
                             />
                         ))}
                     </>

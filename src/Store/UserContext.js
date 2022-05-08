@@ -112,7 +112,7 @@ const UserContextProvider = ({ children }) => {
       setJobOffers(data)
     }
     fetchOffers()
-  }, [])
+  },[])
 
 
 
@@ -150,7 +150,7 @@ const UserContextProvider = ({ children }) => {
         setRemote,
         setOfferData,
         setOfferID,
-        setRecruiterOffers
+        setRecruiterOffers        
       }}
     >
       {children}

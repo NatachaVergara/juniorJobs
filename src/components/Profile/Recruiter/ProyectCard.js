@@ -1,120 +1,69 @@
-//import axios from 'axios';
 import { Form, Formik } from 'formik';
 import React, { useEffect, useState } from 'react'
 import * as Yup from "yup";
 import { Row, Button, Card, CardBody, CardSubtitle, CardText, CardTitle, Col, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import { BASE_URL } from '../../../utils/URL';
-//import EditModal from './EditModal';
 import classes from "./RecruiterProjectsCard.module.scss";
-//import * as Yup from "yup";
-//import { errorAlerts } from '../../../utils/errorsAlert';
 import { MySelect, MyTextInput } from '../../../utils/inputsFunctions';
 import { errorAlerts } from '../../../utils/errorsAlert';
-import axios from 'axios';
-import swal from 'sweetalert';
-//import { useUserContext } from '../../../Store/UserContext';
+import { useUserContext } from '../../../Store/UserContext';
+import FetchRoutes from '../../../Fetch/FetchRoutes';
 
 
-const ProyectCard = ({ offerId, offer, description, exp, remote, schedule, seniority, speciality, title, createDate, location, onHandleDelete }) => {
+
+const ProyectCard = ({ offerId, offer, description, title, createDate, location, onHandleDelete, update }) => {
     const [experiences, setExperiences] = useState([])
     const [remotes, setRemotes] = useState([])
     const [schedules, setSchedules] = useState([])
     const [seniorities, setSeniorities] = useState([])
     const [specialities, setSpecialities] = useState([])
-    const [modal, setModal] = useState(false)
-  //  const {recruiterOffers, setRecruiterOffers} = useUserContext()
-   
-    //const navigate = useNavigate()
+    const [modal, setModal] = useState(false)  
+    
+    
     useEffect(() => {
         const fetchDataSeniorities = async () => {
-            const response = await fetch(`${BASE_URL}/Seniorities/${seniority}`);
+            const response = await fetch(`${BASE_URL}/Seniorities/${offer.id_Seniority}`);
             const data = await response.json();
             setSeniorities(data);
         };
         fetchDataSeniorities()
 
         const fetchDataExperience = async () => {
-            const response = await fetch(`${BASE_URL}/experience/${exp}`);
+            const response = await fetch(`${BASE_URL}/experience/${offer.id_Experience}`);
             const data = await response.json();
             setExperiences(data);
         }
         fetchDataExperience();
 
         const fetchDataSpeciality = async () => {
-            const response = await fetch(`${BASE_URL}/speciality/${speciality}`);
+            const response = await fetch(`${BASE_URL}/speciality/${offer.id_Speciality}`);
             const data = await response.json();
             setSpecialities(data);
         }
         fetchDataSpeciality();
 
         const fetchDataRemote = async () => {
-            const response = await fetch(`${BASE_URL}/remotes/${remote}`);
+            const response = await fetch(`${BASE_URL}/remotes/${offer.id_Remote}`);
             const data = await response.json();
             setRemotes(data);
         }
         fetchDataRemote();
         const fetchDataSchedule = async () => {
-            const response = await fetch(`${BASE_URL}/schedules/${schedule}`);
+            const response = await fetch(`${BASE_URL}/schedules/${offer.id_Schedule}`);
             const data = await response.json();
             setSchedules(data);
         }
         fetchDataSchedule();
 
-    }, [exp, remote, schedule, seniority, speciality])
+    }, [offer.id_Experience, offer.id_Remote, offer.id_Schedule, offer.id_Seniority, offer.id_Speciality])
 
+    ////////////--------------/////////////////
+    ///Fron here is all use in the modal
     const toggle = () => setModal(!modal)
+    //Traigo las diferentes rutas del context que son llamadas con el FetchRoutes()
+    const {seniorities: srty, exp, schedule,speciality,  remote} = useUserContext()
+    FetchRoutes()
 
-    const [todoSpeciality, setTodoSpeciality] = useState([])
-    const [todoSchedule, setTodoSchedule] = useState([])
-    const [todoExperience, setTodoExperience] = useState([])
-    const [todoSeniority, setTodoSeniority] = useState([])
-    const [todoRemote, setTodoRemote] = useState([])
-
-
-
-    useEffect(() => {
-        const fetchDatasetSpeciality = async () => {
-            const response = await fetch(`${BASE_URL}/speciality`);
-            const data = await response.json();
-            setTodoSpeciality(data);
-        };
-
-        fetchDatasetSpeciality();
-
-        const fetchDataSchedule = async () => {
-            const response = await fetch(`${BASE_URL}/schedules`);
-            const data = await response.json();
-            setTodoSchedule(data);
-        };
-
-        fetchDataSchedule();
-
-        const fetchDataSeniority = async () => {
-            const response = await fetch(`${BASE_URL}/Seniorities`);
-            const data = await response.json();
-            setTodoSeniority(data);
-        };
-
-        fetchDataSeniority();
-
-
-        const fetchDataExperience = async () => {
-            const response = await fetch(`${BASE_URL}/experience`);
-            const data = await response.json();
-            setTodoExperience(data);
-        };
-        fetchDataExperience()
-
-        const fetchDataRemote = async () => {
-            const response = await fetch(`${BASE_URL}/remotes`);
-            const data = await response.json();
-            setTodoRemote(data);
-        };
-        fetchDataRemote()
-    }, [])
-
-
- 
 
     return (
         <>
@@ -157,15 +106,15 @@ const ProyectCard = ({ offerId, offer, description, exp, remote, schedule, senio
                                     description: description,
                                     location: location,
                                     id_Recruiter: offer.id_Recruiter,
-                                    id_Schedule: schedule,
-                                    id_Remote: remote,
+                                    id_Schedule:  offer.id_Schedule,
+                                    id_Remote: offer.id_Remote,
                                     id_Talent: null,
-                                    id_Seniority: seniority,
-                                    id_Experience: exp,
-                                    id_Speciality: speciality
+                                    id_Seniority: offer.id_Seniority,
+                                    id_Experience: offer.id_Experience,
+                                    id_Speciality: offer.id_Speciality
 
                                 }}
-
+                                  
                                 validationSchema={Yup.object({
                                     title: Yup.string().required(errorAlerts[4].requiredAlert),
                                     description: Yup.string().required(errorAlerts[4].requiredAlert),
@@ -173,37 +122,8 @@ const ProyectCard = ({ offerId, offer, description, exp, remote, schedule, senio
                                 })}
 
 
-                                onSubmit={(values) => {                                  
-
-                                  
-                                    axios.put(`${BASE_URL}/jobOffers/${offerId}`,
-                                        {
-                                            title: values.title,
-                                            description: values.description,
-                                            location: values.location,
-                                            id_Recruiter: values.id_Recruiter,
-                                            id_Schedule: values.id_Schedule,
-                                            id_Remote: values.id_Remote,
-                                            id_Seniority: values.id_Seniority,
-                                            id_Experience: values.id_Experience,
-                                            id_Speciality: values.id_Speciality,
-                                        }
-
-                                    ).then((res) => {
-                                        console.log(res)
-                                        console.log(res.data)
-                                        console.log(res.data.message)
-                                        console.log(res.status)
-
-                                        if (res.status === 201) {
-                                            swal(res.data.message)
-                                            
-                                            toggle()
-                                        } else {
-                                            swal('Error')
-                                        }
-                                    }).catch(err => { console.log(err) })
-
+                                onSubmit={(values) => {
+                                    update(offerId, values, toggle )
                                 }}
 
                             >
@@ -244,21 +164,21 @@ const ProyectCard = ({ offerId, offer, description, exp, remote, schedule, senio
 
                                         <Row>
                                             <Col md='6' xs='6'>
-                                                <MySelect label="Speciality" name="id_Speciality"> {todoSpeciality.map((s, i) => (
+                                                <MySelect label="Speciality" name="id_Speciality"> {speciality.map((s, i) => (
                                                     <option className='text-dark' key={i} value={s.id}>{s.category} </option>
                                                 ))}
                                                 </MySelect>
                                             </Col>
                                             <Col md='6' xs='6'>
                                                 <MySelect label='Seniority' name='id_Seniority'>
-                                                    {todoSeniority.map(s => (<option className='text-dark' key={s.id} value={s.id}> {s.name} </option>))}
+                                                    {srty.map(s => (<option className='text-dark' key={s.id} value={s.id}> {s.name} </option>))}
                                                 </MySelect>
                                             </Col>
                                         </Row>
                                         <Row>
                                             <Col md='6' xs='6'>
                                                 <MySelect label='Experience' name='id_Experience'>
-                                                    {todoExperience.map(e => (
+                                                    {exp.map(e => (
                                                         <option className='text-dark' key={e.id} value={e.id}> {e.period} </option>
                                                     ))}
                                                 </MySelect>
@@ -266,7 +186,7 @@ const ProyectCard = ({ offerId, offer, description, exp, remote, schedule, senio
                                             </Col>
                                             <Col md='6' xs='6'>
                                                 <MySelect label='Schedule' name='id_Schedule'>
-                                                    {todoSchedule.map(s => (
+                                                    {schedule.map(s => (
                                                         <option className='text-dark' key={s.id} value={s.id}>{s.schedule} </option>
                                                     ))}
                                                 </MySelect>
@@ -275,7 +195,7 @@ const ProyectCard = ({ offerId, offer, description, exp, remote, schedule, senio
                                         <Row>
                                             <Col md='6' xs='6'>
                                                 <MySelect label='Remote' name='id_Remote'>
-                                                    {todoRemote.map(r => (
+                                                    {remote.map(r => (
                                                         <option className='text-dark' key={r.id} value={r.id}>{r.name} </option>
                                                     ))}
                                                 </MySelect>
@@ -287,7 +207,7 @@ const ProyectCard = ({ offerId, offer, description, exp, remote, schedule, senio
                                         <ModalFooter>
                                             <Button
                                                 color="primary" type='submit' disable={!isValid}   >
-                                                Do Something
+                                                Update
                                             </Button>
                                             {' '}
                                             <Button onClick={toggle} >

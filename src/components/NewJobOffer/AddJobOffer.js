@@ -6,7 +6,9 @@ import { useUserContext } from '../../Store/UserContext';
 import { BASE_URL } from '../../utils/URL';
 import swal from "sweetalert";
 import styles from "./NewJobForm.module.scss";
-const AddJobOffer = () => {
+import FetchOffer from '../../Fetch/FetchOffer';
+
+const AddJobOffer = () => {  
     const { userID, seniorities, exp, schedule, speciality, remote } = useUserContext();
     FetchRoutes()
     const navigate = useNavigate();
@@ -45,8 +47,8 @@ const AddJobOffer = () => {
                 console.log(res)
                 console.log(res.data)
                 console.log(res.data.message)
-                console.log(res.status)
-
+                console.log(res.status)               
+                FetchOffer()
                 if (res.status === 201) {
                     //Oferta de trabajo creada
                     swal(res.data.message)
