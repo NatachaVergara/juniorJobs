@@ -49,20 +49,10 @@ const getLocalUserData = () => {
 };
 
 
-// const getLocalJobOffers = () => {
-//   let jobOffersLS = sessionStorage.getItem("jobOffersLS")
-
-//   if (jobOffersLS) {
-//     return JSON.parse(sessionStorage.getItem("jobOffersLS"))
-//   } else {
-//     return []
-//   }
-// }
 
 
 const UserContextProvider = ({ children }) => {
   const [isUser, setIsUser] = useState(getLocalUser());
-  //Cree un estado para setear el userType que por ahora se va a utilizar en el Register
   const [userType, setUserType] = useState(getLocalUserType());
   const [jobOffers, setJobOffers] = useState([])
   const [recruiterOffers, setRecruiterOffers] = useState([])
@@ -76,6 +66,7 @@ const UserContextProvider = ({ children }) => {
   const [skills, setSkills] = useState([])
   const [education, setEducation] = useState([])
   const [remote, setRemote] = useState([])
+  const [lenguage, setLenguage] = useState([])
   const [offerID, setOfferID] = useState([])
 
 
@@ -112,7 +103,7 @@ const UserContextProvider = ({ children }) => {
       setJobOffers(data)
     }
     fetchOffers()
-  },[])
+  }, [])
 
 
 
@@ -121,10 +112,10 @@ const UserContextProvider = ({ children }) => {
   return (
     <UserContext.Provider
       value={{
-        isUser,       
-        userType,     
-        userID,        
-        userData,        
+        isUser,
+        userType,
+        userID,
+        userData,
         jobOffers,
         seniorities,
         exp,
@@ -133,6 +124,7 @@ const UserContextProvider = ({ children }) => {
         skills,
         education,
         remote,
+        lenguage,
         offerData,
         offerID,
         recruiterOffers,
@@ -147,10 +139,11 @@ const UserContextProvider = ({ children }) => {
         setSpeciality,
         setSkills,
         setEducation,
+        setLenguage,
         setRemote,
         setOfferData,
         setOfferID,
-        setRecruiterOffers        
+        setRecruiterOffers
       }}
     >
       {children}

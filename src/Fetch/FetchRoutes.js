@@ -3,7 +3,7 @@ import { useUserContext } from '../Store/UserContext';
 import { BASE_URL } from '../utils/URL';
 
 const FetchRoutes = () => {
-    const { setSeniorities, setExp, setSpeciality, setSkills, setEducation, setSchedule, setRemote } = useUserContext();
+    const { setSeniorities, setExp, setSpeciality, setSkills, setEducation, setSchedule, setRemote, setLenguage } = useUserContext();
 
 useEffect(() =>{
 
@@ -54,9 +54,17 @@ useEffect(() =>{
       };
       fetchRemote();
 
+      const fetchLenguage = async () => {
+        const response = await fetch(`${BASE_URL}/language`);
+        const data = await response.json();
+        setLenguage(data);
+      };
+      fetchLenguage();
 
       
-}, [setEducation, setExp, setRemote, setSchedule, setSeniorities, setSkills, setSpeciality])
+
+      
+}, [setEducation, setExp, setLenguage, setRemote, setSchedule, setSeniorities, setSkills, setSpeciality])
 
 
 }

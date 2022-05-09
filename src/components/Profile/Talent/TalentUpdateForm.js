@@ -1,38 +1,23 @@
-import React, { useState, useEffect } from "react";
-import {
-  Formik,
-  Form,
-  // FieldArray,
-  //Field,
-  //ErrorMessage,
-} from "formik";
+import React from "react";
+import { Formik, Form} from "formik";
 import * as Yup from "yup";
-import { Card, Col, Label, Row } from "reactstrap";
-import RegisterBtn from "../../Buttons/RegisterBtn";
-// eslint-disable-next-line no-unused-vars
-import { MyCheckbox, MyRadio, MySelect, MyTextInput } from "../../../utils/inputsFunctions";
+import {  Col, Row } from "reactstrap";
+import {  MySelect, MyTextInput } from "../../../utils/inputsFunctions";
 import { emailRegex, phoneRegex, urlRegex } from "../../../utils/regex";
 import { errorAlerts } from '../../../utils/errorsAlert'
 import { useUserContext } from "../../../Store/UserContext";
 import { useCRUD } from '../../../services/useCRUD'
 import classes from './TalentUpdateForm.module.scss'
-import { BASE_URL } from "../../../utils/URL";
+import FormBtn from "../../Buttons/FormBtn";
+import FetchRoutes from "../../../Fetch/FetchRoutes";
 
 
-const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
-  const { setUserData } = useUserContext()
+const TalentUpdateForm = ({ data, setIsEditing }) => {
   const { onUpdateSubmit } = useCRUD()
-  const [speciality, setSpeciality] = useState([])
+  //Traigo la data desde el context
+  const { setUserData, seniorities, exp, speciality, education } = useUserContext()
+  FetchRoutes()
 
-
-  useEffect(() => {
-    const fetchDatasetSpeciality = async () => {
-      const response = await fetch(`${BASE_URL}/speciality`);
-      const data = await response.json();
-      setSpeciality(data);
-    };
-    fetchDatasetSpeciality();
-  }, [])
 
   return (
     <>
@@ -51,8 +36,8 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
           id_Experience: data.id_Experience,
           id_Speciality: data.id_Speciality,
           id_Education: data.id_Education,
-          // Skill: [{ name: 0, level: 0 }],
-          // languages: [{ name: 0, level:0}] ,
+          // Skill: [],
+          // languages: [] ,
           profile: data.profile,
 
         }}
@@ -81,334 +66,143 @@ const TalentUpdateForm = ({ data, onSubmit, setIsEditing }) => {
             new Date(new Date() - 599616000000),
             "Must to be +18 years old"
           ),
-          id_Seniority: Yup.number()
-            .oneOf([1, 2], "Invalid seniority Type")
-            .required(errorAlerts.requiredAlert),
-          id_Experience: Yup.number()
-            .oneOf([1, 2, 3, 4, 5], "Invalid experience range")
-            .required(errorAlerts.requiredAlert),
-          id_Speciality: Yup.number().oneOf(
-            [0, 1, 2, 3, 4, 5, 6, 7],
-            "Invalid speciality Type"
-          ),
-          id_Education: Yup.number().oneOf(
-            [1, 2, 3, 4, 5],
-            "Invalid Education Type"
-          ),
           profile: Yup.string()
             .max(350, errorAlerts[5].textDescription)
             .required(errorAlerts[4].requiredAlert)
         })}
-        onSubmit={(values, { setSubmitting }) => {
 
+        onSubmit={(values) => {
           values.id_Seniority = +values.id_Seniority;
           values.id_Education = +values.id_Education;
           values.id_Speciality = +values.id_Speciality;
           values.id_Experience = +values.id_Experience;
 
-          setSubmitting(true);
+          onUpdateSubmit(values)        
           setUserData(values)
-          onUpdateSubmit(values)
-          setSubmitting(false);
           setIsEditing(false)
+
         }}
 
       >
-        {({ isSubmitting, isValid, values }) => (
-          <Form className={classes.updateForm}>
-            <Row>
-              <Col xs='12'
-                md='6'
-              >
-                <MyTextInput
-                  label="Name *"
-                  name="name"
-                  type="text" />
-              </Col>
-              <Col xs='12'
-                md='6'>
-                <MyTextInput
-                  label="Last name *"
-                  name="lastName"
-                  type="text" />
-              </Col>
-            </Row>
-            <Row>
-              <Col
-                xs='12'
-                md='6'>
-                <MyTextInput
-                  label="E-mail *"
-                  name="email"
-                  type="text"
-                  placeholder="example@juniorjobs.com"
-                />
-              </Col>
 
-              <Col
-                xs='12'
-                md='6'>
-                <MyTextInput
-                  label="Phone number *"
-                  name="phone"
-                  type="text"
-                  placeholder="+54 342 6 156 014"
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col
-                xs='12'
-                md='6'>
-                <MyTextInput
-                  label="image *"
-                  name="image"
-                  type="url" />
-              </Col>
-              <Col
-                xs='12'
-                md='6'>
-                <MyTextInput
-                  label="LinkedIn *"
-                  name="url"
-                  type="url"
-                />
-
-              </Col>
-              <Col
-                xs='12'
-                md='6'>
-                <MyTextInput
-                  label="Remote repositories *"
-                  name="repository"
-                  type="url"
-                />
-              </Col>
-            </Row>
-            <MyTextInput label="Date of birth *" name="birthdate" type="date" />
-            <Row>
-              <Col
-                xs='12'
-                md='6'>
-                <MySelect label="Seniority *" name="id_Seniority">
-                  <option value={1}>Trainee</option>
-                  <option value={2}>Junior</option>
-                </MySelect>
-              </Col>
-              <Col>
-                <MySelect label="Speciality if apply *" name="id_Speciality">
-                  {speciality.map((s, i) => (
-                    <option className='text-dark' key={i} value={s.id}>{s.category} </option>
-                  ))}
-
-                </MySelect>
-              </Col>
-            </Row>
-            {/* <Label className='mt-3 mb-0'>Languages and skills *</Label> */}
-            <Row>
-              {/* <FieldArray name="Skill">
-                {({ insert, remove, push }) => (
-                  <div>
-                    {values.Skill.length > 0 &&
-                      values.Skill.map((skill, index) => (
-                        <div className="row" key={index}>
-                          <div className="col">
-                            <label htmlFor={`Skill.${index}.name`}>Name *</label>
-                            <Field name={`Skill.${index}.name`} as={MySelect}>
-                              <option value={1}>Api Rest</option>
-                              <option value={2}>C</option>
-                              <option value={3}>C++</option>
-                              <option value={4}>CSS</option>
-                              <option value={5}>Express</option>
-                              <option value={6}>Git</option>
-
-
-                            </Field>
-                            <ErrorMessage
-                              name={`Skill.${index}.name`}
-                              component="div"
-                              className="field-error"
-                            />
-                          </div>
-                          <div className="col">
-                            <label htmlFor={`Skill.${index}.level`}>
-                              Level *
-                            </label>
-                            <Field name={`Skill.${index}.level`} as={MySelect}>
-                              <option value={0}>Basic</option>
-                              <option value={1}>Intermidate</option>
-                              <option value={2}>Advanced</option>
-                            </Field>
-                            <ErrorMessage
-                              name={`Skill.${index}.level`}
-                              component="div"
-                              className="field-error"
-                            />
-                          </div>
-                          <div className="col">
-                            <Button
-                              color="danger"
-                              className="mt-4"
-                              onClick={() => remove(index)}
-                            >
-                              X
-                            </Button>
-                          </div>
-                        </div>
-                      ))}
-                    <Button
-                      color="success"
-                      className="my-3"
-                      onClick={() => push({ name: "", level: "" })}
-                    >
-                      Add skill
-                    </Button>
-                  </div>
-                )}
-              </FieldArray> */}
-            </Row>
-            {/* <Row>
-              <FieldArray name="languages">
-                {({ insert, remove, push }) => (
-                  <div>
-                    {values.languages.length > 0 &&
-                      values.languages.map((language, index) => (
-                        <div className="row" key={index}>
-                          <div className="col">
-                            <label htmlFor={`languages.${index}.name`}>Name *</label>
-                            <Field name={`languages.${index}.name`} as={MySelect}>
-                              <option value={0}>English</option>
-                              <option value={1}>Spanish</option>
-                              <option value={2}>French</option>
-                              <option value={3}>German</option>
-                              <option value={4}>Italian</option>
-                              <option value={5}>Portugues</option>
-                              
-
-                            </Field>
-                            <ErrorMessage
-                              name={`languages.${index}.name`}
-                              component="div"
-                              className="field-error"
-                            />
-                          </div>
-                          <div className="col">
-                            <label htmlFor={`languages.${index}.level`}>
-                              Level *
-                            </label>
-                            <Field name={`languages.${index}.level`} as={MySelect}>
-                              <option value={0}>Basic</option>
-                              <option value={1}>Intermidate</option>
-                              <option value={2}>Advanced</option>
-                            </Field>
-                            <ErrorMessage
-                              name={`languages.${index}.level`}
-                              component="div"
-                              className="field-error"
-                            />
-                          </div>
-                          <div className="col">
-                            <Button
-                              color="danger"
-                              className="mt-4"
-                              onClick={() => remove(index)}
-                            >
-                              X
-                            </Button>
-                          </div>
-                        </div>
-                      ))}
-                    <Button
-                      color="success"
-                      className="my-3"
-                      onClick={() => push({ name: "", level: "" })}
-                    >
-                      Add Language
-                    </Button>
-                  </div>
-                )}
-              </FieldArray>
-            </Row> */}
+        <Form className={classes.updateForm}>
+          <Row>
+            <Col xs='12'
+              md='6'
+            >
+              <MyTextInput
+                label="Name *"
+                name="name"
+                type="text" />
+            </Col>
             <Col xs='12'
               md='6'>
-              <MySelect
-                label="Education *"
-                name="id_Education">
-                <option value={1}>Bootcamp</option>
-                <option value={2}>Curso</option>
-                <option value={3}>Ingenieria</option>
-                <option value={4}>Licenciatura</option>
-                <option value={5}>Tecnicatura</option>
+              <MyTextInput
+                label="Last name *"
+                name="lastName"
+                type="text" />
+            </Col>
+          </Row>
+          <Row>
+            <Col
+              xs='12'
+              md='6'>
+              <MyTextInput
+                label="E-mail *"
+                name="email"
+                type="text"
+                placeholder="example@juniorjobs.com"
+              />
+            </Col>
+
+            <Col
+              xs='12'
+              md='6'>
+              <MyTextInput
+                label="Phone number *"
+                name="phone"
+                type="text"
+                placeholder="+54 342 6 156 014"
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col
+              xs='12'
+              md='6'>
+              <MyTextInput
+                label="image *"
+                name="image"
+                type="url" />
+            </Col>
+            <Col xs='12' md='6'>
+              <MyTextInput label="Date of birth *" name="birthdate" type="date" />
+            </Col>
+          </Row>
+          <Row>
+            <Col
+              xs='12'
+              md='6'>
+              <MyTextInput
+                label="LinkedIn *"
+                name="url"
+                type="url"
+              />
+
+            </Col>
+            <Col
+              xs='12'
+              md='6'>
+              <MyTextInput
+                label="Remote repositories *"
+                name="repository"
+                type="url"
+              />
+            </Col>
+
+          </Row>
+          <Row>
+            <Col
+              xs='12'
+              md='6'>
+              <MySelect label="Seniority *" name="id_Seniority">
+                {seniorities.map(s =>
+                  (<option key={s.id} value={s.id}>{s.name} </option>))}
+
               </MySelect>
             </Col>
+            <Col>
+              <MySelect label="Speciality*" name="id_Speciality">
+                {speciality.map((s) =>
+                  (<option className='text-dark' key={s.id} value={s.id}>{s.category} </option>))}
+              </MySelect>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs='12'
+              md='6'>
+              <MySelect name="id_Education" label='Education'>
+                {education.map(e => (<option key={e.id} value={e.id}>{e.name}</option>))}
+              </MySelect>
+            </Col>
+            <Col xs='12' md='6'>
+              <MySelect name='id_Experience' label='Experience**'>
+                {exp.map(e => (<option key={e.id} value={e.id}>{e.period} </option>))}
+              </MySelect>
+            </Col>
+          </Row>
+          <Row>
+            <Col md='12' xs='12'></Col>
             <MyTextInput
               label="Profile description *"
               name="profile"
               type="textarea"
               placeholder="Describe yourself"
             />
-            <Label>Experience *</Label>
-            <Card body color="" className="my-3 mt-0">
-              <Row>
-                <Col
-                  xs='12'
-                  md='6'>
-                  <MyRadio
-                    label="0-2 months"
-                    name="id_Experience"
-                    type="radio"
-                    value="1"
-                  />
-                </Col>
-                <Col
-                  xs='12'
-                  md='6'>
-                  <MyRadio
-                    label="2-6 months"
-                    name="id_Experience"
-                    type="radio"
-                    value="2"
-                  />
-                </Col>
-                <Col
-                  xs='12'
-                  md='6'>
-                  <MyRadio
-                    label="6-12 months"
-                    name="id_Experience"
-                    type="radio"
-                    value="3"
-                  />
-                </Col>
-                <Col
-                  xs='12'
-                  md='6'>
-                  <MyRadio
-                    label="1-2 yeas"
-                    name="id_Experience"
-                    type="radio"
-                    value="4"
-                  />
-                </Col>
-                <Col
-                  xs='12'
-                  md='6'>
-                  <MyRadio
-                    label="2-4 years"
-                    name="id_Experience"
-                    type="radio"
-                    value="5"
-                  />
-                </Col>
-              </Row>
-            </Card>
+          </Row>
+          <FormBtn />
+        </Form>
 
-            <RegisterBtn
-              isSubmitting={isSubmitting}
-              isValid={isValid}
-              id={data.id} />
-          </Form>
-        )}
       </Formik>
     </>
   );

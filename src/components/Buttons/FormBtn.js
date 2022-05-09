@@ -4,7 +4,7 @@ import { useUserContext } from '../../Store/UserContext'
 import Swal from "sweetalert";
 import { useCRUD } from '../../services/useCRUD';
 
-const RegisterBtn = ({isSubmitting , isValid, id }) => {
+const FormBtn = () => {
   const {isUser} = useUserContext()
   const {onDeleteSubmit} = useCRUD()
  
@@ -48,11 +48,11 @@ const RegisterBtn = ({isSubmitting , isValid, id }) => {
     <Button 
      className='btn btn-outline-success'
      type='submit'
-     disabled={isSubmitting || !isValid}>
+     >
       Submit
     </Button>
     {isUser &&  
-    <Button className='btn btn-outline-danger' type='reset' disabled={isSubmitting || !isValid} onClick={onRemove} >
+    <Button className='btn btn-outline-danger' type='reset' onClick={onRemove} >
       Remove this profile
     </Button> }
    
@@ -60,4 +60,4 @@ const RegisterBtn = ({isSubmitting , isValid, id }) => {
   )
 }
 
-export default RegisterBtn
+export default FormBtn

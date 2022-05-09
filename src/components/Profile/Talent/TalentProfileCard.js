@@ -43,7 +43,7 @@ export default function TalentProfileCard({ data, edu, exp, sp, sr }) {
       setSpeciality(data);
     }
     fetchDatasetSpeciality();
-
+ 
 
 
   }, [edu, exp, sp, sr]);

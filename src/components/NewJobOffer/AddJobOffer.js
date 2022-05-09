@@ -1,54 +1,41 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import FetchRoutes from '../../Fetch/FetchRoutes';
 import { useUserContext } from '../../Store/UserContext';
 import { BASE_URL } from '../../utils/URL';
 import swal from "sweetalert";
-import styles from "./NewJobForm.module.scss";
-import FetchOffer from '../../Fetch/FetchOffer';
 
-const AddJobOffer = () => {  
-    const { userID, seniorities, exp, schedule, speciality, remote } = useUserContext();
+import { Field, Form, Formik } from 'formik';
+import { Button, Col, Label, Row } from 'reactstrap';
+import { MySelect, MyTextInput } from '../../utils/inputsFunctions';
+
+
+const AddJobOffer = () => {
+    const { userID, seniorities, exp, schedule, speciality, remote, skills, lenguage } = useUserContext();
     FetchRoutes()
     const navigate = useNavigate();
-    const [offer, setOffer] = useState({
-        title: "",
-        description: "",
-        location: "",
-        id_Recruiter: userID,
-        id_Schedule: 1,
-        id_Remote: 1,
-        id_Seniority: 1,
-        id_Experience: 1,
-        id_Speciality: 1
 
-    })
-
-
-    const { title, description, location, id_Recruiter, id_Schedule, id_Remote, id_Seniority, id_Experience, id_Speciality } = offer
-
-    const createJobOffer = async (e) => {
-        e.preventDefault()
+    const createJobOffer = async (values) => {
+        console.log(values)
         axios
             .post(`${BASE_URL}/jobOffers`, {
-                title,
-                description,
-                location,
-                id_Recruiter,
-                id_Schedule,
-                id_Remote,
-                id_Seniority,
-                id_Experience,
-                id_Speciality
+                title: values.title,
+                description: values.description,
+                location: values.location,
+                id_Recruiter: values.id_Recruiter,
+                id_Schedule: values.id_Schedule,
+                id_Remote: values.id_Remote,
+                id_Seniority: values.id_Seniority,
+                id_Experience: values.id_Experience,
+                id_Speciality: values.id_Speciality,
 
             })
             .then((res) => {
                 console.log(res)
                 console.log(res.data)
                 console.log(res.data.message)
-                console.log(res.status)               
-                FetchOffer()
+                console.log(res.status)                
                 if (res.status === 201) {
                     //Oferta de trabajo creada
                     swal(res.data.message)
@@ -63,141 +50,161 @@ const AddJobOffer = () => {
             }).catch(err => { console.log(err) })
     }
 
-    const onChanges = (e) => {
-        setOffer({
-            ...offer,
-            [e.target.name]: e.target.value
-        })
-    }
 
-    const noValidate = !(title.length && description.length && location.length > 0)
 
 
 
     return (
-        <div>
+        <>
 
-            <form onSubmit={createJobOffer} className={styles.newjobForm}>
-                <div>
-                    <label htmlFor="title" className={styles.formTitle}>
-                        Job Offer <span>*</span>
-                    </label>
-                    <input
-                        value={title}
-                        name='title'
-                        type='text'
-                        id='title'
-                        onChange={onChanges}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="description" className={styles.formTitle}>
-                        Job Description <span>*</span>
-                    </label>
-                    <input
-                        value={description}
-                        name='description'
-                        type='text'
-                        id='description'
-                        onChange={onChanges}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="location" className={styles.formTitle}>
-                        Location <span>*</span>
-                    </label>
-                    <input
-                        value={location}
-                        name='location'
-                        type='textarea'
-                        id='location'
-                        onChange={onChanges}
-                    />
-                </div>
-                <div>
-                    <label className={styles.formTitle} htmlFor="id_Schedule">
-                        Schedule
-                    </label>
-                    <select
-                        value={id_Schedule}
-                        name='id_Schedule'
-                        id=' id_Schedule'
-                        onChange={onChanges}
-                    >
-                        {schedule.map(sch => (
-                            <option key={sch.id} value={sch.id}>{sch.schedule}</option>
+            <Formik
+                initialValues={{
+                    title: "",
+                    description: "",
+                    location: "",
+                    id_Recruiter: userID,
+                    id_Schedule: 1,
+                    id_Remote: 1,
+                    id_Seniority: 1,
+                    id_Experience: 1,
+                    id_Speciality: 1,
+                    Skill: [],
+                    Language: [],
+                }}
+                onSubmit={(values) => {
+                    values.id_Seniority = +values.id_Seniority;
+                    values.id_Speciality = +values.id_Speciality;
+                    values.id_Experience = +values.id_Experience;
+                    values.id_Schedule = +values.id_Schedule;
+                    values.id_Remote = +values.id_Remote;
+                    values.Skill = +values.Skill;
+                    values.Language = +values.Language;
+
+                    console.log(values);
+                    createJobOffer(values)
+                }}
+            >
+                <Form>
+                    <Row>
+                        <Col md='6'>
+                            <MyTextInput
+                                label="Title *"
+                                name="title"
+                                type="text" />
+                        </Col>
+                        <Col md='6'>
+                            <MyTextInput
+                                label="Location *"
+                                name="location"
+                                type="text" />
+                        </Col>
+
+                    </Row>
+
+                    <Row>
+                        <Col md='12'>
+                            <MyTextInput
+                                label="Description *"
+                                name="description"
+                                type="textarea" />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col xs='12'
+                            md='4'>
+                            <MySelect label="Seniority *" name="id_Seniority">
+                                {seniorities.map(s =>
+                                    (<option key={s.id} value={s.id}>{s.name} </option>))}
+                            </MySelect>
+                        </Col>
+
+                        <Col xs='12' md='4'>
+                            <MySelect label="Speciality*" name="id_Speciality">
+                                {speciality.map((s) =>
+                                    (<option className='text-dark' key={s.id} value={s.id}>{s.category} </option>))}
+                            </MySelect>
+                        </Col>
+                        <Col xs='12' md='4'>
+                            <MySelect name='id_Experience' label='Experience'>
+                                {exp.map(e => (<option key={e.id} value={e.id}>{e.period} </option>))}
+                            </MySelect>
+                        </Col>
+
+                    </Row>
+
+                    <Row>
+                        <Col md='6' xs='12'>
+                            <MySelect name='id_Remote' label='Remote'>
+                                {remote.map(r => (<option key={r.id} value={r.id}>{r.name} </option>))}
+                            </MySelect>
+
+                        </Col>
+
+
+
+                        <Col md='6' xs='12'>
+                            <MySelect name='id_Schedule' label='Schedule'>
+                                {schedule.map(s => (<option key={s.id} value={s.id}>{s.schedule} </option>))}
+                            </MySelect>
+
+
+
+                        </Col>
+                    </Row>
+
+
+                    <Row>
+                        <Label className="mt-3 mb-1">Skills *</Label>
+                        {skills.map((sk) => (
+                            <Col key={sk.id} sm='3' xs='6'>
+                                <label>
+                                    <Field
+                                        key={sk.id}
+                                        type="checkbox"
+                                        name="Skills"
+                                        value={sk.id.toString()}
+                                    />
+                                    {sk.name}
+                                </label>
+                            </Col>
                         ))}
-                    </select>
-                </div>
-                <div>
-                    <label className={styles.formTitle} htmlFor='id_Remote'
-                    >Remote
-                    </label>
-                    <select
-                        value={id_Remote}
-                        name='id_Remote'
-                        onChange={onChanges}>
-                        {remote.map(r => (
-                            <option key={r.id} value={r.id}> {r.name} </option>
+                    </Row>
+
+                    <Row>
+                        <Label className="mt-3 mb-1">Lenguage *</Label>
+                        {lenguage.map((l) => (
+                            <Col key={l.id} sm='3' xs='6'>
+                                <label>
+                                    <Field
+                                        key={l.id}
+                                        type="checkbox"
+                                        name='Lenguage'
+                                        value={l.id.toString()}
+                                    />
+                                    {l.language}
+                                </label>
+                            </Col>
                         ))}
-                    </select>
-                </div>
-                <div>
-                    <label htmlFor='id_Seniority' className={styles.formTitle}>Seniority</label>
-                    <select
-                        value={id_Seniority}
-                        name='id_Seniority'
-                        id='id_Seniority'
-                        onChange={onChanges}
-                    >{seniorities.map(s => (
-                        <option key={s.id} value={s.id}>{s.name} </option>
-                    ))}
-                    </select>
-                </div>
+                    </Row>
+                    <Row>
+                        <Col md='6'>
+                            <Button type='submit' className='btn btn-outline-success m-5' >Submit</Button>
+                        </Col>
+                    </Row>
+                </Form>
 
 
-                <div>
-                    <label htmlFor=' id_Experience' className={styles.formTitle}>Experience</label>
-                    <select
-                        value={id_Experience}
-                        name='id_Experience'
-                        id='id_Experience'
-                        onChange={onChanges}
-                    >
-                        {exp.map(e => (
-                            <option key={e.id} value={e.id}> {e.period} </option>
-                        ))}
-                    </select>
-                </div>
-                <div>
-                    <label htmlFor='id_Speciality' className={styles.formTitle}>Speciality</label>
-                    <select
-                        value={id_Speciality}
-                        name='id_Speciality'
-                        id='id_Speciality'
-                        onChange={onChanges}
-                    >
-                        {speciality.map(s => (
-                            <option key={s.id} value={s.id}> {s.category}</option>
-                        ))}
-                    </select>
-                </div>
-                <div className={styles.btnContainer}>
-                    <button
-                        type='submit'
-                        className='btn btn-outline-success m-2'
-                        disabled={noValidate}>Enviar</button>
-                </div>
-            </form>
+
+
+
+            </Formik>
 
 
 
 
 
 
-
-
-        </div>
+        </>
     )
 }
 

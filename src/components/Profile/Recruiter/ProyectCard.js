@@ -20,6 +20,7 @@ const ProyectCard = ({ offerId, offer, description, title, createDate, location,
     const [modal, setModal] = useState(false)  
     
     
+    
     useEffect(() => {
         const fetchDataSeniorities = async () => {
             const response = await fetch(`${BASE_URL}/Seniorities/${offer.id_Seniority}`);
@@ -206,7 +207,7 @@ const ProyectCard = ({ offerId, offer, description, title, createDate, location,
                                         </Row>
                                         <ModalFooter>
                                             <Button
-                                                color="primary" type='submit' disable={!isValid}   >
+                                                color="primary" type='submit' >
                                                 Update
                                             </Button>
                                             {' '}

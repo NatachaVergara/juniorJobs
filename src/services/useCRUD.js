@@ -1,12 +1,10 @@
 import { useUserContext } from '../Store/UserContext';
 import { useAxios } from "../hooks/use-axios";
-import { useAxiosJobOffers } from '../hooks/use-jobOffer-axios';
-
 
 export const useCRUD = () => {
     const { userID, userType } = useUserContext();
     const { fetchData } = useAxios();
-    const { fetchDataJO } = useAxiosJobOffers();
+   
     let params = {}
     
     function onCreateSubmit(values) {
@@ -73,22 +71,7 @@ export const useCRUD = () => {
         fetchData(params);
     }
 
-
-
-    function onPostJobOffer(values) {
-        params.method = 'post'
-        params.url = '/jobOffers'
-        params.header = { 'Content-type': 'application/x-www-form-urlencoded' };
-        params.data = values
-        
-        fetchDataJO(params)
-
-    }
-
-
-
-
-    return { onLoginSubmit, onCreateSubmit, onDeleteSubmit, onUpdateSubmit, onPostJobOffer }
+    return { onLoginSubmit, onCreateSubmit, onDeleteSubmit, onUpdateSubmit }
 
 }
 

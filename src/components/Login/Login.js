@@ -1,18 +1,23 @@
 import React from 'react'
 import { Field, Form, Formik } from 'formik'
-//import { BsShieldLockFill } from "react-icons/bs";
 import './Login.scss'
-
-//import { usePostLogin } from '../../hooks/usePostLogin';
 import { emailRegex } from '../../utils/regex';
 import { errorAlerts } from '../../utils/errorsAlert'
 import { useCRUD } from '../../services/useCRUD'
+// import axios from 'axios';
+// import { BASE_URL } from '../../utils/URL';
+//import { useUserContext } from '../../Store/UserContext';
 
 
 
 function Login() {
- 
-  const { onLoginSubmit } = useCRUD()
+  //const { setIsUser, setUserType, setUserId, setUserData } = useUserContext()
+   const { onLoginSubmit } = useCRUD()
+  
+
+
+
+
   return (
     <div className='formPage  mb-5 pb-5'>
 
@@ -48,10 +53,8 @@ function Login() {
         }}
 
         onSubmit={(values, { resetForm }) => {
-         
           onLoginSubmit(values)
-
-
+         
         }}
       >
 

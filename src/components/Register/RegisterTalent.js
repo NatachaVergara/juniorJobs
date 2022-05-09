@@ -1,51 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { Card, Col, Label, Row } from "reactstrap";
-import RegisterBtn from "../Buttons/RegisterBtn";
+import { Col, Label, Row } from "reactstrap";
+
 // eslint-disable-next-line no-unused-vars
 import {
   MyCheckbox,
-  MyRadio,
   MySelect,
   MyTextInput,
 } from "../../utils/inputsFunctions";
 import { emailRegex, phoneRegex, urlRegex } from "../../utils/regex";
 import { errorAlerts } from "../../utils/errorsAlert";
 import { useCRUD } from "../../services/useCRUD";
-import { BASE_URL } from "../../utils/URL";
+import FetchRoutes from "../../Fetch/FetchRoutes";
+import { useUserContext } from "../../Store/UserContext";
+import FormBtn from "../Buttons/FormBtn";
 
-
-
-export default function RegisterTalent(props) {
+export default function RegisterTalent() {
   const { onCreateSubmit } = useCRUD();
-  const [speciality, setSpeciality] = useState([])
-  const [skills, setSkills] = useState([])
-
-
- 
-
-
-  useEffect(() => {
-    const fetchDatasetSpeciality = async () => {
-      const response = await fetch(`${BASE_URL}/speciality`);
-      const data = await response.json();
-      setSpeciality(data);
-    };
-    fetchDatasetSpeciality();
-
-    const fetchDataSkills = async () => {
-      const response = await fetch(`${BASE_URL}/skills`)
-      const data = await response.json()
-      setSkills(data)
-    }
-    fetchDataSkills()
-
-
-  }, [])
-
-  console.log(skills)
-
+  //Me permite traer la informacion especifica para poder mapearlo y mostrarlo en el formulario
+  const { seniorities, exp, speciality, education, lenguage, skills } = useUserContext();
+  FetchRoutes()
 
   return (
     <>
@@ -61,13 +36,13 @@ export default function RegisterTalent(props) {
           url: "",
           repository: "",
           image: "",
-          birthdate: "1986-07-13",
+          birthdate: "",
           id_Seniority: 1,
-          id_Experience: 0,
+          id_Experience: 1,
           id_Speciality: 1,
           id_Education: 1,
           Skill: [],
-          //Language: [{ name: 1, level:1}] ,
+          Language: [],
           profile: "",
           register: true,
           acceptedTerms: false,
@@ -85,7 +60,6 @@ export default function RegisterTalent(props) {
           passwordConfirmation: Yup.string()
             .oneOf([Yup.ref("password"), null], "Passwords must match")
             .required(errorAlerts[4].requiredAlert),
-
           email: Yup.string()
             .email(errorAlerts[2].emailAlert)
             .matches(emailRegex)
@@ -104,23 +78,6 @@ export default function RegisterTalent(props) {
             new Date(new Date() - 599616000000),
             "Must to be +18 years old"
           ),
-          id_Seniority: Yup.number()
-            .oneOf([1, 2], "Invalid seniority Type")
-            .required(),
-          id_Experience: Yup.number()
-            .oneOf([1, 2, 3, 4, 5], "Invalid experience range")
-            .required(),
-          id_Speciality: Yup.number()
-            .oneOf([0, 1, 2, 3, 4, 5, 6, 7], "Invalid speciality Type")
-            .required(errorAlerts[4].requiredAlert),
-          id_Education: Yup.number()
-            .oneOf([1, 2, 3, 4, 5], "Invalid Education Type")
-            .required(errorAlerts[4].requiredAlert),
-          Skill: Yup.number().required(errorAlerts[4].requiredAlert).transform((v) => parseInt(v)),
-          // Language: Yup.number().oneOf(
-          //   [1, 2, 3, 4, 5, 6],
-          //   "Invalid Skill Type"
-          // ).required(errorAlerts[4].requiredAlert),
           profile: Yup.string()
             .max(350, errorAlerts[5].textDescription)
             .required(errorAlerts[4].requiredAlert),
@@ -128,24 +85,16 @@ export default function RegisterTalent(props) {
             .required(errorAlerts[4].requiredAlert)
             .oneOf([true], errorAlerts[6].acceptedTerms),
         })}
-        onSubmit={(values, { setSubmitting }) => {
-          setSubmitting(true);
+        onSubmit={(values) => {
           values.id_Seniority = +values.id_Seniority;
           values.id_Education = +values.id_Education;
           values.id_Speciality = +values.id_Speciality;
           values.id_Experience = +values.id_Experience;
           values.Skill = +values.Skill;
-          // values.id_Remote = +values.id_Remote;
-
-          // values.languages = values.languages.map((language) => ({
-          //   name: +language.level,
-          //   level: +language.level,
-          // }))
-
-          
-          console.log(values.Skill);
+          values.Language = +values.Language;
+          console.log(values);
           onCreateSubmit(values);
-          setSubmitting(false);
+
         }}
       >
         {({ isSubmitting, isValid, value }) => (
@@ -179,6 +128,17 @@ export default function RegisterTalent(props) {
               <Col xs='12'
                 md='6'>
                 <MyTextInput
+                  label="Phone number *"
+                  name="phone"
+                  type="text"
+                  placeholder="+54 342 6 156 014"
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col xs='12'
+                md='6'>
+                <MyTextInput
                   label="Password *"
                   name="password"
                   type="password"
@@ -194,15 +154,7 @@ export default function RegisterTalent(props) {
                   placeholder=""
                 />
               </Col>
-              <Col xs='12'
-                md='6'>
-                <MyTextInput
-                  label="Phone number *"
-                  name="phone"
-                  type="text"
-                  placeholder="+54 342 6 156 014"
-                />
-              </Col>
+
             </Row>
             <Row>
               <Col xs='12'
@@ -211,6 +163,9 @@ export default function RegisterTalent(props) {
                   label="image *"
                   name="image"
                   type="url" />
+              </Col>
+              <Col xs='12' md='6'>
+                <MyTextInput label="Date of birth *" name="birthdate" type="date" />
               </Col>
             </Row>
             <Row>
@@ -230,112 +185,88 @@ export default function RegisterTalent(props) {
                 />
               </Col>
             </Row>
-            <MyTextInput label="Date of birth *" name="birthdate" type="date" />
+
             <Row>
               <Col xs='12'
                 md='6'>
                 <MySelect label="Seniority *" name="id_Seniority">
-                  <option value={1}>Trainee</option>
-                  <option value={2}>Junior</option>
+                  {seniorities.map(s =>
+                    (<option key={s.id} value={s.id}>{s.name} </option>))}
+
                 </MySelect>
               </Col>
-              <Col >
+
+              <Col xs='12' md='6'>
                 <MySelect label="Speciality*" name="id_Speciality">
-                  {speciality.map((s, i) => (
-                    <option className='text-dark' key={i} value={s.id}>{s.category} </option>
-                  ))}
+                  {speciality.map((s) =>
+                    (<option className='text-dark' key={s.id} value={s.id}>{s.category} </option>))}
                 </MySelect>
               </Col>
 
-              <Label className="mt-3 mb-0">Skills *</Label>
-              <Row>
-                {skills.map((sk, i) => (
-                  <Col key={i} sm='3'>
-                    <label>
-                      <Field
-                        key={sk.id}
-                        type="checkbox"
-                        name="Skill"
-                        value={sk.id.toString()}
-                      />
-                      {sk.name}
-                    </label>
-                  </Col>
-                ))}
 
-              </Row>
             </Row>
-            <Label className="mt-3 mb-0">Education/Formation*</Label>
-            <Col xs='12'
-              md='6'>
-              <MySelect name="id_Education">
-                <option value={1}>Bootcamp</option>
-                <option value={2}>Curso</option>
-                <option value={3}>Ingenieria</option>
-                <option value={4}>Licenciatura</option>
-                <option value={5}>Tecnicatura</option>
-              </MySelect>
-            </Col>
-            <Col xs='12'
-              md='12'>
-              <MyTextInput
-                label="Profile description *"
-                name="profile"
-                type="textarea"
-                placeholder="Describe yourself"
-              />
-            </Col>
-            <Label>Experience *</Label>
-            <Card body color="" className="mt-0">
-              <Row>
-                <Col xs='12'
-                  md='2'>
-                  <MyRadio
-                    label="0-2 months"
-                    name="id_Experience"
-                    type="radio"
-                    value="1"
-                  />
-                </Col>
-                <Col xs='12'
-                  md='2'>
-                  <MyRadio
-                    label="2-6 months"
-                    name="id_Experience"
-                    type="radio"
-                    value="2"
-                  />
-                </Col>
-                <Col xs='12'
-                  md='2'>
-                  <MyRadio
-                    label="6-12 months"
-                    name="id_Experience"
-                    type="radio"
-                    value="3"
-                  />
-                </Col>
-                <Col xs='12'
-                  md='2'>
-                  <MyRadio
-                    label="1-2 years"
-                    name="id_Experience"
-                    type="radio"
-                    value="4"
-                  />
-                </Col>
-                <Col xs='12'
-                  md='2'>
-                  <MyRadio
-                    label="2-4 years"
-                    name="id_Experience"
-                    type="radio"
-                    value="5"
-                  />
-                </Col>
-              </Row>
 
-            </Card>
+            <Row>
+              <Label className="mt-3 mb-1">Skills *</Label>
+              {skills.map((sk) => (
+                <Col key={sk.id} sm='3' xs='6'>
+                  <label>
+                    <Field
+                      key={sk.id}
+                      type="checkbox"
+                      name="Skills"
+                      value={sk.id.toString()}
+                    />
+                    {sk.name}
+                  </label>
+                </Col>
+              ))}
+            </Row>
+            <Row>
+              <Label className="mt-3 mb-1">Lenguage *</Label>
+              {lenguage.map((l) => (
+                <Col key={l.id} sm='3' xs='6'>
+                  <label>
+                    <Field
+                      key={l.id}
+                      type="checkbox"
+                      name='Lenguage'
+                      value={l.id.toString()}
+                    />
+                    {l.language}
+                  </label>
+
+
+                </Col>
+              ))}
+              
+            </Row>
+            <Row>
+              <Col xs='12'
+                md='6'>
+                <MySelect name="id_Education" label='Education'>
+                  {education.map(e => (<option key={e.id} value={e.id}>{e.name}</option>))}
+                </MySelect>
+              </Col>
+
+              <Col xs='12' md='6'>
+                <MySelect name='id_Experience' label='Experience**'>
+                  {exp.map(e => (<option key={e.id} value={e.id}>{e.period} </option>))}
+                </MySelect>
+              </Col>
+            </Row>
+
+            <Row>
+              <Col xs='12'
+                md='12'>
+                <MyTextInput
+                  label="Profile description *"
+                  name="profile"
+                  type="textarea"
+                  placeholder="Describe yourself"
+                />
+              </Col>
+            </Row>
             <Row>
               <Col xs='12'
                 md='6'>
@@ -344,12 +275,8 @@ export default function RegisterTalent(props) {
                 </MyCheckbox>
 
               </Col>
-
             </Row>
-
-            <RegisterBtn
-              isSubmitting={isSubmitting}
-              isValid={isValid} />
+            <FormBtn />
           </Form>
         )}
       </Formik>

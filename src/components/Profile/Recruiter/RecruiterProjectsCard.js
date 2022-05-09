@@ -13,10 +13,7 @@ export default function ProjectsCard() {
   const [recruiterOffer, setRecruiterOffer] = useState([])
   const { fetchOffers } = FetchOffer()
 
-  FetchOffer()
 
-
-console.log('hola')
   //filtro a las jobsOffers segun el id del recruiter y a la informacion la envio a la ProyectCard
   useEffect(() => {
     let userOffers = jobOffers.filter(u => u.id_Recruiter === userID)
@@ -72,7 +69,7 @@ console.log('hola')
 
         },
         confirm: {
-          text: "OK",
+          text: "YES",
           value: true,
           visible: true,
           className: "btn btn-outline-success",
