@@ -3,17 +3,38 @@ import { Field, Form, Formik } from 'formik'
 import './Login.scss'
 import { emailRegex } from '../../utils/regex';
 import { errorAlerts } from '../../utils/errorsAlert'
-import { useCRUD } from '../../services/useCRUD'
-// import axios from 'axios';
-// import { BASE_URL } from '../../utils/URL';
-//import { useUserContext } from '../../Store/UserContext';
+import axios from 'axios';
+import { BASE_URL } from '../../utils/URL';
+import swal from 'sweetalert';
+import { useUserContext } from '../../Store/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 
 
 function Login() {
-  //const { setIsUser, setUserType, setUserId, setUserData } = useUserContext()
-   const { onLoginSubmit } = useCRUD()
+  const { setIsUser, setUserType, setUserId, setUserData } = useUserContext()
+  let navigate = useNavigate()
   
+  const loginUser = async (values) => {
+    try {
+      const response = await axios({
+        method: 'POST',
+        url: `${BASE_URL}/users/login`,
+        data: values
+      })
+      setIsUser(true)
+      setUserId(response.data.id)
+      setUserData(response.data)
+      setUserType(values.userType)
+      swal(`Welcome ${response.data.name}`)
+      navigate('/')
+    } catch (error) {
+      console.log(error.response)
+      console.log(error.response.data)
+      swal(error.response.data)
+    }
+
+  }
 
 
 
@@ -28,8 +49,7 @@ function Login() {
           userType: '',
           login: true
         }}
-        className=''
-
+        
         //Validando los inputs
         validate={(values) => {
           let isError = {}
@@ -46,15 +66,17 @@ function Login() {
 
           //Validando los radios
           if (!values.userType) {
-            isError.userType = 'Please, select how are you going to login, talent or recruter'
+            isError.userType = 'Please, select how are you going to login, talent or recruiter'
           }
 
           return isError
         }}
 
-        onSubmit={(values, { resetForm }) => {
-          onLoginSubmit(values)
-         
+        onSubmit={(values) => {
+          console.log(values)
+          loginUser(values)
+
+
         }}
       >
 
@@ -66,6 +88,7 @@ function Login() {
               <div className='container d-flex justify-content-center align-items-center'>
                 <div className='pe-2  text-dark'>
                   <Field
+                  
                     type="radio"
                     name="userType"
                     value="Recruiter"
@@ -116,8 +139,6 @@ function Login() {
               type='submit' className='boton btn btn-outline-success'>Log in
             </button>
           </Form>
-
-
         )}
 
 

@@ -7,14 +7,16 @@ import RecruiterUpdateForm from "./Recruiter/RecruiterUpdateForm";
 import TalentProfileCard from "./Talent/TalentProfileCard";
 import TalentUpdateForm from "./Talent/TalentUpdateForm";
 import TalentProyectsCard from "./Talent/TalentProyectsCard";
+import axios from "axios";
+import { BASE_URL } from "../../utils/URL";
+import swal from "sweetalert";
 
 
 
 
 const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
-  const { userType, userData } = useUserContext();
-
+  const { userType, userData, userID } = useUserContext();
 
 
   const onEdit = () => {
@@ -26,27 +28,55 @@ const Profile = () => {
   }
 
 
-  
+  const onUpdate = async (values) => {
+    try {
+      if (userType === 'Recruiter') {
+        let response = await axios({
+          method: 'PUT',
+          url: `${BASE_URL}/recruiters/${userID}`,
+          data: values
+        })
+        swal(response.data.message)
+      } else {
+        let response = await axios({
+          method: 'PUT',
+          url: `${BASE_URL}/talents/${userID}`,
+          data: values
+        })
+        swal(response.data.message)
+      }
+
+    } catch (error) {
+      console.log(error.response)
+      console.log(error.response.data)
+      swal(error.response.data)
+    }
+
+
+  }
+
+
+
 
 
   return (
     <>
       {userType === 'Talent' ?
         <div className="d-flex flex-column flex-md-row">
-          <TalentProfileCard 
-          data={userData}
-          edu={userData.id_Education}
-          exp={userData.id_Experience}
-          sr={userData.id_Seniority}
-          sp={userData.id_Speciality}
-          
+          <TalentProfileCard
+            data={userData}
+            edu={userData.id_Education}
+            exp={userData.id_Experience}
+            sr={userData.id_Seniority}
+            sp={userData.id_Speciality}
+
           />
           <TalentProyectsCard />
         </div>
         :
         <div className="d-flex flex-column  flex-md-row">
-          <RecruiterProfileCard data={userData}/>
-          <RecruiterProjectsCard  />
+          <RecruiterProfileCard data={userData} />
+          <RecruiterProjectsCard />
         </div>
       }
 
@@ -58,7 +88,7 @@ const Profile = () => {
                 !isEditing ?
                   <>
                     <Button
-                      onClick={onEdit}                      
+                      onClick={onEdit}
                       className='m-5 btn btn-success'
                       type="submit">
                       Edit Profile
@@ -84,6 +114,7 @@ const Profile = () => {
                 <TalentUpdateForm
                   data={userData}
                   setIsEditing={setIsEditing}
+                  onUpdate={onUpdate}
                 >
                 </TalentUpdateForm>
               </Row>
@@ -93,10 +124,11 @@ const Profile = () => {
                 <RecruiterUpdateForm
                   data={userData}
                   setIsEditing={setIsEditing}
+                  onUpdate={onUpdate}
                 >
                 </RecruiterUpdateForm>
               </Row>
-            ): null}
+            ) : null}
           </Row>
         </Container>
       </Fragment>

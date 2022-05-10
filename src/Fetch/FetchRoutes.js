@@ -19,14 +19,10 @@ const FetchRoutes = () => {
     fetchDataSeniorities();
 
 
-
-
-
-
     const fetchDataEducation = async () => {
 
       try {
-        const response = await fetch(`${BASE_URL}/education`);
+        const response = await  axios.get(`${BASE_URL}/education`);
         setEducation(response.data);
       } catch (error) {
         console.log(error)

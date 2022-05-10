@@ -1,25 +1,48 @@
-/* eslint-disable no-unused-vars */
-import React, { useState } from "react";
-import { qs } from "qs";
-import { Link } from "react-router-dom";
+
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { FcNeutralDecision, FcBusiness, FcApproval } from "react-icons/fc";
 import "./Register.scss";
 import RegisterRecruiter from "./RegisterRecruiter";
 import RegisterTalent from "./RegisterTalent";
 import { Container } from "reactstrap";
 import { useUserContext } from "../../Store/UserContext";
+import swal from "sweetalert";
+import axios from "axios";
+import { BASE_URL } from "../../utils/URL";
 
 const Register = () => {
   //Traigo del context el estado usertType para poder elegir el formulario que correponde
   const { setUserType, userType } = useUserContext();
-
+  let navigate = useNavigate();
   const formTalento = () => {
-    setUserType("Talent");
+    setUserType("talents");
   };
   //Iria al formulario de recruter
   const formRecruiter = () => {
-    setUserType("Recruiter");
+    setUserType("recruiters");
   };
+
+
+  const createUser = async (values) => {
+
+    try {
+      const response = await axios({
+        method: 'POST',
+        url: `${BASE_URL}/${userType}`,
+        data: values
+      })
+      console.log(response)
+      swal(`Welcome to JUNIOR JOBS, you can now login to your account`)
+      navigate('/login')
+
+    } catch (error) {
+      console.log(error.response)
+      swal(error.response.data)
+    }
+
+
+  }
 
   return (
     <>
@@ -37,7 +60,7 @@ const Register = () => {
               type="submit"
               onClick={() => formTalento()}
             >
-             Talent form
+              Talent form
             </button>
           </div>
           <div className="registerCard text-dark">
@@ -49,16 +72,16 @@ const Register = () => {
               type="submit"
               onClick={() => formRecruiter()}
             >
-            Recruiter form
+              Recruiter form
             </button>
           </div>
         </div>
       </div>
       <Container>
-        {userType === "Recruiter" ? (
-          <RegisterRecruiter></RegisterRecruiter>
+        {userType === "recruiters" ? (
+          <RegisterRecruiter createUser={createUser} ></RegisterRecruiter>
         ) : null}
-        {userType === "Talent" ? <RegisterTalent></RegisterTalent> : null}
+        {userType === "talents" ? <RegisterTalent  createUser={createUser}></RegisterTalent> : null}
       </Container>
       <Link
         to="/login"

@@ -6,14 +6,13 @@ import {  MySelect, MyTextInput } from "../../../utils/inputsFunctions";
 import { emailRegex, phoneRegex, urlRegex } from "../../../utils/regex";
 import { errorAlerts } from '../../../utils/errorsAlert'
 import { useUserContext } from "../../../Store/UserContext";
-import { useCRUD } from '../../../services/useCRUD'
 import classes from './TalentUpdateForm.module.scss'
 import FormBtn from "../../Buttons/FormBtn";
 import FetchRoutes from "../../../Fetch/FetchRoutes";
 
 
-const TalentUpdateForm = ({ data, setIsEditing }) => {
-  const { onUpdateSubmit } = useCRUD()
+const TalentUpdateForm = ({ data, setIsEditing,  onUpdate }) => {
+ 
   //Traigo la data desde el context
   const { setUserData, seniorities, exp, speciality, education } = useUserContext()
   FetchRoutes()
@@ -76,8 +75,8 @@ const TalentUpdateForm = ({ data, setIsEditing }) => {
           values.id_Education = +values.id_Education;
           values.id_Speciality = +values.id_Speciality;
           values.id_Experience = +values.id_Experience;
-
-          onUpdateSubmit(values)        
+          onUpdate(values)
+               
           setUserData(values)
           setIsEditing(false)
 

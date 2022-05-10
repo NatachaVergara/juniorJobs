@@ -5,11 +5,11 @@ import { Button, Col, Row } from "reactstrap";
 import { MyCheckbox, MyTextInput } from "../../utils/inputsFunctions";
 import { emailRegex, urlRegex } from "../../utils/regex";
 import { errorAlerts } from '../../utils/errorsAlert'
-import { useCRUD } from '../../services/useCRUD'
 
 
-export default function RegisterRecruiter(props) {
-  const { onCreateSubmit } = useCRUD()
+
+export default function RegisterRecruiter({ createUser }) {
+
   return (
     <>
       <h2 className="h1">Complete your recruiter profile!</h2>
@@ -54,102 +54,99 @@ export default function RegisterRecruiter(props) {
           acceptedTerms: Yup.boolean()
             .required(errorAlerts[4].requiredAlert)
             .oneOf([true], errorAlerts[6].acceptedTerms),
-         })}
+        })}
 
 
-        onSubmit={(values, { setSubmitting }) => {
-          setSubmitting(true);
-          console.log(values);
-          onCreateSubmit(values);
-          setSubmitting(false);
+        onSubmit={(values) => {
+          createUser(values)
         }}
       >
-        {({ isSubmitting, isValid }) => (
-          <Form>
-            <Row>
-              <Col xs='12'
-                md='6'>
-                <MyTextInput
-                  label="Name *"
-                  name="name"
-                  type="text" />
-              </Col>
-              <Col xs='12'
-                md='6'>
-                <MyTextInput
-                  label="Last name *"
-                  name="lastName"
-                  type="text" />
-              </Col>
-            </Row>
-            <Row>
-              <Col xs='12'
-                md='6'>
-                <MyTextInput
-                  label="E-mail *"
-                  name="email"
-                  type="text"
-                  placeholder="example@juniorjobs.com"
-                />
-              </Col>
-              <Col xs='12'
-                md='6'>
-                <MyTextInput
-                  label="Password *"
-                  name="password"
-                  type="password"
-                  placeholder=""
-                />
-              </Col>
-              <Col xs='12'
-                md='6'>
-                <MyTextInput
-                  label="Password Confirmation *"
-                  name="passwordConfirmation"
-                  type="password"
-                  placeholder=""
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col xs='12'
-                md='6'>
-                <MyTextInput
-                  label="image *"
-                  name="image"
-                  type="url" />
-              </Col>
-              <Col xs='12'
-                md='6'>
-                <MyTextInput
-                  label="LinkedIn *"
-                  name="url"
-                  type="url" />
-              </Col>
-            </Row>
-            <Row>
-              <Col xs='12'
-                md='12'>
-            <MyTextInput
-              label="Description of company *"
-              name="company"
-              type="textarea"
-              placeholder="Tell us about the company"
-            />
+
+        <Form>
+          <Row>
+            <Col xs='12'
+              md='6'>
+              <MyTextInput
+                label="Name *"
+                name="name"
+                type="text" />
             </Col>
             <Col xs='12'
-                md='6'>
-            <MyCheckbox name="acceptedTerms">
-              {"  "} I accept the terms and conditions
-            </MyCheckbox>
+              md='6'>
+              <MyTextInput
+                label="Last name *"
+                name="lastName"
+                type="text" />
             </Col>
-            </Row>
-            <Button
-              type='submit'             
-              className='btn btn-primary' >Submit Form
-            </Button>
-          </Form>
-        )}
+          </Row>
+          <Row>
+            <Col xs='12'
+              md='6'>
+              <MyTextInput
+                label="E-mail *"
+                name="email"
+                type="text"
+                placeholder="example@juniorjobs.com"
+              />
+            </Col>
+            <Col xs='12'
+              md='6'>
+              <MyTextInput
+                label="Password *"
+                name="password"
+                type="password"
+                placeholder=""
+              />
+            </Col>
+            <Col xs='12'
+              md='6'>
+              <MyTextInput
+                label="Password Confirmation *"
+                name="passwordConfirmation"
+                type="password"
+                placeholder=""
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col xs='12'
+              md='6'>
+              <MyTextInput
+                label="image *"
+                name="image"
+                type="url" />
+            </Col>
+            <Col xs='12'
+              md='6'>
+              <MyTextInput
+                label="LinkedIn *"
+                name="url"
+                type="url" />
+            </Col>
+          </Row>
+          <Row>
+            <Col xs='12'
+              md='12'>
+              <MyTextInput
+                label="Description of company *"
+                name="company"
+                type="textarea"
+                placeholder="Tell us about the company"
+              />
+            </Col>
+            <Col xs='12'
+              md='6'>
+              <MyCheckbox name="acceptedTerms">
+                {"  "} I accept the terms and conditions
+              </MyCheckbox>
+            </Col>
+          </Row>
+          <Button
+            type='submit'
+            className='btn btn-primary' >Submit Form
+          </Button>
+        </Form>
+
       </Formik>
     </>
   );
