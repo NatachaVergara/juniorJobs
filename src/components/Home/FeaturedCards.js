@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+
 import { Link } from "react-router-dom";
 import { Col, Row } from "reactstrap";
 import { useUserContext } from '../../Store/UserContext'
@@ -7,7 +7,7 @@ import Spinner from "../Spinner/Spinner";
 
 import style from './Styles/FeatureCards.module.scss'
 const FeaturedCards = () => {
-  const { jobOffers, fetchOffers } = useUserContext();
+  const { jobOffers } = useUserContext();
 
 
   return (
