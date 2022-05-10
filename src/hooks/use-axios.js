@@ -45,7 +45,8 @@ export const useAxios = () => {
 
         //Login users
         if (params.data.login) {
-          // console.log(res.data)
+          console.log(params.data.login)
+          console.log(res.data)
           swal(`Welcome ${res.data.name}`)
           setIsUser(true)
           setUserType(params.data.userType)
@@ -60,6 +61,7 @@ export const useAxios = () => {
           // The request was made and the server responded with a status code
           // that falls out of the range of 2xx
           console.error(error.response.data);
+          swal(error.response.data)
           // console.log(error.response.status);
           // console.log(error.response.headers);         
         } else if (error.request) {

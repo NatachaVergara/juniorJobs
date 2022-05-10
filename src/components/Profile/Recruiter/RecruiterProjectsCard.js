@@ -7,11 +7,16 @@ import { BASE_URL } from "../../../utils/URL";
 import ProyectCard from "./ProyectCard";
 import classes from "./RecruiterProjectsCard.module.scss";
 import swal from 'sweetalert'
-import FetchOffer from '../../../Fetch/FetchOffer'
+
 export default function ProjectsCard() {
   const { userID, jobOffers, setJobOffers } = useUserContext();
   const [recruiterOffer, setRecruiterOffer] = useState([])
-  const { fetchOffers } = FetchOffer()
+  
+  const fetchOffers = async () => {
+    const response = await axios.get(`${BASE_URL}/jobOffers`)
+    setJobOffers(response.data)
+  }
+
 
 
   //filtro a las jobsOffers segun el id del recruiter y a la informacion la envio a la ProyectCard

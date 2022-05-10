@@ -1,44 +1,43 @@
 import React, { useEffect, useState } from 'react'
-import { AccessTimeRounded, CakeOutlined, CheckroomOutlined, DinnerDiningOutlined, LaptopMacOutlined, LocalHospitalOutlined, TagFacesOutlined, WatchLater } from '@mui/icons-material';
+import { TagFacesOutlined, WatchLater } from '@mui/icons-material';
 import PersonIcon from '@mui/icons-material/Person';
-import { Col, Row } from 'reactstrap';
+//import { Col, Row } from 'reactstrap';
 import classes from './JobDescription.module.scss'
 import { Link, useParams } from 'react-router-dom';
 import { BASE_URL } from '../../utils/URL';
 import { useUserContext } from '../../Store/UserContext'
+import axios from 'axios';
 
 
 const JobDescription = () => {
     const { id } = useParams()
-    const { isUser} = useUserContext()
+    const { isUser } = useUserContext()
     const [offer, setOffer] = useState([])
-    
+
     const [sr, setSR] = useState([])
     const [exp, setExp] = useState([])
     const [schedule, setSchedule] = useState([])
     const [speciality, setSspeciality] = useState([])
 
-  
+
     useEffect(() => {
 
-        const fetchOffer = async () => {
+        const fetchOfferByID = async () => {
             try {
-                const response = await fetch(`${BASE_URL}/jobOffers/${id}`)
-                const data = await response.json()
-                setOffer(data)
+                const response = await axios.get(`${BASE_URL}/jobOffers/${id}`)
+                setOffer(response.data)
             } catch (error) {
                 console.log(error)
             }
         }
-        fetchOffer()
+        fetchOfferByID()
 
 
 
         const fetchSeniority = async () => {
             try {
-                const response = await fetch(`${BASE_URL}/Seniorities/${offer.id_Seniority}`)
-                const data = await response.json()
-                setSR(data)
+                const response = await axios.get(`${BASE_URL}/Seniorities/${offer.id_Seniority}`)
+                setSR(response.data)
 
             } catch (error) {
                 console.log(error)
@@ -49,9 +48,8 @@ const JobDescription = () => {
         const fetchExperience = async () => {
 
             try {
-                const response = await fetch(`${BASE_URL}/experience/${offer.id_Experience}`);
-                const data = await response.json()
-                setExp(data)
+                const response = await axios.get(`${BASE_URL}/experience/${offer.id_Experience}`);
+                setExp(response.data)
 
             } catch (error) {
                 console.log(error)
@@ -63,10 +61,8 @@ const JobDescription = () => {
         const fetchShedules = async () => {
 
             try {
-                const response = await fetch(`${BASE_URL}/schedules/${offer.id_Schedule}`);
-                const data = await response.json()
-
-                setSchedule(data)
+                const response = await axios.get(`${BASE_URL}/schedules/${offer.id_Schedule}`);
+                setSchedule(response.data)
             } catch (error) {
                 console.log(error)
             }
@@ -76,25 +72,23 @@ const JobDescription = () => {
 
 
 
-        const fetchspeciality = async () => {
-
+        const fetchSpeciality = async () => {
             try {
-                const response = await fetch(`${BASE_URL}/speciality/${offer.id_Speciality}`);
-                const data = await response.json()
-                setSspeciality(data)
+                const response = await axios.get(`${BASE_URL}/speciality/${offer.id_Speciality}`);
+                setSspeciality(response.data)
             } catch (error) {
                 console.log(error)
             }
 
         }
-        fetchspeciality()
+        fetchSpeciality()
 
 
 
     }, [id, offer.id_Experience, offer.id_Schedule, offer.id_Seniority, offer.id_Speciality])
 
 
-    
+
 
 
 
@@ -130,9 +124,9 @@ const JobDescription = () => {
                 </ul>
                 <div>
                     {isUser ?
-                     <button className='btn btn-outline-warning ms-5 ms-md-0'>Apply</button> 
-                     :
-                      <Link to='/login' className='btn btn-outline-success ms-5 ms-md-0'>Login/Register to apply</Link>}
+                        <button className='btn btn-outline-warning ms-5 ms-md-0'>Apply</button>
+                        :
+                        <Link to='/login' className='btn btn-outline-success ms-5 ms-md-0'>Login/Register to apply</Link>}
 
                 </div>
             </div>
@@ -167,7 +161,7 @@ const JobDescription = () => {
                     -Deseable experiencia en industria Telecomunicaciones, Bancaria / Financiera, Retail</p>
                 <div className='conditions '>
                     <h3 className='title '>Conditions</h3>
-                    <Row>
+                    {/* <Row>
                         <Col className='col-left'>
                             <ul>
                                 <li>
@@ -201,7 +195,7 @@ const JobDescription = () => {
                             </ul>
 
                         </Col>
-                    </Row>
+                    </Row> */}
                 </div>
             </div>
         </>

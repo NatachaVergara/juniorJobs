@@ -1,13 +1,12 @@
 import {TiSocialTwitter,  TiSocialLinkedin,  TiSocialInstagram,  TiSocialGithub} from "react-icons/ti";
 import { Navbar, NavItem, NavLink } from "reactstrap";
+import Brand from "../Brand/Brand";
 import style from './Styles/Footer.module.scss'
 
 export default function Footer(props) {
   return (
     <Navbar tag="footer" className={style.navbar}>
-      <div>
-        <h6>JUNIOR JOBS</h6>
-      </div>
+      <Brand classes={style.brand} />
       <div >
         <ul className={style.social}>
           <NavItem >

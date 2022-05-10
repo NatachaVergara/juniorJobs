@@ -1,26 +1,32 @@
-.navbar{
+.navbar {
     width: 100%;
-    margin:auto;
+    margin: auto;
     height: 100%;
-    color:white;
+    color: white;
     background: black;
-    display:flex;
+    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content:space-around;
-    align-items:center;
+    justify-content: space-around;
+    align-items: center;
 
-    & .social{
+    & .brand {
+        padding: 10px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    & .social {
 
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        justify-content:center;
+        justify-content: center;
         align-items: center;
-        
-        & a{
-            color:white;
-            font-size:2em;
+
+        & a {
+            color: white;
+            font-size: 2em;
         }
     }
 

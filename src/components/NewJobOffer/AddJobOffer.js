@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import FetchRoutes from '../../Fetch/FetchRoutes';
 import { useUserContext } from '../../Store/UserContext';
 import { BASE_URL } from '../../utils/URL';
 import swal from "sweetalert";
@@ -13,7 +12,7 @@ import { MySelect, MyTextInput } from '../../utils/inputsFunctions';
 
 const AddJobOffer = () => {
     const { userID, seniorities, exp, schedule, speciality, remote, skills, lenguage } = useUserContext();
-    FetchRoutes()
+    
     const navigate = useNavigate();
 
     const createJobOffer = async (values) => {

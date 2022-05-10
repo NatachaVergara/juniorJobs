@@ -7,6 +7,7 @@ import classes from "./RecruiterProjectsCard.module.scss";
 import { MySelect, MyTextInput } from '../../../utils/inputsFunctions';
 import { errorAlerts } from '../../../utils/errorsAlert';
 import { useUserContext } from '../../../Store/UserContext';
+import axios from 'axios';
 import FetchRoutes from '../../../Fetch/FetchRoutes';
 
 
@@ -17,42 +18,60 @@ const ProyectCard = ({ offerId, offer, description, title, createDate, location,
     const [schedules, setSchedules] = useState([])
     const [seniorities, setSeniorities] = useState([])
     const [specialities, setSpecialities] = useState([])
-    const [modal, setModal] = useState(false)  
-    
-    
-    
+    const [modal, setModal] = useState(false)
+
+
+
     useEffect(() => {
         const fetchDataSeniorities = async () => {
-            const response = await fetch(`${BASE_URL}/Seniorities/${offer.id_Seniority}`);
-            const data = await response.json();
-            setSeniorities(data);
-        };
-        fetchDataSeniorities()
+            try {
+                const response = await axios.get(`${BASE_URL}/Seniorities/${offer.id_Seniority}`)
+                setSeniorities(response.data)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        fetchDataSeniorities();
 
         const fetchDataExperience = async () => {
-            const response = await fetch(`${BASE_URL}/experience/${offer.id_Experience}`);
-            const data = await response.json();
-            setExperiences(data);
+            try {
+                const response = await axios.get(`${BASE_URL}/experience/${offer.id_Experience}`)
+                setExperiences(response.data)
+            } catch (error) {
+                console.log(error)
+            }
         }
         fetchDataExperience();
 
         const fetchDataSpeciality = async () => {
-            const response = await fetch(`${BASE_URL}/speciality/${offer.id_Speciality}`);
-            const data = await response.json();
-            setSpecialities(data);
+            try {
+                const response = await axios.get(`${BASE_URL}/speciality/${offer.id_Speciality}`)
+                setSpecialities(response.data)
+            } catch (error) {
+                console.log(error)
+            }
+
         }
         fetchDataSpeciality();
 
         const fetchDataRemote = async () => {
-            const response = await fetch(`${BASE_URL}/remotes/${offer.id_Remote}`);
-            const data = await response.json();
-            setRemotes(data);
+            try {
+                const response = await axios.get(`${BASE_URL}/remotes/${offer.id_Remote}`)
+                setRemotes(response.data);
+            } catch (error) {
+                console.log(error)
+            }
         }
         fetchDataRemote();
+
+
         const fetchDataSchedule = async () => {
-            const response = await fetch(`${BASE_URL}/schedules/${offer.id_Schedule}`);
-            const data = await response.json();
-            setSchedules(data);
+            try {
+                const response = await axios.get(`${BASE_URL}/schedules/${offer.id_Schedule}`);
+                setSchedules(response.data);
+            } catch (error) {
+                console.log(error)
+            }
         }
         fetchDataSchedule();
 
@@ -62,9 +81,8 @@ const ProyectCard = ({ offerId, offer, description, title, createDate, location,
     ///Fron here is all use in the modal
     const toggle = () => setModal(!modal)
     //Traigo las diferentes rutas del context que son llamadas con el FetchRoutes()
-    const {seniorities: srty, exp, schedule,speciality,  remote} = useUserContext()
+    const { seniorities: srty, exp, schedule, speciality, remote } = useUserContext()
     FetchRoutes()
-
 
     return (
         <>
@@ -107,7 +125,7 @@ const ProyectCard = ({ offerId, offer, description, title, createDate, location,
                                     description: description,
                                     location: location,
                                     id_Recruiter: offer.id_Recruiter,
-                                    id_Schedule:  offer.id_Schedule,
+                                    id_Schedule: offer.id_Schedule,
                                     id_Remote: offer.id_Remote,
                                     id_Talent: null,
                                     id_Seniority: offer.id_Seniority,
@@ -115,7 +133,7 @@ const ProyectCard = ({ offerId, offer, description, title, createDate, location,
                                     id_Speciality: offer.id_Speciality
 
                                 }}
-                                  
+
                                 validationSchema={Yup.object({
                                     title: Yup.string().required(errorAlerts[4].requiredAlert),
                                     description: Yup.string().required(errorAlerts[4].requiredAlert),
@@ -124,7 +142,8 @@ const ProyectCard = ({ offerId, offer, description, title, createDate, location,
 
 
                                 onSubmit={(values) => {
-                                    update(offerId, values, toggle )
+                                    update(offerId, values, toggle)
+
                                 }}
 
                             >

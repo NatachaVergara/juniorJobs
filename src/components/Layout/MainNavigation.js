@@ -10,6 +10,7 @@ import fqa from '../../Img/fqa.png'
 import login from '../../Img/login.png'
 import logout from '../../Img/logout.png'
 import register from '../../Img/register.png'
+import Brand from "../Brand/Brand";
 
 
 const MainNavigation = () => {
@@ -27,16 +28,14 @@ const MainNavigation = () => {
 
   return (
     <Navbar className={classes.navbar} sticky="top" dark>
-      <NavItem className={classes.brand}>
-        <NavbarBrand >JUNIOR JOBS</NavbarBrand>
-      </NavItem>
+     <Brand classes={classes.brand}/>
 
 
       <Nav className={classes.nav} >
         <NavItem>
           <NavLink to="/">
-            <Button color="primary">
-              <img src={home} alt='home'  className={classes.img} />
+            <Button color="dark">
+              <img src={home} alt='home' className={classes.img} title='HOME' />
             </Button>
           </NavLink>
         </NavItem >
@@ -44,9 +43,9 @@ const MainNavigation = () => {
         {isUser === true ? (
           <NavItem>
             <NavLink to="/profile">
-              <Button color="primary">
-                
-                <img src={userData?.image} alt='userProfileIMG' className={classes.img} />
+              <Button color="dark">
+
+                <img src={userData?.image} alt='userProfileIMG' className={classes.img}  title='PROFILE'/>
               </Button>
             </NavLink>
           </NavItem>
@@ -54,34 +53,35 @@ const MainNavigation = () => {
         ) : null}
         <NavItem>
           <NavLink to="/about">
-            <Button color="primary">
-              <img src={aboutUs} alt='aboutUsImage'  className={classes.img} />
+            <Button color="dark">
+              <img src={aboutUs} alt='aboutUsImage' className={classes.img} title='ABOUT US' />
             </Button>
           </NavLink>
         </NavItem>
         <NavItem>
           <NavLink to="/faq">
-            <Button color="primary">             
-              <img src={fqa} alt='fqa'className={classes.img} />
+            <Button color="dark">
+              <img src={fqa} alt='fqa' className={classes.img} title='FQA' />
             </Button>
           </NavLink>
         </NavItem>
         {isUser ? (
           <NavItem>
-             <Button onClick={logoutHandler} color="danger" >
-            <img src={logout} alt='login' className={classes.img}  />
-          </Button>
+            <Button onClick={logoutHandler} color="danger" >
+              <img src={logout} alt='login' className={classes.img} title='LOGOUT' />
+            </Button>
           </NavItem>
         ) : (
           <Fragment>
             <NavItem>
-              <Button color="success" className="text-dark" onClick={() => navigate("/register")}>
-                <img src={register} alt='login' className={classes.img}/>
+              <Button color="dark" className="text-dark" onClick={() => navigate("/register")}>
+                <img src={register} alt='login' className={classes.img} title='REGISTER'/>
               </Button>
             </NavItem>
             <NavItem>
-              <Button color="success" className="text-dark" onClick={() => navigate("/login")}>
-              <img src={login} alt='login' className={classes.img}/>
+              <Button
+                color="dark" className="text-dark" onClick={() => navigate("/login")}>
+                <img src={login} alt='login' className={classes.img} title='LOGIN'/>
               </Button>
             </NavItem>
           </Fragment>

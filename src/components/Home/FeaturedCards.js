@@ -7,7 +7,7 @@ import Spinner from "../Spinner/Spinner";
 
 import style from './Styles/FeatureCards.module.scss'
 const FeaturedCards = () => {
-  const { jobOffers } = useUserContext();
+  const { jobOffers, fetchOffers } = useUserContext();
 
 
   return (

@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { BASE_URL } from "../utils/URL";
 
@@ -90,18 +91,13 @@ const UserContextProvider = ({ children }) => {
   }, [userData]);
 
 
-  useEffect(() => {
-    sessionStorage.setItem('jobOffersLS', JSON.stringify(jobOffers))
-  }, [jobOffers])
+  const fetchOffers = async () => {
+    const response = await axios.get(`${BASE_URL}/jobOffers`)
+    setJobOffers(response.data)
+  }
 
 
-
-  useEffect(() => {
-    const fetchOffers = async () => {
-      const response = await fetch(`${BASE_URL}/jobOffers`)
-      const data = await response.json()
-      setJobOffers(data)
-    }
+  useEffect(() => {     
     fetchOffers()
   }, [])
 
@@ -143,7 +139,8 @@ const UserContextProvider = ({ children }) => {
         setRemote,
         setOfferData,
         setOfferID,
-        setRecruiterOffers
+        setRecruiterOffers,
+        fetchOffers
       }}
     >
       {children}

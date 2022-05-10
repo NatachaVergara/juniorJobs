@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import { Col } from 'reactstrap';
 import { useUserContext } from '../../Store/UserContext';
 
@@ -8,10 +8,10 @@ import style from './JobOffersContainer.module.scss'
 
 const JobOffersContainer = () => {
     const { jobOffers } = useUserContext();
-
+   
     const [offers, setOffers] = useState(jobOffers)
     
-    
+   
     const searchAll = () => {
         setOffers(jobOffers)
     }
@@ -27,10 +27,6 @@ const JobOffersContainer = () => {
             setOffers(seniority)
             return
     }
-
-
-
-
   
 
     return (

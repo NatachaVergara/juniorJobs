@@ -1,70 +1,103 @@
+import axios from 'axios';
 import { useEffect } from 'react'
 import { useUserContext } from '../Store/UserContext';
 import { BASE_URL } from '../utils/URL';
 
 const FetchRoutes = () => {
-    const { setSeniorities, setExp, setSpeciality, setSkills, setEducation, setSchedule, setRemote, setLenguage } = useUserContext();
+  const { setSeniorities, setExp, setSpeciality, setSkills, setEducation, setSchedule, setRemote, setLenguage } = useUserContext();
 
-useEffect(() =>{
+  useEffect(() => {
 
     const fetchDataSeniorities = async () => {
-        const response = await fetch(`${BASE_URL}/Seniorities`);
-        const data = await response.json();
-        setSeniorities(data);
-      };
-      fetchDataSeniorities();
-      const fetchDataEducation = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/Seniorities`);
+        setSeniorities(response.data);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    fetchDataSeniorities();
+
+
+
+
+
+
+    const fetchDataEducation = async () => {
+
+      try {
         const response = await fetch(`${BASE_URL}/education`);
-        const data = await response.json();
-        setEducation(data);
-      };
-      fetchDataEducation();
-      const fetchDataExperience = async () => {
-        const response = await fetch(`${BASE_URL}/experience`);
-        const data = await response.json();
-        setExp(data);
-      };
-      fetchDataExperience();
-  
-      const fetchDatasetSpeciality = async () => {
-        const response = await fetch(`${BASE_URL}/speciality`);
-        const data = await response.json();
-        setSpeciality(data);
-      };
-      fetchDatasetSpeciality();
-  
-      const fetchDataSkills = async () => {
-        const response = await fetch(`${BASE_URL}/skills`);
-        const data = await response.json();
-        setSkills(data);
-      };
-      fetchDataSkills();
+        setEducation(response.data);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    fetchDataEducation();
 
-      const fetchSchedule = async () => {
-        const response = await fetch(`${BASE_URL}/schedules`);
-        const data = await response.json();
-        setSchedule(data);
-      };
-      fetchSchedule();
 
-      const fetchRemote = async () => {
-        const response = await fetch(`${BASE_URL}/remotes`);
-        const data = await response.json();
-        setRemote(data);
-      };
-      fetchRemote();
+    const fetchDataExperience = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/experience`);
+        setExp(response.data);
+      } catch (error) {
+        console.log(error)
+      }
 
-      const fetchLenguage = async () => {
-        const response = await fetch(`${BASE_URL}/language`);
-        const data = await response.json();
-        setLenguage(data);
-      };
-      fetchLenguage();
+    }
+    fetchDataExperience();
 
-      
+    const fetchDatasetSpeciality = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/speciality`);
+        setSpeciality(response.data);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    fetchDatasetSpeciality();
 
-      
-}, [setEducation, setExp, setLenguage, setRemote, setSchedule, setSeniorities, setSkills, setSpeciality])
+
+    const fetchDataSkills = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/skills`);
+        setSkills(response.data);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    fetchDataSkills();
+
+
+    const fetchSchedule = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/schedules`);
+        setSchedule(response.data);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    fetchSchedule();
+
+    const fetchRemote = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/remotes`);
+        setRemote(response.data);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    fetchRemote();
+
+    const fetchLenguage = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/language`);
+        setLenguage(response.data);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    fetchLenguage();
+  }, [setEducation, setExp, setLenguage, setRemote, setSchedule, setSeniorities, setSkills, setSpeciality])
 
 
 }
