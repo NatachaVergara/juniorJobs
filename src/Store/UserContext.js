@@ -50,8 +50,6 @@ const getLocalUserData = () => {
 };
 
 
-
-
 const UserContextProvider = ({ children }) => {
   const [isUser, setIsUser] = useState(getLocalUser());
   const [userType, setUserType] = useState(getLocalUserType());
@@ -91,15 +89,18 @@ const UserContextProvider = ({ children }) => {
   }, [userData]);
 
 
-  const fetchOffers = async () => {
-    const response = await axios.get(`${BASE_URL}/jobOffers`)
-    setJobOffers(response.data)
-  }
 
 
-  useEffect(() => {     
-    fetchOffers()
-  }, [])
+
+  useEffect(() => {
+    console.log('...loading all jobOffers')
+    axios({
+      url: `${BASE_URL}/jobOffers`
+    }).then((response)=>{
+      setJobOffers(response.data)
+    }).catch((error) => {console.log(error)})
+ 
+  }, [setJobOffers])
 
 
 
@@ -140,7 +141,7 @@ const UserContextProvider = ({ children }) => {
         setOfferData,
         setOfferID,
         setRecruiterOffers,
-        fetchOffers
+      
       }}
     >
       {children}

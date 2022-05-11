@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { TagFacesOutlined, WatchLater } from '@mui/icons-material';
 import PersonIcon from '@mui/icons-material/Person';
-//import { Col, Row } from 'reactstrap';
 import classes from './JobDescription.module.scss'
 import { Link, useParams } from 'react-router-dom';
 import { BASE_URL } from '../../utils/URL';
@@ -13,84 +12,35 @@ const JobDescription = () => {
     const { id } = useParams()
     const { isUser } = useUserContext()
     const [offer, setOffer] = useState([])
-
-    const [sr, setSR] = useState([])
-    const [exp, setExp] = useState([])
+    const [seniority, setSeniority] = useState([])
+    const [experience, setExperience] = useState([])
     const [schedule, setSchedule] = useState([])
-    const [speciality, setSspeciality] = useState([])
+    const [speciality, setSpeciality] = useState([])
 
 
     useEffect(() => {
-
-        const fetchOfferByID = async () => {
+        console.log('...fetching in jobDescription')
+        const fetchData = async () => {
             try {
-                const response = await axios.get(`${BASE_URL}/jobOffers/${id}`)
-                setOffer(response.data)
+                axios.all([
+                    axios.get(`${BASE_URL}/Seniorities/${offer.id_Seniority}`),
+                    axios.get(`${BASE_URL}/experience/${offer.id_Experience}`),
+                    axios.get(`${BASE_URL}/speciality/${offer.id_Speciality}`),
+                    axios.get(`${BASE_URL}/schedules/${offer.id_Schedule}`),
+                    axios.get(`${BASE_URL}/jobOffers/${id}`)
+                ]).then(response => {
+                    setSeniority(response[0].data);
+                    setExperience(response[1].data);
+                    setSpeciality(response[2].data);
+                    setSchedule(response[3].data);
+                    setOffer(response[4].data)
+                })
             } catch (error) {
                 console.log(error)
             }
         }
-        fetchOfferByID()
-
-
-
-        const fetchSeniority = async () => {
-            try {
-                const response = await axios.get(`${BASE_URL}/Seniorities/${offer.id_Seniority}`)
-                setSR(response.data)
-
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        fetchSeniority()
-
-        const fetchExperience = async () => {
-
-            try {
-                const response = await axios.get(`${BASE_URL}/experience/${offer.id_Experience}`);
-                setExp(response.data)
-
-            } catch (error) {
-                console.log(error)
-            }
-        }
-
-        fetchExperience()
-
-        const fetchShedules = async () => {
-
-            try {
-                const response = await axios.get(`${BASE_URL}/schedules/${offer.id_Schedule}`);
-                setSchedule(response.data)
-            } catch (error) {
-                console.log(error)
-            }
-
-        }
-        fetchShedules()
-
-
-
-        const fetchSpeciality = async () => {
-            try {
-                const response = await axios.get(`${BASE_URL}/speciality/${offer.id_Speciality}`);
-                setSspeciality(response.data)
-            } catch (error) {
-                console.log(error)
-            }
-
-        }
-        fetchSpeciality()
-
-
-
+        fetchData()
     }, [id, offer.id_Experience, offer.id_Schedule, offer.id_Seniority, offer.id_Speciality])
-
-
-
-
-
 
     return (
         <>
@@ -99,13 +49,13 @@ const JobDescription = () => {
                 <ul >
                     <li>{offer.location} </li>
                     <li>|</li>
-                    <li>{sr.name} </li>
+                    <li>{seniority.name} </li>
                     <li>|</li>
                     <li> {schedule.schedule} </li>
                     <li>|</li>
                     <li>{speciality.category} </li>
                     <li>|</li>
-                    <li>{exp.period} </li>
+                    <li>{experience.period} </li>
                 </ul>
 
                 <ul className={classes.items}>

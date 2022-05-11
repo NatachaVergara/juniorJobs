@@ -5,18 +5,13 @@ import './AboutUs.scss'
 
 const AboutUs = () => {
   let us = [
-    { name: 'Brayan Tabarez', city: 'Perimetro Urbano Pereira, Risaralda, Colombia', rol: 'QA', linkedin: 'https://www.linkedin.com/in/brayan-tabares-52a243b5/', github: '#', skills: ['Tester manual'], img: 'https://media-exp1.licdn.com/dms/image/C4E03AQFxC2bBeKV8zQ/profile-displayphoto-shrink_800_800/0/1552109847312?e=1655337600&v=beta&t=l-arRFmAjPZUhvvg3k013wSBt-dFqBAwuMXePtku00k' },
-    { name: 'Gaspar Castelo', city: 'Rosario', rol: 'FrontEnd', linkedin: 'https://www.linkedin.com/in/gaspar-castello-4860a9a7/', github: 'https://github.com/GaspiCastello', skills: ['Front End Development', 'HTML', 'CSS', 'JavaScript', 'React'], img: 'https://images-ext-2.discordapp.net/external/LqVSKe6WPvRROQej0EPTVHPM2zeuI8aST62hrzWVk9E/%3Fe%3D1655942400%26v%3Dbeta%26t%3DXrHDrybrK463fTvtF4-k-k0y38CiQmerq4QDOn_zXCg/https/media-exp1.licdn.com/dms/image/C4E03AQGcI65za-mtxQ/profile-displayphoto-shrink_200_200/0/1570746615246' },
     { name: 'Hernan García', city: '', rol: 'BackEnd', linkedin: 'https://www.linkedin.com/in/hernan-horacio-garcia/', github: 'https://github.com/HernanGarcia1985', skills: ['Back End Development', 'HTML', 'CSS', 'JavaScript', 'React', 'NodeJs'], img: 'https://media-exp1.licdn.com/dms/image/C4D03AQHZzr4lmtadhA/profile-displayphoto-shrink_800_800/0/1641767524591?e=1655942400&v=beta&t=NvPYXD-vuCCfrnf3lMl2KEsypm0kyggl-y15gCz2khE' },
-    { name: 'Matias Mazparrotte', city: 'GBA', rol: 'FrontEnd', linkedin: 'https://www.linkedin.com/in/mat%C3%ADasmazparrotefeli%C3%BA/', github: 'https://github.com/matiasfeliu92', skills: ['Back End Development', 'HTML', 'CSS', 'JavaScript', 'React', 'NodeJs'], img: 'https://avatars.githubusercontent.com/u/88861016?v=4' },
-    { name: 'Matias Semelman', city: 'CABA', rol: 'BackEnd', linkedin: 'https://www.linkedin.com/in/matias-semelman/', github: 'https://github.com/matiassemelman', skills: ['Front End Development', 'HTML', 'CSS', 'JavaScript', 'React'], img: 'https://avatars.githubusercontent.com/u/70870015?v=4' },
     { name: 'Natacha Vergara', city: 'CABA', rol: 'FrontEnd', linkedin: 'https://www.linkedin.com/in/natacha-vergara', github: 'https://github.com/NatachaVergara', skills: ['Front End Development', 'HTML', 'CSS', 'JavaScript', 'React'], img: 'https://firebasestorage.googleapis.com/v0/b/portfolio-c32fd.appspot.com/o/aboutMe%2Fimg-portfolio.jpg?alt=media&token=314824cb-ab0a-4442-bd7c-871e163d3b92' }
   ]
 
 
   return (
     <div className='mt-5 pt-5 mb-0 body'>
-
       <section className="aboutBody ms-md-5 text-light">
         <p className='text-light'>Our mission</p>
         <h4>We believe every junior can find their first job just a few months after the search is started.

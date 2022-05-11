@@ -19,66 +19,36 @@ const ProyectCard = ({ offerId, offer, description, title, createDate, location,
     const [seniorities, setSeniorities] = useState([])
     const [specialities, setSpecialities] = useState([])
     const [modal, setModal] = useState(false)
-
+    //  const nodeRef = React.useRef(null);
 
 
     useEffect(() => {
-        const fetchDataSeniorities = async () => {
+        console.log('...fetching in proyectCard')
+        const fetchData = async () => {
             try {
-                const response = await axios.get(`${BASE_URL}/Seniorities/${offer.id_Seniority}`)
-                setSeniorities(response.data)
+                axios.all([
+                    axios.get(`${BASE_URL}/Seniorities/${offer.id_Seniority}`),
+                    axios.get(`${BASE_URL}/experience/${offer.id_Experience}`),
+                    axios.get(`${BASE_URL}/speciality/${offer.id_Speciality}`),
+                    axios.get(`${BASE_URL}/remotes/${offer.id_Remote}`),
+                    axios.get(`${BASE_URL}/schedules/${offer.id_Schedule}`)
+                ]).then(response => {
+                    setSeniorities(response[0].data);
+                    setExperiences(response[1].data);
+                    setSpecialities(response[2].data);
+                    setRemotes(response[3].data);
+                    setSchedules(response[4].data);
+                })
             } catch (error) {
                 console.log(error)
             }
         }
-        fetchDataSeniorities();
-
-        const fetchDataExperience = async () => {
-            try {
-                const response = await axios.get(`${BASE_URL}/experience/${offer.id_Experience}`)
-                setExperiences(response.data)
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        fetchDataExperience();
-
-        const fetchDataSpeciality = async () => {
-            try {
-                const response = await axios.get(`${BASE_URL}/speciality/${offer.id_Speciality}`)
-                setSpecialities(response.data)
-            } catch (error) {
-                console.log(error)
-            }
-
-        }
-        fetchDataSpeciality();
-
-        const fetchDataRemote = async () => {
-            try {
-                const response = await axios.get(`${BASE_URL}/remotes/${offer.id_Remote}`)
-                setRemotes(response.data);
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        fetchDataRemote();
-
-
-        const fetchDataSchedule = async () => {
-            try {
-                const response = await axios.get(`${BASE_URL}/schedules/${offer.id_Schedule}`);
-                setSchedules(response.data);
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        fetchDataSchedule();
-
+        fetchData()
     }, [offer.id_Experience, offer.id_Remote, offer.id_Schedule, offer.id_Seniority, offer.id_Speciality])
 
     ////////////--------------/////////////////
     ///Fron here is all use in the modal
+
     const toggle = () => setModal(!modal)
     //Traigo las diferentes rutas del context que son llamadas con el FetchRoutes()
     const { seniorities: srty, exp, schedule, speciality, remote } = useUserContext()
@@ -86,7 +56,7 @@ const ProyectCard = ({ offerId, offer, description, title, createDate, location,
 
     return (
         <>
-            <Col sm='12' md='6'>
+            <Col sm='12' md='6' >
                 <Card body color="dark" className={classes.projects}>
                     <CardBody>
                         <CardTitle tag="h5" className='text-center p-2'> OFFER ID  {offerId} || {title} </CardTitle>
@@ -103,7 +73,7 @@ const ProyectCard = ({ offerId, offer, description, title, createDate, location,
                         <CardText>
                         </CardText>
                     </CardBody>
-                    <div className={classes.button}>
+                    <div className={classes.button} >
                         <Button
                             type="submit" className='btn btn-outline-success' onClick={() => toggle()} > Edit offer</Button>
 
@@ -112,13 +82,14 @@ const ProyectCard = ({ offerId, offer, description, title, createDate, location,
 
 
                     <Modal
+
                         isOpen={modal}
                         toggle={toggle}
                     >
-                        <ModalHeader toggle={toggle}>
+                        <ModalHeader toggle={toggle} >
                             Modal title
                         </ModalHeader>
-                        <ModalBody>
+                        <ModalBody >
                             <Formik
                                 initialValues={{
                                     title: title,
@@ -147,94 +118,93 @@ const ProyectCard = ({ offerId, offer, description, title, createDate, location,
                                 }}
 
                             >
-                                {({ isValid }) =>
-                                (
-                                    <Form>
-                                        <Row>
-                                            <Col md='6' xs='6'>
-                                                <MyTextInput
-                                                    label='Title'
-                                                    type="text"
-                                                    name='title'
-                                                    placeholder={title}
-                                                />
-                                            </Col>
-                                            <Col md='6' xs='6'>
-                                                <MyTextInput
-                                                    label='Location'
-                                                    type="text"
-                                                    name='location'
-                                                    placeholder={location}
-                                                />
-                                            </Col>
+
+                                <Form>
+                                    <Row>
+                                        <Col md='6' xs='6'>
+                                            <MyTextInput
+                                                label='Title'
+                                                type="text"
+                                                name='title'
+                                                placeholder={title}
+                                            />
+                                        </Col>
+                                        <Col md='6' xs='6'>
+                                            <MyTextInput
+                                                label='Location'
+                                                type="text"
+                                                name='location'
+                                                placeholder={location}
+                                            />
+                                        </Col>
 
 
-                                        </Row>
-                                        <Row>
+                                    </Row>
+                                    <Row>
 
-                                            <Col md='12'>
-                                                <MyTextInput
-                                                    label='Description'
-                                                    type="textarea"
-                                                    name='description'
-                                                    placeholder={description}
-                                                />
-                                            </Col>
-                                        </Row>
+                                        <Col md='12'>
+                                            <MyTextInput
+                                                label='Description'
+                                                type="textarea"
+                                                name='description'
+                                                placeholder={description}
+                                            />
+                                        </Col>
+                                    </Row>
 
-                                        <Row>
-                                            <Col md='6' xs='6'>
-                                                <MySelect label="Speciality" name="id_Speciality"> {speciality.map((s, i) => (
-                                                    <option className='text-dark' key={i} value={s.id}>{s.category} </option>
+                                    <Row>
+                                        <Col md='6' xs='6'>
+                                            <MySelect label="Speciality" name="id_Speciality"> {speciality.map((s, i) => (
+                                                <option className='text-dark' key={i} value={s.id}>{s.category} </option>
+                                            ))}
+                                            </MySelect>
+                                        </Col>
+                                        <Col md='6' xs='6'>
+                                            <MySelect label='Seniority' name='id_Seniority'>
+                                                {srty.map(s => (<option className='text-dark' key={s.id} value={s.id}> {s.name} </option>))}
+                                            </MySelect>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col md='6' xs='6'>
+                                            <MySelect label='Experience' name='id_Experience'>
+                                                {exp.map(e => (
+                                                    <option className='text-dark' key={e.id} value={e.id}> {e.period} </option>
                                                 ))}
-                                                </MySelect>
-                                            </Col>
-                                            <Col md='6' xs='6'>
-                                                <MySelect label='Seniority' name='id_Seniority'>
-                                                    {srty.map(s => (<option className='text-dark' key={s.id} value={s.id}> {s.name} </option>))}
-                                                </MySelect>
-                                            </Col>
-                                        </Row>
-                                        <Row>
-                                            <Col md='6' xs='6'>
-                                                <MySelect label='Experience' name='id_Experience'>
-                                                    {exp.map(e => (
-                                                        <option className='text-dark' key={e.id} value={e.id}> {e.period} </option>
-                                                    ))}
-                                                </MySelect>
+                                            </MySelect>
 
-                                            </Col>
-                                            <Col md='6' xs='6'>
-                                                <MySelect label='Schedule' name='id_Schedule'>
-                                                    {schedule.map(s => (
-                                                        <option className='text-dark' key={s.id} value={s.id}>{s.schedule} </option>
-                                                    ))}
-                                                </MySelect>
-                                            </Col>
-                                        </Row>
-                                        <Row>
-                                            <Col md='6' xs='6'>
-                                                <MySelect label='Remote' name='id_Remote'>
-                                                    {remote.map(r => (
-                                                        <option className='text-dark' key={r.id} value={r.id}>{r.name} </option>
-                                                    ))}
-                                                </MySelect>
+                                        </Col>
+                                        <Col md='6' xs='6'>
+                                            <MySelect label='Schedule' name='id_Schedule'>
+                                                {schedule.map(s => (
+                                                    <option className='text-dark' key={s.id} value={s.id}>{s.schedule} </option>
+                                                ))}
+                                            </MySelect>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col md='6' xs='6'>
+                                            <MySelect label='Remote' name='id_Remote'>
+                                                {remote.map(r => (
+                                                    <option className='text-dark' key={r.id} value={r.id}>{r.name} </option>
+                                                ))}
+                                            </MySelect>
 
-                                            </Col>
+                                        </Col>
 
 
-                                        </Row>
-                                        <ModalFooter>
-                                            <Button
-                                                color="primary" type='submit' >
-                                                Update
-                                            </Button>
-                                            {' '}
-                                            <Button onClick={toggle} >
-                                                Cancel
-                                            </Button>
-                                        </ModalFooter>
-                                    </Form>)}
+                                    </Row>
+                                    <ModalFooter >
+                                        <Button
+                                            color="primary" type='submit' >
+                                            Update
+                                        </Button>
+                                        {' '}
+                                        <Button onClick={toggle} >
+                                            Cancel
+                                        </Button>
+                                    </ModalFooter>
+                                </Form>
                             </Formik>
 
 
